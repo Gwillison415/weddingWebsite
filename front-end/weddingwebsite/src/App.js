@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
-import { Container } from 'semantic-ui-react';
-
+import { Container, Image } from 'semantic-ui-react';
+import AccountModal from './components/account/AccountModal';
 import Nav from './components/nav/Nav';
 class App extends Component {
   render() {
@@ -15,9 +15,11 @@ class App extends Component {
         <Container>
           <Nav></Nav>
         </Container>
+
         <p className="App-intro">
           To get started, edit <code>src/App.js</code> and save to reload.
         </p>
+        {/* <Image wrapped size='large' src={burn2018} /> */}
       </div>
     );
   }

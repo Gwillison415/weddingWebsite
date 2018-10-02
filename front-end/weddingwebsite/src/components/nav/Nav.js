@@ -13,8 +13,8 @@ import {
   Visibility,
   Reveal
 } from 'semantic-ui-react'
-
-
+import AccountModal from '../account/AccountModal';
+import renderIf from 'render-if';
 const menuStyle = {
   border: 'none',
   borderRadius: 0,
@@ -35,15 +35,18 @@ export default class Nav extends Component {
     super(props)
       this.state = {
         menuFixed: false,
-        overlayFixed: false
+        showAccountModal: false
       }
 
   }
 stickTopMenu = () => this.setState({menuFixed: true});
 unStickTopMenu = () => this.setState({menuFixed: false});
+showAccountModal = () => this.setState({showAccountModal: true})
+closeAccountModal = () => this.setState({showAccountModal: false})
 
     render() {
       const {menuFixed, overlayFixed} = this.state;
+      const { loginStatus, userName, user } = this.props;
       return (<div>
         <Visibility onBottomPassed={this.stickTopMenu} onBottomVisible={this.unStickTopMenu} once={false}>
         <Menu borderless="borderless" fixed={menuFixed && 'top'} style={menuFixed
@@ -51,7 +54,7 @@ unStickTopMenu = () => this.setState({menuFixed: false});
             : menuStyle}>
           <Container text="text">
 
-            <Menu.Item header="header">Grant Willison</Menu.Item>
+            <Menu.Item header="header">Welcome {userName? userName : 'Friend'}</Menu.Item>
             <Menu.Menu postion='left'>
               <Dropdown text='Venue' pointing="pointing" className='link item'>
                 <Dropdown.Menu>
@@ -80,7 +83,7 @@ unStickTopMenu = () => this.setState({menuFixed: false});
               <Dropdown text='Guest Portal' pointing="pointing" className='link item'>
                 <Dropdown.Menu>
 
-                  <Dropdown.Item link="link" href="https://docs.google.com/document/d/1hBBb6wgTOE_MvfRzYYuAswTksmGsoMjhkcoI_d-M2xM/edit?usp=sharing">sign in
+                  <Dropdown.Item link="link">  
                   </Dropdown.Item>
                   {/* <Dropdown.Item >
                     <a href={GrantWillisonResume} download="download" name="GrantWillisonResume.pdf">
@@ -90,6 +93,7 @@ unStickTopMenu = () => this.setState({menuFixed: false});
               </Dropdown>
             </Menu.Menu>
             <Menu.Menu position='right'>
+                <AccountModal closeAccountModal={this.closeAccountModal} showAccountModal={this.state.showAccountModal}></AccountModal>
               {/* <Dropdown text='Projects' pointing="pointing" className='link item'>
                 <Dropdown.Menu>
                   <Dropdown.Item link="link" href='https://dashboard.grantwillison.tech/'>DataBraid Dashboard
@@ -104,6 +108,7 @@ unStickTopMenu = () => this.setState({menuFixed: false});
           </Container>
         </Menu>
           </Visibility>
+
       </div>)
     }
   }
