@@ -83,7 +83,7 @@ closeAccountModal = () => this.setState({showAccountModal: false})
               <Dropdown text='Guest Portal' pointing="pointing" className='link item'>
                 <Dropdown.Menu>
 
-                  <Dropdown.Item link="link">  
+                  <Dropdown.Item link="link">  another dropdown
                   </Dropdown.Item>
                   {/* <Dropdown.Item >
                     <a href={GrantWillisonResume} download="download" name="GrantWillisonResume.pdf">

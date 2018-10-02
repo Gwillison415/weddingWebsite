@@ -4,8 +4,10 @@ import { compose, lifecycle } from 'recompose';
 import { login, setRedirectUrl } from '../../redux/actions/login';
 import Login from './Login';
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state, ownProps) => ({
   user: state.user,
+  formError: ownProps.formApi,
+  loginStatus: state.user.loginStatus,
 });
 
 

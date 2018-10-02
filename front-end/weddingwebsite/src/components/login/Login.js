@@ -1,5 +1,5 @@
 import React from 'react';
-import {Form, Text} from 'react-form';
+import {Form, Text} from 'informed';
 // import MediaQuery from 'react-responsive';
 
 import {Redirect} from 'react-router-dom';
@@ -18,8 +18,7 @@ const Login = (props) => {
     showSignupModal,
     showResetModal,
     showResetEmail,
-    closeAccountModal,
-    loginFB
+    closeAccountModal
   } = props;
   const validate = value => ({
     error: !value || /@/.test(value)
@@ -37,35 +36,57 @@ const Login = (props) => {
     success: value && value.length >= 5
       ? "Thanks for entering your password!"
       : null
-  })
-  return (<div className="form-container">
+  });
+  return (<Form id="form-state-form">
+    {
+      ({formState}) => (<div>
+        <label htmlFor="form-state-name">First name:</label>
+      <Text field="name" id="form-state-name" validate={validate}/>
 
-    <Form className="login">
-      {
-        formApi => (<form onSubmit={formApi.submitForm} id="login-form" className="mb-4">
-          <label htmlFor="email">Email</label>
-          <Text field="email" id="email-text" validate={validate}/>
-          <div style={{margin: '20px'}}></div>
-          <label htmlFor="password">Password</label>
-          <Text field="password" id="password-text" validate={validatePassword}/>
-          <div style={{margin: '20px'}}></div>
-
-          <button type="submit" className="btn btn-primary">
-            Submit
-          </button>
-        </form>)
-      }
-
-    </Form>
-
-    {/* {
-      renderIf(user.loginStatus === true)(<div>
-        {user.loginStatus && closeAccountModal()}
-        <Redirect to={redirect || '/'}/>
-      </div>,)
-    } */}
-
-  </div>);
+        <label htmlFor="email-text">Email</label>
+        <Text field="email" id="email-text" validate={validate}></Text>
+        <div style={{
+            margin: '20px'
+          }}></div>
+          <label htmlFor="password">password </label>
+  <Text field="name" id="password" validate={validatePassword}/>
+        <div style={{
+            margin: '20px'
+          }}></div>
+        <button type="submit">
+          Submit
+        </button>
+        <label>Values:</label>
+        <code>
+          {JSON.stringify(formState.values)}
+        </code>
+        <label>Touched:</label>
+        <code>
+          {JSON.stringify(formState.touched)}
+        </code>
+        <label>Errors:</label>
+        <code>
+          {JSON.stringify(formState.errors)}
+        </code>
+        <label>Async Errors:</label>
+        <code>
+          {JSON.stringify(formState.asyncErrors)}
+        </code>
+        <label>Invalid:</label>
+        <code>
+          {JSON.stringify(formState.invalid)}
+        </code>
+        <label>Pristine:</label>
+        <code>
+          {JSON.stringify(formState.pristine)}
+        </code>
+        <label>Dirty:</label>
+        <code>
+          {JSON.stringify(formState.dirty)}
+        </code>
+      </div>)
+    }
+  </Form>)
 };
 
 export default Login;

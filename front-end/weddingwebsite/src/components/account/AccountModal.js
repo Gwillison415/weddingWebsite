@@ -10,7 +10,7 @@ import { Button, Header, Image, Modal } from 'semantic-ui-react'
 
 const AccountModal = () => (
   <Modal trigger={<Button>Guest Login</Button>} centered={false}>
-    <Modal.Header centered >A Portal To your RSVP Info</Modal.Header>
+    <Modal.Header centered='true' >A Portal To your RSVP Info</Modal.Header>
     <Modal.Content image>
       <Image wrapped size='medium' src={burn2018}/>
       <Modal.Description>
