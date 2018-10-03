@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 // import { Modal, Header } from 'semantic-ui-react';
-import Login from '../login/LoginContainer';
+import Login from '../login/Login';
+// import Login from '../login/LoginContainer';
 // import SignUp from '../signup/SignupContainer';
 // import Reset from '../reset/ResetContainer';
 import './AccountModal.css';
@@ -8,18 +9,19 @@ import burn2018 from '../../assets/images/burn2018.png';
 
 import { Button, Header, Image, Modal } from 'semantic-ui-react'
 
-const AccountModal = () => (
-  <Modal trigger={<Button>Guest Login</Button>} centered={false}>
+const AccountModal = (props) => {
+  const {closeAccountModal} = props;
+  return (<Modal style={{marginTop: "-250px"}} trigger={<Button>Guest Login</Button>} centered={false}>
     <Modal.Header centered='true' >A Portal To your RSVP Info</Modal.Header>
     <Modal.Content image>
       <Image wrapped size='medium' src={burn2018}/>
       <Modal.Description>
         <Header>Sign in to change your deets up until may!</Header>
-        <Login></Login>
+        <Login closeAccountModal={closeAccountModal}></Login>
       </Modal.Description>
     </Modal.Content>
-  </Modal>
-)
+  </Modal>)
+}
 
 export default AccountModal
 // class AccountModal extends Component {

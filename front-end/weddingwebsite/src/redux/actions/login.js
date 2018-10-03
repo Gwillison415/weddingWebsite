@@ -3,6 +3,7 @@ import * as CONST from '../constants/constants';
 /*global FB*/
 
 const loginRequest = (props) => {
+  console.log('loginRequest FIRED');
   const url = '/api/login';
   return axios.post(url, props).then(response => response.data);
 };
