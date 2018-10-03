@@ -12,7 +12,7 @@ import './Login.css';
     super(props)
     this.state = {
       showAccountModal: false,
-      loggedIn:
+      loggedIn: false,
     }
     this.handleClick = this.handleClick.bind(this)
   }
@@ -28,10 +28,10 @@ import './Login.css';
     const formState = this.formApi.getState();
     const {password, email} = formState.values;
     const {invalid, submits} = formState;
-    if (password && email && !invalid && submits === 1) {
+    if (password && email && !invalid && !this.props.loggedIn) {
       this.props.login()
     } else {
-      console.log(this.formState, '1st password pass');
+      console.log('failed handleClick');
       // this.formApi.setValue('password', '')
       // this.formApi.setValue('submits', 0)
       // console.log(formState.values.password, '2nd password pass');
@@ -101,13 +101,15 @@ import './Login.css';
   }
 };
 
-// export const mapStateToProps = (state) => {
-//   const
-// }
+export const mapStateToProps = (state) => {
+  const loggedIn = state.loggedIn;
+
+  return {loggedIn}
+}
 
 export const mapDispatchToProps = dispatch =>
   bindActionCreators({
     login,
   }, dispatch);
 
-export default connect(null, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Login)
