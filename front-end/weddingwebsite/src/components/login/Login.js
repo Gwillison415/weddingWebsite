@@ -14,15 +14,7 @@ import './Login.css';
       showAccountModal: false,
       loginStatus: false,
     }
-    const {
-  onSubmit,
-  preSubmit,
-  getApi,
-  dontPreventDefault,
-  onSubmitFailure,
-  initialValues
-} = props;
-    // this.onSubmit = this.onSubmit.bind(this)  // onsubmt undefined
+
     this.handleClick = this.handleClick.bind(this)
   }
   setFormApi = (formApi) =>{
@@ -65,7 +57,6 @@ import './Login.css';
 }
 
   render(){
-// onSubmit={() => this.formApi.reset()}
     return (
       <Form id="form-state-form" getApi={this.setFormApi} onSubmit={() => {this.triggerSubmit()}}>
     {({formState}) => (<div >

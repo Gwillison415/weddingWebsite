@@ -1,6 +1,6 @@
 
 exports.up = (knex, Promise) => {
-  knex.schema.createTable('dependent_guests', (table) => {
+  return knex.schema.createTable('dependent_guests', (table) => {
   table.increments('id')
   .primary(); //my fb id is 17 char long
   table.string('full_name', 'varchar(30)')

@@ -3,9 +3,11 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
+const PORT = process.env.PORT || 3005;
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const userLogin = require('./controllers/account/login');
 
 var app = express();
 
@@ -19,6 +21,9 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.use('/api', signup) //For User Sign Up and for confirmation of account
+
+app.use('/api', userLogin) //User Login
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
@@ -38,4 +43,7 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
+app.listen(PORT, () => {
+	console.log(`Express server listening on port ${PORT}`);
+})
 module.exports = app;

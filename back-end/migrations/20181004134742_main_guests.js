@@ -7,7 +7,7 @@ exports.up = function(knex, Promise) {
   table.string('email', 'varchar(65)')
   .notNullable()
   .unique();
-  table.string('hashed_password', 'char(60)').notNullable()
+  table.string('hashed_password', 'char(60)').nullable()
   table.string('address_1').nullable()
   table.string('address_2').nullable()
   table.string('city').nullable()
