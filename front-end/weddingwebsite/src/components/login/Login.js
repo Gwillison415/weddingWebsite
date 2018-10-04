@@ -12,8 +12,17 @@ import './Login.css';
     super(props)
     this.state = {
       showAccountModal: false,
-      loggedIn: false,
+      loginStatus: false,
     }
+    const {
+  onSubmit,
+  preSubmit,
+  getApi,
+  dontPreventDefault,
+  onSubmitFailure,
+  initialValues
+} = props;
+    // this.onSubmit = this.onSubmit.bind(this)  // onsubmt undefined
     this.handleClick = this.handleClick.bind(this)
   }
   setFormApi = (formApi) =>{
@@ -21,51 +30,57 @@ import './Login.css';
     this.formApi = formApi;
   }
 
+  validatePassword = value => {
+  console.log('validatePassword value', value);
+    return (!value || value.length < 5) ? "Password must be longer than 5 characters" : null;
+   };
 
+   validateEmail = value => { return (!value || !/@/.test(value))
+       ? "Email Address must contain '@ symbol'"
+       : null;
+   }
+  triggerSubmit = () => {
 
-  handleClick(){
-    console.log(this.formApi.getState());
     const formState = this.formApi.getState();
+    console.log("formState=", formState);
     const {password, email} = formState.values;
     const {invalid, submits} = formState;
-    if (password && email && !invalid && !this.props.loggedIn) {
-      this.props.login()
+    if (password && email && !invalid ) {
+      let loginProps = Object.assign({}, {password}, {email})
+      console.log('validated loginProps', loginProps);
+      this.props.login(password, email)
     } else {
-      console.log('failed handleClick');
+      console.log('failed handleClick unexpectedly');
       // this.formApi.setValue('password', '')
       // this.formApi.setValue('submits', 0)
       // console.log(formState.values.password, '2nd password pass');
     }
+     this.formApi.reset()
+  }
+  handleClick(){
+    console.log(this.formApi.getState());
   }
   closeAccountModal = () => {
   this.setState({showAccountModal: false})
 }
-  render(){
 
-    const validatePassword = value => {
-    console.log('value', value);
-      return (!value || value.length < 5) ? "Password must be longer than 5 characters" : null;
-     };
-    const validateEmail = value => { return (!value || !/@/.test(value))
-        ? "Email Address must contain '@ symbol'"
-        : null;
-    }
+  render(){
+// onSubmit={() => this.formApi.reset()}
     return (
-      <Form id="form-state-form" getApi={this.setFormApi}>
-    {
-      ({formState}) => (<div >
+      <Form id="form-state-form" getApi={this.setFormApi} onSubmit={() => {this.triggerSubmit()}}>
+    {({formState}) => (<div >
         <label htmlFor="email-text">Email</label>
-        <Text field="email" id="email-text" validate={validateEmail}></Text>
+        <Text field="email" id="email-text" validate={this.validateEmail}></Text>
         <div style={{
             margin: '20px'
           }}></div>
         <label htmlFor="password">password
         </label>
-        <Text field="password" id="password" type="password" validate={validatePassword}/>
+        <Text field="password" id="password" type="password" validate={this.validatePassword}/>
         <div style={{
             margin: '20px'
           }}></div>
-        <button type="submit" onClick={this.handleClick()}>
+        <button type="submit" >
           Submit
         </button>
 
@@ -79,7 +94,7 @@ import './Login.css';
               ? JSON.stringify(formState.errors.password)
               : ''
           }</p>
-        <label>Async Errors:</label>
+        {/* <label>Async Errors:</label>
         <code>
           {JSON.stringify(formState.asyncErrors)}
         </code>
@@ -94,17 +109,16 @@ import './Login.css';
         <label>Dirty:</label>
         <code>
           {JSON.stringify(formState.dirty)}
-        </code>
+        </code> */}
       </div>)
     }
-  </Form>)
-  }
+  </Form>)}
 };
 
 export const mapStateToProps = (state) => {
-  const loggedIn = state.loggedIn;
+  const loginStatus = state.loginStatus;
 
-  return {loggedIn}
+  return {loginStatus}
 }
 
 export const mapDispatchToProps = dispatch =>
