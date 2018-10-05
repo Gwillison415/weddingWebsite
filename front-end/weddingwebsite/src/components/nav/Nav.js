@@ -41,7 +41,7 @@ export default class Nav extends Component {
   }
 stickTopMenu = () => this.setState({menuFixed: true});
 unStickTopMenu = () => this.setState({menuFixed: false});
-showAccountModal = () => this.setState({showAccountModal: true})
+// showAccountModal = () => this.setState({showAccountModal: true})
 closeAccountModal = () => this.setState({showAccountModal: false})
 
     render() {
@@ -93,8 +93,11 @@ closeAccountModal = () => this.setState({showAccountModal: false})
               </Dropdown>
             </Menu.Menu>
             <Menu.Menu position='right'>
-                <AccountModal closeAccountModal={this.closeAccountModal} showAccountModal={this.state.showAccountModal}></AccountModal>
-              {/* <Dropdown text='Projects' pointing="pointing" className='link item'>
+
+                <AccountModal closeAccountModal={this.closeAccountModal}></AccountModal>
+              {/*  showAccountModal={this.state.showAccountModal}
+
+                <Dropdown text='Projects' pointing="pointing" className='link item'>
                 <Dropdown.Menu>
                   <Dropdown.Item link="link" href='https://dashboard.grantwillison.tech/'>DataBraid Dashboard
                   </Dropdown.Item>

@@ -13,21 +13,25 @@ if (process.env.NODE_ENV !== 'production') {
 router.route('/signup')
   .post((req, res) => {
     const knex = require('../../knex.js')
-    bcrypt.hash(req.body.password, 12)
+    knex('users').where('email', req.body.email)
+    .then(user => {
+
+      bcrypt.hash(req.body.password, 12)
+    })
     .then(hashed_password => {
-      const newUser = {
+      const updatedUser = {
         hashed_password: hashed_password,
-        confirmed: false,
       }
-      return knex('main_guests').insert(newUser, '*');
+      return knex('main_guests').update(updatedUser);
     })
     .then((signUp) => {
-      console.log(signUp);
+      console.log("passed the update! signUp=",signUp);
     // create token to send with confirm email to confirm the email.
       const user = { userId: signUp[0].id };
       const token = jwt.sign(user, process.env.JWT_KEY, {
         expiresIn: '30 days',
       });
+      console.log('sending a token', token);
       return token;
       })
     .then((tokenToSend) => {

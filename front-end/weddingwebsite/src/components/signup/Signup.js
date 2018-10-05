@@ -3,10 +3,10 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import {Form, Text} from 'informed';
 import {Redirect} from 'react-router-dom';
-import {login} from '../../redux/actions/login';
-import './Login.css';
+import {signup} from '../../redux/actions/login';
+// import './Signup.css';
 
- class Login extends Component {
+ class Signup extends Component {
   constructor(props) {
     super(props)
     this.state = {
@@ -37,9 +37,9 @@ import './Login.css';
     const {password, email} = formState.values;
     const {invalid, submits} = formState;
     if (password && email && !invalid ) {
-      let loginProps = Object.assign({}, {password}, {email})
-      console.log('validated loginProps', loginProps);
-      this.props.login(password, email)
+      let signUpProps = Object.assign({}, {password}, {email})
+      console.log('validated signUpProps', signUpProps);
+      this.props.signup(password, email)
     } else {
       console.log('failed handleClick unexpectedly');
       // this.formApi.setValue('password', '')
@@ -59,6 +59,7 @@ import './Login.css';
     return (
       <Form id="form-state-form" getApi={this.setFormApi} onSubmit={() => {this.triggerSubmit()}}>
     {({formState}) => (<div >
+        <p>Signup page</p>
         <label htmlFor="email-text">Email</label>
         <Text field="email" id="email-text" validate={this.validateEmail}></Text>
         <div style={{
@@ -113,7 +114,7 @@ export const mapStateToProps = (state) => {
 
 export const mapDispatchToProps = dispatch =>
   bindActionCreators({
-    login,
+    signup,
   }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default connect(mapStateToProps, mapDispatchToProps)(Signup)
