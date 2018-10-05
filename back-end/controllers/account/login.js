@@ -3,8 +3,8 @@ const app = express();
 const router = express.Router();
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt-as-promised');
-const transporter = require('../../helpers/nodemailer-setup').transporter;
-const signupEmailOptions = require('../../helpers/nodemailer-setup').signupEmailOptions;
+const transporter = require('../../utils/nodemailer').transporter;
+const signupEmailOptions = require('../../utils/nodemailer').signupEmailOptions;
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
@@ -24,7 +24,7 @@ router.route('/login')
     .then(userToSend => {
       const claim = { userId: userToSend.id };
       const token = jwt.sign(claim, process.env.JWT_KEY, {
-      expiresIn:  Math.floor(Date.now() / 1000) + (60 * 60* 24)
+      expiresIn:  '30 days'
       })
       delete userToSend[0].hashed_password
       if (userToSend[0].confirmed === false) {
@@ -41,3 +41,5 @@ router.route('/login')
       res.status(400).json({ error: 'Invalid Email or Password'})
     })
   })
+
+module.exports = router;

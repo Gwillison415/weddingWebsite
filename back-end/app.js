@@ -8,6 +8,7 @@ const PORT = process.env.PORT || 3005;
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 const userLogin = require('./controllers/account/login');
+const signup = require('./controllers/account/signup');
 
 var app = express();
 
@@ -27,6 +28,21 @@ app.use('/api', userLogin) //User Login
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 
+if (process.env.NODE_ENV !== 'production') {
+  require('dotenv').config();
+}
+
+const allowCrossDomain = function (req, res, next) {
+  res.header('Access-Control-Allow-Credentials', true);
+  res.header('Access-Control-Allow-Origin', req.headers.origin);
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
+  res.header('Access-Control-Allow-Headers', 'X-Requested-With, X-HTTP-Method-Override, Content-Type, Accept');
+  if (req.method == 'OPTIONS') {
+    res.sendStatus(200);
+  } else {
+    next();
+  }
+};
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
