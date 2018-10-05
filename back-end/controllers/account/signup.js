@@ -2,7 +2,7 @@ const express = require('express');
 const router = express.Router();
 const nodemailer = require('nodemailer');
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt-as-promised');
+const bcrypt = require('bcrypt');
 const transporter = require('../../utils/nodemailer').transporter;
 const signupEmailOptions = require('../../utils/nodemailer').signupEmailOptions;
 
@@ -12,28 +12,34 @@ if (process.env.NODE_ENV !== 'production') {
 
 router.route('/signup')
   .post((req, res) => {
+    console.log('0 post request.body = ', req.body);
     const knex = require('../../knex.js')
-    knex('users').where('email', req.body.email)
-    .then(user => {
 
-      bcrypt.hash(req.body.password, 12)
-    })
+    bcrypt.hash(req.body.password, 12)
     .then(hashed_password => {
-      const updatedUser = {
-        hashed_password: hashed_password,
-      }
-      return knex('main_guests').update(updatedUser);
+      console.log('0 hashed_password=', hashed_password);
+      return knex('main_guests')
+      .where('email', req.body.email)
+      .update('hashed_password', hashed_password);
     })
-    .then((signUp) => {
-      console.log("passed the update! signUp=",signUp);
+    .then((truthy) => {
+      console.log("1 passed the update! truthy=",truthy);
     // create token to send with confirm email to confirm the email.
-      const user = { userId: signUp[0].id };
+      if (truthy) {
+        return knex('main_guests')
+        .where('email', req.body.email)
+      } else {
+        throw new Error("User does not exist - You're not on our list!")
+      }
+    })
+    .then(updatedUser => {
+      const user = { userId: updatedUser[0].id };
       const token = jwt.sign(user, process.env.JWT_KEY, {
         expiresIn: '30 days',
       });
-      console.log('sending a token', token);
+      console.log('2 sending a token', token);
       return token;
-      })
+    })
     .then((tokenToSend) => {
       // send the email confirmation
       const signUpEmail = signupEmailOptions(req.body.email, process.env.HOST, tokenToSend);

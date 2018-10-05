@@ -39,7 +39,7 @@ import {signup} from '../../redux/actions/login';
     if (password && email && !invalid ) {
       let signUpProps = Object.assign({}, {password}, {email})
       console.log('validated signUpProps', signUpProps);
-      this.props.signup(password, email)
+      this.props.signup(signUpProps)
     } else {
       console.log('failed handleClick unexpectedly');
       // this.formApi.setValue('password', '')

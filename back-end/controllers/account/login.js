@@ -2,7 +2,7 @@ const express = require('express');
 const app = express();
 const router = express.Router();
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt-as-promised');
+const bcrypt = require('bcrypt');
 const transporter = require('../../utils/nodemailer').transporter;
 const signupEmailOptions = require('../../utils/nodemailer').signupEmailOptions;
 
@@ -13,7 +13,7 @@ if (process.env.NODE_ENV !== 'production') {
 router.route('/login')
   .post((req,res) => {
     const knex = require('../../knex.js')
-    knex('users').where('email', req.body.email)
+    knex('main_guests').where('email', req.body.email)
     .then(user => {
       let compare = user[0].hashed_password;
       return bcrypt.compare(req.body.password, compare)
