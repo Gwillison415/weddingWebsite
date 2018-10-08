@@ -5,7 +5,9 @@ import * as CONST from '../constants/constants';
 const loginRequest = (props) => {
   console.log('loginRequest FIRED');
   const url = '/api/login';
-  return axios.post(url, props).then(response => response.data);
+  return axios.post(url, props).then(response =>{
+    console.log('response.data should be before action.payload, response.data===', response.data);
+     return response.data});
 };
 
 export const login = props => ({type: CONST.LOGIN, payload: loginRequest(props)});

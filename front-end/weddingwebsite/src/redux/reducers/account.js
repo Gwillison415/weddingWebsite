@@ -3,6 +3,11 @@ import * as CONST from '../constants/constants';
 export const user = (state = { loginStatus: false }, action) => {
   switch (action.type) {
     case CONST.LOGIN_FULFILLED:
+    console.log('action.payload==', action.payload);
+    localStorage.setItem('userId', action.payload.id);
+    return { ...state, loginStatus: true, ...action.payload };
+    case CONST.LOGIN:
+    console.log('action.payload==', action.payload);
     localStorage.setItem('userId', action.payload.id);
     return { ...state, loginStatus: true, ...action.payload };
     case CONST.LOGIN_REJECTED:

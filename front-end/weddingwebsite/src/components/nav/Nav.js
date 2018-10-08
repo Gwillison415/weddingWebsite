@@ -14,6 +14,8 @@ import {
   Reveal
 } from 'semantic-ui-react'
 import AccountModal from '../account/AccountModal';
+import { connect } from 'react-redux';
+
 import renderIf from 'render-if';
 const menuStyle = {
   border: 'none',
@@ -30,7 +32,7 @@ const fixedMenuStyle = {
   boxShadow: '0px 3px 5px rgba(0, 0, 0, 0.2)'
 }
 
-export default class Nav extends Component {
+ class Nav extends Component {
   constructor(props) {
     super(props)
       this.state = {
@@ -39,6 +41,11 @@ export default class Nav extends Component {
       }
 
   }
+  // componentDidUpdate(prevprops) {
+  //   if (this.props.user.userName !== this.prevprops.user.userName) {
+  //
+  //   }
+  // }
 stickTopMenu = () => this.setState({menuFixed: true});
 unStickTopMenu = () => this.setState({menuFixed: false});
 // showAccountModal = () => this.setState({showAccountModal: true})
@@ -115,3 +122,12 @@ closeAccountModal = () => this.setState({showAccountModal: false})
       </div>)
     }
   }
+  const mapStateToProps = state => ({
+    // loginStatus: state.user.loginStatus,
+    // user: state.user,
+    userName: state.user.full_name,
+    redirect: state.loginRedirect.redirectURL,
+    // error: state.user.error,
+  });
+
+  export default connect(mapStateToProps, null)(Nav)

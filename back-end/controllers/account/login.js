@@ -34,6 +34,7 @@ router.route('/login')
         res.cookie('authTokenSillyWilly', token, {
           domain: process.env.DOMAIN_FOR_COOKIES || 'localhost',
         });
+        console.log("userToSend[0]===", userToSend[0]);
         return res.status(200).json(userToSend[0])
       }
     })
