@@ -17,12 +17,12 @@ let transporter = nodemailer.createTransport({
 const signupEmailOptions = (email, url, token) => {
   const mailObject =
     {
-      from: '"Grant and Cora" <keenewillison2019@gmail.com>',
+      from: '"Cora and Grant" <keenewillison2019@gmail.com>',
       to: email, // list of receivers
       subject: 'Confirm your account for our weddin\' thang',
       html: `<h1> Welcome to my crappy web skillz! </h1>
       <p>Please use the link below to confirm your account</p>
-      <a href=${url}/api/signup/confirmation/${token}>Click here to confirm</a>
+      <a href="http://${url}/api/signup/confirmation/${token}">Click here to confirm</a>
       <p>If you believe you have received this email in error please contact your senator. or something... </p>`,
       dsn: {
         id: 'signup',

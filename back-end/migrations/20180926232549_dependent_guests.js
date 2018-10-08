@@ -1,4 +1,3 @@
-
 exports.up = (knex, Promise) => {
   return knex.schema.createTable('dependent_guests', (table) => {
   table.increments('id')

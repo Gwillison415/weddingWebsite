@@ -39,7 +39,7 @@ import './Login.css';
     if (password && email && !invalid ) {
       let loginProps = Object.assign({}, {password}, {email})
       console.log('validated loginProps', loginProps);
-      this.props.login(password, email)
+      this.props.login(loginProps)
     } else {
       console.log('failed handleClick unexpectedly');
       // this.formApi.setValue('password', '')

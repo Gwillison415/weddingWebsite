@@ -19,7 +19,7 @@ router.route('/signup')
     .then(hashed_password => {
       console.log('0 hashed_password=', hashed_password);
       return knex('main_guests')
-      .where('email', req.body.email)
+      .where('email', req.body.email.toLowerCase())
       .update('hashed_password', hashed_password);
     })
     .then((truthy) => {
@@ -27,12 +27,13 @@ router.route('/signup')
     // create token to send with confirm email to confirm the email.
       if (truthy) {
         return knex('main_guests')
-        .where('email', req.body.email)
+        .where('email', req.body.email.toLowerCase())
       } else {
         throw new Error("User does not exist - You're not on our list!")
       }
     })
     .then(updatedUser => {
+      console.log('updatedUser==', updatedUser[0]);
       const user = { userId: updatedUser[0].id };
       const token = jwt.sign(user, process.env.JWT_KEY, {
         expiresIn: '30 days',
@@ -42,7 +43,7 @@ router.route('/signup')
     })
     .then((tokenToSend) => {
       // send the email confirmation
-      const signUpEmail = signupEmailOptions(req.body.email, process.env.HOST, tokenToSend);
+      const signUpEmail = signupEmailOptions(req.body.email.toLowerCase(), process.env.HOST, tokenToSend);
       transporter.sendMail(signUpEmail, (error, info) => {
         if (error) {
           return console.log(error);
@@ -70,7 +71,8 @@ router.route('/signup/confirmation/:token')
         //If valid token it takes changes the confirmed flag to true
         return knex('main_guests').where('id', Number(payload.userId)).update({confirmed: true})
         .then(() => {
-          return res.redirect(`${process.env.CLIENT}`)
+          // return res.redirect(`${process.env.CLIENT}`)
+          return res.status(202).json('Thanks for confiming with us!')
         })
         .catch(err => res.redirect(`${process.env.CLIENT}`))
       }

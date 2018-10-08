@@ -5,6 +5,7 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const PORT = process.env.PORT || 3005;
 const cors = require('cors');
+const verifyLoggedIn = require('./utils/auth')
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
@@ -23,11 +24,6 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.use('/api', signup) //For User Sign Up and for confirmation of account
-
-app.use('/api', userLogin) //User Login
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
@@ -67,6 +63,11 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
+app.use('/', indexRouter);
+app.use('/api', signup) //For User Sign Up and for confirmation of account
+app.use('/api', userLogin) //User Login
+app.use(verifyLoggedIn)
+app.use('/users', usersRouter);
 
 app.listen(PORT, () => {
 	console.log(`Express server listening on port ${PORT}`);

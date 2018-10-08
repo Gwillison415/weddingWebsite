@@ -1,5 +1,5 @@
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable('main_guests_2', (table) => {
+  return knex.schema.createTable('main_guests', (table) => {
   table.increments('id')
   .primary(); //my fb id is 17 char long
   table.string('full_name', 'varchar(30)')
@@ -8,6 +8,7 @@ exports.up = function(knex, Promise) {
   .notNullable()
   .unique();
   table.string('hashed_password', 'char(60)').nullable()
+  table.boolean('confirmed').nullable().defaultTo(false)
   table.string('address_1').nullable()
   table.string('address_2').nullable()
   table.string('city').nullable()
