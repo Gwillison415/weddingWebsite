@@ -16,7 +16,7 @@ class Auth extends Component {
 
     if (!this.loginStatus) {
       this.props.setRedirectUrl(this.props.location.pathname);
-      this.props.history.push('/?loginModal=true');
+      this.props.history.push('/?loginYa=Dummy');
     }
  }
  render() {

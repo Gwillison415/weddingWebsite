@@ -17,7 +17,6 @@ import {signup} from '../../redux/actions/login';
     this.handleClick = this.handleClick.bind(this)
   }
   setFormApi = (formApi) =>{
-    console.log('setFormApi called');
     this.formApi = formApi;
   }
 
@@ -51,9 +50,6 @@ import {signup} from '../../redux/actions/login';
   handleClick(){
     console.log(this.formApi.getState());
   }
-  closeAccountModal = () => {
-  this.setState({showAccountModal: false})
-}
 
   render(){
     return (

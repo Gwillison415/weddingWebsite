@@ -19,10 +19,16 @@ class AccountModal extends Component {
       showSignUp: false,
       showLogin: true,
       showReset: false,
-      modalMessage: 'Login to change your details'
+      modalMessage: 'Login to change your details',
+      showAccountModal: false
     };
 
   }
+
+  closeAccountModal = () => {
+  this.setState({showAccountModal: false})
+}
+
   showSignupModal = () => {
     this.setState({ showSignUp: true, showReset: false, showLogin: false, modalMessage: 'Sign Up to confirm your account' });
   }
@@ -34,20 +40,26 @@ class AccountModal extends Component {
   showLoginModal = () => {
     this.setState({ showReset: false, showSignUp: false, showLogin: true, modalMessage: 'Login to change your details' });
   }
+
   render () {
-  const { closeAccountModal, error } = this.props;
-  const { showLogin, showSignUp, open, modalMessage, redirect} = this.state
-  return (<Modal style={{marginTop: "-250px"}} trigger={<Button>Guest Login</Button>} centered={false}>
+    let modalStyle = {
+      marginTop: "-250px",
+
+    }
+  const { error } = this.props;
+  const { showLogin, showSignUp, open, modalMessage, redirect, } = this.state
+  return (<Modal open={this.state.showAccountModal} style={modalStyle} trigger={<Button onClick={() => this.setState({showAccountModal: true})}>Guest Login</Button>} centered={false}>
     <Modal.Header centered='true' >A Portal To your RSVP Info
     <Button onClick={() => {this.showSignupModal()}}>Sign up</Button>
     <Button onClick={() => {this.showLoginModal()}}>Login</Button>
+    <Button onClick={() => {this.closeAccountModal()}}>Close</Button>
     </Modal.Header>
     <Modal.Content image>
       <Image wrapped size='medium' src={burn2018}/>
       <Modal.Description>
         <Header>{modalMessage}</Header>
-        {showLogin && <Login closeAccountModal={closeAccountModal} showResetModal={this.showResetModal} showSignupModal={this.showSignupModal} />}
-          {showSignUp && <Signup closeAccountModal={closeAccountModal} />}
+        {showLogin && <Login closeAccountModal={this.closeAccountModal} showResetModal={this.showResetModal} showSignupModal={this.showSignupModal} />}
+          {showSignUp && <Signup closeAccountModal={this.closeAccountModal} />}
       </Modal.Description>
     </Modal.Content>
     <Segment>
