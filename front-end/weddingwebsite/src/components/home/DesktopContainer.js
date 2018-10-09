@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
+import { Link, NavLink } from 'react-router-dom';
+import { withRouter } from 'react-router-dom';
 
 import {
   Button,
@@ -57,6 +59,10 @@ class DesktopContainer extends Component {
                 <Menu.Item as='a' active>
                   Home
                 </Menu.Item>
+                <Menu.Item as='a' active>
+
+                  <Link to="/user">Profile  </Link>
+                </Menu.Item>
                 <Dropdown text='Venue' pointing="pointing" className='link item'>
                   <Dropdown.Menu>
 
@@ -99,4 +105,4 @@ const mapStateToProps = state => ({
   // error: state.user.error,
 });
 
-export default connect(mapStateToProps, null)(DesktopContainer)
+export default withRouter(connect(mapStateToProps, null)(DesktopContainer))

@@ -6,16 +6,23 @@ import { Route } from 'react-router-dom';
 import AccountModal from './components/account/AccountModal';
 import HomepageLayout from './components/home/HomepageLayout';
 import Nav from './components/nav/Nav';
+import User from './components/user/User';
+import Auth from './components/auth/Auth';
+
 class App extends Component {
+  constructor(props) {
+    super(props)
+  }
   render() {
+    const {loginStatus} = this.props;
     return (
       <div className="App">
-        
-        <Container>
-          <Route exact path="/" component={HomepageLayout}>
 
-          </Route>
-          {/* <HomepageLayout></HomepageLayout> */}
+        <Container>
+          <Route exact path="/" component={HomepageLayout}/>
+
+          <Route path="/user" component={Auth} />
+
 
 
         {/* <Route exact path="/faq" component={Faq} />
@@ -27,5 +34,4 @@ class App extends Component {
     );
   }
 }
-
 export default App;
