@@ -1,8 +1,11 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux';
+
 import {
   Button,
   Container,
   Divider,
+  Dropdown,
   Grid,
   Header,
   Icon,
@@ -15,8 +18,9 @@ import {
   Visibility,
 } from 'semantic-ui-react'
 import HomepageHeading from './HomepageHeading';
+import AccountModal from '../account/AccountModal';
 
-export default class DesktopContainer extends Component {
+class DesktopContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {}
@@ -26,9 +30,8 @@ export default class DesktopContainer extends Component {
   showFixedMenu = () => this.setState({ fixed: true })
 
   render() {
-    const { children } = this.props
+    const { children, userName } = this.props
     const { fixed } = this.state
-  console.log('children in DesktopContainer==', children);
     return (
       <Responsive minWidth={Responsive.onlyTablet.minWidth}>
         <Visibility
@@ -50,19 +53,33 @@ export default class DesktopContainer extends Component {
               size='large'
             >
               <Container>
+                <Menu.Item header="header">Welcome {userName? userName : 'Friend'}</Menu.Item>
                 <Menu.Item as='a' active>
                   Home
                 </Menu.Item>
-                <Menu.Item as='a'>Work</Menu.Item>
-                <Menu.Item as='a'>Company</Menu.Item>
-                <Menu.Item as='a'>Careers</Menu.Item>
+                <Dropdown text='Venue' pointing="pointing" className='link item'>
+                  <Dropdown.Menu>
+
+                    <Dropdown.Item link="link" href="http://yokayoranch.com/" target="_blank">The Venue</Dropdown.Item>
+                    <Dropdown.Item link="link" href='https://www.linkedin.com/pulse/why-we-chose-oauth-20-databraid-little-open-source-could-willison/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_post_details%3B%2FPDbr34GRV6qZB%2BX%2Bxer7A%3D%3D'>another link</Dropdown.Item>
+
+                    <Dropdown.Item link="link" href="https://www.linkedin.com/pulse/how-study-any-subject-larger-net-learning-efficiency-grant-willison/">Studying Efficiency</Dropdown.Item>
+
+                  </Dropdown.Menu>
+                </Dropdown>
+                <Dropdown text='FAQ' pointing="pointing" className='link item'>
+                  <Dropdown.Menu>
+
+                    <Dropdown.Item >FAQ Page</Dropdown.Item>
+                    <Dropdown.Item link="link" href='mailto:keenewillison2019@gmail.com?subject=Question%20about%20___%20from%20____&body=let%20us%20know%20if%20you%20dont%20want%20us%20to%20put%20your%20question%20on%20our%20FAQ'>Ask a question</Dropdown.Item>
+                    <Dropdown.Item ></Dropdown.Item>
+                    <Dropdown.Item ></Dropdown.Item>
+
+                  </Dropdown.Menu>
+                </Dropdown>
+
                 <Menu.Item position='right'>
-                  <Button as='a' inverted={!fixed}>
-                    Log in
-                  </Button>
-                  <Button as='a' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
-                    Sign Up
-                  </Button>
+                  <AccountModal></AccountModal>
                 </Menu.Item>
               </Container>
             </Menu>
@@ -74,3 +91,12 @@ export default class DesktopContainer extends Component {
     )
   }
 }
+const mapStateToProps = state => ({
+  // loginStatus: state.user.loginStatus,
+  // user: state.user,
+  userName: state.user.full_name,
+  redirect: state.loginRedirect.redirectURL,
+  // error: state.user.error,
+});
+
+export default connect(mapStateToProps, null)(DesktopContainer)
