@@ -5,13 +5,13 @@ const Parrallax1 = () => (
     <div>
         {/* -----basic config-----*/}
         <Parallax
-            blur={{min:0, max:2}}
+            blur={{min:0, max:1}}
             bgImage={GrantCoraWhistler}
             bgImageAlt="GrantCoraWhistler"
             strength={200}
         >
 
-            <div style={{ height: '300px' }} />
+            <div style={{ height: '400px' }} />
         </Parallax>
 
         {/* -----dynamic blur-----*/}
