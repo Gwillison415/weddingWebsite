@@ -36,7 +36,7 @@ class AccountModal extends Component {
   }
   render () {
   const { closeAccountModal, error } = this.props;
-  const { showLogin, showSignUp, open, modalMessage} = this.state
+  const { showLogin, showSignUp, open, modalMessage, redirect} = this.state
   return (<Modal style={{marginTop: "-250px"}} trigger={<Button>Guest Login</Button>} centered={false}>
     <Modal.Header centered='true' >A Portal To your RSVP Info
     <Button onClick={() => {this.showSignupModal()}}>Sign up</Button>
@@ -51,7 +51,7 @@ class AccountModal extends Component {
       </Modal.Description>
     </Modal.Content>
     <Segment>
-      <h4>Go ahead and use a simple password that you don't use anywhere else </h4>
+      <h4>Use a simple password that you don't use anywhere else </h4>
       <h4>or a complicated unique one with a password manager</h4>
       <div>error msg: {error}</div></Segment>
   </Modal>)}
@@ -60,6 +60,7 @@ const mapStateToProps = state => ({
   // loginStatus: state.user.loginStatus,
   // user: state.user,
   // userName: state.user.full_name,
+  redirect: state.loginRedirect.redirectURL,
   error: state.user.error,
 });
 
