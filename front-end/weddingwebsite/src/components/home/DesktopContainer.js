@@ -59,7 +59,7 @@ class DesktopContainer extends Component {
                 <Menu.Item as='a' active>
                   Home
                 </Menu.Item>
-                <Menu.Item as='a' active>
+                <Menu.Item  >
 
                   <Link to="/user">Profile  </Link>
                 </Menu.Item>
@@ -77,7 +77,7 @@ class DesktopContainer extends Component {
                   <Dropdown.Menu>
 
                     <Dropdown.Item >FAQ Page</Dropdown.Item>
-                    <Dropdown.Item link="link" href='mailto:keenewillison2019@gmail.com?subject=Question%20about%20___%20from%20____&body=let%20us%20know%20if%20you%20dont%20want%20us%20to%20put%20your%20question%20on%20our%20FAQ'>Ask a question</Dropdown.Item>
+                    <Dropdown.Item link="link" href='mailto:keenewillison2019@gmail.com?subject=Question%20about%20___%20from%20____&body=let%20us%20know%20if%20you%20dont%20want%20us%20to%20put%20your%20question%20on%20our%20FAQ'>Email a question</Dropdown.Item>
                     <Dropdown.Item ></Dropdown.Item>
                     <Dropdown.Item ></Dropdown.Item>
 
@@ -85,7 +85,7 @@ class DesktopContainer extends Component {
                 </Dropdown>
 
                 <Menu.Item position='right'>
-                  <AccountModal></AccountModal>
+                  <AccountModal modalStyle={{marginTop: "-250px"}}></AccountModal>
                 </Menu.Item>
               </Container>
             </Menu>

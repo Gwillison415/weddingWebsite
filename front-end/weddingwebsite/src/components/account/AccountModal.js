@@ -42,11 +42,8 @@ class AccountModal extends Component {
   }
 
   render () {
-    let modalStyle = {
-      marginTop: "-250px",
-
-    }
-  const { error } = this.props;
+    
+  const { error, modalStyle } = this.props;
   const { showLogin, showSignUp, open, modalMessage, redirect, } = this.state
   return (<Modal open={this.state.showAccountModal} style={modalStyle} trigger={<Button onClick={() => this.setState({showAccountModal: true})}>Guest Login</Button>} centered={false}>
     <Modal.Header centered='true' >A Portal To your RSVP Info

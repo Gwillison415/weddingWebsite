@@ -15,11 +15,21 @@ import {
   Visibility,
 } from 'semantic-ui-react'
 import ResponsiveContainer from './ResponsiveContainer';
+import header from '../../assets/images/header.png';
+import Mccrarywedding from '../../assets/images/Mccrarywedding.jpg';
+import Parrallax1 from '../parrallax/Parrallax1.js';
 const HomepageLayout = () => (
   <ResponsiveContainer>
-    <div>wtf is going on</div>
+
     <Segment style={{ padding: '8em 0em' }} vertical>
       <Grid container stackable verticalAlign='middle'>
+        <Grid.Row>
+          <Grid.Column floated='center' width={12}>
+            <Image src={header} style={{'marginLeft': '4rem', 'marginTop': '-2rem'}}>
+
+            </Image>
+          </Grid.Column>
+        </Grid.Row>
         <Grid.Row>
           <Grid.Column width={8}>
             <Header as='h3' style={{ fontSize: '2em' }}>
@@ -38,7 +48,7 @@ const HomepageLayout = () => (
             </p>
           </Grid.Column>
           <Grid.Column floated='right' width={6}>
-            <Image bordered rounded size='large' src='/images/wireframe/white-image.png' />
+            <Image bordered rounded size='large' src={Mccrarywedding} />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
@@ -47,6 +57,9 @@ const HomepageLayout = () => (
           </Grid.Column>
         </Grid.Row>
       </Grid>
+    </Segment>
+    <Segment>
+      <Parrallax1></Parrallax1>
     </Segment>
     <Segment style={{ padding: '0em' }} vertical>
       <Grid celled='internally' columns='equal' stackable>
