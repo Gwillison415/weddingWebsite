@@ -3,6 +3,7 @@ import {Form, Text} from 'informed';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import FormCard from '../cards/FormCard';
+import AccomodationCard from '../cards/AccomodationCard';
 import {saveTheDateSubmit, getDependents} from '../../redux/actions/forms.js';
 
 class User extends Component {
@@ -31,9 +32,26 @@ class User extends Component {
     }
      this.formApi.reset()
   }
+  triggerAccomodationSubmit = () => {
+
+    const formState = this.formApi.getState();
+    console.log('formState====', formState);
+    const {RSVP} = formState.values;
+    const {invalid} = formState;
+    if (RSVP && !invalid ) {
+      let formAnswers = Object.assign({}, {RSVP}, {name: this.props.userName})
+      this.props.saveTheDateSubmit(formAnswers)
+    } else {
+      console.log('failed handleClick unexpectedly');
+    }
+     this.formApi.reset()
+  }
   render() {
-    const {user} = this.props;
-    return( <div> <FormCard triggerSubmit={this.triggerRSVPSubmit} getApi={this.setFormApi} user={user}></FormCard></div>)
+    const {user, dependentGuests} = this.props;
+    return( <div>
+      <FormCard triggerSubmit={this.triggerRSVPSubmit} getApi={this.setFormApi} user={user} dependentGuests={dependentGuests} ></FormCard>
+      <AccomodationCard triggerSubmit={this.triggerAccomodationSubmit} getApi={this.setFormApi} user={user} dependentGuests={dependentGuests} ></AccomodationCard>
+    </div>)
   }
 }
 const mapStateToProps = state => ({
@@ -42,6 +60,7 @@ const mapStateToProps = state => ({
   userName: state.user.full_name,
   redirect: state.loginRedirect.redirectURL,
   error: state.user.error,
+  dependentGuests: state.user.dependentGuests,
 });
 
 export const mapDispatchToProps = dispatch =>

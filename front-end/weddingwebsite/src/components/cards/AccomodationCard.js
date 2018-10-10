@@ -1,18 +1,19 @@
 import React from 'react'
 import {Form, Text, RadioGroup, Radio } from 'informed';
 import {Card, Icon, Image} from 'semantic-ui-react'
-import saveTheDate from '../../assets/images/saveTheDate.jpeg';
+import Glamping from '../../assets/images/Glamping.png';
+import Countdown from '../countdown/CountDown.js';
 
-const FormCard = (props) => {
+const AccomodationCard = (props) => {
   const {triggerSubmit, getApi, user} = props;
   return (
 
     <Card>
-    <Image src={saveTheDate}/>
+    <Image src={Glamping}/>
     <Card.Content>
-      <Card.Header>Hi {user.full_name}</Card.Header>
+      <Card.Header>So, How would you like to stay?</Card.Header>
       <Card.Meta>
-        <span className='date'>So, would you like to RSVP?</span>
+        <span className='date'></span>
       </Card.Meta>
       <Card.Description>
         <Form id="radio-form" getApi={getApi} onSubmit={() => {
@@ -21,8 +22,16 @@ const FormCard = (props) => {
           {
             ({formState}) => (<div >
 
-                <RadioGroup field="RSVP">
-                  <label htmlFor="radio-yes">Most Definitely</label>
+                <RadioGroup field="accomodations">
+                  <label htmlFor="radio-yes">Most Definitley</label>
+                  <Radio value="yes" id="radio-yes"/>
+                  <label htmlFor="radio-maybe">Maybe</label>
+                  <Radio value="maybe" id="radio-maybe"/>
+                  <label htmlFor="radio-no">Me Thinks Not</label>
+                  <Radio value="no" id="radio-no"/>
+                </RadioGroup>
+                <RadioGroup field="accomodations">
+                  <label htmlFor="radio-yes">Most Definitley</label>
                   <Radio value="yes" id="radio-yes"/>
                   <label htmlFor="radio-maybe">Maybe</label>
                   <Radio value="maybe" id="radio-maybe"/>
@@ -50,10 +59,11 @@ const FormCard = (props) => {
     <Card.Content extra="extra">
       <a>
         <Icon name='user'/>
-        22 Friends
+        You will be able to change this for
+        <Countdown minVisible={{visibility:'hidden'}} endDate={'Tue, 05 Mar 2019 00:00:00'}></Countdown>
       </a>
     </Card.Content>
   </Card>)
 }
 
-export default FormCard
+export default AccomodationCard;

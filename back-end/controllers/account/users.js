@@ -5,7 +5,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-router.route('/:id?').post((req, res) => {
+router.route('/rsvp/:id?').post((req, res) => {
   console.log('req.query', req.query);
   console.log('req.params', req.params);
   console.log('req.cookies', req.cookies);
@@ -42,8 +42,8 @@ router.route('/:id').get((req, res) => {
   knex.select('*').from('dependent_guests')
   .where({main_guest: name})
   .then(dependent_guests => {
-    console.log('dependent_guests==', dependent_guests[0]);
-     return res.status(200).send(dependent_guests)
+    console.log('dependent_guests==', dependent_guests);
+     return res.status(200).json(dependent_guests)
   })
 });
 

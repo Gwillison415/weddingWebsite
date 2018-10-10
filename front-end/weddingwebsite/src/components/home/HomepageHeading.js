@@ -40,7 +40,7 @@ const HomepageHeading = ({ mobile }) => (
         marginTop: mobile ? '0.5em' : '1em',
       }}
     />
-    <Countdown></Countdown>
+    <Countdown minVisible={{visibility:'visible'}} endDate={'Sat, 13 Jul 2019 00:00:00'}></Countdown>
   </Container>
 )
 

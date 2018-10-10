@@ -15,7 +15,7 @@ const saveDateInfo = (props) =>{
   console.log("props.name==", props.name, "props.RSVP==", props.RSVP );
   let params = {id: id, name: props.name, rsvp: props.RSVP}
   console.log('params', params);
-  return axios.post(`/user/${id}?name=${props.name}&rsvp=${props.RSVP}`)
+  return axios.post(`/user/rsvp/${id}?name=${props.name}&rsvp=${props.RSVP}`)
    .then(response => response.data)
 
  }
@@ -25,15 +25,17 @@ export const accomodationsFormSubmit = props => ({
 });
 export const getDependents = props => ({
   type: CONST.GET_DEPENDENT_GUESTS,
-  info: getGuestInfo(props),
+  info: getDependentGuestData(props),
 });
 
-const getGuestInfo = (name) =>{
+const getDependentGuestData = (name) =>{
   let id = localStorage.getItem('userId')
   console.log(".name==", name );
   return axios.get(`/user/${id}?name=${name}`)
-   .then(response => response.data)
-
+   .then(response => {
+      console.log('response.data===', response.data);
+    return response.data})
+  .catch(err => err)
  }
 export const rsvpFormSubmit = props => ({
   type: CONST.RSVP_FORM,

@@ -10,12 +10,21 @@ import './Login.css';
   constructor(props) {
     super(props)
     this.state = {
-      showAccountModal: true,
-      loginStatus: false,
     }
 
     this.handleClick = this.handleClick.bind(this)
   }
+  componentDidMount(){
+    if (this.props.loginStatus) {
+      this.props.closeAccountModal()
+    }
+  }
+  componentDidUpdate(prevProps) {
+  // Typical usage (don't forget to compare props):
+  if (this.props.loginStatus !== prevProps.loginStatus) {
+    this.props.closeAccountModal()
+  }
+}
   setFormApi = (formApi) =>{
     console.log('setFormApi called');
     this.formApi = formApi;
@@ -102,7 +111,7 @@ import './Login.css';
 };
 
 export const mapStateToProps = (state) => {
-  const loginStatus = state.loginStatus;
+  const loginStatus = state.user.loginStatus;
 
   return {loginStatus}
 }

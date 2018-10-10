@@ -31,16 +31,15 @@ class Countdown extends Component {
       hours: 0,
       min: 0,
       sec: 0,
-      endDate: 'Sat, 13 Jul 2019 00:00:00',
     }
   }
 
   componentDidMount() {
     // update every second
     this.interval = setInterval(() => {
-      const date = this.calculateCountdown(this.state.endDate);
+      const date = this.calculateCountdown(this.props.endDate);
       date ? this.setState(date) : this.stop();
-    }, 1000);
+    }, 2000);
   }
 
   componentWillUnmount() {
@@ -98,7 +97,7 @@ class Countdown extends Component {
 
   render() {
     const countDown = this.state;
-
+    const {minVisible} = this.props;
     return (
       <div className="Countdown">
         <span className="Countdown-col">
@@ -116,19 +115,13 @@ class Countdown extends Component {
         </span>
 
 
-        <span className="Countdown-col">
+        <span className="Countdown-col" style={minVisible}>
           <span className="Countdown-col-element">
             <strong>{' ' + this.addLeadingZeros(countDown.min)+ ' '}</strong>
             <span>Min</span>
           </span>
         </span>
 
-        <span className="Countdown-col">
-          <span className="Countdown-col-element">
-            <strong>{' ' + this.addLeadingZeros(countDown.sec)+ ' '}</strong>
-            <span>Sec</span>
-          </span>
-        </span>
       </div>
     );
   }
