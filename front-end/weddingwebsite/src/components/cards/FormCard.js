@@ -1,27 +1,59 @@
 import React from 'react'
-
-import { Card, Icon, Image } from 'semantic-ui-react'
+import {Form, Text, RadioGroup, Radio } from 'informed';
+import {Card, Icon, Image} from 'semantic-ui-react'
 import saveTheDate from '../../assets/images/saveTheDate.jpeg';
 
-const FormCard = ({props}) =>{
+const FormCard = (props) => {
+  const {triggerSubmit, getApi, user} = props;
+  return (
 
-  return(
-  <Card>
-    <Image src={saveTheDate} />
+    <Card>
+    <Image src={saveTheDate}/>
     <Card.Content>
-      <Card.Header>Matthew</Card.Header>
+      <Card.Header>Hi {user.full_name}</Card.Header>
       <Card.Meta>
-        <span className='date'>Joined in 2015</span>
+        <span className='date'>So, would you like to RSVP?</span>
       </Card.Meta>
-      <Card.Description>Matthew is a musician living in Nashville.</Card.Description>
+      <Card.Description>
+        <Form id="radio-form" getApi={getApi} onSubmit={() => {
+            triggerSubmit()
+          }}>
+          {
+            ({formState}) => (<div >
+
+                <RadioGroup field="RSVP">
+                  <label htmlFor="radio-yes">Most Definitley</label>
+                  <Radio value="yes" id="radio-yes"/>
+                  <label htmlFor="radio-maybe">Maybe</label>
+                  <Radio value="maybe" id="radio-maybe"/>
+                  <label htmlFor="radio-no">Me Thinks Not</label>
+                  <Radio value="no" id="radio-no"/>
+                </RadioGroup>
+                <button type="submit">Submit</button>
+
+
+              <p>{
+                  formState.errors.email
+                    ? JSON.stringify(formState.errors.email)
+                    : ''
+                }</p>
+              <p>{
+                  formState.errors.password
+                    ? JSON.stringify(formState.errors.password)
+                    : ''
+                }</p>
+            </div>)
+          }
+        </Form>
+      </Card.Description>
     </Card.Content>
-    <Card.Content extra>
+    <Card.Content extra="extra">
       <a>
-        <Icon name='user' />
+        <Icon name='user'/>
         22 Friends
       </a>
     </Card.Content>
-  </Card>
-)}
+  </Card>)
+}
 
 export default FormCard

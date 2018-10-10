@@ -5,10 +5,10 @@ var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const PORT = process.env.PORT || 3005;
 const cors = require('cors');
-const verifyLoggedIn = require('./utils/auth')
+// const verifyLoggedIn = require('./utils/auth') //NOTE no idea why fs isn't reading auth file
+const jwt = require('jsonwebtoken');
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+var usersRouter = require('./controllers/account/users');
 const userLogin = require('./controllers/account/login');
 const signup = require('./controllers/account/signup');
 
@@ -24,6 +24,18 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+var verifyLoggedIn = function(req, res, next) {
+  console.log('hit middleware?');
+  jwt.verify(req.cookies.authTokenSillyWilly, process.env.JWT_KEY, (err, payload) => {
+    if (err) {
+      console.log('authentication err');
+      res.status(401).json({ error: 'Not Logged In' });
+    } else {
+      console.log('user is authenticated');
+      next();
+    }
+  });
+}
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
@@ -63,11 +75,11 @@ app.use(function(err, req, res, next) {
   res.status(err.status || 500);
   res.render('error');
 });
-app.use('/', indexRouter);
 app.use('/api', signup) //For User Sign Up and for confirmation of account
 app.use('/api', userLogin) //User Login
-app.use(verifyLoggedIn)
-app.use('/users', usersRouter);
+
+// app.use(verifyLoggedIn)
+app.use('/user',verifyLoggedIn, usersRouter);
 
 app.listen(PORT, () => {
 	console.log(`Express server listening on port ${PORT}`);
