@@ -23,7 +23,18 @@ export const accomodationsFormSubmit = props => ({
   type: CONST.ACCOMODATIONS_FORM,
   info: props,
 });
+export const getDependents = props => ({
+  type: CONST.GET_DEPENDENT_GUESTS,
+  info: getGuestInfo(props),
+});
 
+const getGuestInfo = (name) =>{
+  let id = localStorage.getItem('userId')
+  console.log(".name==", name );
+  return axios.get(`/user/${id}?name=${name}`)
+   .then(response => response.data)
+
+ }
 export const rsvpFormSubmit = props => ({
   type: CONST.RSVP_FORM,
   info: props,

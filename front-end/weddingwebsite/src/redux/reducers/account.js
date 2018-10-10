@@ -24,6 +24,8 @@ export const user = (state = { loginStatus: false }, action) => {
     return { ...state, loginStatus: true, ...action.payload };
     case CONST.RESET_PASSWORD_REJECTED:
       return { ...state, loginStatus: false, resetError: `Login Failed. ${action.payload.response.data.error}`, ...action.payload };
+    case CONST.GET_DEPENDENT_GUESTS_FILFILLED:
+      return { ...state,  dependentGuests: action.payload };
     default:
       return state;
   }

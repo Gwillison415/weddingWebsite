@@ -3,15 +3,17 @@ import {Form, Text} from 'informed';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import FormCard from '../cards/FormCard';
-import {saveTheDateSubmit} from '../../redux/actions/forms.js';
+import {saveTheDateSubmit, getDependents} from '../../redux/actions/forms.js';
 
 class User extends Component {
   constructor(props) {
     super(props)
   }
 
+  componentDidMount() {
+    this.props.getDependents(this.props.userName)
+  }
   setFormApi = (formApi) =>{
-    console.log('setFormApi called');
     this.formApi = formApi;
   }
 
@@ -45,6 +47,7 @@ const mapStateToProps = state => ({
 export const mapDispatchToProps = dispatch =>
   bindActionCreators({
     saveTheDateSubmit,
+    getDependents,
   }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(User);
 // export default connect(mapStateToProps, null)(User);
