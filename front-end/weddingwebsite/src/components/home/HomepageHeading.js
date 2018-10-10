@@ -6,7 +6,7 @@ import {
   Icon,
   Image,
 } from 'semantic-ui-react'
-
+import Countdown from '../countdown/CountDown.js';
 const HomepageHeading = ({ mobile }) => (
   <Container text>
     <Header
@@ -17,17 +17,17 @@ const HomepageHeading = ({ mobile }) => (
         fontSize: mobile ? '2em' : '4em',
         fontWeight: 'normal',
         marginBottom: 0,
-        marginTop: mobile ? '1.5em' : '3em',
+        marginTop: mobile ? '1.5em' : '1.5em',
       }}
     />
     <Header
       as='h2'
-      content='where you Do whatever you want when you want to.'
+      content='where you Do whatever you want.'
       inverted
       style={{
         fontSize: mobile ? '1.5em' : '1.7em',
         fontWeight: 'normal',
-        marginTop: mobile ? '0.5em' : '1.5em',
+        marginTop: mobile ? '0.5em' : '1em',
       }}
     />
     <Header
@@ -37,10 +37,10 @@ const HomepageHeading = ({ mobile }) => (
       style={{
         fontSize: mobile ? '1.5em' : '1.7em',
         fontWeight: 'normal',
-        marginTop: mobile ? '0.5em' : '1.5em',
+        marginTop: mobile ? '0.5em' : '1em',
       }}
     />
-
+    <Countdown></Countdown>
   </Container>
 )
 

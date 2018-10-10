@@ -10,7 +10,7 @@ import './Login.css';
   constructor(props) {
     super(props)
     this.state = {
-      showAccountModal: false,
+      showAccountModal: true,
       loginStatus: false,
     }
 
@@ -33,12 +33,10 @@ import './Login.css';
   triggerSubmit = () => {
 
     const formState = this.formApi.getState();
-    console.log("formState=", formState);
     const {password, email} = formState.values;
     const {invalid, submits} = formState;
     if (password && email && !invalid ) {
       let loginProps = Object.assign({}, {password}, {email})
-      console.log('validated loginProps', loginProps);
       this.props.login(loginProps)
     } else {
       console.log('failed handleClick unexpectedly');
@@ -51,9 +49,7 @@ import './Login.css';
   handleClick(){
     console.log(this.formApi.getState());
   }
-  closeAccountModal = () => {
-  this.setState({showAccountModal: false})
-}
+
 
   render(){
     return (

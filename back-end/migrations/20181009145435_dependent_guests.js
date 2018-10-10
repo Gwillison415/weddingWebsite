@@ -9,7 +9,7 @@ exports.up = (knex, Promise) => {
   .inTable('main_guests')
   .notNullable()
   .onDelete('CASCADE')
-  table.boolean('rsvp').nullable()
+  table.string('rsvp').nullable()
   table.boolean('final_rsvp').nullable()
   table.boolean('rehersal_rsvp').nullable()
   table.boolean('rehersal_invite').nullable()

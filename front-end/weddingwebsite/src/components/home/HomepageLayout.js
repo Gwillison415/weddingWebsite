@@ -15,19 +15,36 @@ import {
   Visibility,
 } from 'semantic-ui-react'
 import ResponsiveContainer from './ResponsiveContainer';
-const HomepageLayout = () => (
+import header from '../../assets/images/header.png';
+import Mccrarywedding from '../../assets/images/Mccrarywedding.jpg';
+import theEx from '../../assets/images/theEx.jpg';
+import Parrallax1 from '../parrallax/Parrallax1.js';
+import Abridged from '../modals/Abridged.js';
+const HomepageLayout = () => {
+
+  return (
   <ResponsiveContainer>
-    <div>wtf is going on</div>
+
     <Segment style={{ padding: '8em 0em' }} vertical>
       <Grid container stackable verticalAlign='middle'>
         <Grid.Row>
-          <Grid.Column width={8}>
+          <Grid.Column floated='center' width={12}>
+            <Image src={header} style={{'marginLeft': '4rem', 'marginTop': '-2rem'}}>
+
+            </Image>
+          </Grid.Column>
+        </Grid.Row>
+        <Grid.Row>
+          <Grid.Column width={9}>
             <Header as='h3' style={{ fontSize: '2em' }}>
-              We Help Companies and Companions
+              A Celebration of the Invincible Heart
             </Header>
             <p style={{ fontSize: '1.33em' }}>
-              We can give your company superpowers to do things that they never thought possible.
-              Let us delight your customers and empower your needs... through pure data analytics.
+              "It doesn’t interest me what you do for a living. I want to know what you ache for and if you dare to dream of meeting your heart’s longing.
+
+It doesn’t interest me how old you are. I want to know if you will risk looking like a fool for love, for your dream, for the adventure of being alive."
+
+-Oriah Mountain Dreamer, 'The Invitation'
             </p>
             <Header as='h3' style={{ fontSize: '2em' }}>
               We Make Bananas That Can Dance
@@ -38,7 +55,7 @@ const HomepageLayout = () => (
             </p>
           </Grid.Column>
           <Grid.Column floated='right' width={6}>
-            <Image bordered rounded size='large' src='/images/wireframe/white-image.png' />
+            <Image bordered rounded size='large' src={Mccrarywedding} />
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
@@ -48,36 +65,16 @@ const HomepageLayout = () => (
         </Grid.Row>
       </Grid>
     </Segment>
-    <Segment style={{ padding: '0em' }} vertical>
-      <Grid celled='internally' columns='equal' stackable>
-        <Grid.Row textAlign='center'>
-          <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-            <Header as='h3' style={{ fontSize: '2em' }}>
-              "What a Company"
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>That is what they all say about us</p>
-          </Grid.Column>
-          <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-            <Header as='h3' style={{ fontSize: '2em' }}>
-              "I shouldn't have gone with their competitor."
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              <Image avatar src='/images/avatar/large/nan.jpg' />
-              <b>Nan</b> Chief Fun Officer Acme Toys
-            </p>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
+    <Segment>
+      <Parrallax1></Parrallax1>
     </Segment>
-    <Segment style={{ padding: '8em 0em' }} vertical>
+    <Segment style={{ padding: '3em 0em' }} vertical>
       <Container text>
         <Header as='h3' style={{ fontSize: '2em' }}>
-          Breaking The Grid, Grabs Your Attention
+          To our Family, and those we call friends: An invitation
         </Header>
         <p style={{ fontSize: '1.33em' }}>
-          Instead of focusing on content creation and hard work, we have learned how to master the
-          art of doing nothing by providing massive amounts of whitespace and generic content that
-          can seem massive, monolithic and worth your attention.
+          We are thrilled to invite you to join us in celebration of the magic between us. We've poured love, energy, and our kookiness into this partnership building a solid foundation for a beautiful life. We're putting the same into a wonderful weekend to legalize our union and spend time with our nearest and dearest.
         </p>
         <Button as='a' size='large'>
           Read More
@@ -91,18 +88,37 @@ const HomepageLayout = () => (
           <a href='#'>Case Studies</a>
         </Divider>
         <Header as='h3' style={{ fontSize: '2em' }}>
-          Did We Tell You About Our Bananas?
+          Our Story
         </Header>
         <p style={{ fontSize: '1.33em' }}>
-          Yes I know you probably disregarded the earlier boasts as non-sequitur filler content, but
-          it's really true. It took years of gene splicing and combinatory DNA research, but our
-          bananas can really dance.
+          It's a tale as old as time, two star crossed lovers missing each other by minutes, feeling the pull of their beloved just out of reach. Dancing and traipsing through life, opening their hearts to the universe, breaking them fully and refusing to become wilted by the agony of love. Reaching to their souls to seek their hearts longing. Fatefully, whimsically succumbing to the algorithms of mathematicians and silicon valley tech bros. He was piqued by her wee toof and she his mischievous grin. The Goddess running off at the twelfth stroke, leaving behind a moment of authenticity. Found again only by opportune humor in state of inebriated glee. What followed is 3 years weaving magic, dancing wildly, embracing the adventure of life together. Sitting with pain, living with failure, celebrating ecstacy and standing in the fire - then a brisk February afternoon by a rushing waterfall shouting Fuck Yes.
         </p>
-        <Button as='a' size='large'>
-          I'm Still Quite Interested
-        </Button>
+
+        <Abridged>Abridged Version</Abridged>
       </Container>
     </Segment>
+    <Segment style={{ padding: '0em' }} vertical>
+      <Grid celled='internally' columns='equal' stackable>
+        <Grid.Row textAlign='center'>
+          <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
+            <Header as='h3' style={{ fontSize: '2em' }}>
+              "What a Couple"
+            </Header>
+            <p style={{ fontSize: '1.33em' }}>What they all say about us</p>
+          </Grid.Column>
+          <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
+            <Header as='h3' style={{ fontSize: '2em' }}>
+              "I shouldn't have gone with their competitor."
+            </Header>
+            <p style={{ fontSize: '1.33em' }}>
+              <Image style={{display: 'inline-block'}} src={theEx} size='small' circular />
+              <b>Sincerely</b> The Ex's
+            </p>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    </Segment>
+
     <Segment inverted vertical style={{ padding: '5em 0em' }}>
       <Container>
         <Grid divided inverted stackable>
@@ -138,5 +154,5 @@ const HomepageLayout = () => (
       </Container>
     </Segment>
   </ResponsiveContainer>
-)
+)}
 export default HomepageLayout

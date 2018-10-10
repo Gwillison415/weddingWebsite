@@ -37,3 +37,29 @@ export const loginRedirect = (state = {}, action) => {
       return state;
   }
 };
+export const saveTheDateForm = (state = {}, action) => {
+  switch (action.type) {
+    case CONST.SAVE_THE_DATE_FORM_FULFILLED:
+      return { ...state, ...action.info };
+    default:
+      return state;
+  }
+};
+
+export const accomodationsForm = (state = {}, action) => {
+  switch (action.type) {
+    case CONST.ACCOMODATIONS_FORM_FULFILLED:
+      return { ...state, ...action.info };
+    default:
+      return state;
+  }
+};
+
+export const rsvpForm = (state = {}, action) => {
+  switch (action.type) {
+    case CONST.RSVP_FORM_FULFILLED:
+      return { ...state, ...action.info };
+    default:
+      return state;
+  }
+};

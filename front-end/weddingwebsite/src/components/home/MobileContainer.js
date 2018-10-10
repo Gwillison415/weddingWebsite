@@ -15,6 +15,7 @@ import {
   Visibility,
 } from 'semantic-ui-react'
 import HomepageHeading from './HomepageHeading';
+import AccountModal from '../account/AccountModal';
 
 export default class MobileContainer extends Component {
   constructor(props) {
@@ -42,10 +43,9 @@ export default class MobileContainer extends Component {
               Home
             </Menu.Item>
             <Menu.Item as='a'>Work</Menu.Item>
-            <Menu.Item as='a'>Company</Menu.Item>
-            <Menu.Item as='a'>Careers</Menu.Item>
-            <Menu.Item as='a'>Log in</Menu.Item>
-            <Menu.Item as='a'>Sign Up</Menu.Item>
+            <Menu.Item as='a' link="link" href='mailto:keenewillison2019@gmail.com?subject=Question%20about%20___%20from%20____&body=let%20us%20know%20if%20you%20dont%20want%20us%20to%20put%20your%20question%20on%20our%20FAQ'>Email a question</Menu.Item>
+            <Menu.Item as='a' href="http://yokayoranch.com/" target="_blank">The Venue</Menu.Item>
+            <Menu.Item as='a'><AccountModal></AccountModal></Menu.Item>
           </Sidebar>
 
           <Sidebar.Pusher
@@ -65,12 +65,9 @@ export default class MobileContainer extends Component {
                     <Icon name='sidebar' />
                   </Menu.Item>
                   <Menu.Item position='right'>
-                    <Button as='a' inverted>
-                      Log in
-                    </Button>
-                    <Button as='a' inverted style={{ marginLeft: '0.5em' }}>
-                      Sign Up
-                    </Button>
+                    <AccountModal modalStyle={{marginTop: "-450px"}}></AccountModal>
+                    {/* <Button as='a' inverted>
+                    </Button> */}
                   </Menu.Item>
                 </Menu>
               </Container>
