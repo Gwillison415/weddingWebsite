@@ -47,7 +47,7 @@ const FormCard = (props) => {
         </Form>
       </Card.Description>
     </Card.Content>
-    <Card.Content extra="extra">
+    <Card.Content extra={true}>
       <a>
         <Icon name='user'/>
         22 Friends

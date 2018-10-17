@@ -24,6 +24,8 @@ class User extends Component {
     console.log('formState====', formState);
     const {RSVP} = formState.values;
     const {invalid} = formState;
+    console.log("RSVP===", RSVP, "Invalid?==", invalid);
+
     if (RSVP && !invalid ) {
       let formAnswers = Object.assign({}, {RSVP}, {name: this.props.userName})
       this.props.saveTheDateSubmit(formAnswers)
@@ -38,6 +40,7 @@ class User extends Component {
     console.log('formState====', formState);
     const {RSVP} = formState.values;
     const {invalid} = formState;
+    console.log("RSVP===", RSVP, "Invalid?==", invalid);
     if (RSVP && !invalid ) {
       let formAnswers = Object.assign({}, {RSVP}, {name: this.props.userName})
       this.props.saveTheDateSubmit(formAnswers)
@@ -50,7 +53,7 @@ class User extends Component {
     const {user, dependentGuests} = this.props;
     return( <div>
       <FormCard triggerSubmit={this.triggerRSVPSubmit} getApi={this.setFormApi} user={user} dependentGuests={dependentGuests} ></FormCard>
-      <AccomodationCard triggerSubmit={this.triggerAccomodationSubmit} getApi={this.setFormApi} user={user} dependentGuests={dependentGuests} ></AccomodationCard>
+      {/* <AccomodationCard triggerSubmit={this.triggerAccomodationSubmit} getApi={this.setFormApi} user={user} dependentGuests={dependentGuests} ></AccomodationCard> */}
     </div>)
   }
 }

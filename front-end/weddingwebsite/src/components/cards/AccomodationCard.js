@@ -23,20 +23,18 @@ const AccomodationCard = (props) => {
             ({formState}) => (<div >
 
                 <RadioGroup field="accomodations">
-                  <label htmlFor="radio-yes">Most Definitley</label>
-                  <Radio value="yes" id="radio-yes"/>
-                  <label htmlFor="radio-maybe">Maybe</label>
-                  <Radio value="maybe" id="radio-maybe"/>
-                  <label htmlFor="radio-no">Me Thinks Not</label>
-                  <Radio value="no" id="radio-no"/>
-                </RadioGroup>
-                <RadioGroup field="accomodations">
-                  <label htmlFor="radio-yes">Most Definitley</label>
-                  <Radio value="yes" id="radio-yes"/>
-                  <label htmlFor="radio-maybe">Maybe</label>
-                  <Radio value="maybe" id="radio-maybe"/>
-                  <label htmlFor="radio-no">Me Thinks Not</label>
-                  <Radio value="no" id="radio-no"/>
+                  <label htmlFor="radio-glamp">Glamping</label>
+                  <Radio value="glamp" id="radio-glamp"/>
+                  <label htmlFor="radio-RV">RV</label>
+                  <Radio value="RV" id="radio-RV"/>
+                  <label htmlFor="radio-Onsite">Onsite</label>
+                  <Radio value="Onsite" id="radio-Onsite"/>
+                  <label htmlFor="radio-Off-site">Most Definitley</label>
+                  <Radio value="Off-site" id="radio-Off-site"/>
+                  <label htmlFor="radio-whereever">whereever</label>
+                  <Radio value="whereever" id="radio-whereever"/>
+                  <label htmlFor="radio-noIdea">IDK</label>
+                  <Radio value="noIdea" id="radio-noIdea"/>
                 </RadioGroup>
                 <button type="submit">Submit</button>
 
@@ -56,7 +54,7 @@ const AccomodationCard = (props) => {
         </Form>
       </Card.Description>
     </Card.Content>
-    <Card.Content extra="extra">
+    <Card.Content extra={true}>
       <a>
         <Icon name='user'/>
         You will be able to change this for

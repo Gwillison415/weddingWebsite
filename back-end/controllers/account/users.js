@@ -19,12 +19,15 @@ router.route('/rsvp/:id?').post((req, res) => {
   //    return knex.('dependent_guests').where()
   // })
 
-  knex.select('*').from('dependent_guests')
-  .where({main_guest: name})
-  .then(dependent_guests => {
-    console.log('dependent_guests==', dependent_guests);
-     return res.status(200).send(dependent_guests)
-   })
+  knex('main_guests')
+  .where({full_name: name})
+  .update({
+    first_rsvp: rsvpStatus
+  })
+  .returning(['first_rsvp', 'additional_guest_count','rehersal_invite', 'rehersal_rsvp'])
+  .then(updatedGuest => {
+    console.log('updatedGuest===', updatedGuest[0]);
+    res.status(200).send(updatedGuest[0])})
 });
 router.route('/:id').get((req, res) => {
   console.log('req.query', req.query);
