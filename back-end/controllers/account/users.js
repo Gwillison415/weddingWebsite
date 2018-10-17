@@ -27,7 +27,7 @@ router.route('/rsvp/:id?').post((req, res) => {
   .returning(['first_rsvp', 'additional_guest_count','rehersal_invite', 'rehersal_rsvp'])
   .then(updatedGuest => {
     console.log('updatedGuest===', updatedGuest[0]);
-    res.status(200).send(updatedGuest[0])})
+   res.status(200).send(updatedGuest[0])})
 });
 router.route('/:id').get((req, res) => {
   console.log('req.query', req.query);

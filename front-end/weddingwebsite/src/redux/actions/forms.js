@@ -10,13 +10,13 @@ export const saveTheDateSubmit = props => {
   info: saveDateInfo(props),
 }};
 
-const saveDateInfo = (props) =>{
+// const saveDateInfo = (props) =>  axios.post(`/user/rsvp/${id}?name=${props.name}&rsvp=${props.RSVP}`,{}).then(response =>  response.data);
+const saveDateInfo = (props) => {
   let id = localStorage.getItem('userId')
   console.log("props.name==", props.name, "props.RSVP==", props.RSVP );
-  let params = {id: id, name: props.name, rsvp: props.RSVP}
-  console.log('params', params);
-  return axios.post(`/user/rsvp/${id}?name=${props.name}&rsvp=${props.RSVP}`)
-   .then(response => response.data)
+  // let params = {id: id, name: props.name, rsvp: props.RSVP}
+  // console.log('params', params);
+  return axios.post(`/user/rsvp/${id}?name=${props.name}&rsvp=${props.RSVP}`,{}).then(response =>  response.data)
 
  }
 export const accomodationsFormSubmit = props => ({

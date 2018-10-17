@@ -41,8 +41,12 @@ export const loginRedirect = (state = {}, action) => {
 };
 export const saveTheDateForm = (state = {}, action) => {
   switch (action.type) {
+    case CONST.SAVE_THE_DATE_FORM:
+    console.log(action.info);
+      return { ...state, first_rsvp: action.info.first_rsvp, additional_guest_count: action.info.additional_guest_count, rehersal_invite: action.info.rehersal_invite, rehersal_rsvp: action.info.rehersal_rsvp };
     case CONST.SAVE_THE_DATE_FORM_FULFILLED:
-      return { ...state, ...action.info };
+    console.log(action.info);
+      return { ...state, first_rsvp: action.info.first_rsvp, additional_guest_count: action.info.additional_guest_count, rehersal_invite: action.info.rehersal_invite, rehersal_rsvp: action.info.rehersal_rsvp };
     default:
       return state;
   }
