@@ -17,9 +17,17 @@ class DependentGuestRSVPForm extends Component {
     const {RSVP} = formState.values;
     const {invalid} = formState;
     console.log("RSVP===", RSVP, "Invalid?==", invalid);
+    let type;
+    if (this.props.isRehersalInvite) {
+      type = 'rehersal_rsvp';
+    } else if (this.props.isFinalRsvp) {
+      type = 'final_rsvp';
+    } else {
+      type = 'rsvp'
+    }
 
     if (RSVP && !invalid ) {
-      let formAnswers = Object.assign({}, {RSVP}, {dependentGuest: this.props.guest.full_name}, {mainGuest: this.props.mainGuest}, {type: this.props.isRehersalInvite? 'rehersal_rsvp' : 'rsvp'})
+      let formAnswers = Object.assign({}, {RSVP}, {dependentGuest: this.props.guest.full_name}, {mainGuest: this.props.mainGuest}, {type: type})
       this.props.saveTheDateDependentFormSubmit(formAnswers)
     } else {
       console.log('failed handleClick unexpectedly');
