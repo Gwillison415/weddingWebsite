@@ -4,7 +4,7 @@ import {Card, Icon, Image} from 'semantic-ui-react'
 import saveTheDate from '../../assets/images/saveTheDate.jpeg';
 
 const FormCard = (props) => {
-  const {triggerSubmit, getApi, user} = props;
+  const {triggerSubmit, getApi, user, dependentGuests} = props;
   return (
 
     <Card>
@@ -50,7 +50,7 @@ const FormCard = (props) => {
     <Card.Content extra={true}>
       <a>
         <Icon name='user'/>
-        22 Friends
+        {dependentGuests.map(guest => guest.full_name)}
       </a>
     </Card.Content>
   </Card>)

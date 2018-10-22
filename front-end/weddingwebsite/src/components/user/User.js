@@ -4,7 +4,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import FormCard from '../cards/FormCard';
 import AccomodationCard from '../cards/AccomodationCard';
-import {saveTheDateSubmit, getDependents} from '../../redux/actions/forms.js';
+import {saveTheDateFormSubmit, getDependents, accomodationsFormSubmit} from '../../redux/actions/forms.js';
 
 class User extends Component {
   constructor(props) {
@@ -28,7 +28,7 @@ class User extends Component {
 
     if (RSVP && !invalid ) {
       let formAnswers = Object.assign({}, {RSVP}, {name: this.props.userName})
-      this.props.saveTheDateSubmit(formAnswers)
+      this.props.saveTheDateFormSubmit(formAnswers)
     } else {
       console.log('failed handleClick unexpectedly');
     }
@@ -43,7 +43,7 @@ class User extends Component {
     console.log("RSVP===", RSVP, "Invalid?==", invalid);
     if (RSVP && !invalid ) {
       let formAnswers = Object.assign({}, {RSVP}, {name: this.props.userName})
-      this.props.saveTheDateSubmit(formAnswers)
+      this.props.saveTheDateFormSubmit(formAnswers)
     } else {
       console.log('failed handleClick unexpectedly');
     }
@@ -64,11 +64,14 @@ const mapStateToProps = state => ({
   redirect: state.loginRedirect.redirectURL,
   error: state.user.error,
   dependentGuests: state.user.dependentGuests,
+  rehersal_invite: state.saveTheDateForm.rehersal_invite,
+
 });
 
 export const mapDispatchToProps = dispatch =>
   bindActionCreators({
-    saveTheDateSubmit,
+    saveTheDateFormSubmit,
+    accomodationsFormSubmit,
     getDependents,
   }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(User);

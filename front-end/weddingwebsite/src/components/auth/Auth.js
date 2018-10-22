@@ -12,13 +12,6 @@ class Auth extends Component {
      }
 
  }
- // componentDidMount(){
- //
- //    if (!this.loginStatus) {
- //      this.props.setRedirectUrl(this.props.location.pathname);
- //      this.props.history.push('/?loginYa=Dummy');
- //    }
- // }
  render() {
   //TODO reimplement the conditional
    // if (this.props.loginStatus) {
