@@ -15,7 +15,8 @@ class Auth extends Component {
   }
   componentDidMount() {
     // const { user } = this.props;
-    if (!this.loginStatus) {
+    console.log("loginStatus in componentDidMount", this.loginStatus);
+    if (!this.props.loginStatus) {
       this.props.setRedirectUrl(this.props.location.pathname);
       this.props.history.push('/');
     }
@@ -34,14 +35,7 @@ class Auth extends Component {
         <Route path="/" component={HomepageLayout}/>
 
       </Switch>);
-      // }
-      // )
 
-      // return (
-      //     <Switch>
-      //       <Route path="/user" component={User} />
-      //
-      //     </Switch>)
     };
   }
 }

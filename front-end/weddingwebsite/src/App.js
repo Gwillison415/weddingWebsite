@@ -18,15 +18,16 @@ class App extends Component {
     return (
       <div className="App">
 
+        {/* <Container>
+          <Route exact path="/" component={HomepageLayout}/> */}
+        {/* <Route exact path="/faq" component={Faq} />
+        <Route path="/user" component={AuthContainer} /> */}
+        {/* </Container> */}
         <Container>
           <Route exact path="/" component={HomepageLayout}/>
 
           <Route path="/user" component={Auth} />
 
-
-
-        {/* <Route exact path="/faq" component={Faq} />
-        <Route path="/user" component={AuthContainer} /> */}
         </Container>
 
         {/* <Image wrapped size='large' src={burn2018} /> */}

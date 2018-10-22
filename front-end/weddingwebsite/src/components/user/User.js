@@ -4,6 +4,8 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import FormCard from '../cards/FormCard';
 import AccomodationCard from '../cards/AccomodationCard';
+import ResponsiveContainer from '../home/ResponsiveContainer';
+
 import {saveTheDateFormSubmit, getDependents, accomodationsFormSubmit} from '../../redux/actions/forms.js';
 
 class User extends Component {
@@ -51,9 +53,12 @@ class User extends Component {
   }
   render() {
     const {user, dependentGuests} = this.props;
-    return( <div>
+    return(
+       <div>
+         <ResponsiveContainer>
       <FormCard triggerSubmit={this.triggerRSVPSubmit} getApi={this.setFormApi} user={user} dependentGuests={dependentGuests} ></FormCard>
       {/* <AccomodationCard triggerSubmit={this.triggerAccomodationSubmit} getApi={this.setFormApi} user={user} dependentGuests={dependentGuests} ></AccomodationCard> */}
+    </ResponsiveContainer>
     </div>)
   }
 }
