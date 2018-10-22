@@ -27,6 +27,9 @@ export const user = (state = { loginStatus: false, dependentGuests: [] }, action
     case CONST.GET_DEPENDENT_GUESTS_FULFILLED:
       console.log(" getDependentGuest action payload==", action.payload);
       return { ...state,  dependentGuests: action.payload.map(guest => guest)};
+    case CONST.SAVE_THE_DATE_DEPENDENT_FORM_FULFILLED:
+      console.log(" getDependentGuest action payload==", action.payload);
+      return { ...state}; //TODO <FINISH></FINISH>
     case CONST.GET_DEPENDENT_GUESTS_PENDING:
     console.log("GET_DEPENDENT_GUESTS only payload==", action.payload);
       return { ...state};

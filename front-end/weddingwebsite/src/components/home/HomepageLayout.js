@@ -8,11 +8,8 @@ import {
   Icon,
   Image,
   List,
-  Menu,
   Responsive,
-  Segment,
-  Sidebar,
-  Visibility,
+  Segment
 } from 'semantic-ui-react'
 import ResponsiveContainer from './ResponsiveContainer';
 import header from '../../assets/images/header.png';

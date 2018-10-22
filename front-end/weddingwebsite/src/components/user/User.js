@@ -2,11 +2,11 @@ import React, { Component } from 'react';
 import {Form, Text} from 'informed';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import FormCard from '../cards/FormCard';
+// import FormCard from '../cards/FormCard';
 import AccomodationCard from '../cards/AccomodationCard';
 import ResponsiveContainer from '../home/ResponsiveContainer';
-
-import {saveTheDateFormSubmit, getDependents, accomodationsFormSubmit} from '../../redux/actions/forms.js';
+import TabExampleSecondaryPointing from './TabWrapper';
+import { getDependents, accomodationsFormSubmit} from '../../redux/actions/forms.js';
 
 class User extends Component {
   constructor(props) {
@@ -16,47 +16,32 @@ class User extends Component {
   componentDidMount() {
     this.props.getDependents(this.props.userName)
   }
-  setFormApi = (formApi) =>{
-    this.formApi = formApi;
-  }
 
-  triggerRSVPSubmit = () => {
 
-    const formState = this.formApi.getState();
-    console.log('formState====', formState);
-    const {RSVP} = formState.values;
-    const {invalid} = formState;
-    console.log("RSVP===", RSVP, "Invalid?==", invalid);
-
-    if (RSVP && !invalid ) {
-      let formAnswers = Object.assign({}, {RSVP}, {name: this.props.userName})
-      this.props.saveTheDateFormSubmit(formAnswers)
-    } else {
-      console.log('failed handleClick unexpectedly');
-    }
-     this.formApi.reset()
-  }
-  triggerAccomodationSubmit = () => {
-
-    const formState = this.formApi.getState();
-    console.log('formState====', formState);
-    const {RSVP} = formState.values;
-    const {invalid} = formState;
-    console.log("RSVP===", RSVP, "Invalid?==", invalid);
-    if (RSVP && !invalid ) {
-      let formAnswers = Object.assign({}, {RSVP}, {name: this.props.userName})
-      this.props.saveTheDateFormSubmit(formAnswers)
-    } else {
-      console.log('failed handleClick unexpectedly');
-    }
-     this.formApi.reset()
-  }
+  // triggerAccomodationSubmit = () => {
+  //
+  //   const formState = this.formApi.getState();
+  //   console.log('formState====', formState);
+  //   const {RSVP} = formState.values;
+  //   const {invalid} = formState;
+  //   console.log("RSVP===", RSVP, "Invalid?==", invalid);
+  //   if (RSVP && !invalid ) {
+  //     let formAnswers = Object.assign({}, {RSVP}, {name: this.props.userName})
+  //     this.props.saveTheDateFormSubmit(formAnswers)
+  //   } else {
+  //     console.log('failed handleClick unexpectedly');
+  //   }
+  //    this.formApi.reset()
+  // }
   render() {
     const {user, dependentGuests} = this.props;
     return(
        <div>
          <ResponsiveContainer>
-      <FormCard triggerSubmit={this.triggerRSVPSubmit} getApi={this.setFormApi} user={user} dependentGuests={dependentGuests} ></FormCard>
+           <TabExampleSecondaryPointing user={user} dependentGuests={dependentGuests}>
+      {/* <FormCard triggerSubmit={this.triggerRSVPSubmit} getApi={this.setFormApi} user={user} dependentGuests={dependentGuests} ></FormCard> */}
+
+      </TabExampleSecondaryPointing>
       {/* <AccomodationCard triggerSubmit={this.triggerAccomodationSubmit} getApi={this.setFormApi} user={user} dependentGuests={dependentGuests} ></AccomodationCard> */}
     </ResponsiveContainer>
     </div>)
@@ -75,7 +60,6 @@ const mapStateToProps = state => ({
 
 export const mapDispatchToProps = dispatch =>
   bindActionCreators({
-    saveTheDateFormSubmit,
     accomodationsFormSubmit,
     getDependents,
   }, dispatch);

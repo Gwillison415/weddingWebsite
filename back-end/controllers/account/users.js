@@ -31,6 +31,69 @@ router.route('/rsvp/:id?').post((req, res) => {
  })
 });
 
+router.route('/drsvp/dependents').post((req, res) => {
+  console.log('req.body', req.body);
+  console.log('req.params typeof',  req.query.rsvpType);
+
+  const knex = require('../../knex.js')
+  const rsvpType = req.query.type;
+  const mainGuest = req.body.mainGuest
+  const dependentGuest = req.body.dependentGuest;
+  const rsvpStatus = req.body.rsvp;
+  const rehersalInvite = req.body.rehersalInvite ? req.body.rehersalInvite : null;
+  if (rsvpType == 'rsvp') {
+    knex('dependent_guests')
+    .where({full_name: dependentGuest, main_guest: mainGuest})
+    .update({
+      rsvp: rsvpStatus
+    })
+    .returning(['full_name', 'rsvp','rehersal_invite', 'rehersal_rsvp'])
+    .then(updatedGuest => {
+      console.log('updatedGuest= rsvp==', updatedGuest[0]);
+     res.status(200).send(updatedGuest[0])
+   })
+  } else if (rsvpType =='final_rsvp') {
+    knex('dependent_guests')
+    .where({full_name: dependentGuest, main_guest: mainGuest})
+    .update({
+      final_rsvp: rsvpStatus
+    })
+    .returning(['full_name', 'rsvp','rehersal_invite', 'rehersal_rsvp'])
+    .then(updatedGuest => {
+      console.log('updatedGuest=final==', updatedGuest[0]);
+     res.status(200).send(updatedGuest[0])
+   })
+  } else if (rsvpType =='rehersal_invite') {
+    knex('dependent_guests')
+    .where({full_name: dependentGuest, main_guest: mainGuest})
+    .update({
+      rehersal_invite: rsvpStatus
+    })
+    .returning(['full_name', 'rsvp','rehersal_invite', 'rehersal_rsvp'])
+  .then(updatedGuest => {
+    console.log('updatedGuest=rehersalInvite==', updatedGuest[0]);
+   res.status(200).send(updatedGuest[0])
+ })
+  } else if (rsvpType =='rehersal_rsvp') {
+    knex('dependent_guests')
+    .where({full_name: dependentGuest, main_guest: mainGuest})
+    .update({
+      rehersal_rsvp: rsvpStatus
+    })
+    .returning(['full_name', 'rsvp','rehersal_invite', 'rehersal_rsvp'])
+
+  .then(updatedGuest => {
+    console.log('updatedGuest=rehersal_rsvp==', updatedGuest[0]);
+   res.status(200).send(updatedGuest[0])
+ })
+  }
+//    | final_rsvp | rehersal_rsvp | rehersal_invite
+// Object.assign({}, {  `${rsvpType}`: rsvpStatus})
+
+
+
+});
+
 router.route('/dependents/:id').get((req, res) => {
   // console.log('req.query', req.query);
   // console.log('req.params', req.params);

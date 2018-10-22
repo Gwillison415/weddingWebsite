@@ -5,8 +5,19 @@ export const saveTheDateFormSubmit = (props) => {
 
   return {type: CONST.SAVE_THE_DATE_FORM, payload: saveDateInfo(props)}
 };
+export const saveTheDateDependentFormSubmit = (props) => {
+
+  return {type: CONST.SAVE_THE_DATE_DEPENDENT_FORM, payload: saveDependentDateInfo(props)}
+};
 
 // const saveDateInfo = (props) =>  axios.post(`/user/rsvp/${id}?name=${props.name}&rsvp=${props.RSVP}`,{}).then(response =>  response.data);
+const saveDependentDateInfo = (props) => {
+  return axios.post(`/user/drsvp/dependents?type=${props.type}`, {
+    mainGuest: props.mainGuest,
+    dependentGuest: props.dependentGuest,
+    rsvp: props.RSVP
+  }).then(response => response.data)
+}
 const saveDateInfo = (props) => {
   let id = localStorage.getItem('userId')
   return axios.post(`/user/rsvp/${id}?name=${props.name}&rsvp=${props.RSVP}`, {}).then(response => response.data)
