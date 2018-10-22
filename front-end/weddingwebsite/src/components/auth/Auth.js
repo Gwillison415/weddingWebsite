@@ -1,44 +1,53 @@
 import React, {Component} from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import User from '../user/User';
-import { bindActionCreators } from 'redux'
+import {bindActionCreators} from 'redux'
 import {setRedirectUrl} from '../../redux/actions/login';
+import HomepageLayout from '../home/HomepageLayout';
+
 class Auth extends Component {
- constructor(props) {
-   super(props)
-     this.state = {
-     }
+  constructor(props) {
+    super(props)
+    this.state = {}
 
- }
- render() {
-  //TODO reimplement the conditional
-   // if (this.props.loginStatus) {
-   //   return (
-   //     <Switch>
-   //       <Route path="/user" component={User} />
-   //
-   //     </Switch>
-   //   );
-   // } else {
-   //
-   //   return (<div>whoops, someone isn't logged in</div>);
-   // }
- // )
+  }
+  componentDidMount() {
+    // const { user } = this.props;
+    if (!this.loginStatus) {
+      this.props.setRedirectUrl(this.props.location.pathname);
+      this.props.history.push('/');
+    }
+  }
+  render() {
+    console.log("loginStatus", this.loginStatus);
+    //TODO reimplement the conditional
+    if (this.props.loginStatus) {
+      return (<Switch>
+        <Route path="/user" component={User}/>
 
-   return (
-       <Switch>
-         <Route path="/user" component={User} />
+      </Switch>);
+    } else {
 
-       </Switch>)
- };
- }
+      return (<Switch>
+        <Route path="/" component={HomepageLayout}/>
 
-const mapStateToProps = state => ({
-  loginStatus: state.user.loginStatus,
-})
+      </Switch>);
+      // }
+      // )
+
+      // return (
+      //     <Switch>
+      //       <Route path="/user" component={User} />
+      //
+      //     </Switch>)
+    };
+  }
+}
+
+const mapStateToProps = state => ({loginStatus: state.user.loginStatus})
 const mapDispatchToProps = dispatch => bindActionCreators({
-  setRedirectUrl,
+  setRedirectUrl
 }, dispatch)
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Auth));
