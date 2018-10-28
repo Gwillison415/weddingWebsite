@@ -25,13 +25,6 @@ const HomepageLayout = () => {
     <Segment style={{ padding: '8em 0em' }} vertical>
       <Grid container stackable verticalAlign='middle'>
         <Grid.Row>
-          <Grid.Column floated='center' width={12}>
-            <Image src={header} style={{'marginLeft': '4rem', 'marginTop': '-2rem'}}>
-
-            </Image>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
           <Grid.Column width={9}>
             <Header as='h3' style={{ fontSize: '2em' }}>
               A Celebration of the Invincible Heart

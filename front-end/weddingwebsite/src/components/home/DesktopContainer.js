@@ -41,10 +41,11 @@ class DesktopContainer extends Component {
           onBottomPassed={this.showFixedMenu}
           onBottomPassedReverse={this.hideFixedMenu}
         >
+
           <Segment
             inverted
             textAlign='center'
-            style={{ minHeight: 700, padding: '1em 0em' }}
+            style={{ minHeight: 500, padding: '1em 0em', backgroundColor: '#034b5b' }}
             vertical
           >
             <Menu
