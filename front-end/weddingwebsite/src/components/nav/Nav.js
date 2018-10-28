@@ -102,18 +102,7 @@ closeAccountModal = () => this.setState({showAccountModal: false})
             <Menu.Menu position='right'>
 
                 <AccountModal closeAccountModal={this.closeAccountModal}></AccountModal>
-              {/*  showAccountModal={this.state.showAccountModal}
-
-                <Dropdown text='Projects' pointing="pointing" className='link item'>
-                <Dropdown.Menu>
-                  <Dropdown.Item link="link" href='https://dashboard.grantwillison.tech/'>DataBraid Dashboard
-                  </Dropdown.Item>
-                  <Dropdown.Divider/>
-                  <Dropdown.Item href='http://gaminganalytics.grantwillison.tech/'>Highcharts Project</Dropdown.Item>
-                  <Dropdown.Item href='http://moogsoft.grantwillison.tech/'>
-                    De-Duped Data Project</Dropdown.Item>
-                </Dropdown.Menu>
-              </Dropdown> */}
+        
             </Menu.Menu>
           </Container>
         </Menu>

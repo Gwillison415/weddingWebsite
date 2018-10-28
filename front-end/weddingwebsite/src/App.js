@@ -8,6 +8,7 @@ import HomepageLayout from './components/home/HomepageLayout';
 import Nav from './components/nav/Nav';
 import User from './components/user/User';
 import Auth from './components/auth/Auth';
+import {AccomodationsInfo} from './components/info/AccomodationsInfo';
 
 class App extends Component {
   constructor(props) {
@@ -27,6 +28,7 @@ class App extends Component {
           <Route exact path="/" component={HomepageLayout}/>
 
           <Route path="/user" component={Auth} />
+          <Route path="/info/accomodations" component={AccomodationsInfo} />
 
         </Container>
 

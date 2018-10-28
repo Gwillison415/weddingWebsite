@@ -1,10 +1,10 @@
 import * as CONST from '../constants/constants';
 
-export const user = (state = { loginStatus: false, dependentGuests: [] }, action) => {
+export const user = (state = { loginStatus: false, dependentGuests: [], homeIsActive: true }, action) => {
   switch (action.type) {
     case CONST.LOGIN_FULFILLED:
     localStorage.setItem('userId', action.payload.id);
-    return { ...state, loginStatus: true, dependentGuests: [],...action.payload };
+    return { ...state, loginStatus: true, homeIsActive: false, profileIsActive: true, dependentGuests: [],...action.payload };
     case CONST.LOGIN:
     console.log('action.payload==', action.payload);
     localStorage.setItem('userId', action.payload.id);
@@ -39,19 +39,21 @@ export const user = (state = { loginStatus: false, dependentGuests: [] }, action
     case "GET_DEPENDENT_GUESTS_2":
     console.log(" getDependentGuest 2 2 REGUlar action payload==", action.data);
       return { ...state,  dependentGuests: action.data};
+      case CONST.REDIRECT:
+        return { ...state, redirectURL: action.url, homeIsActive: action.homeIsActive, profileIsActive: action.profileIsActive };
     default:
       return state;
   }
 };
 
-export const loginRedirect = (state = {}, action) => {
-  switch (action.type) {
-    case CONST.REDIRECT:
-      return { ...state, redirectURL: action.url };
-    default:
-      return state;
-  }
-};
+// export const loginRedirect = (state = {}, action) => {
+//   switch (action.type) {
+//     case CONST.REDIRECT:
+//       return { ...state, redirectURL: action.url };
+//     default:
+//       return state;
+//   }
+// };
 export const saveTheDateForm = (state = {}, action) => {
   switch (action.type) {
     case CONST.SAVE_THE_DATE_FORM:

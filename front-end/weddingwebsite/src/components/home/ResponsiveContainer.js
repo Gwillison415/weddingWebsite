@@ -2,9 +2,9 @@ import React from 'react';
 import DesktopContainer from './DesktopContainer';
 import MobileContainer from './MobileContainer';
 
-const ResponsiveContainer = ({ children }) => (
+const ResponsiveContainer = ({ children , signInMessage}) => (
   <div>
-    <DesktopContainer>{children}</DesktopContainer>
+    <DesktopContainer signInMessage={signInMessage}>{children}</DesktopContainer>
     <MobileContainer>{children}</MobileContainer>
   </div>
 )

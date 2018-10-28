@@ -5,14 +5,14 @@ import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import {Provider} from 'react-redux'
 import {applyMiddleware, combineReducers, createStore, compose} from 'redux';
-import {user, loginRedirect, saveTheDateForm, accomodationsForm, rsvpForm } from './redux/reducers/account';
+import {user, saveTheDateForm, accomodationsForm, rsvpForm } from './redux/reducers/account';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import promiseMiddleware from 'redux-promise-middleware';
 import { BrowserRouter } from 'react-router-dom';
 
 
-const weddingApp = combineReducers({user, loginRedirect, saveTheDateForm, accomodationsForm, rsvpForm });
+const weddingApp = combineReducers({user, saveTheDateForm, accomodationsForm, rsvpForm });
 
 const store = createStore(weddingApp,
    {},

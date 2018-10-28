@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Link, NavLink } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
+import {changePageLocation} from '../../redux/actions/login';
+import { bindActionCreators } from 'redux';
 
 import {
   Button,
@@ -25,14 +27,16 @@ import AccountModal from '../account/AccountModal';
 class DesktopContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = {}
+    this.state = {
+    }
   }
 
   hideFixedMenu = () => this.setState({ fixed: false })
   showFixedMenu = () => this.setState({ fixed: true })
 
+
   render() {
-    const { children, userName } = this.props
+    const { children, userName, changePageLocation, signInMessage } = this.props
     const { fixed } = this.state
     return (
       <Responsive minWidth={Responsive.onlyTablet.minWidth}>
@@ -56,13 +60,19 @@ class DesktopContainer extends Component {
               size='large'
             >
               <Container>
-                <Menu.Item header="header">Welcome {userName? userName : 'Friend'}</Menu.Item>
-                <Menu.Item as='a' active>
-                  Home
+                <Menu.Item header="header">Welcome {userName? userName : signInMessage? signInMessage : 'Friend'}</Menu.Item>
+                <Menu.Item active={this.props.homeIsActive} onClick={() => {
+                  changePageLocation('home')
+                  this.props.history.push('/')
+                }}> Home
+                  {/* <Link to="/">Home </Link> */}
                 </Menu.Item>
-                <Menu.Item  >
+                <Menu.Item active={this.props.profileIsActive} onClick={() => {
+                  changePageLocation('profile')
+                  this.props.history.push('/user')
+                }} > Profile
 
-                  <Link to="/user">Profile  </Link>
+                  {/* <Link to="/user">Profile  </Link> */}
                 </Menu.Item>
                 <Dropdown text='Venue' pointing="pointing" className='link item'>
                   <Dropdown.Menu>
@@ -74,12 +84,14 @@ class DesktopContainer extends Component {
 
                   </Dropdown.Menu>
                 </Dropdown>
-                <Dropdown text='FAQ' pointing="pointing" className='link item'>
+                <Dropdown text='Guest Info' pointing="pointing" className='link item'>
                   <Dropdown.Menu>
 
-                    <Dropdown.Item >FAQ Page</Dropdown.Item>
-                    <Dropdown.Item link="link" href='mailto:keenewillison2019@gmail.com?subject=Question%20about%20___%20from%20____&body=let%20us%20know%20if%20you%20dont%20want%20us%20to%20put%20your%20question%20on%20our%20FAQ'>Email a question</Dropdown.Item>
-                    <Dropdown.Item ></Dropdown.Item>
+                    <Dropdown.Item style={{color: 'black'}}>FAQ Page</Dropdown.Item>
+                    <Dropdown.Item link="link" href='mailto:keenewillison2019@gmail.com?subject=Question%20about%20___%20from%20____&body=let%20us%20know%20if%20you%20dont%20want%20us%20to%20put%20your%20question%20on%20our%20FAQ' style={{color: 'black'}}>Email a question</Dropdown.Item>
+                    <Dropdown.Item >
+                      <Link to="/info/accomodations" style={{color: 'black'}} > Accomodations </Link>
+                      </Dropdown.Item>
                     <Dropdown.Item ></Dropdown.Item>
 
                   </Dropdown.Menu>
@@ -101,9 +113,14 @@ class DesktopContainer extends Component {
 const mapStateToProps = state => ({
   // loginStatus: state.user.loginStatus,
   // user: state.user,
+  homeIsActive: state.user.homeIsActive,
+  profileIsActive: state.user.profileIsActive,
   userName: state.user.full_name,
-  redirect: state.loginRedirect.redirectURL,
+  redirect: state.user.redirectURL,
   // error: state.user.error,
 });
+const mapDispatchToProps = dispatch => bindActionCreators({
+  changePageLocation,
+}, dispatch)
 
-export default withRouter(connect(mapStateToProps, null)(DesktopContainer))
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(DesktopContainer))

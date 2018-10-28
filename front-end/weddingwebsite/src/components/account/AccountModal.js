@@ -69,7 +69,7 @@ const mapStateToProps = state => ({
   loginStatus: state.user.loginStatus,
   // user: state.user,
   // userName: state.user.full_name,
-  redirect: state.loginRedirect.redirectURL,
+  redirect: state.user.redirectURL,
   error: state.user.error,
 });
 

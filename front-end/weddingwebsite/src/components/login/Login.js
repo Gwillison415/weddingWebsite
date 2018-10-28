@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import { bindActionCreators } from 'redux';
+import {withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 import {Form, Text} from 'informed';
 import {Redirect} from 'react-router-dom';
@@ -22,6 +23,7 @@ import './Login.css';
   componentDidUpdate(prevProps) {
   // Typical usage (don't forget to compare props):
   if (this.props.loginStatus !== prevProps.loginStatus) {
+    this.props.history.push('/user')
     this.props.closeAccountModal()
   }
 }
@@ -121,4 +123,4 @@ export const mapDispatchToProps = dispatch =>
     login,
   }, dispatch);
 
-export default connect(mapStateToProps, mapDispatchToProps)(Login)
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Login))

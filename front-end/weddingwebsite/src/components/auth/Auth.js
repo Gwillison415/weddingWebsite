@@ -14,22 +14,35 @@ class Auth extends Component {
 
   }
   componentDidMount() {
+    console.log('this.props.location.pathname in auth', this.props.location.pathname);
     if (!this.props.loginStatus) {
       this.props.setRedirectUrl(this.props.location.pathname);
       this.props.history.push('/');
     }
   }
+  componentDidUpdate(prevProps) {
+  // Typical usage (don't forget to compare props):
+  if (this.props.loginStatus !== prevProps.loginStatus) {
+    console.log('you prob just logged in');
+  }
+}
   render() {
 
+    console.log('in app loginStatus');
     if (this.props.loginStatus) {
       return (<Switch>
         <Route path="/user" component={User}/>
 
       </Switch>);
     } else {
-
-      return (<Switch>
-        <Route path="/" component={HomepageLayout}/>
+    console.log('switched in auth');
+      return (
+        <Switch>
+          <Route path="/"
+          render={(props) =>
+            <HomepageLayout {...props} signInMessage={'Sign in Silly!'}/>
+            }
+          />
 
       </Switch>);
 
