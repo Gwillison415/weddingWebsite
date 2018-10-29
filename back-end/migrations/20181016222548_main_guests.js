@@ -16,7 +16,7 @@ exports.up = function(knex, Promise) {
   table.string('state').nullable()
   table.integer('zip').nullable()
   table.integer('additional_guest_count').nullable()
-  table.boolean('first_rsvp').nullable()
+  table.string('first_rsvp').nullable()
   table.boolean('final_rsvp').nullable()
   table.boolean('rehersal_rsvp').nullable()
   table.boolean('rehersal_invite').nullable()

@@ -42,7 +42,7 @@ class AccountModal extends Component {
   }
 
   render () {
-    
+
   const { error, modalStyle } = this.props;
   const { showLogin, showSignUp, open, modalMessage, redirect, } = this.state
   return (<Modal open={this.state.showAccountModal} style={modalStyle} trigger={<Button onClick={() => this.setState({showAccountModal: true})}>Guest Login</Button>} centered={false}>
@@ -66,10 +66,10 @@ class AccountModal extends Component {
   </Modal>)}
 }
 const mapStateToProps = state => ({
-  // loginStatus: state.user.loginStatus,
+  loginStatus: state.user.loginStatus,
   // user: state.user,
   // userName: state.user.full_name,
-  redirect: state.loginRedirect.redirectURL,
+  redirect: state.user.redirectURL,
   error: state.user.error,
 });
 

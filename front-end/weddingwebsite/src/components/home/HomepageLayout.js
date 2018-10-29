@@ -8,11 +8,8 @@ import {
   Icon,
   Image,
   List,
-  Menu,
   Responsive,
-  Segment,
-  Sidebar,
-  Visibility,
+  Segment
 } from 'semantic-ui-react'
 import ResponsiveContainer from './ResponsiveContainer';
 import header from '../../assets/images/header.png';
@@ -20,32 +17,23 @@ import Mccrarywedding from '../../assets/images/Mccrarywedding.jpg';
 import theEx from '../../assets/images/theEx.jpg';
 import Parrallax1 from '../parrallax/Parrallax1.js';
 import Abridged from '../modals/Abridged.js';
-const HomepageLayout = () => {
-
+const HomepageLayout = ({signInMessage}) => {
+  console.log("signInMessage in HomepageLayout==", signInMessage);
   return (
-  <ResponsiveContainer>
+  <ResponsiveContainer signInMessage={signInMessage} >
 
     <Segment style={{ padding: '8em 0em' }} vertical>
       <Grid container stackable verticalAlign='middle'>
         <Grid.Row>
-          <Grid.Column floated='center' width={12}>
-            <Image src={header} style={{'marginLeft': '4rem', 'marginTop': '-2rem'}}>
-
-            </Image>
-          </Grid.Column>
-        </Grid.Row>
-        <Grid.Row>
           <Grid.Column width={9}>
             <Header as='h3' style={{ fontSize: '2em' }}>
-              A Celebration of the Invincible Heart
+              A Celebration of the Invincible Heart {signInMessage}
             </Header>
             <p style={{ fontSize: '1.33em' }}>
-              "It doesn’t interest me what you do for a living. I want to know what you ache for and if you dare to dream of meeting your heart’s longing.
+              "It doesn’t interest me what you do for a living. I want to know what you ache for and if you dare to dream of meeting your heart’s longing. It doesn’t interest me how old you are. I want to know if you will risk looking like a fool for love, for your dream, for the adventure of being alive."
 
-It doesn’t interest me how old you are. I want to know if you will risk looking like a fool for love, for your dream, for the adventure of being alive."
-
--Oriah Mountain Dreamer, 'The Invitation'
             </p>
+            <p style={{ fontSize: '1.13em' }}>-Oriah Mountain Dreamer, 'The Invitation'</p>
             <Header as='h3' style={{ fontSize: '2em' }}>
               We Make Bananas That Can Dance
             </Header>

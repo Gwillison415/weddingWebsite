@@ -1,51 +1,57 @@
 import React, {Component} from 'react';
-import { Route, Switch } from 'react-router-dom';
-import { connect } from 'react-redux';
-import { withRouter } from 'react-router-dom';
+import {Route, Switch} from 'react-router-dom';
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import User from '../user/User';
-import { bindActionCreators } from 'redux'
+import {bindActionCreators} from 'redux'
 import {setRedirectUrl} from '../../redux/actions/login';
+import HomepageLayout from '../home/HomepageLayout';
+
 class Auth extends Component {
- constructor(props) {
-   super(props)
-     this.state = {
-     }
+  constructor(props) {
+    super(props)
+    this.state = {}
 
- }
- // componentDidMount(){
- //
- //    if (!this.loginStatus) {
- //      this.props.setRedirectUrl(this.props.location.pathname);
- //      this.props.history.push('/?loginYa=Dummy');
- //    }
- // }
- render() {
-  //TODO reimplement the conditional
-   // if (this.props.loginStatus) {
-   //   return (
-   //     <Switch>
-   //       <Route path="/user" component={User} />
-   //
-   //     </Switch>
-   //   );
-   // } else {
-   //
-   //   return (<div>whoops, someone isn't logged in</div>);
-   // }
- // )
+  }
+  componentDidMount() {
+    console.log('this.props.location.pathname in auth', this.props.location.pathname);
+    if (!this.props.loginStatus) {
+      this.props.setRedirectUrl(this.props.location.pathname);
+      this.props.history.push('/');
+    }
+  }
+  componentDidUpdate(prevProps) {
+  // Typical usage (don't forget to compare props):
+  if (this.props.loginStatus !== prevProps.loginStatus) {
+    console.log('you prob just logged in');
+  }
+}
+  render() {
 
-   return (
-       <Switch>
-         <Route path="/user" component={User} />
+    console.log('in app loginStatus');
+    if (this.props.loginStatus) {
+      return (<Switch>
+        <Route path="/user" component={User}/>
 
-       </Switch>)
- };
- }
+      </Switch>);
+    } else {
+    console.log('switched in auth');
+      return (
+        <Switch>
+          <Route path="/"
+          render={(props) =>
+            <HomepageLayout {...props} signInMessage={'Sign in Silly!'}/>
+            }
+          />
 
-const mapStateToProps = state => ({
-  loginStatus: state.user.loginStatus,
-})
+      </Switch>);
+
+    };
+  }
+}
+
+const mapStateToProps = state => ({loginStatus: state.user.loginStatus})
 const mapDispatchToProps = dispatch => bindActionCreators({
-  setRedirectUrl,
+  setRedirectUrl
 }, dispatch)
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Auth));

@@ -8,6 +8,7 @@ import HomepageLayout from './components/home/HomepageLayout';
 import Nav from './components/nav/Nav';
 import User from './components/user/User';
 import Auth from './components/auth/Auth';
+import {AccomodationsInfo} from './components/info/AccomodationsInfo';
 
 class App extends Component {
   constructor(props) {
@@ -18,15 +19,17 @@ class App extends Component {
     return (
       <div className="App">
 
+        {/* <Container>
+          <Route exact path="/" component={HomepageLayout}/> */}
+        {/* <Route exact path="/faq" component={Faq} />
+        <Route path="/user" component={AuthContainer} /> */}
+        {/* </Container> */}
         <Container>
           <Route exact path="/" component={HomepageLayout}/>
 
           <Route path="/user" component={Auth} />
+          <Route path="/info/accomodations" component={AccomodationsInfo} />
 
-
-
-        {/* <Route exact path="/faq" component={Faq} />
-        <Route path="/user" component={AuthContainer} /> */}
         </Container>
 
         {/* <Image wrapped size='large' src={burn2018} /> */}
