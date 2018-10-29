@@ -3,7 +3,6 @@ import {Form, Text} from 'informed';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 // import FormCard from '../cards/FormCard';
-import AccomodationCard from '../cards/AccomodationCard';
 import ResponsiveContainer from '../home/ResponsiveContainer';
 import TabExampleSecondaryPointing from './TabWrapper';
 import { getDependents, accomodationsFormSubmit} from '../../redux/actions/forms.js';
@@ -34,15 +33,14 @@ class User extends Component {
   //    this.formApi.reset()
   // }
   render() {
-    const {user, dependentGuests} = this.props;
+    const {user, dependentGuests, hasOnsiteInvite} = this.props;
     return(
        <div>
          <ResponsiveContainer>
-           <TabExampleSecondaryPointing user={user} dependentGuests={dependentGuests}>
+           <TabExampleSecondaryPointing user={user} dependentGuests={dependentGuests} hasOnsiteInvite={hasOnsiteInvite}>
       {/* <FormCard triggerSubmit={this.triggerRSVPSubmit} getApi={this.setFormApi} user={user} dependentGuests={dependentGuests} ></FormCard> */}
 
       </TabExampleSecondaryPointing>
-      {/* <AccomodationCard triggerSubmit={this.triggerAccomodationSubmit} getApi={this.setFormApi} user={user} dependentGuests={dependentGuests} ></AccomodationCard> */}
     </ResponsiveContainer>
     </div>)
   }
@@ -55,7 +53,7 @@ const mapStateToProps = state => ({
   error: state.user.error,
   dependentGuests: state.user.dependentGuests,
   rehersal_invite: state.saveTheDateForm.rehersal_invite,
-
+  hasOnsiteInvite: state.user.onsite_invite,
 });
 
 export const mapDispatchToProps = dispatch =>

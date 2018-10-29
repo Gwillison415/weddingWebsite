@@ -24,13 +24,10 @@ const PreliminaryRSVP =(props) =>{
       <Grid container stackable verticalAlign='middle'>
         <Grid.Row>
           <Header as='h3' style={{ fontSize: '2em' }}>
-            first ask ehadline
+            Roll Call! This is your first Chance to tell us where you stand!
           </Header>
           <p style={{ fontSize: '1.33em' }}>
-            explanation of what we're getting at
-            esn’t interest me what you do for a living. I want to know what you ache for and if you dare to dream of meeting your heart’s longing.
-
-            It doesn’t interest me how old you are. I want to know if you will risk looking like a fool for love, for your drea
+            We're getting hitched July 13th and planning a wedding around the entire weekend. So Let us know what you know about your plans that weekend.
           </p>
         </Grid.Row>
         <Grid.Row>
@@ -47,29 +44,31 @@ const PreliminaryRSVP =(props) =>{
     </Segment>
     <Segment>
       <Grid container stackable verticalAlign='middle'>
+      {dependentGuests.length ? <Grid.Row > <Grid.Column textAlign='center'>But Wait? What about the other people we know, that you know?</Grid.Column> </Grid.Row> : null }
       <Grid.Row>
         {dependentGuests.map((guest, idx) =>
           {console.log("guest", guest);
           if (guest.rehersal_invite) {
             return (<div key={idx} style={{display: 'inline-flex'}}>
               <Grid.Column style={{ padding: '.5em 2em' }} width={6}>
-                 <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={false} rehersalInvite={'the celebration jully 13th?'}>
+                 <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={false} rehersalInvite={'the celebration July 13th?'}>
                     </DependentGuestRSVPForm>
                      </Grid.Column>
               <Grid.Column style={{ padding: '.5em 2em' }} width={6}>
-                <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={true} rehersalInvite={' family dinner Jull 11th?'}  >
+                <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={true} rehersalInvite={'family dinner July 11th?'}  >
                    </DependentGuestRSVPForm>
               </Grid.Column>
             </div>)
           } else {
             return  (<div  key={idx}style={{display: 'inline-flex'}}>
             <Grid.Column style={{ padding: '.5em 2em' }} width={6}>
-               <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={false} rehersalInvite={'the celebration jully 13th?'}>
+               <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={false} rehersalInvite={'the celebration July 13th?'}>
                   </DependentGuestRSVPForm>
                    </Grid.Column>
                 </div>)
           }
           })
+
         }
       </Grid.Row>
       </Grid>

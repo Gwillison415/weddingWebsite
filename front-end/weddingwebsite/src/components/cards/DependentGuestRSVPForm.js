@@ -2,6 +2,8 @@ import React, {Component} from 'react'
 import {Form, Text, RadioGroup, Radio } from 'informed';
 import {Card, Icon, Image} from 'semantic-ui-react'
 import saveTheDate from '../../assets/images/saveTheDate.jpeg';
+import logowedcel from '../../assets/images/logowedcel.png';
+import logofamdin from '../../assets/images/logofamdin.png';
 import {saveTheDateDependentFormSubmit} from '../../redux/actions/forms.js';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -43,9 +45,9 @@ class DependentGuestRSVPForm extends Component {
     return (
 
       <Card>
-      <Image src={saveTheDate}/>
+      <Image src={isRehersalInvite? logofamdin : logowedcel }/>
       <Card.Content>
-        <Card.Header> So, will {guest.full_name} be able to join us for {rehersalInvite}</Card.Header>
+        <Card.Header> So, will {guest.full_name} be able to join us for <u>{rehersalInvite}</u> </Card.Header>
         <Card.Meta>
           <span className='date'></span>
         </Card.Meta>

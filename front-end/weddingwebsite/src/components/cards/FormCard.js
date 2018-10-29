@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Form, Text, RadioGroup, Radio } from 'informed';
 import {Card, Icon, Image} from 'semantic-ui-react'
-import saveTheDate from '../../assets/images/saveTheDate.jpeg';
+import logostd from '../../assets/images/logostd.png';
 import {saveTheDateFormSubmit} from '../../redux/actions/forms.js';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
@@ -35,7 +35,7 @@ class FormCard extends Component {
     return (
 
       <Card>
-      <Image src={saveTheDate}/>
+      <Image src={logostd}/>
       <Card.Content>
         <Card.Header>Hi {user.full_name}</Card.Header>
         <Card.Meta>
