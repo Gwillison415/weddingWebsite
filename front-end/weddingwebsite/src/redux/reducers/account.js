@@ -1,9 +1,11 @@
 import * as CONST from '../constants/constants';
+let firstRsvpStatus;
 
 export const user = (state = { loginStatus: false, dependentGuests: [], homeIsActive: true }, action) => {
   switch (action.type) {
     case CONST.LOGIN_FULFILLED:
     localStorage.setItem('userId', action.payload.id);
+    // firstRsvpStatus = action.payload.first_rsvp
     return { ...state, loginStatus: true, homeIsActive: false, profileIsActive: true, dependentGuests: [],...action.payload };
     case CONST.LOGIN:
     console.log('action.payload==', action.payload);
@@ -19,6 +21,12 @@ export const user = (state = { loginStatus: false, dependentGuests: [], homeIsAc
     case CONST.RESET_PASSWORD_FULFILLED:
     localStorage.setItem('userId', action.payload.id);
     return { ...state, loginStatus: true, ...action.payload };
+    case CONST.UPDATE_USER_INFO:
+      console.log(" UPDATE_USER_INFO action payload==", action.payload);
+      return { ...state,  ...action.payload};
+    case CONST.SAVE_THE_DATE_FORM_FULFILLED:
+      console.log(" UPDATE_USER_INFO action payload==", action.payload);
+      return { ...state,  ...action.payload};
     case CONST.RESET_PASSWORD_REJECTED:
       return { ...state, loginStatus: false, resetError: `Login Failed. ${action.payload.response.data.error}`, ...action.payload };
     // case CONST.GET_DEPENDENT_GUESTS_FULFILLED:

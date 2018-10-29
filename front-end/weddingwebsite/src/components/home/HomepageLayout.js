@@ -5,7 +5,6 @@ import {
   Divider,
   Grid,
   Header,
-  Icon,
   Image,
   List,
   Responsive,
@@ -17,11 +16,12 @@ import Mccrarywedding from '../../assets/images/Mccrarywedding.jpg';
 import theEx from '../../assets/images/theEx.jpg';
 import Parrallax1 from '../parrallax/Parrallax1.js';
 import Abridged from '../modals/Abridged.js';
+import UserDash from '../userDash/UserDash';
 const HomepageLayout = ({signInMessage}) => {
   console.log("signInMessage in HomepageLayout==", signInMessage);
   return (
   <ResponsiveContainer signInMessage={signInMessage} >
-
+    <UserDash></UserDash>
     <Segment style={{ padding: '8em 0em' }} vertical>
       <Grid container stackable verticalAlign='middle'>
         <Grid.Row>

@@ -20,10 +20,15 @@ const saveDependentDateInfo = (props) => {
 }
 const saveDateInfo = (props) => {
   let id = localStorage.getItem('userId')
-  return axios.post(`/user/rsvp/${id}?name=${props.name}&rsvp=${props.RSVP}`, {}).then(response => response.data)
+  return axios.post(`/user/rsvp/${id}?name=${props.name}&rsvp=${props.RSVP}`, {}).then(response => {
+    return response.data})
 }
 export const accomodationsFormSubmit = props => ({type: CONST.ACCOMODATIONS_FORM, payload: props});
 
+export const updateUserPropsFromForms = (props) => {
+  console.log('updateUserPropsFromForms FIRED', props);
+  return({type: CONST.UPDATE_USER_INFO, payload: props})
+};
 // export const getDependents = (props) => {
 //   return async (dispatch) => {
 //     dispatch({ type: CONST.GET_DEPENDENT_GUESTS })

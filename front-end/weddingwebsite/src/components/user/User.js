@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import ResponsiveContainer from '../home/ResponsiveContainer';
 import TabExampleSecondaryPointing from './TabWrapper';
 import { getDependents, accomodationsFormSubmit} from '../../redux/actions/forms.js';
+import UserDash from '../userDash/UserDash';
 
 class User extends Component {
   constructor(props) {
@@ -37,6 +38,7 @@ class User extends Component {
     return(
        <div>
          <ResponsiveContainer>
+             <UserDash></UserDash>
            <TabExampleSecondaryPointing user={user} dependentGuests={dependentGuests} hasOnsiteInvite={hasOnsiteInvite}>
       {/* <FormCard triggerSubmit={this.triggerRSVPSubmit} getApi={this.setFormApi} user={user} dependentGuests={dependentGuests} ></FormCard> */}
 

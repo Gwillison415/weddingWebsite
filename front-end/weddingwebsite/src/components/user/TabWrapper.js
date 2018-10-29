@@ -1,18 +1,6 @@
 import React from 'react'
 import FormCard from '../cards/FormCard';
-import {
-  Tab,
-  Button,
-  Container,
-  Divider,
-  Grid,
-  Header,
-  Icon,
-  Image,
-  List,
-  Responsive,
-  Segment
-} from 'semantic-ui-react';
+import {Tab} from 'semantic-ui-react';
 import PreliminaryRSVP from "../formTabs/prelimRsvp"
 import FinalRSVP from "../formTabs/finalRsvp"
 import AccomodationCard from '../cards/AccomodationCard';
