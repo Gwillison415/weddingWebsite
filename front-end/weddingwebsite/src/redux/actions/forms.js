@@ -23,8 +23,13 @@ const saveDateInfo = (props) => {
   return axios.post(`/user/rsvp/${id}?name=${props.name}&rsvp=${props.RSVP}`, {}).then(response => {
     return response.data})
 }
-export const accomodationsFormSubmit = props => ({type: CONST.ACCOMODATIONS_FORM, payload: props});
+export const accomodationsFormSubmit = props => ({type: CONST.ACCOMODATIONS_FORM, payload: postAccomodationsFormData(props)});
 
+const postAccomodationsFormData = (props) => {
+  console.log('props in postAccomodationsFormData==', props);
+  axios.post(`/user/arsvp/`, props)
+  .then(response => console.log(response.data))
+}
 export const updateUserPropsFromForms = (props) => {
   console.log('updateUserPropsFromForms FIRED', props);
   return({type: CONST.UPDATE_USER_INFO, payload: props})

@@ -12,29 +12,16 @@ class AccomodationCard extends Component {
     super(props)
   }
 
-  triggerSubmit = () => {
+  triggerSubmit = (userName) => {
     const formState = this.formApi.getState();
     console.log('formState====', formState);
-    const {RSVP} = formState.values;
+    const {accomodations} = formState.values;
     const {invalid} = formState;
-    console.log("RSVP===", RSVP, "Invalid?==", invalid);
-    let type;
-    if (this.props.isRehersalInvite) {
-      type = 'rehersal_rsvp';
-    } else if (this.props.isFinalRsvp) {
-      type = 'final_rsvp';
-    } else {
-      type = 'rsvp'
-    }
+    console.log("accomodations===", accomodations, "Invalid?==", invalid);
 
-    if (RSVP && !invalid) {
-      let formAnswers = Object.assign({}, {
-        RSVP
-      }, {
-        dependentGuest: this.props.guest.full_name
-      }, {
-        mainGuest: this.props.mainGuest
-      }, {type: type})
+
+    if (accomodations && !invalid) {
+      let formAnswers = Object.assign({}, {accomodations}, {userName: userName})
       this.props.accomodationsFormSubmit(formAnswers)
     } else {
       console.log('failed handleClick unexpectedly');
@@ -71,27 +58,27 @@ class AccomodationCard extends Component {
                 </Card.Meta>
                 <Card.Description>
                   <Form id="radio-form" getApi={this.setFormApi} onSubmit={() => {
-                      this.triggerSubmit()
+                      this.triggerSubmit(this.props.userName)
                     }}>
                     {
                       ({formState}) => (<div >
 
                         <RadioGroup field="accomodations">
                            <Segment compact>
-                          <label htmlFor="radio-glamp">Glamping</label>
-                          <Radio value="glamp" id="radio-glamp"/>
-                          <label htmlFor="radio-RV">RV</label>
-                          <Radio value="RV" id="radio-RV"/>
-                          <label htmlFor="radio-Onsite">Onsite</label>
-                          <Radio value="Onsite" id="radio-Onsite"/>
+                          <label htmlFor="radio-no">No, I will make other accommodations</label>
+                          <Radio value="no" id="radio-no"/>
+                          </Segment>
+                          <Segment compact>
+                          <label htmlFor="radio-yes">Yes! And I am cool with what you offered.</label>
+                          <Radio value="yes" id="radio-yes"/>
+                        </Segment>
+                          <Segment compact>
+                          <label htmlFor="radio-yesEasy">Yes! And I am fine with where ever you need to put me.</label>
+                          <Radio value="yesEasy" id="radio-yesEasy"/>
                           </Segment>
                            <Segment compact>
-                          <label htmlFor="radio-Off-site">Yes </label>
-                          <Radio value="Off-site" id="radio-Off-site"/>
-                          <label htmlFor="radio-whereever">whereever</label>
-                          <Radio value="whereever" id="radio-whereever"/>
-                          <label htmlFor="radio-noIdea">IDK</label>
-                          <Radio value="noIdea" id="radio-noIdea"/>
+                          <label htmlFor="radio-yesBut">Yes, But I would prefer a different accommodation. (please e-mail us directly) </label>
+                          <Radio value="yesBut" id="radio-yesBut"/>
                           </Segment>
                         </RadioGroup>
                         <button type="submit">Submit</button>
@@ -112,12 +99,13 @@ class AccomodationCard extends Component {
                 </Card.Description>
               </Card.Content>
               <Card.Content extra={true}>
+                <h4>please still rsvp in the other tabs!</h4>
                 <a>
                   <Icon name='user'/>
                   You will be able to change this for
                   <Countdown minVisible={{
                       visibility: 'hidden'
-                    }} endDate={'Tue, 05 Mar 2019 00:00:00'}></Countdown>
+                    }} endDate={' 01 Feb 2019 00:00:00'}></Countdown>
                 </a>
               </Card.Content>
             </Card>
@@ -127,18 +115,18 @@ class AccomodationCard extends Component {
     </div>)
   }
 }
-// const mapStateToProps = state => ({
-//    loginStatus: state.user.loginStatus,
-//   user: state.user,
-//   userName: state.user.full_name,
-//    redirect: state.loginRedirect.redirectURL,
-//   error: state.user.error,
-//   dependentGuests: state.user.dependentGuests,
-//   rehersal_invite: state.saveTheDateForm.rehersal_invite,
-//
-// });
+const mapStateToProps = state => ({
+   // loginStatus: state.user.loginStatus,
+  user: state.user,
+  userName: state.user.full_name,
+  //  redirect: state.loginRedirect.redirectURL,
+  // error: state.user.error,
+  // dependentGuests: state.user.dependentGuests,
+  // rehersal_invite: state.saveTheDateForm.rehersal_invite,
+
+});
 
 export const mapDispatchToProps = dispatch => bindActionCreators({
   accomodationsFormSubmit
 }, dispatch);
-export default connect(null, mapDispatchToProps)(AccomodationCard);
+export default connect(mapStateToProps, mapDispatchToProps)(AccomodationCard);

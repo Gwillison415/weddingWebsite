@@ -31,9 +31,24 @@ router.route('/rsvp/:id?').post((req, res) => {
  })
 });
 
-router.route('/arsvp/dependents').post((req, res) => {
+router.route('/arsvp').post((req, res) => {
+  const knex = require('../../knex.js')
   console.log('req.body', req.body);
-  res.send(201)
+
+  const {userName, accomodations} = req.body;
+  // const accomodations = req.body.accomodations;
+  console.log('req.body username==', userName, "accomodations==", accomodations);
+  knex('main_guests')
+  .where({full_name: userName})
+  .update({
+    poll_q1: accomodations
+  })
+  .returning(['first_rsvp', 'additional_guest_count','rehersal_invite', 'rehersal_rsvp', 'poll_q1'])
+  .then(updatedGuest => {
+    console.log('updatedGuest===', updatedGuest[0]);
+   res.status(200).send(updatedGuest[0])
+ })
+  // res.send(201)
 })
 router.route('/drsvp/dependents').post((req, res) => {
   console.log('req.params typeof',  req.query.rsvpType);
@@ -98,7 +113,6 @@ router.route('/drsvp/dependents').post((req, res) => {
 });
 
 router.route('/dependents/:id').get((req, res) => {
-  // console.log('req.query', req.query);
   // console.log('req.params', req.params);
   const knex = require('../../knex.js')
   const userId = req.params.id;
