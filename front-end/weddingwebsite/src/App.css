@@ -1,7 +1,15 @@
 .App {
   text-align: center;
+  font-family: herculanum, fzshuti;
 }
 
+.container .ui{
+  font-family: herculanum, fzshuti;
+}
+
+.container p {
+  font-family: papyrus, avenir;
+}
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
   height: 80px;

@@ -60,9 +60,14 @@ class AccountModal extends Component {
       </Modal.Description>
     </Modal.Content>
     <Segment>
-      <h4>Use a simple password that you don't use anywhere else </h4>
-      <h4>or a complicated unique one with a password manager</h4>
-      <div>error msg: {error}</div></Segment>
+      {error? (<div>
+        <h1>{error}</h1>
+         <h4>Use a simple password that you don't use anywhere else </h4>
+        <h4>or a complicated unique one with a password manager</h4>
+        <h3>i'm not building a reset password option in, so save it or make it easy</h3>
+      </div>)
+    :null}
+      </Segment>
   </Modal>)}
 }
 const mapStateToProps = state => ({

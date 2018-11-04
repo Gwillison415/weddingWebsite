@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {connect} from 'react-redux';
 import { Container, Image } from 'semantic-ui-react';
 import { Route } from 'react-router-dom';
 import AccountModal from './components/account/AccountModal';
@@ -15,7 +16,8 @@ class App extends Component {
     super(props)
   }
   render() {
-    const {loginStatus} = this.props;
+    const {loginStatus, user} = this.props;
+    console.log('user in app', user);
     return (
       <div className="App">
 
@@ -25,7 +27,9 @@ class App extends Component {
         <Route path="/user" component={AuthContainer} /> */}
         {/* </Container> */}
         <Container>
-          <Route exact path="/" component={HomepageLayout}/>
+          <Route exact path="/"
+          render={(props) => <HomepageLayout user={user} />}
+           />
 
           <Route path="/user" component={Auth} />
           <Route path="/info/accomodations" component={AccomodationsInfo} />
@@ -37,4 +41,8 @@ class App extends Component {
     );
   }
 }
-export default App;
+// export default App;
+const mapStateToProps = state => ({
+  user: state.user
+});
+export default connect(mapStateToProps, null)(App);

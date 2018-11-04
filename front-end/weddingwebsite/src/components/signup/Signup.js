@@ -37,7 +37,6 @@ import {signup} from '../../redux/actions/login';
     const {invalid, submits} = formState;
     if (password && email && !invalid ) {
       let signUpProps = Object.assign({}, {password}, {email})
-      console.log('validated signUpProps', signUpProps);
       this.props.signup(signUpProps)
     } else {
       console.log('failed handleClick unexpectedly');
@@ -81,6 +80,9 @@ import {signup} from '../../redux/actions/login';
               ? JSON.stringify(formState.errors.password)
               : ''
           }</p>
+          <h4>Use a simple password that you don't use anywhere else </h4>
+         <h4>or a complicated unique one with a password manager</h4>
+         <h4>Use only the email we have for you</h4>
         {/* <label>Async Errors:</label>
         <code>
           {JSON.stringify(formState.asyncErrors)}

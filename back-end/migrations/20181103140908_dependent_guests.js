@@ -16,6 +16,14 @@ exports.up = (knex, Promise) => {
   table.boolean('carpooling').nullable()
   table.datetime('arrival_time', 2).nullable()
   table.datetime('departure_time', 2).nullable()
+  table.string('meal_pref').nullable()
+  table.string('food_allergies').nullable()
+  table.string('rsvp_comments').nullable()
+  table.string('onsite_invite').nullable()
+  table.string('poll_q1').nullable()
+  table.string('poll_q2').nullable()
+  table.string('poll_q3').nullable()
+  table.string('poll_q4').nullable()
   });
 };
 
