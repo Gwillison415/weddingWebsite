@@ -40,7 +40,7 @@ class Auth extends Component {
         <Switch>
           <Route path="/"
           render={(props) =>
-            <HomepageLayout {...props} signInMessage={'Sign in Silly!'}/>
+            <HomepageLayout {...props} signInMessage={'Sign in Silly!'} user={this.props.user}/>
             }
           />
 
@@ -50,7 +50,10 @@ class Auth extends Component {
   }
 }
 
-const mapStateToProps = state => ({loginStatus: state.user.loginStatus})
+const mapStateToProps = state => ({
+  loginStatus: state.user.loginStatus,
+  user: state.user
+})
 const mapDispatchToProps = dispatch => bindActionCreators({
   setRedirectUrl
 }, dispatch)

@@ -19,15 +19,20 @@ import {
 class UserDash extends Component {
   constructor(props) {
     super(props)
+    // this.state ={
+    //   showDash: false
+    // }
   }
-  componentDidUpdate(prevProps) {
-  // Typical usage (don't forget to compare props):
-  if (this.props.user.loginStatus !== prevProps.user.loginStatus) {
-    console.log('you prob just logged in');
-  }
-}
+//   componentDidUpdate(prevProps) {
+//   // Typical usage (don't forget to compare props):
+//   if (this.props.user.loginStatus !== prevProps.user.loginStatus) {
+//     console.log('you prob just logged in');
+//   }
+// }
   render() {
     const {user, rehersalInvite, firstRSVP, hasOnsiteInvite} = this.props;
+    // const {showDash} = this.state;
+
     return (<Container>
       <Grid celled='internally'>
         <Grid.Row>

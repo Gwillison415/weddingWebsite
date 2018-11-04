@@ -17,11 +17,12 @@ import theEx from '../../assets/images/theEx.jpg';
 import Parrallax1 from '../parrallax/Parrallax1.js';
 import Abridged from '../modals/Abridged.js';
 import UserDash from '../userDash/UserDash';
-const HomepageLayout = ({signInMessage}) => {
-  console.log("signInMessage in HomepageLayout==", signInMessage);
+const HomepageLayout = ({signInMessage, user}) => {
+  console.log("user in HomepageLayout==", user);
   return (
   <ResponsiveContainer signInMessage={signInMessage} >
-    <UserDash></UserDash>
+    {user.loginStatus? <UserDash/> : <div></div>}
+
     <Segment style={{ padding: '8em 0em' }} vertical>
       <Grid container stackable verticalAlign='middle'>
         <Grid.Row>
