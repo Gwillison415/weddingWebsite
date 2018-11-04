@@ -20,12 +20,12 @@ class UserDash extends Component {
   constructor(props) {
     super(props)
   }
-//   componentDidUpdate(prevProps) {
-//   // Typical usage (don't forget to compare props):
-//   if (this.props.use !== prevProps.loginStatus) {
-//     console.log('you prob just logged in');
-//   }
-// }
+  componentDidUpdate(prevProps) {
+  // Typical usage (don't forget to compare props):
+  if (this.props.user.loginStatus !== prevProps.user.loginStatus) {
+    console.log('you prob just logged in');
+  }
+}
   render() {
     const {user, rehersalInvite, firstRSVP, hasOnsiteInvite} = this.props;
     return (<Container>

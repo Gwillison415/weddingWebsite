@@ -8,7 +8,6 @@ export const user = (state = { loginStatus: false, dependentGuests: [], homeIsAc
     // firstRsvpStatus = action.payload.first_rsvp
     return { ...state, loginStatus: true, homeIsActive: false, profileIsActive: true, dependentGuests: [],...action.payload };
     case CONST.LOGIN:
-    console.log('action.payload==', action.payload);
     localStorage.setItem('userId', action.payload.id);
     return { ...state, loginStatus: true, ...action.payload };
     case CONST.LOGIN_REJECTED:
@@ -17,15 +16,15 @@ export const user = (state = { loginStatus: false, dependentGuests: [], homeIsAc
       localStorage.clear();
       return { loginStatus: false };
     case CONST.SIGNUP_FULFILLED:
-  return { ...state, loginStatus: false, ...action.payload };
+  return { ...state, loginStatus: false, error:'You\'ve signed up successfully! now check you email to confirm', ...action.payload };
+    case CONST.SIGNUP_REJECTED:
+  return { ...state, loginStatus: false, error:'Something Went wrong, make sure to sign up with the email we have for you on file', ...action.payload };
     case CONST.RESET_PASSWORD_FULFILLED:
     localStorage.setItem('userId', action.payload.id);
     return { ...state, loginStatus: true, ...action.payload };
     case CONST.UPDATE_USER_INFO:
-      console.log(" UPDATE_USER_INFO action payload==", action.payload);
       return { ...state,  ...action.payload};
     case CONST.SAVE_THE_DATE_FORM_FULFILLED:
-      console.log(" UPDATE_USER_INFO action payload==", action.payload);
       return { ...state,  ...action.payload};
     case CONST.RESET_PASSWORD_REJECTED:
       return { ...state, loginStatus: false, resetError: `Login Failed. ${action.payload.response.data.error}`, ...action.payload };
@@ -33,19 +32,14 @@ export const user = (state = { loginStatus: false, dependentGuests: [], homeIsAc
     //   console.log(" getDependentGuest action payload==", action.data);
     //   return { ...state,  dependentGuests: action.data.map( guest => guest)};
     case CONST.GET_DEPENDENT_GUESTS_FULFILLED:
-      console.log(" getDependentGuest action payload==", action.payload);
       return { ...state,  dependentGuests: action.payload.map(guest => guest)};
     case CONST.SAVE_THE_DATE_DEPENDENT_FORM_FULFILLED:
-      console.log(" getDependentGuest action payload==", action.payload);
       return { ...state}; //TODO <FINISH></FINISH>
     case CONST.GET_DEPENDENT_GUESTS_PENDING:
-    console.log("GET_DEPENDENT_GUESTS only payload==", action.payload);
       return { ...state};
     case CONST.GET_DEPENDENT_GUESTS:
-    console.log(" getDependentGuest Started ");
       return { ...state,  dependentGuests: action.data};
     case "GET_DEPENDENT_GUESTS_2":
-    console.log(" getDependentGuest 2 2 REGUlar action payload==", action.data);
       return { ...state,  dependentGuests: action.data};
       case CONST.REDIRECT:
         return { ...state, redirectURL: action.url, homeIsActive: action.homeIsActive, profileIsActive: action.profileIsActive };
