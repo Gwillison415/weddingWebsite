@@ -27,7 +27,7 @@ exports.up = function(knex, Promise) {
   table.string('meal_pref').nullable()
   table.string('food_allergies').nullable()
   table.string('rsvp_comments').nullable()
-  table.string('onsite_invite').nullable()
+  table.boolean('onsite_invite').nullable()
   table.string('poll_q1').nullable()
   table.string('poll_q2').nullable()
   table.string('poll_q3').nullable()

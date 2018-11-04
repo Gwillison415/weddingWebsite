@@ -23,15 +23,10 @@ const FinalRSVP =(props) =>{
       <Grid container stackable verticalAlign='middle'>
         <Grid.Row>
           <Header as='h3' style={{ fontSize: '2em' }}>
-            Last chance mofo
+            So Are We Doing This or Nah?
           </Header>
           <p style={{ fontSize: '1.33em' }}>
-            explanation of what we're getting at
-            yes r no biatch
-
-            esn’t interest me what you do for a living. I want to know what you ache for and if you dare to dream of meeting your heart’s longing.
-
-            It doesn’t interest me how old you are. I want to know if you will risk looking like a fool for love, for your drea
+            Ok, the time has come to give us a solid answer. No Cali Flakin’ on this one, you’re in or you’re out. We’ve got to know how many mouths the caterer needs to feed and how many rugrats will be dancing to their heart's content on Saturday! If your plans have changed, update your info now. If everything's the same just click ‘Yes, I’ll be there!’ and get your dance moves in order. 
           </p>
         </Grid.Row>
         <Grid.Row>

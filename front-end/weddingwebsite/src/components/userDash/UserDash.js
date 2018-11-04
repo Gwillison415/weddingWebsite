@@ -58,7 +58,7 @@ class UserDash extends Component {
           </Grid.Column>
           {hasOnsiteInvite? <Grid.Column width={2}>
               <h5>Family Dinner</h5>
-             <Icon name='handshake outline ' size='small' />
+             <Icon name='handshake outline' size='small' />
           </Grid.Column> : null}
         </Grid.Row>
       </Grid>

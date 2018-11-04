@@ -31,8 +31,11 @@ router.route('/rsvp/:id?').post((req, res) => {
  })
 });
 
-router.route('/drsvp/dependents').post((req, res) => {
+router.route('/arsvp/dependents').post((req, res) => {
   console.log('req.body', req.body);
+  res.send(201)
+})
+router.route('/drsvp/dependents').post((req, res) => {
   console.log('req.params typeof',  req.query.rsvpType);
 
   const knex = require('../../knex.js')

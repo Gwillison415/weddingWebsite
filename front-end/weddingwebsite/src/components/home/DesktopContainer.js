@@ -36,7 +36,7 @@ class DesktopContainer extends Component {
 
 
   render() {
-    const { children, userName, changePageLocation, signInMessage } = this.props
+    const { children, userName, changePageLocation, signInMessage, user } = this.props
     const { fixed } = this.state
     return (
       <Responsive minWidth={Responsive.onlyTablet.minWidth}>
@@ -70,6 +70,10 @@ class DesktopContainer extends Component {
                 <Menu.Item active={this.props.profileIsActive} onClick={() => {
                   changePageLocation('profile')
                   this.props.history.push('/user')
+                  if (!user.loginStatus) {
+                    console.log('nay logged in');
+                    window.alert('Ya gotta log in to see your profile silly')
+                  }
                 }} > Profile
 
                   {/* <Link to="/user">Profile  </Link> */}
@@ -112,7 +116,7 @@ class DesktopContainer extends Component {
 }
 const mapStateToProps = state => ({
   // loginStatus: state.user.loginStatus,
-  // user: state.user,
+  user: state.user,
   homeIsActive: state.user.homeIsActive,
   profileIsActive: state.user.profileIsActive,
   userName: state.user.full_name,

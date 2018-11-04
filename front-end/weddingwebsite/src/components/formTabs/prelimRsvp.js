@@ -27,7 +27,7 @@ const PreliminaryRSVP =(props) =>{
             Roll Call! This is your first Chance to tell us where you stand!
           </Header>
           <p style={{ fontSize: '1.33em' }}>
-            We're getting hitched July 13th and planning a wedding around the entire weekend. So Let us know what you know about your plans that weekend.
+            We're planning a gleeful weekend celebration around our nuptials that will take place on Saturday July 13th. Our guestlist is full and our venue limited. So let us know what you know/think about your plans that weekend.
           </p>
         </Grid.Row>
         <Grid.Row>
