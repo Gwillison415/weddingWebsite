@@ -55,7 +55,7 @@ class DependentGuestRSVPForm extends Component {
       <Card.Content>
         <Card.Header>
           So, will {guest.full_name}
-          be able to join us for
+          be able to join us for 
           <u>{rehersalInvite}</u>
         </Card.Header>
         <Card.Meta>

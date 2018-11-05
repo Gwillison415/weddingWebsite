@@ -6,6 +6,7 @@ import User from '../user/User';
 import {bindActionCreators} from 'redux'
 import {setRedirectUrl} from '../../redux/actions/login';
 import HomepageLayout from '../home/HomepageLayout';
+import {AccomodationsInfo} from '../info/AccomodationsInfo';
 
 class Auth extends Component {
   constructor(props) {
@@ -20,35 +21,39 @@ class Auth extends Component {
       this.props.history.push('/');
     }
   }
-  componentDidUpdate(prevProps) {
-  // Typical usage (don't forget to compare props):
-  if (this.props.loginStatus !== prevProps.loginStatus) {
-    console.log('you prob just logged in');
-  }
-}
+  // componentDidUpdate(prevProps) {
+  // if (this.props.loginStatus !== prevProps.loginStatus) {
+  //   console.log('you prob just logged in');
+  // }
+// }
   render() {
 
     console.log('in app loginStatus');
     if (this.props.loginStatus) {
       return (<Switch>
         <Route path="/user" component={User}/>
-
+       <Route path="/info/accomodations" component={AccomodationsInfo} />
       </Switch>);
-    } else {
-    console.log('switched in auth');
-      return (
-        <Switch>
-          <Route path="/"
-          render={(props) =>
-            <HomepageLayout {...props} signInMessage={'Sign in Silly!'} user={this.props.user}/>
-            }
-          />
-
-      </Switch>);
-
-    };
+      // return ( <User></User>)
+    }
+    return null
+    // else {
+    // console.log('switched in auth');
+    //   return ( <HomepageLayout user={this.props.user}></HomepageLayout>
+    //   );
+    //
+    // };
   }
 }
+
+{/* <Switch>
+  <Route exact path="/"
+  render={(props) =>
+    <HomepageLayout {...props} signInMessage={'Sign in Silly!'} user={this.props.user}/>
+    }
+  />
+
+</Switch> */}
 
 const mapStateToProps = state => ({
   loginStatus: state.user.loginStatus,
@@ -57,4 +62,5 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   setRedirectUrl
 }, dispatch)
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Auth));
+export default connect(mapStateToProps, mapDispatchToProps)(Auth);
+// export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Auth));

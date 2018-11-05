@@ -99,6 +99,7 @@ const rootPanels = [
 ]
 
 export const AccomodationsInfo = () => {
+  console.log('AccomodationsInfo fired');
   return (
     <div>
       <ResponsiveContainer>

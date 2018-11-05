@@ -28,7 +28,6 @@ import './Login.css';
   }
 }
   setFormApi = (formApi) =>{
-    console.log('setFormApi called');
     this.formApi = formApi;
   }
 
