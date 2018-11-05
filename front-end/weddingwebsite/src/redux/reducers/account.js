@@ -66,6 +66,11 @@ export const user = (state = {
         ...state,
         ...action.payload
       };
+    case CONST.SAVE_THE_FINAL_DATE_FORM_FULFILLED:
+      return {
+        ...state,
+        final_rsvp: action.payload.final_rsvp
+      };
     case CONST.RESET_PASSWORD_REJECTED:
       return {
         ...state,
@@ -109,7 +114,7 @@ export const user = (state = {
     case CONST.ACCOMODATIONS_FORM_FULFILLED:
       return {
         ...state,
-        ...action.info
+        accodmodations: action.payload.poll_q1
       };
     default:
       return state;

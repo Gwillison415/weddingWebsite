@@ -45,7 +45,7 @@ class AccomodationCard extends Component {
         <Grid.Row>
           <Grid.Column width={2}>
             <p>
-              ots of fings
+              We have your response as {user.accomodations}
             </p>
           </Grid.Column>
           <Grid.Column width={9}>

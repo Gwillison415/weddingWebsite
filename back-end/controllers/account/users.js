@@ -5,7 +5,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-router.route('/rsvp/:id?').post((req, res) => {
+router.route('/1strsvp/:id?').post((req, res) => {
   console.log('req.query', req.query);
   console.log('req.params', req.params);
   console.log('req.cookies', req.cookies);
@@ -25,6 +25,23 @@ router.route('/rsvp/:id?').post((req, res) => {
     first_rsvp: rsvpStatus
   })
   .returning(['first_rsvp', 'additional_guest_count','rehersal_invite', 'rehersal_rsvp'])
+  .then(updatedGuest => {
+    console.log('updatedGuest===', updatedGuest[0]);
+   res.status(200).send(updatedGuest[0])
+ })
+});
+router.route('/2ndrsvp').post((req, res) => {
+  console.log('req.query', req.query);
+  const knex = require('../../knex.js')
+  const {name, RSVP} = req.body;
+  console.log('name', name, 'RSVP', RSVP);
+
+  knex('main_guests')
+  .where({full_name: name})
+  .update({
+    final_rsvp: RSVP
+  })
+  .returning(['final_rsvp', 'additional_guest_count','rehersal_invite', 'rehersal_rsvp'])
   .then(updatedGuest => {
     console.log('updatedGuest===', updatedGuest[0]);
    res.status(200).send(updatedGuest[0])

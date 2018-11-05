@@ -1,5 +1,5 @@
 import React from 'react'
-import FormCard from '../cards/FormCard';
+import FinalRSVPForm from '../cards/FinalRSVPForm';
 import {
   Tab,
   Button,
@@ -26,7 +26,7 @@ const FinalRSVP =(props) =>{
             So Are We Doing This or Nah?
           </Header>
           <p style={{ fontSize: '1.33em' }}>
-            Ok, the time has come to give us a solid answer. No Cali Flakin’ on this one, you’re in or you’re out. We’ve got to know how many mouths the caterer needs to feed and how many rugrats will be dancing to their heart's content on Saturday! If your plans have changed, update your info now. If everything's the same just click ‘Yes, I’ll be there!’ and get your dance moves in order. 
+            Ok, the time has come to give us a solid answer. No Cali Flakin’ on this one, you’re in or you’re out. We’ve got to know how many mouths the caterer needs to feed and how many rugrats will be dancing to their heart's content on Saturday! If your plans have changed, update your info now. If everything's the same just click ‘Yes, I’ll be there!’ and get your dance moves in order.
           </p>
         </Grid.Row>
         <Grid.Row>
@@ -36,7 +36,7 @@ const FinalRSVP =(props) =>{
             </Image>
           </Grid.Column>
           <Grid.Column floated='right' width={9}>
-            <FormCard></FormCard>
+            <FinalRSVPForm/>
           </Grid.Column>
         </Grid.Row>
       </Grid>

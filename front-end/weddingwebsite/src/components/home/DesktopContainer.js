@@ -60,7 +60,7 @@ class DesktopContainer extends Component {
               size='large'
             >
               <Container>
-                <Menu.Item header="header">Welcome {userName? userName : signInMessage? signInMessage : 'Friend'}</Menu.Item>
+                <Menu.Item header>Welcome {userName? userName : signInMessage? signInMessage : 'Friend'}</Menu.Item>
                 <Menu.Item active={this.props.homeIsActive} onClick={() => {
                   changePageLocation('home')
                   this.props.history.push('/')
@@ -78,7 +78,7 @@ class DesktopContainer extends Component {
 
                   {/* <Link to="/user">Profile  </Link> */}
                 </Menu.Item>
-                <Dropdown text='Venue' pointing="pointing" className='link item'>
+                <Dropdown text='Venue' pointing className='link item'>
                   <Dropdown.Menu>
 
                     <Dropdown.Item link="link" href="http://yokayoranch.com/" target="_blank">The Venue</Dropdown.Item>
@@ -88,7 +88,7 @@ class DesktopContainer extends Component {
 
                   </Dropdown.Menu>
                 </Dropdown>
-                <Dropdown text='Guest Info' pointing="pointing" className='link item'>
+                <Dropdown text='Guest Info' pointing className='link item'>
                   <Dropdown.Menu>
 
                     <Dropdown.Item style={{color: 'black'}}>FAQ Page</Dropdown.Item>

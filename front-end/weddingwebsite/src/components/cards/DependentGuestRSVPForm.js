@@ -71,7 +71,7 @@ class DependentGuestRSVPForm extends Component {
                 <RadioGroup field="RSVP">
                   <label htmlFor="radio-yes">Most Definitely</label>
                   <Radio value="yes" id="radio-yes"/> {
-                    renderIf(!isRehersalInvite)(<div>
+                    renderIf(isRehersalInvite)(<div>
                       <label htmlFor="radio-maybe">Maybe</label>
                       <Radio value="maybe" id="radio-maybe"/>
                     </div>)

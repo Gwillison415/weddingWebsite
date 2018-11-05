@@ -29,6 +29,17 @@ class UserDash extends Component {
 //     console.log('you prob just logged in');
 //   }
 // }
+  finalRsvpStatus = (user) => {
+    console.log('finalRsvpStatus');
+    if (user.final_rsvp === true) {
+      return 'Yes!'
+    } else if (user.final_rsvp === false) {
+      return 'No'
+    }
+    else {
+      return '???'
+    }
+  }
   render() {
     const {user, rehersalInvite, firstRSVP, hasOnsiteInvite} = this.props;
     // const {showDash} = this.state;
@@ -46,7 +57,8 @@ class UserDash extends Component {
           </Grid.Column>
           <Grid.Column width={2}>
               <h5>Final RSVP</h5>
-             <Icon name='heart' size='small' />
+             <Icon name='heart' size='small' >{this.finalRsvpStatus(user)} </Icon>
+
           </Grid.Column>
           <Grid.Column width={2}>
               <h5>Lodging</h5>

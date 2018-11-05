@@ -20,15 +20,26 @@ const saveDependentDateInfo = (props) => {
 }
 const saveDateInfo = (props) => {
   let id = localStorage.getItem('userId')
-  return axios.post(`/user/rsvp/${id}?name=${props.name}&rsvp=${props.RSVP}`, {}).then(response => {
+  return axios.post(`/user/1strsvp/${id}?name=${props.name}&rsvp=${props.RSVP}`, {}).then(response => {
     return response.data})
 }
+const finalSaveDateInfo = (props) => {
+  let id = localStorage.getItem('userId')
+  return axios.post(`/user/2ndrsvp`, props).then(response => {
+    console.log('2ndrsvp props=', props);
+    return response.data})
+}
+export const saveTheFinalDateFormSubmit = (props) => {
+
+  return {type: CONST.SAVE_THE_FINAL_DATE_FORM, payload: finalSaveDateInfo(props)}
+};
 export const accomodationsFormSubmit = props => ({type: CONST.ACCOMODATIONS_FORM, payload: postAccomodationsFormData(props)});
 
 const postAccomodationsFormData = (props) => {
   console.log('props in postAccomodationsFormData==', props);
   axios.post(`/user/arsvp/`, props)
-  .then(response => console.log(response.data))
+  .then(response => {console.log('formdata returned==',response.data)
+  return response.data})
 }
 export const updateUserPropsFromForms = (props) => {
   console.log('updateUserPropsFromForms FIRED', props);
