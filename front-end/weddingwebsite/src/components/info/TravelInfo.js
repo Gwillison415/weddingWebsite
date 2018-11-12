@@ -21,16 +21,16 @@ const NestedContentGettingThereVenue = (<div className={'NestedContent'}>
   </p>
   <p>
     We are encouraging guests to
-    <b> carpool </b> 
+    <b> carpool </b>
     when able
   </p>
   <p>Please indicate on your RSVP if you are interested in carpooling and / or if you have space in an RV - we will assist in connecting people.</p>
-  <h4>Renting a car</h4>
+  <h4> Renting a car </h4>
   <p>The best prices are 'almost always at the airport', except for the other times. Cora will tell anyone who will listen how much she loves Dollar Car Rental, she uses them 'almost exclusively', in addition 'they are generally very reasonable and easy to pick up and drop off at both SFO and Oakland'. Thank the lord
-    <i>someone</i>
+    <i> someone </i>
     has their finger on the pulse of the rental car market</p>
   <h4>Please note there are bridge tolls in the SF Bay!</h4>
-  <ul>Bay Bridge - connects SF and Oakland -
+  <ul>Bay Bridge - connects SF and Oakland
     <li>Fee only when entering SF (I-80 West)
       <ul>
         <li>Pay with cash or fastTrak   </li>
@@ -42,8 +42,8 @@ const NestedContentGettingThereVenue = (<div className={'NestedContent'}>
 
   <ul>
     Golden Gate Bridge - Connects SF to Marin
-    <li>NO CASH Pay the $7 toll with
-      <a href="https://www.bayareafastrak.org/en/guide/GGBridgeToll.shtml">FastTrak</a>
+    <li>NO CASH - Pay the $7 toll with
+      <a href="https://www.bayareafastrak.org/en/guide/GGBridgeToll.shtml"> FastTrak </a>
     </li>
     <li>within 48 hours of crossing with your license plate number</li>
     <li>
