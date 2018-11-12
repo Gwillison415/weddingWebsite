@@ -10,8 +10,7 @@ const NestedPanelsOffsite = [
     key: 'Travelodge',
     title: 'Travelodge Ukiah - $100-200 per night',
     content: [
-      'This Hotel is inexpensive and the closest to the venue, a 5 minute drive.  It’s not fancy but it does the trick!',
-      'If you\'re interested we\'ll be setting up a block for a discounted rate.',
+      'This Hotel is inexpensive and the closest to the venue, a 5 minute drive.',
     ].join(' '),
 
   },
@@ -71,7 +70,7 @@ const NestedPanelsOnsite = [
 ]
 const NestedContentOnsite = (
   <div>
-    <Accordion.Accordion panels={NestedPanelsOnsite} exclusive={false} />
+    <Accordion.Accordion className={'outerAccordion'} panels={NestedPanelsOnsite} exclusive={false} />
   </div>
 )
 const NestedContentOffsite = (

@@ -11,6 +11,7 @@ import Nav from './components/nav/Nav';
 import User from './components/user/User';
 import Auth from './components/auth/Auth';
 import {AccomodationsInfo} from './components/info/AccomodationsInfo';
+import {TravelInfo} from './components/info/TravelInfo';
 
 class App extends Component {
   constructor(props) {
@@ -24,6 +25,7 @@ class App extends Component {
           <Route exact path="/"
           render={(props) => <HomepageLayout user={user} />}/>
            <Route exact path="/info/accomodations" component={AccomodationsInfo} />
+           <Route exact path="/info/travel" component={TravelInfo} />
           <Route path="/user" component={Auth} />
         </Container>
 
