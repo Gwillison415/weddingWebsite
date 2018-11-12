@@ -15,7 +15,7 @@ export default class Abridged extends Component {
         open={this.state.modalOpen}
         onClose={this.handleClose}
         basic
-        size='medium'
+        size='large'
       >
         <Modal.Content>
           <h3>We met on tinder</h3>

@@ -23,15 +23,19 @@ class UserDash extends Component {
     //   showDash: false
     // }
   }
-//   componentDidUpdate(prevProps) {
-//   // Typical usage (don't forget to compare props):
-//   if (this.props.user.loginStatus !== prevProps.user.loginStatus) {
-//     console.log('you prob just logged in');
-//   }
-// }
+
+  finalRsvpStatus = (user) => {
+    if (user.final_rsvp === true) {
+      return 'Yes!'
+    } else if (user.final_rsvp === false) {
+      return 'No'
+    }
+    else {
+      return '???'
+    }
+  }
   render() {
     const {user, rehersalInvite, firstRSVP, hasOnsiteInvite} = this.props;
-    // const {showDash} = this.state;
 
     return (<Container>
       <Grid celled='internally'>
@@ -46,7 +50,8 @@ class UserDash extends Component {
           </Grid.Column>
           <Grid.Column width={2}>
               <h5>Final RSVP</h5>
-             <Icon name='heart' size='small' />
+             <Icon name='heart' size='small' >{this.finalRsvpStatus(user)} </Icon>
+
           </Grid.Column>
           <Grid.Column width={2}>
               <h5>Lodging</h5>
@@ -58,7 +63,7 @@ class UserDash extends Component {
           </Grid.Column>
           {hasOnsiteInvite? <Grid.Column width={2}>
               <h5>Family Dinner</h5>
-             <Icon name='handshake outline ' size='small' />
+             <Icon name='handshake outline' size='small' />
           </Grid.Column> : null}
         </Grid.Row>
       </Grid>

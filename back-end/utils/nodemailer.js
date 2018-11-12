@@ -20,9 +20,12 @@ const signupEmailOptions = (email, url, token) => {
       from: '"Cora and Grant" <keenewillison2019@gmail.com>',
       to: email, // list of receivers
       subject: 'Confirm your account for our weddin\' thang',
-      html: `<h1> Welcome to my crappy web skillz! </h1>
+      html: `<h1> Welcome to my glorious web skillz! </h1>
       <p>Please use the link below to confirm your account</p>
       <a href="http://${url}/api/signup/confirmation/${token}">Click here to confirm</a>
+  <p>After confirming you can return to the website to complete your RSVP's. </p>
+      <p>Remember to keep your password somewhere, as building in a password reset option is not in the cards. Don't worry there is no personal information that can be stolen from logging into your account - unless they want to crash our wedding!</p>
+      <a href="www.sillywilliwedding.com">www.sillywilliwedding.com</a>
       <p>If you believe you have received this email in error please contact your senator. or something... </p>`,
       dsn: {
         id: 'signup',

@@ -5,7 +5,7 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
-router.route('/rsvp/:id?').post((req, res) => {
+router.route('/1strsvp/:id?').post((req, res) => {
   console.log('req.query', req.query);
   console.log('req.params', req.params);
   console.log('req.cookies', req.cookies);
@@ -30,9 +30,44 @@ router.route('/rsvp/:id?').post((req, res) => {
    res.status(200).send(updatedGuest[0])
  })
 });
+router.route('/2ndrsvp').post((req, res) => {
+  console.log('req.query', req.query);
+  const knex = require('../../knex.js')
+  const {name, RSVP} = req.body;
+  console.log('name', name, 'RSVP', RSVP);
 
-router.route('/drsvp/dependents').post((req, res) => {
+  knex('main_guests')
+  .where({full_name: name})
+  .update({
+    final_rsvp: RSVP
+  })
+  .returning(['final_rsvp', 'additional_guest_count','rehersal_invite', 'rehersal_rsvp'])
+  .then(updatedGuest => {
+    console.log('updatedGuest===', updatedGuest[0]);
+   res.status(200).send(updatedGuest[0])
+ })
+});
+
+router.route('/arsvp').post((req, res) => {
+  const knex = require('../../knex.js')
   console.log('req.body', req.body);
+
+  const {userName, accomodations} = req.body;
+  // const accomodations = req.body.accomodations;
+  console.log('req.body username==', userName, "accomodations==", accomodations);
+  knex('main_guests')
+  .where({full_name: userName})
+  .update({
+    poll_q1: accomodations
+  })
+  .returning(['first_rsvp', 'additional_guest_count','rehersal_invite', 'rehersal_rsvp', 'poll_q1'])
+  .then(updatedGuest => {
+    console.log('updatedGuest===', updatedGuest[0]);
+   res.status(200).send(updatedGuest[0])
+ })
+  // res.send(201)
+})
+router.route('/drsvp/dependents').post((req, res) => {
   console.log('req.params typeof',  req.query.rsvpType);
 
   const knex = require('../../knex.js')
@@ -95,7 +130,6 @@ router.route('/drsvp/dependents').post((req, res) => {
 });
 
 router.route('/dependents/:id').get((req, res) => {
-  // console.log('req.query', req.query);
   // console.log('req.params', req.params);
   const knex = require('../../knex.js')
   const userId = req.params.id;

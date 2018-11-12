@@ -3,7 +3,6 @@ import * as CONST from '../constants/constants';
 /*global FB*/
 
 const loginRequest = (props) => {
-  console.log('loginRequest FIRED');
   const url = '/api/login';
   return axios.post(url, props).then(response => response.data);
 };
@@ -11,7 +10,6 @@ const loginRequest = (props) => {
 export const login = props => ({type: CONST.LOGIN, payload: loginRequest(props)});
 
 const signupRequest = (props) => {
-  console.log('signupRequest FIRED');
   const url = '/api/signup';
   return axios.post(url, props).then(response => response.data);
 };
@@ -22,8 +20,8 @@ export const setRedirectUrl = url => ({type: CONST.REDIRECT, url});
 
 export const changePageLocation = (newLocation) => {
   if (newLocation === 'home') {
-    return {type: CONST.REDIRECT, url: '/', homeIsActive: true, profileIsActive: false}
+    return {type: CONST.CHANGE_PAGE_LOCATION, url: '/', homeIsActive: true, profileIsActive: false}
   } else {
-    return {type: CONST.REDIRECT, url: '/user', homeIsActive: false, profileIsActive: true}
+    return {type: CONST.CHANGE_PAGE_LOCATION, url: '/user', homeIsActive: false, profileIsActive: true}
   }
 }

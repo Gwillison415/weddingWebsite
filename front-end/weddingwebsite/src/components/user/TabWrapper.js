@@ -8,7 +8,6 @@ import AccomodationCard from '../cards/AccomodationCard';
 
 const TabExampleSecondaryPointing = (props) => {
   let {user, dependentGuests, hasOnsiteInvite} = props;
-  console.log(dependentGuests);
   const panes = [
     { menuItem: 'Preliminary RSVP', render: () => <Tab.Pane attached={false}>
         <PreliminaryRSVP  dependentGuests={dependentGuests} user={user}/>
@@ -27,7 +26,7 @@ const TabExampleSecondaryPointing = (props) => {
   )
 
 }
-// dependentGuests={dependentGuests}
+
 
 
 

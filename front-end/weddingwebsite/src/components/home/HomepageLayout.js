@@ -18,7 +18,6 @@ import Parrallax1 from '../parrallax/Parrallax1.js';
 import Abridged from '../modals/Abridged.js';
 import UserDash from '../userDash/UserDash';
 const HomepageLayout = ({signInMessage, user}) => {
-  console.log("user in HomepageLayout==", user);
   return (
   <ResponsiveContainer signInMessage={signInMessage} >
     {user.loginStatus? <UserDash/> : <div></div>}

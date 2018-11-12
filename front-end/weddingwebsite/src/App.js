@@ -4,6 +4,7 @@ import './App.css';
 import {connect} from 'react-redux';
 import { Container, Image } from 'semantic-ui-react';
 import { Route } from 'react-router-dom';
+import {withRouter} from 'react-router-dom';
 import AccountModal from './components/account/AccountModal';
 import HomepageLayout from './components/home/HomepageLayout';
 import Nav from './components/nav/Nav';
@@ -17,26 +18,15 @@ class App extends Component {
   }
   render() {
     const {loginStatus, user} = this.props;
-    console.log('user in app', user);
     return (
       <div className="App">
-
-        {/* <Container>
-          <Route exact path="/" component={HomepageLayout}/> */}
-        {/* <Route exact path="/faq" component={Faq} />
-        <Route path="/user" component={AuthContainer} /> */}
-        {/* </Container> */}
         <Container>
           <Route exact path="/"
-          render={(props) => <HomepageLayout user={user} />}
-           />
-
+          render={(props) => <HomepageLayout user={user} />}/>
+           <Route exact path="/info/accomodations" component={AccomodationsInfo} />
           <Route path="/user" component={Auth} />
-          <Route path="/info/accomodations" component={AccomodationsInfo} />
-
         </Container>
 
-        {/* <Image wrapped size='large' src={burn2018} /> */}
       </div>
     );
   }
@@ -45,4 +35,4 @@ class App extends Component {
 const mapStateToProps = state => ({
   user: state.user
 });
-export default connect(mapStateToProps, null)(App);
+export default withRouter(connect(mapStateToProps, null)(App));

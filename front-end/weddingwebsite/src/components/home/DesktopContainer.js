@@ -36,7 +36,7 @@ class DesktopContainer extends Component {
 
 
   render() {
-    const { children, userName, changePageLocation, signInMessage } = this.props
+    const { children, userName, changePageLocation, signInMessage, user } = this.props
     const { fixed } = this.state
     return (
       <Responsive minWidth={Responsive.onlyTablet.minWidth}>
@@ -60,7 +60,7 @@ class DesktopContainer extends Component {
               size='large'
             >
               <Container>
-                <Menu.Item header="header">Welcome {userName? userName : signInMessage? signInMessage : 'Friend'}</Menu.Item>
+                <Menu.Item header>Welcome {userName? userName : signInMessage? signInMessage : 'Friend'}</Menu.Item>
                 <Menu.Item active={this.props.homeIsActive} onClick={() => {
                   changePageLocation('home')
                   this.props.history.push('/')
@@ -68,13 +68,19 @@ class DesktopContainer extends Component {
                   {/* <Link to="/">Home </Link> */}
                 </Menu.Item>
                 <Menu.Item active={this.props.profileIsActive} onClick={() => {
-                  changePageLocation('profile')
-                  this.props.history.push('/user')
+                  if (!user.loginStatus) {
+                    console.log('nay logged in');
+                    window.alert('Ya gotta log in to see your profile silly')
+                  } else {
+
+                    changePageLocation('profile')
+                    this.props.history.push('/user')
+                  }
                 }} > Profile
 
                   {/* <Link to="/user">Profile  </Link> */}
                 </Menu.Item>
-                <Dropdown text='Venue' pointing="pointing" className='link item'>
+                <Dropdown text='Venue' pointing className='link item'>
                   <Dropdown.Menu>
 
                     <Dropdown.Item link="link" href="http://yokayoranch.com/" target="_blank">The Venue</Dropdown.Item>
@@ -84,16 +90,16 @@ class DesktopContainer extends Component {
 
                   </Dropdown.Menu>
                 </Dropdown>
-                <Dropdown text='Guest Info' pointing="pointing" className='link item'>
+                <Dropdown text='Guest Info' pointing className='link item'>
                   <Dropdown.Menu>
 
                     <Dropdown.Item style={{color: 'black'}}>FAQ Page</Dropdown.Item>
                     <Dropdown.Item link="link" href='mailto:keenewillison2019@gmail.com?subject=Question%20about%20___%20from%20____&body=let%20us%20know%20if%20you%20dont%20want%20us%20to%20put%20your%20question%20on%20our%20FAQ' style={{color: 'black'}}>Email a question</Dropdown.Item>
                     <Dropdown.Item >
-                      <Link to="/info/accomodations" style={{color: 'black'}} > Accomodations </Link>
+                      <Link to="/info/accomodations" style={{color: 'black'}}
+                      > Accomodations </Link>
                       </Dropdown.Item>
                     <Dropdown.Item ></Dropdown.Item>
-
                   </Dropdown.Menu>
                 </Dropdown>
 
@@ -112,7 +118,7 @@ class DesktopContainer extends Component {
 }
 const mapStateToProps = state => ({
   // loginStatus: state.user.loginStatus,
-  // user: state.user,
+  user: state.user,
   homeIsActive: state.user.homeIsActive,
   profileIsActive: state.user.profileIsActive,
   userName: state.user.full_name,
