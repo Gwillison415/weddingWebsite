@@ -32,7 +32,6 @@ import './Login.css';
   }
 
   validatePassword = value => {
-  console.log('validatePassword value', value);
     return (!value || value.length < 5) ? "Password must be longer than 5 characters" : null;
    };
 
@@ -50,9 +49,6 @@ import './Login.css';
       this.props.login(loginProps)
     } else {
       console.log('failed handleClick unexpectedly');
-      // this.formApi.setValue('password', '')
-      // this.formApi.setValue('submits', 0)
-      // console.log(formState.values.password, '2nd password pass');
     }
      this.formApi.reset()
   }

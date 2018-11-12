@@ -112,6 +112,7 @@ export const user = (state = {
     case CONST.CHANGE_PAGE_LOCATION:
       return {
         ...state,
+        redirectURL: action.url,
         homeIsActive: action.homeIsActive,
         profileIsActive: action.profileIsActive
       };

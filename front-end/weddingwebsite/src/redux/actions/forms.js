@@ -74,8 +74,6 @@ const getDependentGuestData = (name) => {
   return function(dispatch, getState) {
     return axios.get(`/user/dependents/${id}?name=${name}`)
     .then(response => {
-      console.log('getDependentGuest response.data===', response.data, "typeof response.data=", typeof response.data);
-       // dispatch({type: "GET_DEPENDENT_GUESTS_2", data: response.data})
        return response.data;
     })
     .catch(err => err)

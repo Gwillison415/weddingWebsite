@@ -14,6 +14,8 @@ import {
   Sidebar,
   Visibility,
 } from 'semantic-ui-react'
+import { Link, NavLink } from 'react-router-dom';
+
 import HomepageHeading from './HomepageHeading';
 import AccountModal from '../account/AccountModal';
 
@@ -43,7 +45,10 @@ export default class MobileContainer extends Component {
               Home
             </Menu.Item>
             <Menu.Item as='a'>Work</Menu.Item>
-            <Menu.Item as='a' link="link" href='mailto:keenewillison2019@gmail.com?subject=Question%20about%20___%20from%20____&body=let%20us%20know%20if%20you%20dont%20want%20us%20to%20put%20your%20question%20on%20our%20FAQ'>Email a question</Menu.Item>
+            <Menu.Item as='a' link href='mailto:keenewillison2019@gmail.com?subject=Question%20about%20___%20from%20____&body=let%20us%20know%20if%20you%20dont%20want%20us%20to%20put%20your%20question%20on%20our%20FAQ'>Email a question</Menu.Item>
+            <Menu.Item >
+              <Link to={"/info/accomodations"} style={{color: 'black'}}  > Accomodations </Link>
+            </Menu.Item>
             <Menu.Item as='a' href="http://yokayoranch.com/" target="_blank">The Venue</Menu.Item>
             <Menu.Item as='a'><AccountModal></AccountModal></Menu.Item>
           </Sidebar>

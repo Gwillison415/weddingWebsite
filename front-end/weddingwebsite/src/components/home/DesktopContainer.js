@@ -63,7 +63,7 @@ class DesktopContainer extends Component {
                 <Menu.Item header>Welcome {userName? userName : signInMessage? signInMessage : 'Friend'}</Menu.Item>
                 <Menu.Item active={this.props.homeIsActive} onClick={() => {
                   changePageLocation('home')
-                  // this.props.history.push('/')
+                  this.props.history.push('/')
                 }}> Home
                   {/* <Link to="/">Home </Link> */}
                 </Menu.Item>
@@ -74,7 +74,7 @@ class DesktopContainer extends Component {
                   } else {
 
                     changePageLocation('profile')
-                    // this.props.history.push('/user')
+                    this.props.history.push('/user')
                   }
                 }} > Profile
 
@@ -96,10 +96,10 @@ class DesktopContainer extends Component {
                     <Dropdown.Item style={{color: 'black'}}>FAQ Page</Dropdown.Item>
                     <Dropdown.Item link="link" href='mailto:keenewillison2019@gmail.com?subject=Question%20about%20___%20from%20____&body=let%20us%20know%20if%20you%20dont%20want%20us%20to%20put%20your%20question%20on%20our%20FAQ' style={{color: 'black'}}>Email a question</Dropdown.Item>
                     <Dropdown.Item >
-                      <Link to="/info/accomodations" style={{color: 'black'}}  > Accomodations </Link>
+                      <Link to="/info/accomodations" style={{color: 'black'}}
+                      > Accomodations </Link>
                       </Dropdown.Item>
                     <Dropdown.Item ></Dropdown.Item>
-{/* onClick={()=>{this.props.history.push('/info/accomodations')}} */}
                   </Dropdown.Menu>
                 </Dropdown>
 

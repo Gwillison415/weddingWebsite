@@ -23,14 +23,8 @@ class UserDash extends Component {
     //   showDash: false
     // }
   }
-//   componentDidUpdate(prevProps) {
-//   // Typical usage (don't forget to compare props):
-//   if (this.props.user.loginStatus !== prevProps.user.loginStatus) {
-//     console.log('you prob just logged in');
-//   }
-// }
+
   finalRsvpStatus = (user) => {
-    console.log('finalRsvpStatus');
     if (user.final_rsvp === true) {
       return 'Yes!'
     } else if (user.final_rsvp === false) {
@@ -42,7 +36,6 @@ class UserDash extends Component {
   }
   render() {
     const {user, rehersalInvite, firstRSVP, hasOnsiteInvite} = this.props;
-    // const {showDash} = this.state;
 
     return (<Container>
       <Grid celled='internally'>
