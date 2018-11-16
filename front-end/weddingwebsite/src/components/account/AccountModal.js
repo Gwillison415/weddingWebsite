@@ -17,9 +17,9 @@ class AccountModal extends Component {
     this.state = {
       open: false,
       showSignUp: false,
-      showLogin: true,
+      showLogin: false,
       showReset: false,
-      modalMessage: 'Login to change your details',
+      modalMessage: 'Login coming soon! check back after thanksgiving! In the meantime, you can peruse our guest info',
       showAccountModal: false
     };
 
