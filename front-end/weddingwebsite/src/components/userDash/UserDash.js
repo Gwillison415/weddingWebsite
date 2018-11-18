@@ -35,7 +35,7 @@ class UserDash extends Component {
     }
   }
   render() {
-    const {user, rehersalInvite, firstRSVP, hasOnsiteInvite} = this.props;
+    const {user, rehersalInvite, firstRSVP, hasOnsiteInvite} = this.props;  
 
     return (<Container>
       <Grid celled='internally'>

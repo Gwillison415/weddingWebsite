@@ -16,7 +16,8 @@
     "redux-promise-middleware": "^5.1.1",
     "redux-thunk": "^2.3.0",
     "render-if": "^0.1.1",
-    "semantic-ui-react": "^0.82.5"
+    "semantic-ui-react": "^0.82.5",
+    "merge": ">=1.2.1"
   },
   "scripts": {
     "start-js": "PORT=3006 NODE_PATH=src/ react-scripts start",

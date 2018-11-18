@@ -34,3 +34,20 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+.NestedContent {
+  font-family: helvetica;
+}
+
+.NestedContent ul {
+  margin-left: 45px;
+
+}
+.NestedContent p {
+  margin-left: 10px 85px 15px;
+  font-family: inherit;
+
+}
+.NestedContent li {
+  margin: 25px 55px 25px 35px;
+  text-align: left;
+}

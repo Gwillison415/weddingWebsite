@@ -11,7 +11,7 @@ const Parrallax1 = () => (
             strength={200}
         >
 
-            <div style={{ height: '400px' }} />
+            <div style={{ height: '600px' }} />
         </Parallax>
 
         {/* -----dynamic blur-----*/}
