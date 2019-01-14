@@ -36,7 +36,10 @@ var verifyLoggedIn = function(req, res, next) {
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
-
+// console.log('port', process.env.DB_PORT, 'host', process.env.DB_HOST,
+// 'database', process.env.DATABASE_NAME,
+// 'user', process.env.DATABASE_USER,
+// 'password', process.env.DATABASE_ACCESS_KEY);
 const allowCrossDomain = function (req, res, next) {
   res.header('Access-Control-Allow-Credentials', true);
   res.header('Access-Control-Allow-Origin', req.headers.origin);
