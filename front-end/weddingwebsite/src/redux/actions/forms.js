@@ -126,6 +126,7 @@ const postBrunchFormSubmit = data => {
   }
 };
 
+<<<<<<< HEAD
 export const brunchFormSubmit = data => {
   if (data.isMainGuest) {
     return {type: CONST.MAIN_BRUNCH_FORM, payload: postBrunchFormSubmit(data)};
@@ -162,6 +163,23 @@ export const rsvpFormSubmit = data => ({
   type: CONST.RSVP_FORM,
   payload: data
 });
+=======
+export const getDependents = props => (
+  {
+    type: CONST.GET_DEPENDENT_GUESTS,
+    payload: getDependentGuestData(props)
+  }
+);
+const getDependentGuestData = (name) => {
+  let id = localStorage.getItem('userId')
+  return axios.get(`${process.env.REACT_APP_API_ADDRESS}/user/dependents/${id}?name=${name}`, { withCredentials: true })
+    .then(response => {
+      return response.data;
+    })
+    .catch(err => err)
+}
+export const rsvpFormSubmit = props => ({ type: CONST.RSVP_FORM, payload: props });
+>>>>>>> change port assignment to 80 and ditch proxy
 
 export const handleTabChange = index => ({
   type: CONST.TAB_CHANGE,

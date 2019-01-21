@@ -23,7 +23,7 @@
     "semantic-ui-react": "^0.85.0"
   },
   "scripts": {
-    "start-js": "PORT=3006 NODE_PATH=src/ react-scripts start",
+    "start-js": "PORT=3000 NODE_PATH=src/ react-scripts start",
     "start": "run-p start-js",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
