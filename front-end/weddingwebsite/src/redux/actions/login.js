@@ -2,14 +2,14 @@ import axios from 'axios';
 import * as CONST from '../constants/constants';
 
 const loginRequest = (props) => {
-  const url = '/api/login';
+  const url = 'http://api.sillywilliwedding.com/api/login';
   return axios.post(url, props).then(response => response.data);
 };
 
 export const login = props => ({type: CONST.LOGIN, payload: loginRequest(props)});
 
 const signupRequest = (props) => {
-  const url = '/api/signup';
+  const url = 'http://api.sillywilliwedding.com/api/signup';
   return axios.post(url, props).then(response => response.data);
 };
 

@@ -12,7 +12,7 @@ export const saveTheDateDependentFormSubmit = (props) => {
 
 // const saveDateInfo = (props) =>  axios.post(`/user/rsvp/${id}?name=${props.name}&rsvp=${props.RSVP}`,{}).then(response =>  response.data);
 const saveDependentDateInfo = (props) => {
-  return axios.post(`/user/drsvp/dependents?type=${props.type}`, {
+  return axios.post(`http://api.sillywilliwedding.com/user/drsvp/dependents?type=${props.type}`, {
     mainGuest: props.mainGuest,
     dependentGuest: props.dependentGuest,
     rsvp: props.RSVP
@@ -20,12 +20,12 @@ const saveDependentDateInfo = (props) => {
 }
 const saveDateInfo = (props) => {
   let id = localStorage.getItem('userId')
-  return axios.post(`/user/1strsvp/${id}?name=${props.name}&rsvp=${props.RSVP}`, {}).then(response => {
+  return axios.post(`http://api.sillywilliwedding.com/user/1strsvp/${id}?name=${props.name}&rsvp=${props.RSVP}`, {}).then(response => {
     return response.data})
 }
 const finalSaveDateInfo = (props) => {
-
-  return axios.post(`/user/2ndrsvp`, props).then(response => {
+  let id = localStorage.getItem('userId')
+  return axios.post(`http://api.sillywilliwedding.com/user/2ndrsvp`, props).then(response => {
     return response.data})
 }
 export const saveTheFinalDateFormSubmit = (props) => {
@@ -35,8 +35,8 @@ export const saveTheFinalDateFormSubmit = (props) => {
 export const accomodationsFormSubmit = props => ({type: CONST.ACCOMODATIONS_FORM, payload: postAccomodationsFormData(props)});
 
 const postAccomodationsFormData = (props) => {
-  axios.post(`/user/arsvp/`, props)
-    .then(response => response.data)
+  axios.post(`http://api.sillywilliwedding.com/user/arsvp/`, props)
+  .then(response => response.data)
 }
 export const updateUserPropsFromForms = (props) => {
   return({type: CONST.UPDATE_USER_INFO, payload: props})
@@ -49,7 +49,7 @@ export const getDependents = props => (
 const getDependentGuestData = (name) => {
   let id = localStorage.getItem('userId')
   return function(dispatch, getState) {
-    return axios.get(`/user/dependents/${id}?name=${name}`)
+    return axios.get(`http://api.sillywilliwedding.com/user/dependents/${id}?name=${name}`)
     .then(response => {
        return response.data;
     })
