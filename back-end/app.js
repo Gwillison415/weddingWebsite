@@ -21,7 +21,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 var verifyLoggedIn = function(req, res, next) {
-  console.log('hit middleware?');
+
   jwt.verify(req.cookies.authTokenSillyWilly, process.env.JWT_KEY, (err, payload) => {
     if (err) {
       console.log('authentication err');
