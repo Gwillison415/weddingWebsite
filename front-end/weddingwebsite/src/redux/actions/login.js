@@ -9,6 +9,7 @@ const loginRequest = (props) => {
 export const login = props => ({type: CONST.LOGIN, payload: loginRequest(props)});
 
 const signupRequest = (props) => {
+  console.log('signupRequest fired');
   const url = 'http://api.sillywilliwedding.com/api/signup';
   return axios.post(url, props).then(response => response.data);
 };
