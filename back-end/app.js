@@ -52,7 +52,7 @@ if (process.env.NODE_ENV !== 'production') {
 // app.use(allowCrossDomain);
 
 var corsOptions = {
-  origin: 'http://api.sillywilliwedding.com',
+  origin: 'http://www.sillywilliwedding.com',
   // origin: 'http://localhost:3005',
   credentials: true,
 };
