@@ -16,11 +16,11 @@ const saveDependentDateInfo = (props) => {
     mainGuest: props.mainGuest,
     dependentGuest: props.dependentGuest,
     rsvp: props.RSVP
-  }).then(response => response.data)
+  }, withCredentials: true).then(response => response.data)
 }
 const saveDateInfo = (props) => {
   let id = localStorage.getItem('userId')
-  return axios.post(`http://api.sillywilliwedding.com/user/1strsvp/${id}?name=${props.name}&rsvp=${props.RSVP}`, {}).then(response => {
+  return axios.post(`http://api.sillywilliwedding.com/user/1strsvp/${id}?name=${props.name}&rsvp=${props.RSVP}`, withCredentials: true).then(response => {
     return response.data})
 }
 const finalSaveDateInfo = (props) => {
@@ -49,7 +49,7 @@ export const getDependents = props => (
 const getDependentGuestData = (name) => {
   let id = localStorage.getItem('userId')
   return function(dispatch, getState) {
-    return axios.get(`http://api.sillywilliwedding.com/user/dependents/${id}?name=${name}`)
+    return axios.get(`http://api.sillywilliwedding.com/user/dependents/${id}?name=${name}`, withCredentials: true)
     .then(response => {
        return response.data;
     })

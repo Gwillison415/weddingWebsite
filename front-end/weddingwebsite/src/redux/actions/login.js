@@ -3,7 +3,7 @@ import * as CONST from '../constants/constants';
 
 const loginRequest = (props) => {
   const url = 'http://api.sillywilliwedding.com/api/login';
-  return axios.post(url, props).then(response => response.data);
+  return axios.post(url, props, withCredentials: true).then(response => response.data);
 };
 
 export const login = props => ({type: CONST.LOGIN, payload: loginRequest(props)});
@@ -11,7 +11,7 @@ export const login = props => ({type: CONST.LOGIN, payload: loginRequest(props)}
 const signupRequest = (props) => {
   console.log('signupRequest fired');
   const url = 'http://api.sillywilliwedding.com/api/signup';
-  return axios.post(url, props).then(response => response.data);
+  return axios.post(url, props, withCredentials: true).then(response => response.data);
 };
 
 export const signup = props => ({type: CONST.SIGNUP, payload: signupRequest(props)});
