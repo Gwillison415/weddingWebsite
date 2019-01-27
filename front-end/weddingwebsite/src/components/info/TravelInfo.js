@@ -26,7 +26,7 @@ const NestedContentGettingThereVenue = (<div className={'NestedContent'}>
   </p>
   <p>Please indicate on your RSVP if you are interested in carpooling and / or if you have space in an RV - we will assist in connecting people.</p>
   <h4> Renting a car </h4>
-  <p>The best prices are 'almost always at the airport', except for the other times. Cora will tell anyone who will listen how much she loves Dollar Car Rental, she uses them 'almost <exclusivel>q</exclusivel>y', in addition 'they are generally very reasonable and easy to pick up and drop off at both SFO and Oakland'. Thank the lord
+  <p>The best prices are 'almost always at the airport', except for the other times. Cora will tell anyone who will listen how much she loves Dollar Car Rental, she uses them 'almost exclusively', in addition 'they are generally very reasonable and easy to pick up and drop off at both SFO and Oakland'. Thank the lord
     <i> someone </i>
     has their finger on the pulse of the rental car market</p>
   <h4>Please note there are bridge tolls in the SF Bay!</h4>
