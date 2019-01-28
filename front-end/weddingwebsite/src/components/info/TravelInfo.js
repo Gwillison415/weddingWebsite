@@ -86,7 +86,7 @@ const rootPanels = [
     content: ['This isn’t your mother’s wedding (actually though). We’d like to bring our beautiful community together for a weekend of connection, joy, and dancing. We recommend planning to arrive in Ukiah Friday afternoon or early evening and leaving Sunday late afternoon or evening to take part in all we have planned. Our goal is to create plenty of time to just be with our friends and family'].join(' ')
   }, {
     key: 'onsite-1',
-    title: 'How do I might I get to California?',
+    title: 'How do I get to California?',
     content: {
       content: NestedContentGettingThereCali
     }
