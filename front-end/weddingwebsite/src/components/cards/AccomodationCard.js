@@ -105,7 +105,7 @@ class AccomodationCard extends Component {
                   You will be able to change this for
                   <Countdown minVisible={{
                       visibility: 'hidden'
-                    }} endDate={' 01 Feb 2019 00:00:00'}></Countdown>
+                    }} endDate={' 01 Apr 2019 00:00:00'}></Countdown>
                 </a>
               </Card.Content>
             </Card>

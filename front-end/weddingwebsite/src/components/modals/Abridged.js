@@ -11,7 +11,7 @@ export default class Abridged extends Component {
   render() {
     return (
       <Modal
-        trigger={<Button onClick={this.handleOpen}>Abridged Version</Button>}
+        trigger={<Button size='huge' onClick={this.handleOpen}>Abridged Version</Button>}
         open={this.state.modalOpen}
         onClose={this.handleClose}
         basic

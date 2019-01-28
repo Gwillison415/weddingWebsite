@@ -80,13 +80,13 @@ class DesktopContainer extends Component {
 
                   {/* <Link to="/user">Profile  </Link> */}
                 </Menu.Item>
-                <Dropdown text='Venue' pointing className='link item'>
+                <Dropdown text='Places' pointing className='link item'>
                   <Dropdown.Menu>
 
                     <Dropdown.Item link="link" href="http://yokayoranch.com/" target="_blank">The Venue</Dropdown.Item>
-                    <Dropdown.Item link="link" href='https://www.linkedin.com/pulse/why-we-chose-oauth-20-databraid-little-open-source-could-willison/?lipi=urn%3Ali%3Apage%3Ad_flagship3_profile_view_base_post_details%3B%2FPDbr34GRV6qZB%2BX%2Bxer7A%3D%3D'>another link</Dropdown.Item>
 
-                    <Dropdown.Item link="link" href="https://www.linkedin.com/pulse/how-study-any-subject-larger-net-learning-efficiency-grant-willison/">Studying Efficiency</Dropdown.Item>
+
+                    <Dropdown.Item link="link" href="http://www.vichysprings.com/">Vichy Hot Springs</Dropdown.Item>
 
                   </Dropdown.Menu>
                 </Dropdown>

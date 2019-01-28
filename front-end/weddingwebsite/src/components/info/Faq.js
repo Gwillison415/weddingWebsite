@@ -6,11 +6,11 @@ const panels = [
   {
     key: 'what-is-dog',
     title: 'Kid Friendly Event',
-    content: (<div>
+    content: {content : (<div>
       <p>There will games and activities ‘specially for the littles! We don’t think we could enjoy our day quite as much without the little giggles, squeals, and occasional whines of your special little spawns.
       </p>
       <p>We'd love to arrange on-site group childcare on the night of the reception so you can fully enjoy the party. Let us know if your little is interested in joining the sleepover party! We are thinking from 8 or 9pm until 1/2am or overnight the morning. Parent’s let us know your thoughts and what you would like to see.</p>
-    </div>)
+    </div>) }
   }, {
     key: 'kinds-of-dogs',
     title: 'My Invite didn’t include a +1 or only a +1? ',
@@ -26,20 +26,20 @@ const panels = [
   }, {
     key: 'acquire-dog',
     title: 'What is a feminist wedding?',
-    content: (<div>
+    content: {content : (<div>
       <p>
         A wedding crafted with consciousness of the sociopolitical implications of participation in a patriarchal system that has been used to oppress and deny primarily women, minorities, and people of color basic human rights for centuries. We have spent a great deal of time carefully examining traditions, challenging internalized beliefs about gender roles and the institution of marriage, and participating in the process in the most egalitarian way we could. We’ve chosen to forego some traditions, alter others, create new ones and make conscious efforts to incorporate social justice into our celebration. We’ve done this because it is what fits for us and honors this relationship we’ve founded and continue to build.
       </p>
       <p>
         We both believe it is in living our highest values where we create growth and transformation - something we wish to continue to engage in for the future. We value our relationship and the relationship with you - we welcome questions and curiosity. We believe having difficult conversations is core to development as a person and something we encourage with great fervor. As you come to bear witness to our union, we welcome you to bring your full authentic selves.
       </p>
-    </div>)
+    </div>)}
   }
 ]
 
 export const Faq = () => (<div>
   <ResponsiveContainer>
-    <Accordion className={'ParentContent'} exclusive={false} defaultActiveIndex={0} panels={panels}/>
+    <Accordion className={'ParentContent'} exclusive={false} defaultActiveIndex={[0]} panels={panels}/>
   </ResponsiveContainer>
 </div>)
 

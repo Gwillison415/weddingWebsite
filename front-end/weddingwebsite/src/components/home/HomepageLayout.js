@@ -10,6 +10,7 @@ import {
   Responsive,
   Segment
 } from 'semantic-ui-react'
+import Countdown from '../countdown/CountDown';
 import ResponsiveContainer from './ResponsiveContainer';
 import header from '../../assets/images/header.png';
 import Mccrarywedding from '../../assets/images/Mccrarywedding.jpg';
@@ -114,19 +115,26 @@ const HomepageLayout = ({signInMessage, user}) => {
             <Grid.Column width={3}>
               <Header inverted as='h4' content='About' />
               <List link inverted>
-                <List.Item as='a'>Sitemap</List.Item>
-                <List.Item as='a'>Contact Us</List.Item>
-                <List.Item as='a'>Religious Ceremonies</List.Item>
+                <List.Item >
+                  <List.Icon name='paper plane' />
+                    <List.Content style={{textAlign: 'center'}}>
+                      <a href='mailto:keenewillison2019@gmail.com'>Email</a>
+                    </List.Content>
+                </List.Item>
                 <List.Item as='a'>Gazebo Plans</List.Item>
               </List>
             </Grid.Column>
             <Grid.Column width={3}>
               <Header inverted as='h4' content='Services' />
               <List link inverted>
-                <List.Item as='a'>Banana Pre-Order</List.Item>
+                <List.Item >
+                  <List.Icon name='shop' />
+                    <List.Content style={{textAlign: 'center'}}>
+                      <a href='mailto:cballou.surf@gmail.com'>Banana Pre-Order</a>
+                    </List.Content>
+                </List.Item>
                 <List.Item as='a'>DNA FAQ</List.Item>
-                <List.Item as='a'>How To Access</List.Item>
-                <List.Item as='a'>Favorite X-Men</List.Item>
+
               </List>
             </Grid.Column>
             <Grid.Column width={7}>
@@ -134,7 +142,9 @@ const HomepageLayout = ({signInMessage, user}) => {
                 Footer Header
               </Header>
               <p>
-                Extra space for a call to action inside the footer that could help re-engage users.
+                If you've read this far, go ahead and login with the email you've provided us! You've only got <span style={{display:'inline-block'}}>  <Countdown  minVisible={{
+                    visibility: 'hidden'
+                  }} endDate={' 13 Jul 2019 00:00:00'} ></Countdown></span>until we're celebrating!
               </p>
             </Grid.Column>
           </Grid.Row>
