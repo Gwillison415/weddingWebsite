@@ -16,7 +16,6 @@ class DependentGuestRSVPForm extends Component {
     }
   }
   triggerRSVPSubmit = () => {
-
     const formState = this.formApi.getState();
     const { RSVP } = formState.values;
     const { invalid } = formState;

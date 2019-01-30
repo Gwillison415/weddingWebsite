@@ -40,7 +40,7 @@ class AccomodationCard extends Component {
         <Grid.Row>
           <h3>Remember, you're only seeing this because you’re VIP and everyone should know your name by now at the box office. We'd like you to be stuck with us all weekend. We imagined you’re interested but it's totally cool if you'd rather not be onsite with the hippie lovefest.
           </h3>
-          <h2>we'd like the answer to this one
+          <h2>we'd like the answer to this question
             <b> ASAP </b>
             so we can open the space to others if available!</h2>
         </Grid.Row>
