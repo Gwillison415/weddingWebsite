@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import {Form,  RadioGroup, Radio} from 'informed';
 import {Card, Icon, Image} from 'semantic-ui-react'
-import saveTheDate from '../../assets/images/saveTheDate.jpeg';
+// import saveTheDate from '../../assets/images/saveTheDate.jpeg';
 import logowedcel from '../../assets/images/logowedcel.png';
 import logofamdin from '../../assets/images/logofamdin.png';
 import {saveTheDateDependentFormSubmit} from '../../redux/actions/forms.js';
