@@ -15,7 +15,6 @@ class Auth extends Component {
 
   }
   componentDidMount() {
-    console.log('this.props.location.pathname in auth', this.props.location.pathname);
     if (!this.props.loginStatus) {
       this.props.setRedirectUrl(this.props.location.pathname);
       this.props.history.push('/');

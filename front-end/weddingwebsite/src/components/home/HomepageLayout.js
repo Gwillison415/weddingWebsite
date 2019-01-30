@@ -141,11 +141,11 @@ const HomepageLayout = ({signInMessage, user}) => {
               <Header as='h4' inverted>
                 Footer Header
               </Header>
-              <p>
-                If you've read this far, go ahead and login with the email you've provided us! You've only got <span style={{display:'inline-block'}}>  <Countdown  minVisible={{
+              <h4>
+                If you've read this far, go ahead and login with the email you've provided us! You've only got <span style={{display:'inline-block'}}>{  <Countdown  minVisible={{
                     visibility: 'hidden'
-                  }} endDate={' 13 Jul 2019 00:00:00'} ></Countdown></span>until we're celebrating!
-              </p>
+                  }} endDate={' 13 Jul 2019 00:00:00'} ></Countdown>}</span>until we're celebrating!
+              </h4>
             </Grid.Column>
           </Grid.Row>
         </Grid>

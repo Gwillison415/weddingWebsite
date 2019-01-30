@@ -8,20 +8,13 @@ import {login} from '../../redux/actions/login';
 import './Login.css';
 
  class Login extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-    }
 
-    this.handleClick = this.handleClick.bind(this)
-  }
   componentDidMount(){
     if (this.props.loginStatus) {
       this.props.closeAccountModal()
     }
   }
   componentDidUpdate(prevProps) {
-  // Typical usage (don't forget to compare props):
   if (this.props.loginStatus !== prevProps.loginStatus) {
     this.props.history.push('/user')
     this.props.closeAccountModal()
@@ -40,7 +33,6 @@ import './Login.css';
        : null;
    }
   triggerSubmit = () => {
-
     const formState = this.formApi.getState();
     const {password, email} = formState.values;
     const {invalid, submits} = formState;
@@ -48,12 +40,9 @@ import './Login.css';
       let loginProps = Object.assign({}, {password}, {email})
       this.props.login(loginProps)
     } else {
-      console.log('failed handleClick unexpectedly');
+      console.log('failed triggerSubmit unexpectedly');
     }
      this.formApi.reset()
-  }
-  handleClick(){
-    console.log(this.formApi.getState());
   }
 
 
