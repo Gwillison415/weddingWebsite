@@ -7,12 +7,11 @@ import {
   Header,
   Image,
   List,
-  Responsive,
   Segment
 } from 'semantic-ui-react'
 import Countdown from '../countdown/CountDown';
 import ResponsiveContainer from './ResponsiveContainer';
-import header from '../../assets/images/header.png';
+// import header from '../../assets/images/header.png';
 import Mccrarywedding from '../../assets/images/Mccrarywedding.jpg';
 import theEx from '../../assets/images/theEx.jpg';
 import Parrallax1 from '../parrallax/Parrallax1.js';

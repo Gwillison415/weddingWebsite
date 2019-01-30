@@ -14,11 +14,8 @@ class AccomodationCard extends Component {
 
   triggerSubmit = (userName) => {
     const formState = this.formApi.getState();
-    console.log('formState====', formState);
     const {accomodations} = formState.values;
     const {invalid} = formState;
-    console.log("accomodations===", accomodations, "Invalid?==", invalid);
-
 
     if (accomodations && !invalid) {
       let formAnswers = Object.assign({}, {accomodations}, {userName: userName})
@@ -26,7 +23,6 @@ class AccomodationCard extends Component {
     } else {
       console.log('failed handleClick unexpectedly');
     }
-    // this.formApi.reset()
   }
   setFormApi = (formApi) => {
     this.formApi = formApi;

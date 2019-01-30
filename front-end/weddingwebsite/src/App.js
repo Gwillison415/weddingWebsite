@@ -1,25 +1,19 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 import {connect} from 'react-redux';
-import { Container, Image } from 'semantic-ui-react';
+import { Container } from 'semantic-ui-react';
 import { Route } from 'react-router-dom';
 import {withRouter} from 'react-router-dom';
-import AccountModal from './components/account/AccountModal';
 import HomepageLayout from './components/home/HomepageLayout';
-import Nav from './components/nav/Nav';
-import User from './components/user/User';
 import Auth from './components/auth/Auth';
 import {AccomodationsInfo} from './components/info/AccomodationsInfo';
 import {TravelInfo} from './components/info/TravelInfo';
 import {Faq} from './components/info/Faq';
 
 class App extends Component {
-  constructor(props) {
-    super(props)
-  }
+
   render() {
-    const {loginStatus, user} = this.props;
+    const { user} = this.props;
     return (
       <div className="App">
         <Container>
@@ -35,7 +29,6 @@ class App extends Component {
     );
   }
 }
-// export default App;
 const mapStateToProps = state => ({
   user: state.user
 });

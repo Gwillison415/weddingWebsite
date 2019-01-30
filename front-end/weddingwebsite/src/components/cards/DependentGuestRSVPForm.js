@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Form, Text, RadioGroup, Radio} from 'informed';
+import {Form,  RadioGroup, Radio} from 'informed';
 import {Card, Icon, Image} from 'semantic-ui-react'
 import saveTheDate from '../../assets/images/saveTheDate.jpeg';
 import logowedcel from '../../assets/images/logowedcel.png';
@@ -9,16 +9,11 @@ import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import renderIf from 'render-if';
 class DependentGuestRSVPForm extends Component {
-  constructor(props) {
-    super(props)
-  }
   triggerRSVPSubmit = () => {
 
     const formState = this.formApi.getState();
-    console.log('formState====', formState);
     const {RSVP} = formState.values;
     const {invalid} = formState;
-    console.log("RSVP===", RSVP, "Invalid?==", invalid);
     let type;
     if (this.props.isRehersalInvite) {
       type = 'rehersal_rsvp';
@@ -55,7 +50,7 @@ class DependentGuestRSVPForm extends Component {
       <Card.Content>
         <Card.Header>
           So, will {guest.full_name}
-          be able to join us for 
+          be able to join us for
           <u>{rehersalInvite}</u>
         </Card.Header>
         <Card.Meta>

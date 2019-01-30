@@ -1,9 +1,7 @@
 import React from 'react';
 import {
-  Button,
   Container,
   Header,
-  Icon,
   Image,
 } from 'semantic-ui-react'
 import Countdown from '../countdown/CountDown.js';

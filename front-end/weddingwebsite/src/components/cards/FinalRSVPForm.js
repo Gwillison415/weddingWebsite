@@ -1,5 +1,5 @@
 import React, {Component} from 'react'
-import {Form, Text, RadioGroup, Radio } from 'informed';
+import {Form, RadioGroup, Radio } from 'informed';
 import {Card, Icon, Image} from 'semantic-ui-react'
 import logostd from '../../assets/images/logostd.png';
 import {saveTheFinalDateFormSubmit} from '../../redux/actions/forms.js';
@@ -7,9 +7,7 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 class FinalRSVPForm extends Component {
-  constructor(props) {
-    super(props)
-  }
+
   triggerRSVPSubmit = () => {
 
     const formState = this.formApi.getState();
@@ -31,7 +29,7 @@ class FinalRSVPForm extends Component {
   }
 
   render()  {
-    const {user, dependentGuests} = this.props;
+    const {user} = this.props;
     return (
 
       <Card>

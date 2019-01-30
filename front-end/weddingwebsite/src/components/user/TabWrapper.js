@@ -1,5 +1,4 @@
 import React from 'react'
-import FormCard from '../cards/FormCard';
 import {Tab} from 'semantic-ui-react';
 import PreliminaryRSVP from "../formTabs/prelimRsvp"
 import FinalRSVP from "../formTabs/finalRsvp"

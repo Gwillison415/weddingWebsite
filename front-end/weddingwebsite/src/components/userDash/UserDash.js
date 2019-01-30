@@ -1,28 +1,16 @@
 import React, {Component} from 'react';
-import {Form, Text} from 'informed';
+
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {updateUserPropsFromForms} from '../../redux/actions/forms';
 
 import {
-  Tab,
-  Button,
-  Container,
   Grid,
   Icon,
-  Image,
-  List,
-  Responsive,
-  Segment
+  Container
 } from 'semantic-ui-react';
 
 class UserDash extends Component {
-  constructor(props) {
-    super(props)
-    // this.state ={
-    //   showDash: false
-    // }
-  }
 
   finalRsvpStatus = (user) => {
     if (user.final_rsvp === true) {
@@ -35,7 +23,7 @@ class UserDash extends Component {
     }
   }
   render() {
-    const {user, rehersalInvite, firstRSVP, hasOnsiteInvite} = this.props;  
+    const {user, firstRSVP, hasOnsiteInvite} = this.props;
 
     return (<Container>
       <Grid celled='internally'>
@@ -78,7 +66,6 @@ const mapStateToProps = state => ({
   hasRehersalInvite: state.user.rehersal_invite,
   hasOnsiteInvite: state.user.onsite_invite,
   firstRSVP: state.user.first_rsvp,
-  hasOnsiteInvite: state.user.onsite_invite,
 });
 
 export const mapDispatchToProps = dispatch =>

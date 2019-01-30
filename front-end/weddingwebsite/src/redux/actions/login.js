@@ -1,6 +1,5 @@
 import axios from 'axios';
 import * as CONST from '../constants/constants';
-/*global FB*/
 
 const loginRequest = (props) => {
   const url = '/api/login';
