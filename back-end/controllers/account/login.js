@@ -13,7 +13,6 @@ if (process.env.NODE_ENV !== 'production') {
 router.route('/login')
   .post((req,res) => {
     const knex = require('../../knex.js')
-    console.log('req.body in login ===', req.body);
     knex('main_guests').where('email', req.body.email.toLowerCase())
     .then(user => {
       let compare = user[0].hashed_password;
