@@ -10,7 +10,6 @@ import {connect} from 'react-redux';
 import renderIf from 'render-if';
 class DependentGuestRSVPForm extends Component {
   triggerRSVPSubmit = () => {
-
     const formState = this.formApi.getState();
     const {RSVP} = formState.values;
     const {invalid} = formState;
@@ -51,7 +50,7 @@ class DependentGuestRSVPForm extends Component {
         <Card.Header>
           So, will {guest.full_name}
           be able to join us for
-          <u>{rehersalInvite}</u>
+          <u> {rehersalInvite}</u>
         </Card.Header>
         <Card.Meta>
           <span className='date'></span>
@@ -101,16 +100,7 @@ class DependentGuestRSVPForm extends Component {
     </Card>)
   }
 }
-// const mapStateToProps = state => ({
-//    loginStatus: state.user.loginStatus,
-//   user: state.user,
-//   userName: state.user.full_name,
-//    redirect: state.loginRedirect.redirectURL,
-//   error: state.user.error,
-//   dependentGuests: state.user.dependentGuests,
-//   rehersal_invite: state.saveTheDateForm.rehersal_invite,
-//
-// });
+
 
 export const mapDispatchToProps = dispatch => bindActionCreators({
   saveTheDateDependentFormSubmit

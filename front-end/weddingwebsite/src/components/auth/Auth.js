@@ -19,15 +19,15 @@ class Auth extends Component {
   render() {
     if (this.props.loginStatus) {
       return (<Switch>
-        <Route path="/user" component={User}/>
-       <Route path="/info/accomodations" component={withRouter(AccomodationsInfo)} />
-      </Switch>);
-
-    } else {
+                <Route path="/user" component={User}/>
+                <Route path="/info/accomodations" component={withRouter(AccomodationsInfo)} />
+              </Switch>);
+    }
+    else {
       return (
         <Switch>
-         <Route path="/info/accomodations" component={withRouter(AccomodationsInfo)} />
-         <HomepageLayout exact path={'/'} user={this.props.user}></HomepageLayout>
+          <Route path="/info/accomodations" component={withRouter(AccomodationsInfo)} />
+          <HomepageLayout exact path={'/'} user={this.props.user}></HomepageLayout>
         </Switch>
       );
     }
