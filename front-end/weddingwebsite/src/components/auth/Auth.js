@@ -23,17 +23,14 @@ class Auth extends Component {
        <Route path="/info/accomodations" component={withRouter(AccomodationsInfo)} />
       </Switch>);
 
-    }
-
-    else {
+    } else {
       return (
         <Switch>
          <Route path="/info/accomodations" component={withRouter(AccomodationsInfo)} />
          <HomepageLayout exact path={'/'} user={this.props.user}></HomepageLayout>
         </Switch>
       );
-
-    };
+    }
   }
 }
 

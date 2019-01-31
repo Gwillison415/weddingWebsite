@@ -6,19 +6,11 @@ import {changePageLocation} from '../../redux/actions/login';
 import { bindActionCreators } from 'redux';
 
 import {
-  Button,
   Container,
-  Divider,
   Dropdown,
-  Grid,
-  Header,
-  Icon,
-  Image,
-  List,
   Menu,
   Responsive,
   Segment,
-  Sidebar,
   Visibility,
 } from 'semantic-ui-react'
 import HomepageHeading from './HomepageHeading';
@@ -36,7 +28,7 @@ class DesktopContainer extends Component {
 
 
   render() {
-    const { children, userName, changePageLocation, signInMessage, user } = this.props
+    const { children, userName, changePageLocation, signInMessage, user, profileIsActive, homeIsActive } = this.props
     const { fixed } = this.state
     return (
       <Responsive minWidth={Responsive.onlyTablet.minWidth}>
@@ -61,18 +53,16 @@ class DesktopContainer extends Component {
             >
               <Container>
                 <Menu.Item header>Welcome {userName? userName : signInMessage? signInMessage : 'Friend'}</Menu.Item>
-                <Menu.Item active={this.props.homeIsActive} onClick={() => {
+                <Menu.Item active={homeIsActive} onClick={() => {
                   changePageLocation('home')
                   this.props.history.push('/')
                 }}> Home
                   {/* <Link to="/">Home </Link> */}
                 </Menu.Item>
-                <Menu.Item active={this.props.profileIsActive} onClick={() => {
+                <Menu.Item active={profileIsActive} onClick={() => {
                   if (!user.loginStatus) {
-                    console.log('nay logged in');
                     window.alert('Ya gotta log in to see your profile silly')
                   } else {
-
                     changePageLocation('profile')
                     this.props.history.push('/user')
                   }

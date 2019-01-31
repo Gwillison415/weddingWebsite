@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Login from '../login/Login';
-import Signup from '../signup/Signup';
+import Signup from '../signup/Signup.jsx';
 // import Login from '../login/LoginContainer';
 // import SignUp from '../signup/SignupContainer';
 // import Reset from '../reset/ResetContainer';
@@ -16,9 +16,9 @@ class AccountModal extends Component {
 
     this.state = {
       showSignUp: false,
-      showLogin: false,
+      showLogin: true,
       showReset: false,
-      modalMessage: 'Login coming soon! check back after thanksgiving! In the meantime, you can peruse our guest info',
+      modalMessage: '',
       showAccountModal: false
     };
 
