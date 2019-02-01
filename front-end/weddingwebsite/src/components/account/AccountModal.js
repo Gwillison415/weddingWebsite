@@ -44,8 +44,8 @@ class AccountModal extends Component {
 
   const { error, modalStyle } = this.props;
   const { showLogin, showSignUp, modalMessage } = this.state
-  return (<Modal open={this.state.showAccountModal} style={modalStyle} trigger={<Button onClick={() => this.setState({showAccountModal: true})}>Guest Login</Button>} centered={false}>
-    <Modal.Header centered='true' >A Portal To your RSVP Info
+    return (<Modal open={this.state.showAccountModal} className={"scrolling"} style={modalStyle} trigger={<Button onClick={() => this.setState({showAccountModal: true})}>Guest Login</Button>} centered={false}>
+      <Modal.Header centered='false' >  <div>A Portal To your RSVP Info</div>
     <Button onClick={() => {this.showSignupModal()}}>Sign up</Button>
     <Button onClick={() => {this.showLoginModal()}}>Login</Button>
     <Button onClick={() => {this.closeAccountModal()}}>Close</Button>

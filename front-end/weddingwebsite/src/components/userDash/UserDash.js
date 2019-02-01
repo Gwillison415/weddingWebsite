@@ -33,13 +33,20 @@ constructor(props){
   assignColWidth = (user) => {
     const totalCols = 16;
     let cols = 4;
-    user.additional_guest_count > 0 ? cols++ : null;
-    user.onsite_invite ? cols++ : null;
+    if (user.additional_guest_count > 0 ){
+      cols++
+    }
+    if (user.onsite_invite) {
+      cols++
+    }
     return Math.floor(totalCols / cols)
   }
   render() {
     const {user, firstRSVP, hasOnsiteInvite} = this.props;
     const { laptopColWidth} = this.state;
+    console.log('laptopColWidth', laptopColWidth);
+    
+
     return (<Container>
       <Grid >
         <Grid.Row>

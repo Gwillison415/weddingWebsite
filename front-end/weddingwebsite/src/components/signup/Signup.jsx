@@ -31,6 +31,7 @@ class Signup extends Component {
 
     const formState = this.formApi.getState();
     const { password, email } = formState.values;
+    email.toLowerCase()
     const { invalid } = formState;
     if (password && email && !invalid) {
       let signUpProps = Object.assign({}, { password }, { email })

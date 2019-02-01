@@ -24,7 +24,6 @@ class MobileContainer extends Component {
   }
   handlePusherClick = () => {
     const { sidebarOpened } = this.state
-
     if (sidebarOpened) this.setState({ sidebarOpened: false })
   }
 
@@ -32,7 +31,7 @@ class MobileContainer extends Component {
 
   render() {
     const { children, signInMessage, user, profileIsActive, homeIsActive, userName, changePageLocation } = this.props
-    const { sidebarOpened, } = this.state
+    const { sidebarOpened } = this.state
 
     return (
       <Responsive maxWidth={Responsive.onlyMobile.maxWidth}>
@@ -87,7 +86,7 @@ class MobileContainer extends Component {
                     <Icon name='sidebar' />
                   </Menu.Item>
                   <Menu.Item position='right'>
-                    <AccountModal modalStyle={{marginTop: "-450px"}}></AccountModal>
+                    <AccountModal modalStyle={{marginTop: "-150px"}}></AccountModal>
                     {/* <Button as='a' inverted>
                     </Button> */}
                   </Menu.Item>
@@ -104,13 +103,11 @@ class MobileContainer extends Component {
   }
 }
 const mapStateToProps = state => ({
-  // loginStatus: state.user.loginStatus,
   user: state.user,
   homeIsActive: state.user.homeIsActive,
   profileIsActive: state.user.profileIsActive,
   userName: state.user.full_name,
   redirect: state.user.redirectURL,
-  // error: state.user.error,
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
   changePageLocation,

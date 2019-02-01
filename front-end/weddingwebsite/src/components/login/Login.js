@@ -34,6 +34,7 @@ import './Login.css';
   triggerSubmit = () => {
     const formState = this.formApi.getState();
     const {password, email} = formState.values;
+    email.toLowerCase();
     const {invalid} = formState;
     if (password && email && !invalid ) {
       let loginProps = Object.assign({}, {password}, {email})
@@ -74,22 +75,7 @@ import './Login.css';
               ? JSON.stringify(formState.errors.password)
               : ''
           }</p>
-        {/* <label>Async Errors:</label>
-        <code>
-          {JSON.stringify(formState.asyncErrors)}
-        </code>
-        <label>Invalid:</label>
-        <code>
-          {JSON.stringify(formState.invalid)}
-        </code>
-        <label>Pristine:</label>
-        <code>
-          {JSON.stringify(formState.pristine)}
-        </code>
-        <label>Dirty:</label>
-        <code>
-          {JSON.stringify(formState.dirty)}
-        </code> */}
+       
       </div>)
     }
   </Form>)}
