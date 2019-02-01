@@ -3,7 +3,6 @@ import { bindActionCreators } from 'redux';
 import {withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 import {Form, Text} from 'informed';
-import {Redirect} from 'react-router-dom';
 import {login} from '../../redux/actions/login';
 import './Login.css';
 
@@ -35,7 +34,7 @@ import './Login.css';
   triggerSubmit = () => {
     const formState = this.formApi.getState();
     const {password, email} = formState.values;
-    const {invalid, submits} = formState;
+    const {invalid} = formState;
     if (password && email && !invalid ) {
       let loginProps = Object.assign({}, {password}, {email})
       this.props.login(loginProps)

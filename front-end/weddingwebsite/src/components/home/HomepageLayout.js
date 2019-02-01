@@ -1,6 +1,5 @@
 import React from 'react';
 import {
-  Button,
   Container,
   Divider,
   Grid,
@@ -68,7 +67,7 @@ const HomepageLayout = ({ signInMessage, user }) => {
         </p>
         
           <Divider
-            as='h4'
+           
             className='header'
             horizontal
             style={{ margin: '3em 0em', textTransform: 'uppercase' }}

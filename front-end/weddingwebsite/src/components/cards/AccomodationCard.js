@@ -2,15 +2,12 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {Form, Text, RadioGroup, Radio} from 'informed';
+import {Form, RadioGroup, Radio} from 'informed';
 import {Card, Icon, Image, Grid, Segment} from 'semantic-ui-react'
 import logolodging from '../../assets/images/logolodging.png';
 import Countdown from '../countdown/CountDown.js';
 import {accomodationsFormSubmit} from '../../redux/actions/forms';
 class AccomodationCard extends Component {
-  constructor(props) {
-    super(props)
-  }
 
   triggerSubmit = (userName) => {
     const formState = this.formApi.getState();

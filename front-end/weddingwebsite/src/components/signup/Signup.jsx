@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { Form, Text } from 'informed';
-import { Redirect } from 'react-router-dom';
 import { signup } from '../../redux/actions/login';
 // import './Signup.css';
 
@@ -32,7 +31,7 @@ class Signup extends Component {
 
     const formState = this.formApi.getState();
     const { password, email } = formState.values;
-    const { invalid, submits } = formState;
+    const { invalid } = formState;
     if (password && email && !invalid) {
       let signUpProps = Object.assign({}, { password }, { email })
       this.props.signup(signUpProps)

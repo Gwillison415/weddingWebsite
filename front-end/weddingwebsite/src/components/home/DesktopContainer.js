@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
 import {changePageLocation} from '../../redux/actions/login';
 import { bindActionCreators } from 'redux';
