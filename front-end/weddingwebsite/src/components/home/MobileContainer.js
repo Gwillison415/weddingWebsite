@@ -57,6 +57,9 @@ class MobileContainer extends Component {
             </Menu.Item>
             <Menu.Item as='a' link href='mailto:keenewillison2019@gmail.com?subject=Question%20about%20___%20from%20____&body=let%20us%20know%20if%20you%20dont%20want%20us%20to%20put%20your%20question%20on%20our%20FAQ'>Email a question</Menu.Item>
             <Menu.Item >
+              <Link to="/info/timeline"> Timeline </Link>
+            </Menu.Item>
+           <Menu.Item >
               <Link to="/info/accomodations" >Accomodations </Link>
             </Menu.Item>
             <Menu.Item >

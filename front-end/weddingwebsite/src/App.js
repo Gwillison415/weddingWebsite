@@ -8,6 +8,7 @@ import HomepageLayout from './components/home/HomepageLayout';
 import Auth from './components/auth/Auth';
 import {AccomodationsInfo} from './components/info/AccomodationsInfo';
 import {TravelInfo} from './components/info/TravelInfo';
+import { TimelineInfo } from './components/info/TimelineInfo';
 import {Faq} from './components/info/Faq';
 
 class App extends Component {
@@ -20,6 +21,7 @@ class App extends Component {
           <Route exact path="/"
           render={(props) => <HomepageLayout user={user} />}/>
            <Route exact path="/info/accomodations" component={AccomodationsInfo} />
+           <Route exact path="/info/timeline" component={TimelineInfo} />
            <Route exact path="/info/travel" component={TravelInfo} />
            <Route exact path="/info/faq" component={Faq} />
           <Route path="/user" component={Auth} />

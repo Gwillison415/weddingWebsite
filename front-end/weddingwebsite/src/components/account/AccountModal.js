@@ -18,7 +18,7 @@ class AccountModal extends Component {
       showSignUp: false,
       showLogin: true,
       showReset: false,
-      modalMessage: '',
+      modalMessage: 'Login to change your details',
       showAccountModal: false
     };
 
@@ -47,11 +47,11 @@ class AccountModal extends Component {
     return (<Modal open={this.state.showAccountModal} className={"scrolling"} style={modalStyle} trigger={<Button onClick={() => this.setState({showAccountModal: true})}>Guest Login</Button>} centered={false}>
       <Modal.Header centered='false' >  <div>A Portal To your RSVP Info</div>
     <Button onClick={() => {this.showSignupModal()}}>Sign up</Button>
-    <Button onClick={() => {this.showLoginModal()}}>Login</Button>
+        <Button active={showLogin} onClick={() => {this.showLoginModal()}}>Login</Button>
     <Button onClick={() => {this.closeAccountModal()}}>Close</Button>
     </Modal.Header>
     <Modal.Content image>
-      <Image wrapped size='medium' src={burn2018}/>
+      <Image wrapped size='small' src={burn2018}/>
       <Modal.Description>
         <Header>{modalMessage}</Header>
         {showLogin && <Login closeAccountModal={this.closeAccountModal} showResetModal={this.showResetModal} showSignupModal={this.showSignupModal} />}
