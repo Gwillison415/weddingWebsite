@@ -1,0 +1,8 @@
+@media screen and (max-width: 500px) /* Mobile */ {
+  .two.wide.column {
+    width: 0px!important;
+  }
+  .five.wide.column {
+     width: 37.25%!important;
+  }
+}

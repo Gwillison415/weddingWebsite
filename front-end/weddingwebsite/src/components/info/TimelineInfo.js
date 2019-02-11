@@ -1,5 +1,6 @@
 import React from 'react';
 import Timeline from 'react-timeline-semantic-ui';
+import "./timeline.css";
 import { Particles } from 'react-particles-js';
 import { particlesConfig } from '../particles/particlesjs-config';
 const P = Particles;
