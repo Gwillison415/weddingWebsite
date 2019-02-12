@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import Login from '../login/Login';
-import Signup from '../signup/Signup';
+import Signup from '../signup/Signup.jsx';
 // import Login from '../login/LoginContainer';
 // import SignUp from '../signup/SignupContainer';
 // import Reset from '../reset/ResetContainer';
@@ -15,11 +15,10 @@ class AccountModal extends Component {
     super(props);
 
     this.state = {
-      open: false,
       showSignUp: false,
-      showLogin: false,
+      showLogin: true,
       showReset: false,
-      modalMessage: 'Login coming soon! check back after thanksgiving! In the meantime, you can peruse our guest info',
+      modalMessage: 'Login to change your details',
       showAccountModal: false
     };
 
@@ -44,15 +43,15 @@ class AccountModal extends Component {
   render () {
 
   const { error, modalStyle } = this.props;
-  const { showLogin, showSignUp, open, modalMessage, redirect, } = this.state
-  return (<Modal open={this.state.showAccountModal} style={modalStyle} trigger={<Button onClick={() => this.setState({showAccountModal: true})}>Guest Login</Button>} centered={false}>
-    <Modal.Header centered='true' >A Portal To your RSVP Info
+  const { showLogin, showSignUp, modalMessage } = this.state
+    return (<Modal open={this.state.showAccountModal} className={"scrolling"} style={modalStyle} trigger={<Button onClick={() => this.setState({showAccountModal: true})}>Guest Login</Button>} centered={false}>
+      <Modal.Header centered='false' >  <div>A Portal To your RSVP Info</div>
     <Button onClick={() => {this.showSignupModal()}}>Sign up</Button>
-    <Button onClick={() => {this.showLoginModal()}}>Login</Button>
+        <Button active={showLogin} onClick={() => {this.showLoginModal()}}>Login</Button>
     <Button onClick={() => {this.closeAccountModal()}}>Close</Button>
     </Modal.Header>
     <Modal.Content image>
-      <Image wrapped size='medium' src={burn2018}/>
+      <Image wrapped size='small' src={burn2018}/>
       <Modal.Description>
         <Header>{modalMessage}</Header>
         {showLogin && <Login closeAccountModal={this.closeAccountModal} showResetModal={this.showResetModal} showSignupModal={this.showSignupModal} />}

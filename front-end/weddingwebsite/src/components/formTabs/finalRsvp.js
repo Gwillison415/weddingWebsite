@@ -1,20 +1,13 @@
 import React from 'react'
-import FinalRSVPForm from '../cards/FinalRSVPForm';
+import FinalRSVPForm from '../forms/FinalRSVPForm';
 import {
-  Tab,
-  Button,
-  Container,
-  Divider,
   Grid,
   Header,
-  Icon,
   Image,
-  List,
-  Responsive,
   Segment
 } from 'semantic-ui-react';
 import dubaiDesert from '../../assets/images/dubaiDesert.jpg';
-import DependentGuestRSVPForm from '../cards/DependentGuestRSVPForm';
+import DependentGuestRSVPForm from '../forms/DependentGuestRSVPForm';
 
 const FinalRSVP =(props) =>{
   let {user, dependentGuests} = props;

@@ -4,7 +4,7 @@ import './index.css';
 import App from './App';
 import registerServiceWorker from './registerServiceWorker';
 import {Provider} from 'react-redux'
-import {applyMiddleware, combineReducers, createStore, compose} from 'redux';
+import {applyMiddleware, combineReducers, createStore} from 'redux';
 import {user, saveTheDateForm, accomodationsForm, rsvpForm } from './redux/reducers/account';
 import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';

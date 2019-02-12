@@ -9,24 +9,13 @@ import HomepageLayout from '../home/HomepageLayout';
 import {AccomodationsInfo} from '../info/AccomodationsInfo';
 
 class Auth extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {}
 
-  }
   componentDidMount() {
-    console.log('this.props.location.pathname in auth', this.props.location.pathname);
     if (!this.props.loginStatus) {
       this.props.setRedirectUrl(this.props.location.pathname);
       this.props.history.push('/');
     }
   }
-//   componentDidUpdate(prevProps) {
-//   if (this.props !== prevProps) {
-//       console.log('this.props.location.pathname in auth', this.props.location.pathname);
-//     console.log('you prob just logged in');
-//   }
-// }
   render() {
     if (this.props.loginStatus) {
       return (<Switch>
@@ -34,20 +23,14 @@ class Auth extends Component {
        <Route path="/info/accomodations" component={withRouter(AccomodationsInfo)} />
       </Switch>);
 
-    }
-
-    else {
-    console.log('switched in auth');
-
+    } else {
       return (
-
         <Switch>
          <Route path="/info/accomodations" component={withRouter(AccomodationsInfo)} />
          <HomepageLayout exact path={'/'} user={this.props.user}></HomepageLayout>
         </Switch>
       );
-
-    };
+    }
   }
 }
 
@@ -59,5 +42,5 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => bindActionCreators({
   setRedirectUrl
 }, dispatch)
-// export default connect(mapStateToProps, mapDispatchToProps)(Auth);
+
 export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Auth));

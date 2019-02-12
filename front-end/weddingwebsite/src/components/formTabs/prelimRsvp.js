@@ -1,20 +1,13 @@
 import React from 'react'
-import FormCard from '../cards/FormCard';
+import FormCard from '../forms/MainGuestRSVPForm';
 import {
-  Tab,
-  Button,
-  Container,
-  Divider,
   Grid,
   Header,
-  Icon,
   Image,
-  List,
-  Responsive,
   Segment
 } from 'semantic-ui-react';
 import Mccrarywedding from '../../assets/images/Mccrarywedding.jpg';
-import DependentGuestRSVPForm from '../cards/DependentGuestRSVPForm';
+import DependentGuestRSVPForm from '../forms/DependentGuestRSVPForm';
 
 
 const PreliminaryRSVP =(props) =>{

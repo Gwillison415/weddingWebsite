@@ -3,25 +3,17 @@ import { bindActionCreators } from 'redux';
 import {withRouter} from 'react-router-dom';
 import { connect } from 'react-redux';
 import {Form, Text} from 'informed';
-import {Redirect} from 'react-router-dom';
 import {login} from '../../redux/actions/login';
 import './Login.css';
 
  class Login extends Component {
-  constructor(props) {
-    super(props)
-    this.state = {
-    }
 
-    this.handleClick = this.handleClick.bind(this)
-  }
   componentDidMount(){
     if (this.props.loginStatus) {
       this.props.closeAccountModal()
     }
   }
   componentDidUpdate(prevProps) {
-  // Typical usage (don't forget to compare props):
   if (this.props.loginStatus !== prevProps.loginStatus) {
     this.props.history.push('/user')
     this.props.closeAccountModal()
@@ -40,20 +32,17 @@ import './Login.css';
        : null;
    }
   triggerSubmit = () => {
-
     const formState = this.formApi.getState();
     const {password, email} = formState.values;
-    const {invalid, submits} = formState;
+    email.toLowerCase();
+    const {invalid} = formState;
     if (password && email && !invalid ) {
       let loginProps = Object.assign({}, {password}, {email})
       this.props.login(loginProps)
     } else {
-      console.log('failed handleClick unexpectedly');
+      console.log('failed triggerSubmit unexpectedly');
     }
      this.formApi.reset()
-  }
-  handleClick(){
-    console.log(this.formApi.getState());
   }
 
 
@@ -86,22 +75,7 @@ import './Login.css';
               ? JSON.stringify(formState.errors.password)
               : ''
           }</p>
-        {/* <label>Async Errors:</label>
-        <code>
-          {JSON.stringify(formState.asyncErrors)}
-        </code>
-        <label>Invalid:</label>
-        <code>
-          {JSON.stringify(formState.invalid)}
-        </code>
-        <label>Pristine:</label>
-        <code>
-          {JSON.stringify(formState.pristine)}
-        </code>
-        <label>Dirty:</label>
-        <code>
-          {JSON.stringify(formState.dirty)}
-        </code> */}
+       
       </div>)
     }
   </Form>)}

@@ -1,9 +1,9 @@
 import React from 'react'
-import FormCard from '../cards/FormCard';
 import {Tab} from 'semantic-ui-react';
-import PreliminaryRSVP from "../formTabs/prelimRsvp"
-import FinalRSVP from "../formTabs/finalRsvp"
-import AccomodationCard from '../cards/AccomodationCard';
+import PreliminaryRSVP from "../formTabs/PrelimRsvp"
+import FinalRSVP from "../formTabs/FinalRsvp"
+import MealPref from "../formTabs/MealPref"
+import AccomodationCard from '../forms/AccomodationCard';
 
 
 const TabExampleSecondaryPointing = (props) => {
@@ -20,6 +20,9 @@ const TabExampleSecondaryPointing = (props) => {
   if (hasOnsiteInvite) {
     panes.unshift({ menuItem: 'Accomodations', render: () => <Tab.Pane attached={false}>  <AccomodationCard></AccomodationCard>  </Tab.Pane> })
   }
+    //   { menuItem: 'Meal Preferences & allergies', render: () => <Tab.Pane attached={false}>
+    //   <MealPref dependentGuests={dependentGuests} user={user}/>
+    // </Tab.Pane> },
 
   return (
     <Tab menu={{ secondary: true, pointing: true }} panes={panes} user={user}  />

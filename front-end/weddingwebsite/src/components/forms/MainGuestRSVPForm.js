@@ -1,14 +1,17 @@
 import React, {Component} from 'react'
-import {Form, Text, RadioGroup, Radio } from 'informed';
+import {Form, RadioGroup, Radio } from 'informed';
 import {Card, Icon, Image} from 'semantic-ui-react'
 import logostd from '../../assets/images/logostd.png';
-import {saveTheFinalDateFormSubmit} from '../../redux/actions/forms.js';
+import {saveTheDateFormSubmit} from '../../redux/actions/forms.js';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-class FinalRSVPForm extends Component {
+class FormCard extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      responseMessage: ''
+    }
   }
   triggerRSVPSubmit = () => {
 
@@ -20,7 +23,8 @@ class FinalRSVPForm extends Component {
 
     if (RSVP && !invalid ) {
       let formAnswers = Object.assign({}, {RSVP}, {name: this.props.userName})
-      this.props.saveTheFinalDateFormSubmit(formAnswers)
+      this.props.saveTheDateFormSubmit(formAnswers)
+      this.setState({ responseMessage: `Cheers, we have ${this.props.userName} as ${RSVP}` })
     } else {
       console.log('failed handleClick unexpectedly');
     }
@@ -31,7 +35,9 @@ class FinalRSVPForm extends Component {
   }
 
   render()  {
-    const {user, dependentGuests} = this.props;
+    const {user} = this.props;
+    const { responseMessage } = this.state;
+
     return (
 
       <Card>
@@ -51,6 +57,8 @@ class FinalRSVPForm extends Component {
                   <RadioGroup field="RSVP">
                     <label htmlFor="radio-yes">Most Definitely</label>
                     <Radio value="yes" id="radio-yes"/>
+                    <label htmlFor="radio-maybe">Maybe</label>
+                    <Radio value="maybe" id="radio-maybe"/>
                     <label htmlFor="radio-no">Me Thinks Not</label>
                     <Radio value="no" id="radio-no"/>
 
@@ -72,6 +80,7 @@ class FinalRSVPForm extends Component {
             }
           </Form>
         </Card.Description>
+          <h4>{responseMessage} </h4>
       </Card.Content>
       <Card.Content extra={true}>
         <a>
@@ -94,6 +103,6 @@ const mapStateToProps = state => ({
 
 export const mapDispatchToProps = dispatch =>
   bindActionCreators({
-    saveTheFinalDateFormSubmit,
+    saveTheDateFormSubmit,
   }, dispatch);
-export default connect(mapStateToProps, mapDispatchToProps)(FinalRSVPForm);
+export default connect(mapStateToProps, mapDispatchToProps)(FormCard);

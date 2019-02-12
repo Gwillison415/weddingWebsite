@@ -1,5 +1,4 @@
 import * as CONST from '../constants/constants';
-let firstRsvpStatus;
 
 export const user = (state = {
   loginStatus: false,

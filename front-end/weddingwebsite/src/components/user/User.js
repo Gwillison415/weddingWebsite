@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import {Form, Text} from 'informed';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
@@ -10,9 +9,6 @@ import {getDependents, accomodationsFormSubmit} from '../../redux/actions/forms.
 import UserDash from '../userDash/UserDash';
 
 class User extends Component {
-  constructor(props) {
-    super(props)
-  }
 
   componentDidMount() {
     this.props.getDependents(this.props.userName)

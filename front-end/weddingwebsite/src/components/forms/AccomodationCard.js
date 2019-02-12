@@ -2,44 +2,45 @@ import React, {Component} from 'react';
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 
-import {Form, Text, RadioGroup, Radio} from 'informed';
+import {Form, RadioGroup, Radio} from 'informed';
 import {Card, Icon, Image, Grid, Segment} from 'semantic-ui-react'
 import logolodging from '../../assets/images/logolodging.png';
 import Countdown from '../countdown/CountDown.js';
 import {accomodationsFormSubmit} from '../../redux/actions/forms';
 class AccomodationCard extends Component {
-  constructor(props) {
+  constructor(props){
     super(props)
+    this.state ={
+      responseMessage: ''
+    }
   }
 
   triggerSubmit = (userName) => {
     const formState = this.formApi.getState();
-    console.log('formState====', formState);
     const {accomodations} = formState.values;
     const {invalid} = formState;
-    console.log("accomodations===", accomodations, "Invalid?==", invalid);
-
 
     if (accomodations && !invalid) {
       let formAnswers = Object.assign({}, {accomodations}, {userName: userName})
       this.props.accomodationsFormSubmit(formAnswers)
+      this.setState({ responseMessage: `Great, we have you as ${accomodations}`})
     } else {
       console.log('failed handleClick unexpectedly');
     }
-    // this.formApi.reset()
   }
   setFormApi = (formApi) => {
     this.formApi = formApi;
   }
   render() {
     const {user} = this.props;
+    const { responseMessage} = this.state;
     return (<div>
       <Grid>
         <Grid.Row>
           <h3>Remember, you're only seeing this because you’re VIP and everyone should know your name by now at the box office. We'd like you to be stuck with us all weekend. We imagined you’re interested but it's totally cool if you'd rather not be onsite with the hippie lovefest.
           </h3>
           <h2>we'd like the answer to this one
-            <b>ASAP</b>
+            <b> ASAP </b>
             so we can open the space to others if available!</h2>
         </Grid.Row>
         <Grid.Row>
@@ -97,6 +98,7 @@ class AccomodationCard extends Component {
                     }
                   </Form>
                 </Card.Description>
+                <h4>{responseMessage} </h4>
               </Card.Content>
               <Card.Content extra={true}>
                 <h4>please still rsvp in the other tabs!</h4>

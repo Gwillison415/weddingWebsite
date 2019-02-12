@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import {Form, Text, RadioGroup, Radio} from 'informed';
+import {Form,  RadioGroup, Radio} from 'informed';
 import {Card, Icon, Image} from 'semantic-ui-react'
-import saveTheDate from '../../assets/images/saveTheDate.jpeg';
+// import saveTheDate from '../../assets/images/saveTheDate.jpeg';
 import logowedcel from '../../assets/images/logowedcel.png';
 import logofamdin from '../../assets/images/logofamdin.png';
 import {saveTheDateDependentFormSubmit} from '../../redux/actions/forms.js';
@@ -11,14 +11,15 @@ import renderIf from 'render-if';
 class DependentGuestRSVPForm extends Component {
   constructor(props) {
     super(props)
+    this.state = {
+      responseMessage: ''
+    }
   }
   triggerRSVPSubmit = () => {
 
     const formState = this.formApi.getState();
-    console.log('formState====', formState);
     const {RSVP} = formState.values;
     const {invalid} = formState;
-    console.log("RSVP===", RSVP, "Invalid?==", invalid);
     let type;
     if (this.props.isRehersalInvite) {
       type = 'rehersal_rsvp';
@@ -37,10 +38,11 @@ class DependentGuestRSVPForm extends Component {
         mainGuest: this.props.mainGuest
       }, {type: type})
       this.props.saveTheDateDependentFormSubmit(formAnswers)
+      this.setState({ responseMessage: `Cheers, we have ${this.props.guest.full_name} as ${RSVP}` })
+
     } else {
       console.log('failed handleClick unexpectedly');
     }
-    // this.formApi.reset()
   }
   setFormApi = (formApi) => {
     this.formApi = formApi;
@@ -48,14 +50,15 @@ class DependentGuestRSVPForm extends Component {
 
   render() {
     const {guest, rehersalInvite, isRehersalInvite} = this.props;
+    const { responseMessage } = this.state;
+
     return (<Card>
       <Image src={isRehersalInvite
           ? logofamdin
           : logowedcel}/>
       <Card.Content>
         <Card.Header>
-          So, will {guest.full_name}
-          be able to join us for 
+          So, will {guest.full_name} be able to join us for
           <u>{rehersalInvite}</u>
         </Card.Header>
         <Card.Meta>
@@ -96,6 +99,7 @@ class DependentGuestRSVPForm extends Component {
             }
           </Form>
         </Card.Description>
+        <h4>{responseMessage} </h4>
       </Card.Content>
       <Card.Content extra={true}>
         <a>
@@ -106,16 +110,7 @@ class DependentGuestRSVPForm extends Component {
     </Card>)
   }
 }
-// const mapStateToProps = state => ({
-//    loginStatus: state.user.loginStatus,
-//   user: state.user,
-//   userName: state.user.full_name,
-//    redirect: state.loginRedirect.redirectURL,
-//   error: state.user.error,
-//   dependentGuests: state.user.dependentGuests,
-//   rehersal_invite: state.saveTheDateForm.rehersal_invite,
-//
-// });
+
 
 export const mapDispatchToProps = dispatch => bindActionCreators({
   saveTheDateDependentFormSubmit
