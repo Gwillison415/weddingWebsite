@@ -120,6 +120,12 @@ export const user = (state = {
         ...state,
         accodmodations: action.payload.poll_q1
       };
+    case CONST.MEALS_FORM_FULFILLED:
+      return {
+        ...state,
+        meals: action.payload.meal_pref,
+        allergies: action.payload.food_allergies
+      }
     default:
       return state;
   }

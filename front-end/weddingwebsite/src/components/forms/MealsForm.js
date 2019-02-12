@@ -2,27 +2,27 @@ import React, { Component } from 'react'
 import { Form, RadioGroup, Radio, Text } from 'informed';
 import { Card, Icon, Image } from 'semantic-ui-react'
 import logostd from '../../assets/images/logostd.png';
-import { saveTheFinalDateFormSubmit } from '../../redux/actions/forms.js';
+import { saveMealPrefsSubmit } from '../../redux/actions/forms.js';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
-class Meals extends Component {
+class MealsForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
             responseMessage: ''
         }
     }
-    triggerRSVPSubmit = () => {
+    triggerSubmit = () => {
 
         const formState = this.formApi.getState();
-        const { RSVP } = formState.values;
+        const { mealType, allergies } = formState.values;
         const { invalid } = formState;
 
-        if (RSVP && !invalid) {
-            let formAnswers = Object.assign({}, { RSVP }, { name: this.props.userName })
-            this.props.saveTheFinalDateFormSubmit(formAnswers)
-            this.setState({ responseMessage: `Cheers, we have ${this.props.userName} as ${RSVP}` })
+        if (mealType && !invalid) {
+            let formAnswers = Object.assign({}, { mealType }, { name: this.props.userName }, { allergies})
+            this.props.saveMealPrefsSubmit(formAnswers)
+            this.setState({ responseMessage: `Cheers, we have ${this.props.userName} as ${mealType}` })
 
         } else {
             console.log('failed handleClick unexpectedly');
@@ -48,12 +48,12 @@ class Meals extends Component {
                     </Card.Meta>
                     <Card.Description>
                         <Form id="radio-form" getApi={this.setFormApi} onSubmit={() => {
-                            this.triggerRSVPSubmit()
+                            this.triggerSubmit()
                         }}>
                             {
                                 ({ formState }) => (<div >
 
-                                    <RadioGroup field="RSVP">
+                                    <RadioGroup field="mealType">
                                         <label htmlFor="radio-omnivore">Omnivore</label>
                                         <Radio value="omni" id="radio-omnivore" />
                                         <label htmlFor="radio-veg">Vegetarian</label>
@@ -107,6 +107,6 @@ const mapStateToProps = state => ({
 
 export const mapDispatchToProps = dispatch =>
     bindActionCreators({
-        saveTheFinalDateFormSubmit,
+        saveMealPrefsSubmit,
     }, dispatch);
-export default connect(mapStateToProps, mapDispatchToProps)(Meals);
+export default connect(mapStateToProps, mapDispatchToProps)(MealsForm);

@@ -7,7 +7,7 @@ import {
     Segment
 } from 'semantic-ui-react';
 import dubaiDesert from '../../assets/images/dubaiDesert.jpg';
-import DependentGuestRSVPForm from '../forms/DependentGuestRSVPForm';
+import MealsForm from '../forms/MealsForm';
 
 const MealPref = (props) => {
     let { user, dependentGuests } = props;
@@ -42,19 +42,19 @@ const MealPref = (props) => {
                         if (guest.rsvp !== "no") {
                             return (<div key={idx} style={{ display: 'inline-flex' }}>
                                 <Grid.Column style={{ padding: '.5em 2em' }} width={6}>
-                                    <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={false} isFinalRsvp={true} rehersalInvite={'the celebration jully 13th?'}>
-                                    </DependentGuestRSVPForm>
+                                    <MealsForm guest={guest} mainGuest={user.full_name} isRehersalInvite={false} isFinalRsvp={true} rehersalInvite={'the celebration jully 13th?'}>
+                                    </MealsForm>
                                 </Grid.Column>
                                 <Grid.Column style={{ padding: '.5em 2em' }} width={6}>
-                                    <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={true} isFinalRsvp={true} rehersalInvite={' family dinner Jull 11th?'}  >
-                                    </DependentGuestRSVPForm>
+                                    <MealsForm guest={guest} mainGuest={user.full_name} isRehersalInvite={true} isFinalRsvp={true} rehersalInvite={' family dinner Jull 11th?'}  >
+                                    </MealsForm>
                                 </Grid.Column>
                             </div>)
                         } else {
                             return (<div key={idx} style={{ display: 'inline-flex' }}>
                                 <Grid.Column style={{ padding: '.5em 2em' }} width={6}>
-                                    <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={false} rehersalInvite={'the celebration jully 13th?'}>
-                                    </DependentGuestRSVPForm>
+                                    <MealsForm guest={guest} mainGuest={user.full_name} isRehersalInvite={false} rehersalInvite={'the celebration jully 13th?'}>
+                                    </MealsForm>
                                 </Grid.Column>
                             </div>)
                         }
