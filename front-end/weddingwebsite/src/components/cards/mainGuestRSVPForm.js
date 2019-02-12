@@ -7,6 +7,12 @@ import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 
 class FormCard extends Component {
+  constructor(props) {
+    super(props)
+    this.state = {
+      responseMessage: ''
+    }
+  }
   triggerRSVPSubmit = () => {
 
     const formState = this.formApi.getState();
@@ -18,6 +24,7 @@ class FormCard extends Component {
     if (RSVP && !invalid ) {
       let formAnswers = Object.assign({}, {RSVP}, {name: this.props.userName})
       this.props.saveTheDateFormSubmit(formAnswers)
+      this.setState({ responseMessage: `Cheers, we have ${this.props.userName} as ${RSVP}` })
     } else {
       console.log('failed handleClick unexpectedly');
     }
@@ -29,6 +36,8 @@ class FormCard extends Component {
 
   render()  {
     const {user} = this.props;
+    const { responseMessage } = this.state;
+
     return (
 
       <Card>
@@ -71,6 +80,7 @@ class FormCard extends Component {
             }
           </Form>
         </Card.Description>
+          <h4>{responseMessage} </h4>
       </Card.Content>
       <Card.Content extra={true}>
         <a>

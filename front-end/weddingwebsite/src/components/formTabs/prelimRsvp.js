@@ -1,5 +1,5 @@
 import React from 'react'
-import FormCard from '../cards/FormCard';
+import FormCard from '../cards/mainGuestRSVPForm';
 import {
   Grid,
   Header,

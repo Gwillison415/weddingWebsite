@@ -8,6 +8,12 @@ import logolodging from '../../assets/images/logolodging.png';
 import Countdown from '../countdown/CountDown.js';
 import {accomodationsFormSubmit} from '../../redux/actions/forms';
 class AccomodationCard extends Component {
+  constructor(props){
+    super(props)
+    this.state ={
+      responseMessage: ''
+    }
+  }
 
   triggerSubmit = (userName) => {
     const formState = this.formApi.getState();
@@ -17,6 +23,7 @@ class AccomodationCard extends Component {
     if (accomodations && !invalid) {
       let formAnswers = Object.assign({}, {accomodations}, {userName: userName})
       this.props.accomodationsFormSubmit(formAnswers)
+      this.setState({ responseMessage: `Great, we have you as ${accomodations}`})
     } else {
       console.log('failed handleClick unexpectedly');
     }
@@ -26,6 +33,7 @@ class AccomodationCard extends Component {
   }
   render() {
     const {user} = this.props;
+    const { responseMessage} = this.state;
     return (<div>
       <Grid>
         <Grid.Row>
@@ -90,6 +98,7 @@ class AccomodationCard extends Component {
                     }
                   </Form>
                 </Card.Description>
+                <h4>{responseMessage} </h4>
               </Card.Content>
               <Card.Content extra={true}>
                 <h4>please still rsvp in the other tabs!</h4>
