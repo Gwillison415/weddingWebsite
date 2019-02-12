@@ -44,19 +44,23 @@ router.route('/meals').post((req, res) => {
   const knex = require('../../knex.js')
   console.log('req.body', req.body);
 
-  const { userName, mealType, allergies} = req.body;
-  // const accomodations = req.body.accomodations;
-  // console.log('req.body username==', userName, "accomodations==", accomodations);
-  knex('main_guests')
-  .where({full_name: userName})
-  .update({
-    poll_q1: accomodations
-  })
-  .returning(['first_rsvp', 'additional_guest_count','rehersal_invite', 'rehersal_rsvp', 'poll_q1'])
-  .then(updatedGuest => {
-    // console.log('updatedGuest===', updatedGuest[0]);
-   res.status(200).send(updatedGuest[0])
- })
+  const { fullName, mealType, mainGuest, allergies } = req.body;
+  if (!fullName) {
+    //we have a mainGuest and don't need to query the dependent guest table
+
+    knex('main_guests')
+      .where({ full_name: mainGuest})
+    .update({
+      meal_pref: mealType,
+      food_allergies: allergies
+    })
+      .returning(['meal_pref','food_allergies'])
+    .then(updatedGuest => {
+      // console.log('updatedGuest===', updatedGuest[0]);
+     res.status(200).send(updatedGuest[0])
+   })
+  }
+  // 'first_rsvp', 'additional_guest_count', 'rehersal_invite', 'rehersal_rsvp', 'poll_q1', 
   // res.send(201)
 })
 router.route('/arsvp').post((req, res) => {

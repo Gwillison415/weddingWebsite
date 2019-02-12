@@ -5,12 +5,15 @@ import logostd from '../../assets/images/logostd.png';
 import { saveMealPrefsSubmit } from '../../redux/actions/forms.js';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import knives from '../../assets/images/knives.png';
+
 
 class MealsForm extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            responseMessage: ''
+            responseMessage: '',
+            guest: this.props.guest ? this.props.guest : this.props.mainGuest
         }
     }
     triggerSubmit = () => {
@@ -20,9 +23,15 @@ class MealsForm extends Component {
         const { invalid } = formState;
 
         if (mealType && !invalid) {
-            let formAnswers = Object.assign({}, { mealType }, { name: this.props.userName }, { allergies})
+            let formAnswers;
+            if (this.props.guest ) {
+                formAnswers = Object.assign({}, { mealType }, { mainGuest: this.props.userName }, { allergies}, {fullName: this.state.guest})
+                this.setState({ responseMessage: `Cheers, we have ${this.state.guest} as ${mealType}` })
+            } else {
+                formAnswers = Object.assign({}, { mealType }, { main_guest: this.props.userName }, { allergies})
+                this.setState({ responseMessage: `Cheers, we have ${this.state.guest} as ${mealType}` })
+            }
             this.props.saveMealPrefsSubmit(formAnswers)
-            this.setState({ responseMessage: `Cheers, we have ${this.props.userName} as ${mealType}` })
 
         } else {
             console.log('failed handleClick unexpectedly');
@@ -34,17 +43,16 @@ class MealsForm extends Component {
     }
 
     render() {
-        const { user } = this.props;
+        const { guest } = this.state;
         const { responseMessage } = this.state;
-
         return (
 
             <Card>
-                <Image src={logostd} />
+                <Image src={knives} />
                 <Card.Content>
-                    <Card.Header>Hi {user.full_name}</Card.Header>
+                    <Card.Header>SupperTime Savory</Card.Header>
                     <Card.Meta>
-                        <span className='date'>Tell me dearest, what would you like to eat?</span>
+                        <span className='date'>Tell me dearest, what would {guest} like to eat?</span>
                     </Card.Meta>
                     <Card.Description>
                         <Form id="radio-form" getApi={this.setFormApi} onSubmit={() => {
@@ -53,13 +61,18 @@ class MealsForm extends Component {
                             {
                                 ({ formState }) => (<div >
 
-                                    <RadioGroup field="mealType">
-                                        <label htmlFor="radio-omnivore">Omnivore</label>
-                                        <Radio value="omni" id="radio-omnivore" />
-                                        <label htmlFor="radio-veg">Vegetarian</label>
-                                        <Radio value="veg" id="radio-veg" />
+                                    <div>
+                                        <RadioGroup field="mealType">
+                                        {/* <Segment compact></Segment> */}
+                                            <label htmlFor="radio-omnivore">Omnivore</label>
+                                            <Radio value="omni" id="radio-omnivore" />
+                                            <label htmlFor="radio-veg">Vegetarian</label>
+                                            <Radio value="veg" id="radio-veg" />
+                                            <label htmlFor="radio-gf">Gluten Free</label>
+                                            <Radio value="gf" id="radio-gf" />
 
-                                    </RadioGroup>
+                                        </RadioGroup>
+                                    </div>
                                     <label>Please let us know about any allergies <Text field="allergies" /></label>
                                     <button type="submit">Submit</button>
 
