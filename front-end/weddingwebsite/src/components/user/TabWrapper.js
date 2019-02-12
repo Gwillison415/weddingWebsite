@@ -3,7 +3,7 @@ import {Tab} from 'semantic-ui-react';
 import PreliminaryRSVP from "../formTabs/PrelimRsvp"
 import FinalRSVP from "../formTabs/FinalRsvp"
 import MealPref from "../formTabs/MealPref"
-import AccomodationCard from '../cards/AccomodationCard';
+import AccomodationCard from '../forms/AccomodationCard';
 
 
 const TabExampleSecondaryPointing = (props) => {

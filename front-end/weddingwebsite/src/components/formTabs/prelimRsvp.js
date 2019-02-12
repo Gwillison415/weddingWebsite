@@ -1,5 +1,5 @@
 import React from 'react'
-import FormCard from '../cards/mainGuestRSVPForm';
+import FormCard from '../forms/MainGuestRSVPForm';
 import {
   Grid,
   Header,
@@ -7,7 +7,7 @@ import {
   Segment
 } from 'semantic-ui-react';
 import Mccrarywedding from '../../assets/images/Mccrarywedding.jpg';
-import DependentGuestRSVPForm from '../cards/DependentGuestRSVPForm';
+import DependentGuestRSVPForm from '../forms/DependentGuestRSVPForm';
 
 
 const PreliminaryRSVP =(props) =>{

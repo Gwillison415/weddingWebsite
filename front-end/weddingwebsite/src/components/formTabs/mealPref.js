@@ -1,5 +1,5 @@
 import React from 'react'
-import FinalRSVPForm from '../cards/FinalRSVPForm';
+import FinalRSVPForm from '../forms/FinalRSVPForm';
 import {
     Grid,
     Header,
@@ -7,7 +7,7 @@ import {
     Segment
 } from 'semantic-ui-react';
 import dubaiDesert from '../../assets/images/dubaiDesert.jpg';
-import DependentGuestRSVPForm from '../cards/DependentGuestRSVPForm';
+import DependentGuestRSVPForm from '../forms/DependentGuestRSVPForm';
 
 const MealPref = (props) => {
     let { user, dependentGuests } = props;
