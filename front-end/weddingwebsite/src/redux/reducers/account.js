@@ -33,7 +33,7 @@ export const user = (state = {
       };
     case CONST.LOGOUT_FULFILLED:
       localStorage.clear();
-      return {loginStatus: false};
+      return { loginStatus: false };
     case CONST.SIGNUP_FULFILLED:
       return {
         ...state,
@@ -77,18 +77,18 @@ export const user = (state = {
         resetError: `Login Failed. ${action.payload.response.data.error}`,
         ...action.payload
       };
-      // case CONST.GET_DEPENDENT_GUESTS_FULFILLED:
-      //   console.log(" getDependentGuest action payload==", action.data);
-      //   return { ...state,  dependentGuests: action.data.map( guest => guest)};
     case CONST.GET_DEPENDENT_GUESTS_FULFILLED:
       return {
         ...state,
         dependentGuests: action.payload.map(guest => guest)
       };
     case CONST.SAVE_THE_DATE_DEPENDENT_FORM_FULFILLED:
+
+      const dependentGuests = state.dependentGuests.map(dGuest => dGuest.full_name === action.payload.full_name ? action.payload : dGuest)
       return {
-        ...state
-      }; //TODO <FINISH></FINISH>
+        ...state,
+        dependentGuests: dependentGuests,
+      };
     case CONST.GET_DEPENDENT_GUESTS_PENDING:
       return {
         ...state
@@ -123,22 +123,14 @@ export const user = (state = {
     case CONST.MEALS_FORM_FULFILLED:
       return {
         ...state,
-        meals: action.payload.meal_pref,
-        allergies: action.payload.food_allergies
+        meal_pref: action.payload.meal_pref,
+        food_allergies: action.payload.food_allergies
       }
     default:
       return state;
   }
 };
 
-// export const loginRedirect = (state = {}, action) => {
-//   switch (action.type) {
-//     case CONST.REDIRECT:
-//       return { ...state, redirectURL: action.url };
-//     default:
-//       return state;
-//   }
-// };
 export const saveTheDateForm = (state = {}, action) => {
   switch (action.type) {
     case CONST.SAVE_THE_DATE_FORM:

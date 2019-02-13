@@ -20,7 +20,7 @@ class DependentGuestRSVPForm extends Component {
     const formState = this.formApi.getState();
     const {RSVP} = formState.values;
     const {invalid} = formState;
-    let type;
+    let type, displayRSVP;
     if (this.props.isRehersalInvite) {
       type = 'rehersal_rsvp';
     } else if (this.props.isFinalRsvp) {
@@ -28,8 +28,13 @@ class DependentGuestRSVPForm extends Component {
     } else {
       type = 'rsvp'
     }
+        if (RSVP !== 'maybe') {
+          displayRSVP = RSVP ? 'yes' : 'no'
+        } else {
+          displayRSVP = RSVP;
+        }
 
-    if (RSVP && !invalid) {
+    if ( !invalid) {
       let formAnswers = Object.assign({}, {
         RSVP
       }, {
@@ -37,8 +42,10 @@ class DependentGuestRSVPForm extends Component {
       }, {
         mainGuest: this.props.mainGuest
       }, {type: type})
+      console.log('formAnswers', formAnswers);
+      
       this.props.saveTheDateDependentFormSubmit(formAnswers)
-      this.setState({ responseMessage: `Cheers, we have ${this.props.guest.full_name} as ${RSVP}` })
+      this.setState({ responseMessage: `Cheers, we have ${this.props.guest.full_name} as ${displayRSVP}` })
 
     } else {
       console.log('failed handleClick unexpectedly');
@@ -49,17 +56,16 @@ class DependentGuestRSVPForm extends Component {
   }
 
   render() {
-    const {guest, rehersalInvite, isRehersalInvite} = this.props;
+    const { guest, rehersalInvite, isRehersalInvite, isFinalRsvp} = this.props;
     const { responseMessage } = this.state;
 
     return (<Card>
       <Image src={isRehersalInvite
           ? logofamdin
-          : logowedcel}/>
+          : logowedcel} style={{height: 217}}/>
       <Card.Content>
         <Card.Header>
-          So, will {guest.full_name} be able to join us for
-          <u>{rehersalInvite}</u>
+          So, will {guest.full_name} be able to join us for <u>{rehersalInvite}</u>
         </Card.Header>
         <Card.Meta>
           <span className='date'></span>
@@ -72,15 +78,21 @@ class DependentGuestRSVPForm extends Component {
               ({formState}) => (<div >
 
                 <RadioGroup field="RSVP">
-                  <label htmlFor="radio-yes">Most Definitely</label>
-                  <Radio value="yes" id="radio-yes"/> {
-                    renderIf(isRehersalInvite)(<div>
-                      <label htmlFor="radio-maybe">Maybe</label>
-                      <Radio value="maybe" id="radio-maybe"/>
-                    </div>)
-                  }
-                  <label htmlFor="radio-no">Me Thinks Not</label>
-                  <Radio value="no" id="radio-no"/>
+                  <div style={{ display: 'block', margin: "10px 15px" }}>
+
+                    <label htmlFor="radio-yes">Most Definitely</label>
+                    <Radio value={true} id="radio-yes" />
+                  </div>
+                  {!isFinalRsvp ? <div style={{ display: 'block', margin: "10px 15px" }}>
+
+                    <label htmlFor="radio-maybe">Maaaaaaaaybe?</label>
+                    <Radio value={'maybe'} id="radio-maybe" />
+                  </div> : null}
+                  <div style={{ display: 'block', margin: "10px 15px" }}>
+
+                    <label htmlFor="radio-no">Me Thinks Not</label>
+                    <Radio value={false} id="radio-no" />
+                  </div>
 
                 </RadioGroup>
                 <button type="submit">Submit</button>

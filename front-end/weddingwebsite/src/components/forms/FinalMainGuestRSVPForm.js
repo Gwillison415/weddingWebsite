@@ -19,10 +19,10 @@ class FinalRSVPForm extends Component {
     const {RSVP} = formState.values;
     const {invalid} = formState;
 
-    if (RSVP && !invalid ) {
+    if (!invalid ) {
       let formAnswers = Object.assign({}, {RSVP}, {name: this.props.userName})
       this.props.saveTheFinalDateFormSubmit(formAnswers)
-      this.setState({ responseMessage: `Cheers, we have ${this.props.userName} as ${RSVP}` })
+      this.setState({ responseMessage: `Cheers, we have ${this.props.userName} as ${RSVP? "a Yes!": "sadly, a no"}` })
 
     } else {
       console.log('failed handleClick unexpectedly');
@@ -54,11 +54,16 @@ class FinalRSVPForm extends Component {
               ({formState}) => (<div >
 
                   <RadioGroup field="RSVP">
-                    <label htmlFor="radio-yes">Most Definitely</label>
-                    <Radio value="yes" id="radio-yes"/>
-                    <label htmlFor="radio-no">Me Thinks Not</label>
-                    <Radio value="no" id="radio-no"/>
+                  <div style={{ display: 'block', margin: "10px 15px" }}>
 
+                    <label htmlFor="radio-yes">Most Definitely</label>
+                    <Radio value={true} id="radio-yes" />
+                  </div>
+                  <div style={{ display: 'block', margin: "10px 15px" }}>
+
+                    <label htmlFor="radio-no">Me Thinks Not</label>
+                    <Radio value={false} id="radio-no" />
+                  </div>
                   </RadioGroup>
                   <button type="submit">Submit</button>
 

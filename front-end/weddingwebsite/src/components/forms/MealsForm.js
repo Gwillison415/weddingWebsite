@@ -28,7 +28,7 @@ class MealsForm extends Component {
                 formAnswers = Object.assign({}, { mealType }, { mainGuest: this.props.userName }, { allergies}, {fullName: this.state.guest})
                 this.setState({ responseMessage: `Cheers, we have ${this.state.guest} as ${mealType}` })
             } else {
-                formAnswers = Object.assign({}, { mealType }, { main_guest: this.props.userName }, { allergies})
+                formAnswers = Object.assign({}, { mealType }, { mainGuest: this.props.userName }, { allergies})
                 this.setState({ responseMessage: `Cheers, we have ${this.state.guest} as ${mealType}` })
             }
             this.props.saveMealPrefsSubmit(formAnswers)

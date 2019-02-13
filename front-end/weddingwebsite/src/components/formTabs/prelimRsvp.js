@@ -1,12 +1,12 @@
 import React from 'react'
-import FormCard from '../forms/MainGuestRSVPForm';
+import MainGuestRSVPForm from '../forms/MainGuestRSVPForm';
 import {
   Grid,
   Header,
   Image,
   Segment
 } from 'semantic-ui-react';
-import Mccrarywedding from '../../assets/images/Mccrarywedding.jpg';
+import thaiTemple from '../../assets/images/thaiTemple.jpg';
 import DependentGuestRSVPForm from '../forms/DependentGuestRSVPForm';
 
 
@@ -24,13 +24,13 @@ const PreliminaryRSVP =(props) =>{
           </p>
         </Grid.Row>
         <Grid.Row>
-          <Grid.Column floated='left' width={4}>
-            <Image src={Mccrarywedding} style={{'marginLeft': '4rem', 'marginTop': '-2rem'}}>
+          <Grid.Column  width={9}>
+            <Image src={thaiTemple} size='large' >
 
             </Image>
           </Grid.Column>
-          <Grid.Column floated='right' width={9}>
-            <FormCard></FormCard>
+          <Grid.Column width={7}>
+            <MainGuestRSVPForm/>
           </Grid.Column>
         </Grid.Row>
       </Grid>

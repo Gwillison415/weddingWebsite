@@ -1,5 +1,5 @@
 import React from 'react'
-import FinalRSVPForm from '../forms/FinalRSVPForm';
+import FinalRSVPForm from '../forms/FinalMainGuestRSVPForm';
 import {
     Grid,
     Header,
