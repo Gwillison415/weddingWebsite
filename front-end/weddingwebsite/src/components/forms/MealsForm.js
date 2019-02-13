@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { Form, RadioGroup, Radio, Text } from 'informed';
-import { Card, Icon, Image } from 'semantic-ui-react'
+import { Card, Icon, Image, Segment} from 'semantic-ui-react'
 import logostd from '../../assets/images/logostd.png';
 import { saveMealPrefsSubmit } from '../../redux/actions/forms.js';
 import { bindActionCreators } from 'redux';
@@ -13,7 +13,8 @@ class MealsForm extends Component {
         super(props)
         this.state = {
             responseMessage: '',
-            guest: this.props.guest ? this.props.guest : this.props.mainGuest
+            guest: this.props.guest ? this.props.guest : this.props.mainGuest,
+            allergies: ''
         }
     }
     triggerSubmit = () => {
@@ -26,10 +27,10 @@ class MealsForm extends Component {
             let formAnswers;
             if (this.props.guest ) {
                 formAnswers = Object.assign({}, { mealType }, { mainGuest: this.props.userName }, { allergies}, {fullName: this.state.guest})
-                this.setState({ responseMessage: `Cheers, we have ${this.state.guest} as ${mealType}` })
+                this.setState({ responseMessage: `Cheers, we have ${this.state.guest} as ${mealType}`, allergies })
             } else {
                 formAnswers = Object.assign({}, { mealType }, { mainGuest: this.props.userName }, { allergies})
-                this.setState({ responseMessage: `Cheers, we have ${this.state.guest} as ${mealType}` })
+                this.setState({ responseMessage: `Cheers, we have ${this.state.guest} as ${mealType}`, allergies })
             }
             this.props.saveMealPrefsSubmit(formAnswers)
 
@@ -63,24 +64,29 @@ class MealsForm extends Component {
 
                                     <div>
                                         <RadioGroup field="mealType">
-                                        {/* <Segment compact></Segment> */}
+                                         <Segment >
                                             <label htmlFor="radio-omnivore">Omnivore</label>
                                             <Radio value="omni" id="radio-omnivore" />
+                                         </Segment> 
+                                         <Segment >
                                             <label htmlFor="radio-veg">Vegetarian</label>
                                             <Radio value="veg" id="radio-veg" />
+                                         </Segment> 
+                                         <Segment >
                                             <label htmlFor="radio-gf">Gluten Free</label>
                                             <Radio value="gf" id="radio-gf" />
+                                         </Segment> 
 
                                         </RadioGroup>
                                     </div>
                                     <label>Please let us know about any allergies <Text field="allergies" /></label>
-                                    <button type="submit">Submit</button>
+                                    <button style={{margin: 20}} type="submit">Submit</button>
 
 
-                                    <p>{
+                                    <p>Allergies we'll know about:{
                                         formState.values.allergies
                                             ? JSON.stringify(formState.values.allergies, null, 2)
-                                            : ''
+                                            : this.state.allergies
                                     }</p>
                                     <p>{
                                         formState.errors.email

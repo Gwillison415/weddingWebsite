@@ -34,7 +34,7 @@ class FormCard extends Component {
   }
 
   render()  {
-    const { user, isFinalRsvp} = this.props;
+    const { user} = this.props;
     const { responseMessage } = this.state;
 
     return (
