@@ -10,10 +10,6 @@ router.route('/1strsvp/:id?').post((req, res) => {
   const userId = req.params.id;
   const name = req.query.name;
   const rsvpStatus = req.query.rsvp;
-  // knex('main_guests').where('id', userId)
-  // .then(mainGuest =>{
-  //    return knex.('dependent_guests').where()
-  // })
 
   knex('main_guests')
     .where({ full_name: name })
@@ -46,6 +42,7 @@ router.route('/rehersalrsvp').post((req, res) => {
     .update({
       rehersal_rsvp: RSVP
     }, "*")
+    .returning(['rehersal_rsvp'])
     .then(updatedGuest => {
       res.status(200).send(updatedGuest[0])
     })
@@ -56,7 +53,6 @@ router.route('/meals').post((req, res) => {
   console.log('req.body', req.body);
 
   const { fullName, mealType, mainGuest, allergies } = req.body;
-  console.log('fullName, mealType, mainGuest, allergies ', fullName, mealType, mainGuest, allergies);
 
   if (!fullName) {
     //we have a mainGuest and don't need to query the dependent guest table
@@ -78,8 +74,8 @@ router.route('/meals').post((req, res) => {
           meal_pref: mealType,
           food_allergies: allergies
         })
+      .returning(['meal_pref', 'food_allergies'])
       .then(updatedGuest => {
-        console.log('updatedGuest===', updatedGuest[0]);
         // res.status(200).send(updatedGuest[0])
         res.status(200)
       })
@@ -94,14 +90,17 @@ router.route('/arsvp').post((req, res) => {
 
   const { userName, accomodations } = req.body;
   // const accomodations = req.body.accomodations;
-  // console.log('req.body username==', userName, "accomodations==", accomodations);
+  console.log('req.body username==', userName, "accomodations==", accomodations);
   knex('main_guests')
     .where({ full_name: userName })
     .update({
       poll_q1: accomodations
     })
-    .returning(['first_rsvp', 'additional_guest_count', 'rehersal_invite', 'rehersal_rsvp', 'final_rsvp', 'poll_q1'])
+    .returning(['poll_q1'])
     .then(updatedGuest => {
+
+
+      console.log('updatedGuest[0]', updatedGuest[0]);
 
       res.status(200).send(updatedGuest[0])
     })

@@ -116,9 +116,17 @@ export const user = (state = {
         profileIsActive: action.profileIsActive
       };
     case CONST.ACCOMODATIONS_FORM_FULFILLED:
+    console.log('ACCOMODATIONS_FORM fullfilled');
       return {
         ...state,
-        accodmodations: action.payload.poll_q1
+        poll_q1: action.payload.poll_q1
+      };
+    case CONST.ACCOMODATIONS_FORM:
+      console.log('ACCOMODATIONS_FORM', action);
+    
+      return {
+        ...state,
+        poll_q1: action.payload.poll_q1
       };
     case CONST.MEALS_FORM_FULFILLED:
       return {

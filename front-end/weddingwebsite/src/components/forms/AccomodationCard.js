@@ -5,6 +5,7 @@ import {connect} from 'react-redux';
 import {Form, RadioGroup, Radio} from 'informed';
 import {Card, Icon, Image, Grid, Segment} from 'semantic-ui-react'
 import logolodging from '../../assets/images/logolodging.png';
+import gnarv from '../../assets/images/gnarv.jpg';
 import Countdown from '../countdown/CountDown.js';
 import {accomodationsFormSubmit} from '../../redux/actions/forms';
 class AccomodationCard extends Component {
@@ -44,10 +45,8 @@ class AccomodationCard extends Component {
             so we can open the space to others if available!</h2>
         </Grid.Row>
         <Grid.Row>
-          <Grid.Column width={2}>
-            <p>
-              We have your response as {user.accomodations}
-            </p>
+          <Grid.Column width={7}>
+            <Image src={gnarv} />
           </Grid.Column>
           <Grid.Column width={9}>
             <Card>
