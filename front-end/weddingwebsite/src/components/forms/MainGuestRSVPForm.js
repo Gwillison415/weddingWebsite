@@ -19,7 +19,6 @@ class FormCard extends Component {
     console.log('formState====', formState);
     const {RSVP} = formState.values;
     const {invalid} = formState;
-    console.log("RSVP===", RSVP, "Invalid?==", invalid);
 
     if (RSVP && !invalid ) {
       let formAnswers = Object.assign({}, {RSVP}, {name: this.props.userName})
@@ -35,7 +34,7 @@ class FormCard extends Component {
   }
 
   render()  {
-    const {user} = this.props;
+    const { user} = this.props;
     const { responseMessage } = this.state;
 
     return (
@@ -55,16 +54,27 @@ class FormCard extends Component {
               ({formState}) => (<div >
 
                   <RadioGroup field="RSVP">
+                  <div style={{ display: 'block', margin: "10px 15px" }}>
+
                     <label htmlFor="radio-yes">Most Definitely</label>
-                    <Radio value="yes" id="radio-yes"/>
-                    <label htmlFor="radio-maybe">Maybe</label>
-                    <Radio value="maybe" id="radio-maybe"/>
+                    <Radio value={true} id="radio-yes" />
+                  </div>
+                  <div style={{ display: 'block', margin: "10px 15px" }}>
+
+                    <label htmlFor="radio-maybe">Maaaaaaaaybe?</label>
+                    <Radio value={'maybe'} id="radio-maybe" />
+                  </div> 
+                  <div style={{ display: 'block', margin: "10px 15px" }}>
+
                     <label htmlFor="radio-no">Me Thinks Not</label>
-                    <Radio value="no" id="radio-no"/>
+                    <Radio value={false} id="radio-no" />
+                  </div>
 
                   </RadioGroup>
                   <button type="submit">Submit</button>
 
+
+                
 
                 <p>{
                     formState.errors.email
