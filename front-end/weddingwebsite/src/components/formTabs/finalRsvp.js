@@ -38,7 +38,6 @@ const FinalRSVP = (props) => {
       <Grid container stackable verticalAlign='middle'>
         <Grid.Row>
           {dependentGuests.map((guest, idx) => {
-            // console.log("guest", guest);
             if (guest.rsvp !== "no" && guest.rehersal_invite) {
               return (<div key={idx} style={{ display: 'inline-flex' }}>
                 <Grid.Column style={{ padding: '.5em 2em' }} width={6}>

@@ -20,6 +20,8 @@ class UserDash extends Component {
   }
 
   rsvpStatus = (rsvp) => {
+    console.log('rsvp',rsvp);
+    
     if (rsvp === true) {
       return 'Yes!'
     } else if (rsvp === false) {
@@ -30,6 +32,7 @@ class UserDash extends Component {
     }
   }
   lodging = (user) => {
+    // q1 = vip arrival
     switch (user.poll_q1) {
       case 'yes':
         return 'I\'m Sorted!';
@@ -66,7 +69,7 @@ class UserDash extends Component {
 
   }
   render() {
-    const { user, firstRSVP, hasOnsiteInvite, dependentGuests } = this.props;
+    const { user, firstRSVP, finalRSVP, hasOnsiteInvite, dependentGuests, rehersalRSVP } = this.props;
     const { laptopColWidth, mobileColWidth } = this.state;
     const dependentGuestsColWidth = this.assignColWidthDependentGuest(dependentGuests)
 
@@ -81,11 +84,12 @@ class UserDash extends Component {
           </Grid.Column>
           <Grid.Column mobile={mobileColWidth} largeScreen={laptopColWidth}>
             <h5>Final RSVP</h5>
-            <Icon name='envelope square' size='small' >{this.rsvpStatus(user.final_rsvp)} </Icon>
+            <Icon name='envelope square' size='small' />{this.rsvpStatus(finalRSVP)} 
 
           </Grid.Column>
           <Grid.Column mobile={mobileColWidth} largeScreen={laptopColWidth}>
-            <h5>Lodging Status:  <Icon name='suitcase' size='small' > </Icon></h5>
+            <h5>Lodging Status: </h5>
+            <Icon name='suitcase' size='small' > </Icon>
             <p> {this.lodging(user)}</p>
           </Grid.Column>
           <Grid.Column mobile={mobileColWidth} largeScreen={laptopColWidth}>
@@ -94,7 +98,7 @@ class UserDash extends Component {
           </Grid.Column>
           {hasOnsiteInvite ? <Grid.Column mobile={mobileColWidth} largeScreen={laptopColWidth}>
             <h5>Family Dinner</h5>
-            <Icon name='handshake outline' size='small' />
+            <Icon name='handshake outline' size='small' /> {this.rsvpStatus(rehersalRSVP)}
           </Grid.Column> : null}
           {user.additional_guest_count > 0 ? <Grid.Column mobile={mobileColWidth} largeScreen={laptopColWidth}>
             <h5>Additional Guests</h5>
@@ -109,21 +113,30 @@ class UserDash extends Component {
               <h5>{guest.full_name} </h5>
 
               <Grid.Row>
-                <h5> Meal Preference
+                <h5> 
                 <span>
-                    <Icon name='handshake outline' size='small' ></Icon>
-                    {guest.meal_pref}
+                    <Icon name='food' size='small' ></Icon>
+                    Meal Preference: {guest.meal_pref}
                   </span>
                 </h5>
               </Grid.Row>
               {guest.rehersal_invite ? <Grid.Row>
-                <h5>Rehersal RSVP  <span>
+                <h5><span>
                   <Icon name='envelope square' size='small' > </Icon>
                 </span>
-                  {this.rsvpStatus(guest.rehersal_rsvp)}
+                  Rehersal RSVP: {this.rsvpStatus(guest.rehersal_rsvp)}
                 </h5>
 
               </Grid.Row> : null}
+              {guest.food_allergies.length ? <Grid.Row>
+                <h5> <span>
+                  <Icon name='bullhorn' size='small' > </Icon>
+                </span>
+                Allergies: {guest.food_allergies}
+                </h5>
+
+              </Grid.Row> : null}
+
             </Grid.Column>)
           })}
 
@@ -140,6 +153,8 @@ const mapStateToProps = state => ({
   hasRehersalInvite: state.user.rehersal_invite,
   hasOnsiteInvite: state.user.onsite_invite,
   firstRSVP: state.user.first_rsvp,
+  finalRSVP: state.user.final_rsvp,
+  rehersalRSVP: state.user.rehersal_rsvp
 });
 
 export const mapDispatchToProps = dispatch =>

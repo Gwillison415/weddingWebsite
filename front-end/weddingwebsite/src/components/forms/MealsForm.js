@@ -35,11 +35,8 @@ class MealsForm extends Component {
             if (this.props.isMainGuest) {
                 this.props.saveMealPrefsSubmit(formAnswers)
             } else {
-                console.log('saveDependentMealPrefsSubmit',);
-                
                 this.props.saveDependentMealPrefsSubmit(formAnswers)
             }
-
         } else {
             console.log('failed handleClick unexpectedly');
         }
@@ -51,7 +48,6 @@ class MealsForm extends Component {
 
     render() {
         const { guest, responseMessage } = this.state;
-        const { isMainGuest } = this.props;
         return (
 
             <Card>

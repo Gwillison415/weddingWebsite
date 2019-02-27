@@ -1,12 +1,6 @@
 import React from 'react'
-import FinalRSVPForm from '../forms/FinalMainGuestRSVPForm';
-import {
-    Grid,
-    Header,
-    Image,
-    Segment
-} from 'semantic-ui-react';
-import knives from '../../assets/images/knives.png';
+import {Grid} from 'semantic-ui-react';
+
 import MealsForm from '../forms/MealsForm';
 
 const MealPref = (props) => {
@@ -17,7 +11,7 @@ const MealPref = (props) => {
             <Grid.Row>
                 {dependentGuests.map((guest, idx) => {
                     return (<div key={idx} style={{ display: 'inline-flex' }}>
-                        <Grid.Column style={{ padding: '.5em 2em' }} width={6}>
+                        <Grid.Column style={{ padding: '.5em 1em' }} width={6}>
                             <MealsForm guest={guest.full_name} mainGuest={user.full_name} isMainGuest={false}>
                             </MealsForm>
                         </Grid.Column>
@@ -26,7 +20,7 @@ const MealPref = (props) => {
                 })
                 }
                 <div style={{ display: 'inline-flex' }}>
-                    <Grid.Column style={{ padding: '.5em 2em' }} width={6}>
+                    <Grid.Column style={{ padding: '.5em 1em' }} width={6}>
                         <MealsForm mainGuest={user.full_name} isMainGuest={true}>
                         </MealsForm>
                     </Grid.Column>
