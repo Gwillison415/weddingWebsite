@@ -34,23 +34,29 @@ const postAccomodationsFormData = (props) => {
 }
 export const accomodationsFormSubmit = props => ({ type: CONST.ACCOMODATIONS_FORM, payload: postAccomodationsFormData(props) });
 
-const postMealPrefFormData = (props) => {  
+const postMealPrefFormData = (props) => {
   console.log('porps', props);
-  
   return axios.post(`/user/meals/`, props)
     .then(response => response.data)
 }
 export const saveMealPrefsSubmit = props => ({ type: CONST.MEALS_FORM, payload: postMealPrefFormData(props) });
 
+const postDependentMealPrefFormData = (props) => {
+  return axios.post(`/user/dependents/meals/`, props)
+    .then(response => response.data)
+}
+
+export const saveDependentMealPrefsSubmit = props => ({ type: CONST.DEPENDENT_MEALS_FORM, payload: postDependentMealPrefFormData(props) });
+
 export const updateUserPropsFromForms = (props) => ({ type: CONST.UPDATE_USER_INFO, payload: props });
 
 const getDependentGuestData = (name) => {
   let id = localStorage.getItem('userId')
-    return axios.get(`/user/dependents/${id}?name=${name}`)
-      .then(response => {
-        return response.data;
-      })
-      .catch(err => err)
+  return axios.get(`/user/dependents/${id}?name=${name}`)
+    .then(response => {
+      return response.data;
+    })
+    .catch(err => err)
 }
 export const getDependents = props => (
   {

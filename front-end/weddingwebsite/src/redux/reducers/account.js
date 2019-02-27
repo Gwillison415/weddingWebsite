@@ -1,5 +1,8 @@
 import * as CONST from '../constants/constants';
 
+const updateGuest = (allGuestsInState, updatedGuest) => {
+  return allGuestsInState.map(originalGuest => originalGuest.full_name === updatedGuest.full_name ? updatedGuest : originalGuest)
+}
 export const user = (state = {
   loginStatus: false,
   dependentGuests: [],
@@ -8,7 +11,6 @@ export const user = (state = {
   switch (action.type) {
     case CONST.LOGIN_FULFILLED:
       localStorage.setItem('userId', action.payload.id);
-      // firstRsvpStatus = action.payload.first_rsvp
       return {
         ...state,
         loginStatus: true,
@@ -83,13 +85,11 @@ export const user = (state = {
         dependentGuests: action.payload.map(guest => guest)
       };
     case CONST.SAVE_THE_DATE_DEPENDENT_FORM_FULFILLED:
+      const dependentGuestsSTD = updateGuest(state.dependentGuests, action.payload)
 
-      const dependentGuests = state.dependentGuests.map(dGuest => dGuest.full_name === action.payload.full_name ? action.payload : dGuest)
-      console.log('dependentGuests',dependentGuests);
-      
       return {
         ...state,
-        dependentGuests: dependentGuests,
+        dependentGuests: dependentGuestsSTD,
       };
     case CONST.GET_DEPENDENT_GUESTS_PENDING:
       return {
@@ -118,14 +118,14 @@ export const user = (state = {
         profileIsActive: action.profileIsActive
       };
     case CONST.ACCOMODATIONS_FORM_FULFILLED:
-    console.log('ACCOMODATIONS_FORM fullfilled');
+      console.log('ACCOMODATIONS_FORM fullfilled');
       return {
         ...state,
         poll_q1: action.payload.poll_q1
       };
     case CONST.ACCOMODATIONS_FORM:
       console.log('ACCOMODATIONS_FORM', action);
-    
+
       return {
         ...state,
         poll_q1: action.payload.poll_q1
@@ -135,6 +135,15 @@ export const user = (state = {
         ...state,
         meal_pref: action.payload.meal_pref,
         food_allergies: action.payload.food_allergies
+      }
+    case CONST.DEPENDENT_MEALS_FORM_FULFILLED:
+      console.log('state.dependentGuests', state.dependentGuests);
+      const dependentGuests = updateGuest(state.dependentGuests, action.payload)
+      console.log('dependentGuests', dependentGuests);
+
+      return {
+        ...state,
+        dependentGuests: dependentGuests,
       }
     default:
       return state;

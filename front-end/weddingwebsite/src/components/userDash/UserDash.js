@@ -1,51 +1,52 @@
-import React, {Component} from 'react';
-import {bindActionCreators} from 'redux';
-import {connect} from 'react-redux';
-import {updateUserPropsFromForms} from '../../redux/actions/forms';
+import React, { Component } from 'react';
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
+import { updateUserPropsFromForms } from '../../redux/actions/forms';
 
 import {
   Grid,
   Icon,
-  Container
+  Container,
+  Divider
 } from 'semantic-ui-react';
 
 class UserDash extends Component {
-constructor(props){
-  super(props)
-  this.state = {
-    mobileColWidth: 5,
-    laptopColWidth: this.assignColWidth(this.props.user)
+  constructor(props) {
+    super(props)
+    this.state = {
+      mobileColWidth: 5,
+      laptopColWidth: this.assignColWidthMain(this.props.user)
+    }
   }
-}
 
-  finalRsvpStatus = (user) => {
-    if (user.final_rsvp === true) {
+  rsvpStatus = (rsvp) => {
+    if (rsvp === true) {
       return 'Yes!'
-    } else if (user.final_rsvp === false) {
+    } else if (rsvp === false) {
       return 'No'
     }
     else {
       return '???'
     }
   }
-lodging = (user)=>{
-  switch (user.poll_q1) {
-    case 'yes':
-      return 'I\'m Sorted!';
-    case 'yesEasy':
-      return 'Yes + Flexible';
-    case 'no':
-      return 'Working on it';
-    case 'yesBut':
-      return 'It\'s complicated'
-    default:
-      break;
+  lodging = (user) => {
+    switch (user.poll_q1) {
+      case 'yes':
+        return 'I\'m Sorted!';
+      case 'yesEasy':
+        return 'Yes + Flexible';
+      case 'no':
+        return 'Working on it';
+      case 'yesBut':
+        return 'It\'s complicated'
+      default:
+        break;
+    }
   }
-}
-  assignColWidth = (user) => {
+  assignColWidthMain = (user) => {
     const totalCols = 16;
     let cols = 4;
-    if (user.additional_guest_count > 0 ){
+    if (user.additional_guest_count > 0) {
       cols++
     }
     if (user.onsite_invite) {
@@ -53,41 +54,79 @@ lodging = (user)=>{
     }
     return Math.floor(totalCols / cols)
   }
+  assignColWidthDependentGuest = (guests) => {
+
+    let numbGuests = guests.length
+    const totalCols = 16;
+    if (numbGuests > 3) {
+      numbGuests /= 2
+    }
+
+    return Math.floor(totalCols / numbGuests)
+
+  }
   render() {
-    const {user, firstRSVP, hasOnsiteInvite} = this.props;
-    const { laptopColWidth} = this.state;
-    console.log('laptopColWidth', laptopColWidth);
-    
+    const { user, firstRSVP, hasOnsiteInvite, dependentGuests } = this.props;
+    const { laptopColWidth, mobileColWidth } = this.state;
+    const dependentGuestsColWidth = this.assignColWidthDependentGuest(dependentGuests)
+
 
     return (<Container>
       <Grid >
         <Grid.Row>
-          {user.additional_guest_count > 0 ? <Grid.Column mobile={5} largeScreen={laptopColWidth}>
-              <h5>Additional Guests</h5>
-             <Icon name='plus square' size='small' /> {user.additional_guest_count}
-          </Grid.Column> : null}
-          <Grid.Column mobile={5} largeScreen={laptopColWidth}>
+
+          <Grid.Column mobile={mobileColWidth} largeScreen={laptopColWidth}>
             <h5>Initial RSVP</h5>
-             <Icon name='envelope square' size='small' /> {firstRSVP}
+            <Icon name='heart' size='small' /> {firstRSVP}
           </Grid.Column>
-          <Grid.Column mobile={5} largeScreen={laptopColWidth}>
-              <h5>Final RSVP</h5>
-             <Icon name='heart' size='small' >{this.finalRsvpStatus(user)} </Icon>
+          <Grid.Column mobile={mobileColWidth} largeScreen={laptopColWidth}>
+            <h5>Final RSVP</h5>
+            <Icon name='envelope square' size='small' >{this.rsvpStatus(user.final_rsvp)} </Icon>
 
           </Grid.Column>
-          <Grid.Column mobile={5} largeScreen={laptopColWidth}>
-              <h5>Lodging</h5>
-            <Icon name='suitcase' size='small' > </Icon>
-            <h4>{this.lodging(user)}</h4>
+          <Grid.Column mobile={mobileColWidth} largeScreen={laptopColWidth}>
+            <h5>Lodging Status:  <Icon name='suitcase' size='small' > </Icon></h5>
+            <p> {this.lodging(user)}</p>
           </Grid.Column>
-          <Grid.Column mobile={5} largeScreen={laptopColWidth}>
-              <h5>Carpooling</h5>
-             <Icon name='car' size='small' />
+          <Grid.Column mobile={mobileColWidth} largeScreen={laptopColWidth}>
+            <h5>Carpooling</h5>
+            <Icon name='car' size='small' />
           </Grid.Column>
-           {hasOnsiteInvite? <Grid.Column mobile={5} largeScreen={laptopColWidth}>
-              <h5>Family Dinner</h5>
-             <Icon name='handshake outline' size='small' />
-          </Grid.Column> : null} 
+          {hasOnsiteInvite ? <Grid.Column mobile={mobileColWidth} largeScreen={laptopColWidth}>
+            <h5>Family Dinner</h5>
+            <Icon name='handshake outline' size='small' />
+          </Grid.Column> : null}
+          {user.additional_guest_count > 0 ? <Grid.Column mobile={mobileColWidth} largeScreen={laptopColWidth}>
+            <h5>Additional Guests</h5>
+            <Icon name='plus square' size='small' /> {user.additional_guest_count}
+          </Grid.Column> : null}
+
+        </Grid.Row>
+        <Divider></Divider>
+        <Grid.Row>
+          {user.dependentGuests.map((guest, idx) => {
+            return (<Grid.Column key={idx} mobile={8} largeScreen={dependentGuestsColWidth}>
+              <h5>{guest.full_name} </h5>
+
+              <Grid.Row>
+                <h5> Meal Preference
+                <span>
+                    <Icon name='handshake outline' size='small' ></Icon>
+                    {guest.meal_pref}
+                  </span>
+                </h5>
+              </Grid.Row>
+              {guest.rehersal_invite ? <Grid.Row>
+                <h5>Rehersal RSVP  <span>
+                  <Icon name='envelope square' size='small' > </Icon>
+                </span>
+                  {this.rsvpStatus(guest.rehersal_rsvp)}
+                </h5>
+
+              </Grid.Row> : null}
+            </Grid.Column>)
+          })}
+
         </Grid.Row>
       </Grid>
     </Container>)

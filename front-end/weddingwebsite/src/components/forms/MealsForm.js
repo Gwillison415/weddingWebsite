@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { Form, RadioGroup, Radio, Text } from 'informed';
-import { Card, Icon, Image, Segment} from 'semantic-ui-react'
+import { Card, Icon, Image, Segment } from 'semantic-ui-react'
 import logostd from '../../assets/images/logostd.png';
-import { saveMealPrefsSubmit } from '../../redux/actions/forms.js';
+import { saveMealPrefsSubmit, saveDependentMealPrefsSubmit } from '../../redux/actions/forms.js';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import knives from '../../assets/images/knives.png';
@@ -25,14 +25,20 @@ class MealsForm extends Component {
 
         if (mealType && !invalid) {
             let formAnswers;
-            if (this.props.guest ) {
-                formAnswers = Object.assign({}, { mealType }, { mainGuest: this.props.userName }, { allergies}, {fullName: this.state.guest})
+            if (this.props.guest) {
+                formAnswers = Object.assign({}, { mealType }, { allergies }, { fullName: this.state.guest })
                 this.setState({ responseMessage: `Cheers, we have ${this.state.guest} as ${mealType}`, allergies })
             } else {
-                formAnswers = Object.assign({}, { mealType }, { mainGuest: this.props.userName }, { allergies})
+                formAnswers = Object.assign({}, { mealType }, { mainGuest: this.props.userName }, { allergies })
                 this.setState({ responseMessage: `Cheers, we have ${this.state.guest} as ${mealType}`, allergies })
             }
-            this.props.saveMealPrefsSubmit(formAnswers)
+            if (this.props.isMainGuest) {
+                this.props.saveMealPrefsSubmit(formAnswers)
+            } else {
+                console.log('saveDependentMealPrefsSubmit',);
+                
+                this.props.saveDependentMealPrefsSubmit(formAnswers)
+            }
 
         } else {
             console.log('failed handleClick unexpectedly');
@@ -44,8 +50,8 @@ class MealsForm extends Component {
     }
 
     render() {
-        const { guest } = this.state;
-        const { responseMessage } = this.state;
+        const { guest, responseMessage } = this.state;
+        const { isMainGuest } = this.props;
         return (
 
             <Card>
@@ -53,7 +59,7 @@ class MealsForm extends Component {
                 <Card.Content>
                     <Card.Header>SupperTime Savory</Card.Header>
                     <Card.Meta>
-                        <span className='date'>Tell me dearest, what would {guest} like to eat?</span>
+                        <span className='date'>Tell me dearest, what would {guest} like to eat? - on a saturday night - no less!</span>
                     </Card.Meta>
                     <Card.Description>
                         <Form id="radio-form" getApi={this.setFormApi} onSubmit={() => {
@@ -64,23 +70,23 @@ class MealsForm extends Component {
 
                                     <div>
                                         <RadioGroup field="mealType">
-                                         <Segment >
-                                            <label htmlFor="radio-omnivore">Omnivore</label>
-                                            <Radio value="omni" id="radio-omnivore" />
-                                         </Segment> 
-                                         <Segment >
-                                            <label htmlFor="radio-veg">Vegetarian</label>
-                                            <Radio value="veg" id="radio-veg" />
-                                         </Segment> 
-                                         <Segment >
-                                            <label htmlFor="radio-gf">Gluten Free</label>
-                                            <Radio value="gf" id="radio-gf" />
-                                         </Segment> 
+                                            <Segment >
+                                                <label htmlFor="radio-omnivore">Omnivore</label>
+                                                <Radio value="omni" id="radio-omnivore" />
+                                            </Segment>
+                                            <Segment >
+                                                <label htmlFor="radio-veg">Vegetarian</label>
+                                                <Radio value="veg" id="radio-veg" />
+                                            </Segment>
+                                            <Segment >
+                                                <label htmlFor="radio-gf">Gluten Free</label>
+                                                <Radio value="gf" id="radio-gf" />
+                                            </Segment>
 
                                         </RadioGroup>
                                     </div>
-                                    <label>Please let us know about any allergies <Text field="allergies" placeholder={'Children Whining, DJT'}/></label>
-                                    <button style={{margin: 20}} type="submit">Submit</button>
+                                    <label>Please let us know about any allergies <Text field="allergies" placeholder={'Children Whining, DJT'} /></label>
+                                    <button style={{ margin: 20 }} type="submit">Submit</button>
 
 
                                     <p>Allergies we'll know about:{
@@ -127,5 +133,6 @@ const mapStateToProps = state => ({
 export const mapDispatchToProps = dispatch =>
     bindActionCreators({
         saveMealPrefsSubmit,
+        saveDependentMealPrefsSubmit
     }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(MealsForm);

@@ -30,7 +30,7 @@ router.route('/2ndrsvp').post((req, res) => {
     .update({
       final_rsvp: RSVP
     })
-  .returning(['final_rsvp'])
+    .returning(['final_rsvp'])
     .then(updatedGuest => {
       res.status(200).send(updatedGuest[0])
     })
@@ -52,36 +52,33 @@ router.route('/rehersalrsvp').post((req, res) => {
 
 router.route('/meals').post((req, res) => {
   const knex = require('../../knex.js')
-  const { fullName, mealType, mainGuest, allergies } = req.body;
+  const { mealType, mainGuest, allergies } = req.body;
+  knex('main_guests')
+    .where({ full_name: mainGuest })
+    .update({
+      meal_pref: mealType,
+      food_allergies: allergies
+    }, '*')
+    .then(updatedGuest => {
+      res.status(200).send(updatedGuest[0])
+    })
 
-  if (!fullName) {
-    //we have a mainGuest and don't need to query the dependent guest table
-    knex('main_guests')
-      .where({ full_name: mainGuest })
-      .update({
+})
+
+router.route('/dependents/meals').post((req, res) => {
+  const knex = require('../../knex.js')
+  const { fullName, mealType, allergies } = req.body;
+  knex('dependent_guests')
+    .where({ full_name: fullName })
+    .update(
+      {
         meal_pref: mealType,
         food_allergies: allergies
-      })
-      .returning(['meal_pref', 'food_allergies'])
-      .then(updatedGuest => {
-        res.status(200).send(updatedGuest[0])
-      })
-  } else {
-    knex('dependent_guests')
-      .where({ full_name: fullName })
-      .update(
-        {
-          meal_pref: mealType,
-          food_allergies: allergies
-        })
-      .returning(['meal_pref', 'food_allergies'])
-      .then(updatedGuest => {
-        console.log('updatedGuest', updatedGuest[0]);
-        
-        res.status(200)
-      })
-
-  }
+      }, '*')
+    .then(updatedGuest => {
+      console.log('updated dependent  Guest', updatedGuest[0]);
+      res.status(200).send(updatedGuest[0])
+    })
 })
 router.route('/arsvp').post((req, res) => {
   const knex = require('../../knex.js')
@@ -107,7 +104,7 @@ router.route('/drsvp/dependents').post((req, res) => {
   const rsvpStatus = req.body.rsvp;
   const rehersalInvite = req.body.rehersalInvite ? req.body.rehersalInvite : null;
   console.log('rsvpStatus', rsvpStatus, 'rsvpType', rsvpType);
-  
+
   if (rsvpType == 'rsvp') { // initial
     knex('dependent_guests')
       .where({ full_name: dependentGuest, main_guest: mainGuest })
@@ -115,7 +112,7 @@ router.route('/drsvp/dependents').post((req, res) => {
         rsvp: rsvpStatus
       })
       .returning(['rsvp'])
-      .then(updatedGuest => {        
+      .then(updatedGuest => {
         res.status(200).send(updatedGuest[0])
       })
   } else if (rsvpType == 'final_rsvp') {
@@ -138,7 +135,7 @@ router.route('/drsvp/dependents').post((req, res) => {
       .then(updatedGuest => {
         // updatedGuest[0]['dependentGuestName']= dependentGuest
         console.log('updatedGuest[0]', updatedGuest[0]);
-        
+
         res.status(200).send(updatedGuest[0])
       })
   }

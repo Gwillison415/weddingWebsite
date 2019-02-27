@@ -26,14 +26,14 @@ const MealPref = (props) => {
                 })
                 }
                 <div style={{ display: 'inline-flex' }}>
-                 <Grid.Column style={{ padding: '.5em 2em' }} width={6}>
-                    <MealsForm mainGuest={user.full_name} isMainGuest={true}>
-                    </MealsForm>
-                </Grid.Column>
+                    <Grid.Column style={{ padding: '.5em 2em' }} width={6}>
+                        <MealsForm mainGuest={user.full_name} isMainGuest={true}>
+                        </MealsForm>
+                    </Grid.Column>
                 </div>
 
             </Grid.Row>
         </Grid>
-)
+    )
 }
 export default MealPref;
