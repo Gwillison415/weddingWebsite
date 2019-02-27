@@ -85,6 +85,8 @@ export const user = (state = {
     case CONST.SAVE_THE_DATE_DEPENDENT_FORM_FULFILLED:
 
       const dependentGuests = state.dependentGuests.map(dGuest => dGuest.full_name === action.payload.full_name ? action.payload : dGuest)
+      console.log('dependentGuests',dependentGuests);
+      
       return {
         ...state,
         dependentGuests: dependentGuests,

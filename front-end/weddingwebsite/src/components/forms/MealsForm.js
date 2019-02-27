@@ -79,7 +79,7 @@ class MealsForm extends Component {
 
                                         </RadioGroup>
                                     </div>
-                                    <label>Please let us know about any allergies <Text field="allergies" /></label>
+                                    <label>Please let us know about any allergies <Text field="allergies" placeholder={'Children Whining, DJT'}/></label>
                                     <button style={{margin: 20}} type="submit">Submit</button>
 
 

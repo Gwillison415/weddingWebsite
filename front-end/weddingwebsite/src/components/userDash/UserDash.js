@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-
 import {bindActionCreators} from 'redux';
 import {connect} from 'react-redux';
 import {updateUserPropsFromForms} from '../../redux/actions/forms';
@@ -29,7 +28,20 @@ constructor(props){
       return '???'
     }
   }
-
+lodging = (user)=>{
+  switch (user.poll_q1) {
+    case 'yes':
+      return 'I\'m Sorted!';
+    case 'yesEasy':
+      return 'Yes + Flexible';
+    case 'no':
+      return 'Working on it';
+    case 'yesBut':
+      return 'It\'s complicated'
+    default:
+      break;
+  }
+}
   assignColWidth = (user) => {
     const totalCols = 16;
     let cols = 4;
@@ -65,7 +77,8 @@ constructor(props){
           </Grid.Column>
           <Grid.Column mobile={5} largeScreen={laptopColWidth}>
               <h5>Lodging</h5>
-             <Icon name='suitcase' size='small' />
+            <Icon name='suitcase' size='small' > </Icon>
+            <h4>{this.lodging(user)}</h4>
           </Grid.Column>
           <Grid.Column mobile={5} largeScreen={laptopColWidth}>
               <h5>Carpooling</h5>

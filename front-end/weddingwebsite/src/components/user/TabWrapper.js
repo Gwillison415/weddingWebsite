@@ -17,7 +17,7 @@ const TabExampleSecondaryPointing = (props) => {
       <FinalRSVP dependentGuests={dependentGuests} user={user}/>
     </Tab.Pane> },
     {
-      menuItem: 'Meal Preferences & allergies', render: () => <Tab.Pane attached={false}>
+      menuItem: 'Meal Preferences', render: () => <Tab.Pane attached={false}>
         <MealPref dependentGuests={dependentGuests} user={user} />
       </Tab.Pane>
     },

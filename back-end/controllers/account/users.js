@@ -76,6 +76,8 @@ router.route('/meals').post((req, res) => {
         })
       .returning(['meal_pref', 'food_allergies'])
       .then(updatedGuest => {
+        console.log('updatedGuest', updatedGuest[0]);
+        
         res.status(200)
       })
 
@@ -120,7 +122,7 @@ router.route('/drsvp/dependents').post((req, res) => {
     knex('dependent_guests')
       .where({ full_name: dependentGuest, main_guest: mainGuest })
       .update({
-        final_rsvp: rsvpStatus == 'no'? false : true
+        final_rsvp: rsvpStatus
       })
       .returning(['final_rsvp'])
       .then(updatedGuest => {
@@ -131,9 +133,12 @@ router.route('/drsvp/dependents').post((req, res) => {
       .where({ full_name: dependentGuest, main_guest: mainGuest })
       .update({
         rehersal_rsvp: rsvpStatus
-      })
-      .returning(['rehersal_rsvp'])
+      }, '*')
+      // .returning(['rehersal_rsvp'])
       .then(updatedGuest => {
+        // updatedGuest[0]['dependentGuestName']= dependentGuest
+        console.log('updatedGuest[0]', updatedGuest[0]);
+        
         res.status(200).send(updatedGuest[0])
       })
   }

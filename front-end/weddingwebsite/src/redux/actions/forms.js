@@ -35,6 +35,8 @@ const postAccomodationsFormData = (props) => {
 export const accomodationsFormSubmit = props => ({ type: CONST.ACCOMODATIONS_FORM, payload: postAccomodationsFormData(props) });
 
 const postMealPrefFormData = (props) => {  
+  console.log('porps', props);
+  
   return axios.post(`/user/meals/`, props)
     .then(response => response.data)
 }
