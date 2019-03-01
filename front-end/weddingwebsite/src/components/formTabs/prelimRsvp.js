@@ -37,8 +37,7 @@ const PreliminaryRSVP =(props) =>{
       <Grid container stackable verticalAlign='middle'>
       {dependentGuests.length ? <Grid.Row > <Grid.Column textAlign='center'>But Wait? What about the other people we know, that you know?</Grid.Column> </Grid.Row> : null }
       <Grid.Row>
-        {dependentGuests.map((guest, idx) =>
-          {console.log("guest", guest);
+        {dependentGuests.map((guest, idx) =>{
           if (guest.rehersal_invite) {
             return (<div key={idx} style={{display: 'inline-flex'}}>
               <Grid.Column style={{ padding: '.5em 2em' }} width={6}>

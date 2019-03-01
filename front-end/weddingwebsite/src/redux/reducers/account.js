@@ -272,7 +272,6 @@ export const saveTheDateForm = (state = {}, action) => {
         rehersal_rsvp: action.payload.rehersal_rsvp
       };
     case CONST.SAVE_THE_DATE_FORM_FULFILLED:
-      console.log(action.payload);
       return {
         ...state,
         first_rsvp: action.payload.first_rsvp,
