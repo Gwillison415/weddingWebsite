@@ -20,8 +20,6 @@ class UserDash extends Component {
   }
 
   rsvpStatus = (rsvp) => {
-    console.log('rsvp',rsvp);
-    
     if (rsvp === true) {
       return 'Yes!'
     } else if (rsvp === false) {
@@ -58,49 +56,43 @@ class UserDash extends Component {
     return Math.floor(totalCols / cols)
   }
   assignColWidthDependentGuest = (guests) => {
-
     let numbGuests = guests.length
     const totalCols = 16;
-    if (numbGuests > 3) {
+    if (numbGuests > 4) {
       numbGuests /= 2
     }
-
-    return Math.floor(totalCols / numbGuests)
-
+    return Math.floor(totalCols / numbGuests);
   }
   render() {
     const { user, firstRSVP, finalRSVP, hasOnsiteInvite, dependentGuests, rehersalRSVP } = this.props;
     const { laptopColWidth, mobileColWidth } = this.state;
     const dependentGuestsColWidth = this.assignColWidthDependentGuest(dependentGuests)
 
-
     return (<Container>
-      <Grid >
+      <Grid centered>
         <Grid.Row>
-
-          <Grid.Column mobile={mobileColWidth} largeScreen={laptopColWidth}>
+          <Grid.Column mobile={mobileColWidth} computer={laptopColWidth}>
             <h5>Initial RSVP</h5>
             <Icon name='heart' size='small' /> {firstRSVP}
           </Grid.Column>
-          <Grid.Column mobile={mobileColWidth} largeScreen={laptopColWidth}>
+          <Grid.Column mobile={mobileColWidth} computer={laptopColWidth}>
             <h5>Final RSVP</h5>
-            <Icon name='envelope square' size='small' />{this.rsvpStatus(finalRSVP)} 
-
+            <Icon name='envelope square' size='small' />{this.rsvpStatus(finalRSVP)}
           </Grid.Column>
-          <Grid.Column mobile={mobileColWidth} largeScreen={laptopColWidth}>
+          <Grid.Column mobile={mobileColWidth} computer={laptopColWidth}>
             <h5>Lodging Status: </h5>
-            <Icon name='suitcase' size='small' > </Icon>
-            <p> {this.lodging(user)}</p>
+            <Icon name='suitcase' size='small' />
+            {this.lodging(user)}
           </Grid.Column>
-          <Grid.Column mobile={mobileColWidth} largeScreen={laptopColWidth}>
+          <Grid.Column mobile={mobileColWidth} computer={laptopColWidth}>
             <h5>Carpooling</h5>
             <Icon name='car' size='small' />
           </Grid.Column>
-          {hasOnsiteInvite ? <Grid.Column mobile={mobileColWidth} largeScreen={laptopColWidth}>
+          {hasOnsiteInvite ? <Grid.Column mobile={mobileColWidth} computer={laptopColWidth}>
             <h5>Family Dinner</h5>
             <Icon name='handshake outline' size='small' /> {this.rsvpStatus(rehersalRSVP)}
           </Grid.Column> : null}
-          {user.additional_guest_count > 0 ? <Grid.Column mobile={mobileColWidth} largeScreen={laptopColWidth}>
+          {user.additional_guest_count > 0 ? <Grid.Column mobile={mobileColWidth} computer={laptopColWidth}>
             <h5>Additional Guests</h5>
             <Icon name='plus square' size='small' /> {user.additional_guest_count}
           </Grid.Column> : null}
@@ -109,12 +101,12 @@ class UserDash extends Component {
         <Divider></Divider>
         <Grid.Row>
           {user.dependentGuests.map((guest, idx) => {
-            return (<Grid.Column key={idx} mobile={8} largeScreen={dependentGuestsColWidth}>
+            return (<Grid.Column key={idx} mobile={8} computer={dependentGuestsColWidth}>
               <h5>{guest.full_name} </h5>
 
               <Grid.Row>
-                <h5> 
-                <span>
+                <h5>
+                  <span>
                     <Icon name='food' size='small' ></Icon>
                     Meal Preference: {guest.meal_pref}
                   </span>
@@ -132,7 +124,7 @@ class UserDash extends Component {
                 <h5> <span>
                   <Icon name='bullhorn' size='small' > </Icon>
                 </span>
-                Allergies: {guest.food_allergies}
+                  Allergies: {guest.food_allergies}
                 </h5>
 
               </Grid.Row> : null}

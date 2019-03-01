@@ -23,14 +23,17 @@ const FinalRSVP = (props) => {
           </p>
         </Grid.Row>
         <Grid.Row>
-          <Grid.Column floated='left' width={9}>
+          {/* <Grid.Column floated='left' width={9}>
             <Image src={dubaiDesert} size='huge'>
 
             </Image>
-          </Grid.Column>
+          </Grid.Column> */}
           <Grid.Column floated='right' width={7}>
-            <FinalRSVPForm />
+            <FinalRSVPForm isFinalRsvp={true} />
           </Grid.Column>
+          {user.rehersal_invite? <Grid.Column floated='left' width={7}>
+            <FinalRSVPForm isRehersalInvite={true} />
+          </Grid.Column>:null}
         </Grid.Row>
       </Grid>
     </Segment>

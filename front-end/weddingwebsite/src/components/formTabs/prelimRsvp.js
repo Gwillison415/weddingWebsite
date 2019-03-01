@@ -25,9 +25,7 @@ const PreliminaryRSVP =(props) =>{
         </Grid.Row>
         <Grid.Row>
           <Grid.Column  width={9}>
-            <Image src={thaiTemple} size='large' >
-
-            </Image>
+            <Image src={thaiTemple} size='large' />
           </Grid.Column>
           <Grid.Column width={7}>
             <MainGuestRSVPForm/>

@@ -12,7 +12,8 @@ class AccomodationCard extends Component {
   constructor(props){
     super(props)
     this.state ={
-      responseMessage: ''
+      responseMessage: '',
+      radioStyle: { height: 20, width: 20, margin: 5 }
     }
   }
 
@@ -34,7 +35,7 @@ class AccomodationCard extends Component {
   }
   render() {
     const {user} = this.props;
-    const { responseMessage} = this.state;
+    const { responseMessage, radioStyle} = this.state;
     return (<div>
       <Grid>
         <Grid.Row>
@@ -66,19 +67,19 @@ class AccomodationCard extends Component {
                         <RadioGroup field="accomodations">
                            <Segment compact>
                           <label htmlFor="radio-no">No, I will make other accommodations</label>
-                          <Radio value="no" id="radio-no"/>
+                          <Radio value="no" id="radio-no" style={radioStyle}/>
                           </Segment>
                           <Segment compact>
                           <label htmlFor="radio-yes">Yes! And I am cool with what you offered.</label>
-                          <Radio value="yes" id="radio-yes"/>
+                          <Radio value="yes" id="radio-yes" style={radioStyle}/>
                         </Segment>
                           <Segment compact>
                           <label htmlFor="radio-yesEasy">Yes! And I am fine with where ever you need to put me.</label>
-                          <Radio value="yesEasy" id="radio-yesEasy"/>
+                          <Radio value="yesEasy" id="radio-yesEasy" style={radioStyle}/>
                           </Segment>
                            <Segment compact>
                           <label htmlFor="radio-yesBut">Yes, But I would prefer a different accommodation. (please e-mail us directly) </label>
-                          <Radio value="yesBut" id="radio-yesBut"/>
+                          <Radio value="yesBut" id="radio-yesBut" style={radioStyle}/>
                           </Segment>
                         </RadioGroup>
                         <button type="submit">Submit</button>

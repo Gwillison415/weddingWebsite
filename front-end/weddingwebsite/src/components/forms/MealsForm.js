@@ -14,7 +14,8 @@ class MealsForm extends Component {
         this.state = {
             responseMessage: '',
             guest: this.props.guest ? this.props.guest : this.props.mainGuest,
-            allergies: ''
+            allergies: '',
+            radioStyle: { height: 20, width: 20, margin: 5 }
         }
     }
     triggerSubmit = () => {
@@ -47,7 +48,7 @@ class MealsForm extends Component {
     }
 
     render() {
-        const { guest, responseMessage } = this.state;
+        const { guest, responseMessage, radioStyle } = this.state;
         return (
 
             <Card>
@@ -68,15 +69,15 @@ class MealsForm extends Component {
                                         <RadioGroup field="mealType">
                                             <Segment >
                                                 <label htmlFor="radio-omnivore">Omnivore</label>
-                                                <Radio value="omni" id="radio-omnivore" />
+                                                <Radio value="omni" id="radio-omnivore" style={radioStyle}/>
                                             </Segment>
                                             <Segment >
                                                 <label htmlFor="radio-veg">Vegetarian</label>
-                                                <Radio value="veg" id="radio-veg" />
+                                                <Radio value="veg" id="radio-veg" style={radioStyle}/>
                                             </Segment>
                                             <Segment >
                                                 <label htmlFor="radio-gf">Gluten Free</label>
-                                                <Radio value="gf" id="radio-gf" />
+                                                <Radio value="gf" id="radio-gf" style={radioStyle}/>
                                             </Segment>
 
                                         </RadioGroup>

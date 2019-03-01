@@ -70,7 +70,7 @@ export const user = (state = {
     case CONST.SAVE_THE_FINAL_DATE_FORM_FULFILLED:
       return {
         ...state,
-        final_rsvp: action.payload.final_rsvp
+        ...action.payload,
       };
     case CONST.RESET_PASSWORD_REJECTED:
       return {
@@ -82,25 +82,15 @@ export const user = (state = {
     case CONST.GET_DEPENDENT_GUESTS_FULFILLED:
       return {
         ...state,
-        dependentGuests: action.payload.map(guest => guest)
+        dependentGuests: [...action.payload]
       };
     case CONST.SAVE_THE_DATE_DEPENDENT_FORM_FULFILLED:
       const dependentGuestsSTD = updateGuest(state.dependentGuests, action.payload)
-
       return {
         ...state,
         dependentGuests: dependentGuestsSTD,
       };
-    case CONST.GET_DEPENDENT_GUESTS_PENDING:
-      return {
-        ...state
-      };
     case CONST.GET_DEPENDENT_GUESTS:
-      return {
-        ...state,
-        dependentGuests: action.data
-      };
-    case "GET_DEPENDENT_GUESTS_2":
       return {
         ...state,
         dependentGuests: action.data
@@ -118,17 +108,21 @@ export const user = (state = {
         profileIsActive: action.profileIsActive
       };
     case CONST.ACCOMODATIONS_FORM_FULFILLED:
-      console.log('ACCOMODATIONS_FORM fullfilled');
       return {
         ...state,
         poll_q1: action.payload.poll_q1
       };
     case CONST.ACCOMODATIONS_FORM:
-      console.log('ACCOMODATIONS_FORM', action);
-
       return {
         ...state,
         poll_q1: action.payload.poll_q1
+      };
+    case CONST.SAVE_THE_REHEARSAL_DATE_FORM_FULFILLED:
+      console.log('SAVE_THE_REHEARSAL_DATE_FORM payload', action);
+
+      return {
+        ...state,
+        ...action.payload,
       };
     case CONST.MEALS_FORM_FULFILLED:
       return {
@@ -170,14 +164,6 @@ export const saveTheDateForm = (state = {}, action) => {
         rehersal_invite: action.payload.rehersal_invite,
         rehersal_rsvp: action.payload.rehersal_rsvp
       };
-    default:
-      return state;
-  }
-};
-
-export const accomodationsForm = (state = {}, action) => {
-  switch (action.type) {
-
     default:
       return state;
   }

@@ -21,12 +21,18 @@ export const saveTheDateDependentFormSubmit = (props) => {
   return { type: CONST.SAVE_THE_DATE_DEPENDENT_FORM, payload: saveDependentDateInfo(props) }
 };
 
-const finalSaveDateInfo = (props) => {
-  return axios.post(`/user/2ndrsvp`, props).then(response => {
-    return response.data
-  })
+const saveMainRsvp = (props) => {
+  return axios.post(`/user/2ndrsvp`, props).then(response => response.data)
 }
-export const saveTheFinalDateFormSubmit = (props) => ({ type: CONST.SAVE_THE_FINAL_DATE_FORM, payload: finalSaveDateInfo(props) })
+export const saveMainRsvpFormSubmit = (props) => {
+  console.log('props', props);
+  
+  if (props.type === "final_rsvp") {
+    return ({ type: CONST.SAVE_THE_FINAL_DATE_FORM, payload: saveMainRsvp(props) })
+  } else {
+    return ({ type: CONST.SAVE_THE_REHEARSAL_DATE_FORM, payload: saveMainRsvp(props) })
+  }
+}
 
 const postAccomodationsFormData = (props) => {
   return axios.post(`/user/arsvp/`, props)
@@ -35,7 +41,6 @@ const postAccomodationsFormData = (props) => {
 export const accomodationsFormSubmit = props => ({ type: CONST.ACCOMODATIONS_FORM, payload: postAccomodationsFormData(props) });
 
 const postMealPrefFormData = (props) => {
-  console.log('porps', props);
   return axios.post(`/user/meals/`, props)
     .then(response => response.data)
 }

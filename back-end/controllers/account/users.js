@@ -17,38 +17,52 @@ router.route('/1strsvp/:id?').post((req, res) => {
       first_rsvp: rsvpStatus
     })
     .returning(['first_rsvp'])
-    .then(updatedGuest => {
-      res.status(200).send(updatedGuest[0])
+    .then(updatedField => {
+      res.status(200).send(updatedField[0])
     })
 });
 router.route('/2ndrsvp').post((req, res) => {
   const knex = require('../../knex.js')
-  const { name, RSVP } = req.body;
+  const { name, RSVP, type } = req.body;
+  if (type === 'final_rsvp') {
+    knex('main_guests')
+      .where({ full_name: name })
+      .update({
+        final_rsvp: RSVP
+      })
+      .returning(['final_rsvp'])
+      .then(updatedField => {
+        res.status(200).send(updatedField[0])
+      })
 
-  knex('main_guests')
-    .where({ full_name: name })
-    .update({
-      final_rsvp: RSVP
-    })
-    .returning(['final_rsvp'])
-    .then(updatedGuest => {
-      res.status(200).send(updatedGuest[0])
-    })
+  } else if (type === 'rehersal_rsvp') {
+    knex('main_guests')
+      .where({ full_name: name })
+      .update({
+        rehersal_rsvp: RSVP
+      })
+      .returning(['rehersal_rsvp'])
+      .then(updatedField => {        
+        res.status(200).send(updatedField[0])
+      })
+  } else {
+    res.status(403).send('rsvp type not found')
+  }
 });
-router.route('/rehersalrsvp').post((req, res) => {
-  const knex = require('../../knex.js')
-  const { name, RSVP } = req.body;
+// router.route('/rehersalrsvp').post((req, res) => {
+//   const knex = require('../../knex.js')
+//   const { name, RSVP } = req.body;
 
-  knex('main_guests')
-    .where({ full_name: name })
-    .update({
-      rehersal_rsvp: RSVP
-    })
-    .returning(['rehersal_rsvp'])
-    .then(updatedGuest => {
-      res.status(200).send(updatedGuest[0])
-    })
-});
+//   knex('main_guests')
+//     .where({ full_name: name })
+//     .update({
+//       rehersal_rsvp: RSVP
+//     })
+//     .returning(['rehersal_rsvp'])
+//     .then(updatedField => {
+//       res.status(200).send(updatedField[0])
+//     })
+// });
 
 router.route('/meals').post((req, res) => {
   const knex = require('../../knex.js')
@@ -90,8 +104,8 @@ router.route('/arsvp').post((req, res) => {
       poll_q1: accomodations
     })
     .returning(['poll_q1'])
-    .then(updatedGuest => {
-      res.status(200).send(updatedGuest[0])
+    .then(updatedField => {
+      res.status(200).send(updatedField[0])
     })
 
 })
