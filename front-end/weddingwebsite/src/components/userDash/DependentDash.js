@@ -30,7 +30,7 @@ export const DependentGuestRow = ({ guests, dependentGuestsColWidth, rsvpStatus 
                     <h5><span>
                         <Icon name='envelope square' size='small' > </Icon>
                     </span>
-                        Rehersal RSVP: {rsvpStatus(guest.rehersal_rsvp)}
+                        Rehersal Dinner: {rsvpStatus(guest.rehersal_rsvp)}
                     </h5>
 
                 </Grid.Row> : null}
@@ -38,7 +38,7 @@ export const DependentGuestRow = ({ guests, dependentGuestsColWidth, rsvpStatus 
                     <h5> <span>
                         <Icon name='bullhorn' size='small' > </Icon>
                     </span>
-                        Allergies: {guest.food_allergies}
+                        Allergic to: {guest.food_allergies}
                     </h5>
 
                 </Grid.Row> : null}
