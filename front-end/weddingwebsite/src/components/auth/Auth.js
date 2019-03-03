@@ -1,12 +1,12 @@
-import React, {Component} from 'react';
-import {Route, Switch} from 'react-router-dom';
-import {connect} from 'react-redux';
-import {withRouter} from 'react-router-dom';
+import React, { Component } from 'react';
+import { Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import User from '../user/User';
-import {bindActionCreators} from 'redux'
-import {setRedirectUrl} from '../../redux/actions/login';
+import { bindActionCreators } from 'redux'
+import { setRedirectUrl } from '../../redux/actions/login';
 import HomepageLayout from '../home/HomepageLayout';
-import {AccomodationsInfo} from '../info/AccomodationsInfo';
+import { AccomodationsInfo } from '../info/AccomodationsInfo';
 
 class Auth extends Component {
 
@@ -19,9 +19,9 @@ class Auth extends Component {
   render() {
     if (this.props.loginStatus) {
       return (<Switch>
-                <Route path="/user" component={User}/>
-                <Route path="/info/accomodations" component={withRouter(AccomodationsInfo)} />
-              </Switch>);
+        <Route path="/user" component={User} />
+        <Route path="/info/accomodations" component={withRouter(AccomodationsInfo)} />
+      </Switch>);
     }
     else {
       return (
