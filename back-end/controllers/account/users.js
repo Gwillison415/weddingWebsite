@@ -120,8 +120,7 @@ router.route('/drsvp/dependents').post((req, res) => {
       .where({ full_name: dependentGuest, main_guest: mainGuest })
       .update({
         rsvp: rsvpStatus
-      })
-      .returning(['rsvp'])
+      }, '*')
       .then(updatedGuest => {
         res.status(200).send(updatedGuest[0])
       })
@@ -130,8 +129,7 @@ router.route('/drsvp/dependents').post((req, res) => {
       .where({ full_name: dependentGuest, main_guest: mainGuest })
       .update({
         final_rsvp: rsvpStatus
-      })
-      .returning(['final_rsvp'])
+      }, '*')
       .then(updatedGuest => {
         res.status(200).send(updatedGuest[0])
       })
@@ -141,7 +139,7 @@ router.route('/drsvp/dependents').post((req, res) => {
       .update({
         rehersal_rsvp: rsvpStatus
       }, '*')
-      // .returning(['rehersal_rsvp'])
+
       .then(updatedGuest => {
         res.status(200).send(updatedGuest[0])
       })
