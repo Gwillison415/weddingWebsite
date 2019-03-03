@@ -44,18 +44,18 @@ const FinalRSVP = (props) => {
             if (guest.rsvp !== "no" && guest.rehersal_invite) {
               return (<div key={idx} style={{ display: 'inline-flex' }}>
                 <Grid.Column style={{ padding: '.5em 2em' }} width={6}>
-                  <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={false} isFinalRsvp={true} rehersalInvite={'  the celebration jully 13th?'}>
+                  <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={false} isFinalRsvp={true} rehersalInvite={'  the celebration July 13th?'}>
                   </DependentGuestRSVPForm>
                 </Grid.Column>
                 <Grid.Column style={{ padding: '.5em 2em' }} width={6}>
-                  <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={true} isFinalRsvp={true} rehersalInvite={'  family dinner Jull 11th?'}  >
+                  <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={true} isFinalRsvp={true} rehersalInvite={'  family dinner July 11th?'}  >
                   </DependentGuestRSVPForm>
                 </Grid.Column>
               </div>)
             } else {
               return (<div key={idx} style={{ display: 'inline-flex' }}>
                 <Grid.Column style={{ padding: '.5em 2em' }} width={6}>
-                  <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={true} isFinalRsvp={true} rehersalInvite={'the celebration jully 13th?'}>
+                  <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={true} isFinalRsvp={true} rehersalInvite={'the celebration July 13th?'}>
                   </DependentGuestRSVPForm>
                 </Grid.Column>
               </div>)
