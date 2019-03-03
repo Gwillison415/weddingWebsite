@@ -11,6 +11,7 @@ import DependentGuestRSVPForm from '../forms/DependentGuestRSVPForm';
 
 const FinalRSVP = (props) => {
   let { user, dependentGuests } = props;
+  
   return (<div>
     <Segment style={{ padding: '2em 0em' }} vertical>
       <Grid container stackable verticalAlign='middle'>

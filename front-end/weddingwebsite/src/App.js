@@ -15,6 +15,7 @@ class App extends Component {
 
   render() {
     const { user} = this.props;
+
     return (
       <div className="App">
         <Container>

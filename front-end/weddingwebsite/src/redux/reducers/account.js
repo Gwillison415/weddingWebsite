@@ -118,7 +118,6 @@ export const user = (state = {
         poll_q1: action.payload.poll_q1
       };
     case CONST.SAVE_THE_REHEARSAL_DATE_FORM_FULFILLED:
-      console.log('SAVE_THE_REHEARSAL_DATE_FORM payload', action);
 
       return {
         ...state,
@@ -127,14 +126,10 @@ export const user = (state = {
     case CONST.MEALS_FORM_FULFILLED:
       return {
         ...state,
-        meal_pref: action.payload.meal_pref,
-        food_allergies: action.payload.food_allergies
+        ...action.payload
       }
     case CONST.DEPENDENT_MEALS_FORM_FULFILLED:
-      console.log('state.dependentGuests', state.dependentGuests);
       const dependentGuests = updateGuest(state.dependentGuests, action.payload)
-      console.log('dependentGuests', dependentGuests);
-
       return {
         ...state,
         dependentGuests: dependentGuests,
