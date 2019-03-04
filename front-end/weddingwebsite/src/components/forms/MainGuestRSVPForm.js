@@ -10,7 +10,8 @@ class FormCard extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      responseMessage: ''
+      responseMessage: '',
+      radioStyle: { height: 20, width: 20, margin: 5 }
     }
   }
   triggerRSVPSubmit = () => {
@@ -35,7 +36,7 @@ class FormCard extends Component {
 
   render()  {
     const { user} = this.props;
-    const { responseMessage } = this.state;
+    const { responseMessage, radioStyle } = this.state;
 
     return (
 
@@ -57,17 +58,17 @@ class FormCard extends Component {
                   <div style={{ display: 'block', margin: "10px 15px" }}>
 
                     <label htmlFor="radio-yes">Most Definitely</label>
-                    <Radio value={true} id="radio-yes" />
+                    <Radio value={true} id="radio-yes" style={radioStyle}/>
                   </div>
                   <div style={{ display: 'block', margin: "10px 15px" }}>
 
                     <label htmlFor="radio-maybe">Maaaaaaaaybe?</label>
-                    <Radio value={'maybe'} id="radio-maybe" />
+                    <Radio value={'maybe'} id="radio-maybe" style={radioStyle}/>
                   </div> 
                   <div style={{ display: 'block', margin: "10px 15px" }}>
 
                     <label htmlFor="radio-no">Me Thinks Not</label>
-                    <Radio value={false} id="radio-no" />
+                    <Radio value={false} id="radio-no" style={radioStyle}/>
                   </div>
 
                   </RadioGroup>

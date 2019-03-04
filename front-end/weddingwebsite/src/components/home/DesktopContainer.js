@@ -76,7 +76,7 @@ class DesktopContainer extends Component {
                     <Dropdown.Item link="link" href="http://yokayoranch.com/" target="_blank">The Venue</Dropdown.Item>
 
 
-                    <Dropdown.Item link="link" href="http://www.vichysprings.com/">Vichy Hot Springs</Dropdown.Item>
+                    <Dropdown.Item link="link" href="http://www.vichysprings.com/" target="_blank">Vichy Hot Springs</Dropdown.Item>
 
                   </Dropdown.Menu>
                 </Dropdown>

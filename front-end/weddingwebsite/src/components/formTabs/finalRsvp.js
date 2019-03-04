@@ -11,6 +11,7 @@ import DependentGuestRSVPForm from '../forms/DependentGuestRSVPForm';
 
 const FinalRSVP = (props) => {
   let { user, dependentGuests } = props;
+  
   return (<div>
     <Segment style={{ padding: '2em 0em' }} vertical>
       <Grid container stackable verticalAlign='middle'>
@@ -23,14 +24,17 @@ const FinalRSVP = (props) => {
           </p>
         </Grid.Row>
         <Grid.Row>
-          <Grid.Column floated='left' width={9}>
+          {/* <Grid.Column floated='left' width={9}>
             <Image src={dubaiDesert} size='huge'>
 
             </Image>
-          </Grid.Column>
+          </Grid.Column> */}
           <Grid.Column floated='right' width={7}>
-            <FinalRSVPForm />
+            <FinalRSVPForm isFinalRsvp={true} />
           </Grid.Column>
+          {user.rehersal_invite? <Grid.Column floated='left' width={7}>
+            <FinalRSVPForm isRehersalInvite={true} />
+          </Grid.Column>:null}
         </Grid.Row>
       </Grid>
     </Segment>
@@ -41,18 +45,18 @@ const FinalRSVP = (props) => {
             if (guest.rsvp !== "no" && guest.rehersal_invite) {
               return (<div key={idx} style={{ display: 'inline-flex' }}>
                 <Grid.Column style={{ padding: '.5em 2em' }} width={6}>
-                  <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={false} isFinalRsvp={true} rehersalInvite={'  the celebration jully 13th?'}>
+                  <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={false} isFinalRsvp={true} rehersalInvite={'  the celebration July 13th?'}>
                   </DependentGuestRSVPForm>
                 </Grid.Column>
                 <Grid.Column style={{ padding: '.5em 2em' }} width={6}>
-                  <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={true} isFinalRsvp={true} rehersalInvite={'  family dinner Jull 11th?'}  >
+                  <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={true} isFinalRsvp={true} rehersalInvite={'  family dinner July 11th?'}  >
                   </DependentGuestRSVPForm>
                 </Grid.Column>
               </div>)
             } else {
               return (<div key={idx} style={{ display: 'inline-flex' }}>
                 <Grid.Column style={{ padding: '.5em 2em' }} width={6}>
-                  <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={true} isFinalRsvp={true} rehersalInvite={'the celebration jully 13th?'}>
+                  <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={true} isFinalRsvp={true} rehersalInvite={'the celebration July 13th?'}>
                   </DependentGuestRSVPForm>
                 </Grid.Column>
               </div>)

@@ -5,8 +5,7 @@ const helmet = require('helmet')
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-// const PORT = process.env.PORT || 3005;
-const PORT = 3005;
+const PORT = process.env.PORT || 3005;
 const cors = require('cors');
 // const verifyLoggedIn = require('./utils/auth') //NOTE no idea why fs isn't reading auth file
 const jwt = require('jsonwebtoken');
@@ -26,7 +25,6 @@ app.use(express.static(path.join(__dirname, 'public')));
 var verifyLoggedIn = function(req, res, next) {
   jwt.verify(req.cookies.authTokenSillyWilly, process.env.JWT_KEY, (err, payload) => {
     if (err) {
-      console.log('authentication err=', err);
       res.status(401).json({ error: 'Not Logged In' });
     } else {
       next();
@@ -53,7 +51,7 @@ if (process.env.NODE_ENV !== 'production') {
 
 var corsOptions = {
   // origin: 'http://www.sillywilliwedding.com',
-  origin: 'http://localhost:3005',
+  origin: 'http://localhost:3006',
   credentials: true,
 };
 

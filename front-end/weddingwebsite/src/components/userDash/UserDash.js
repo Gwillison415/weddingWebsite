@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { updateUserPropsFromForms } from '../../redux/actions/forms';
-
+import { DependentGuestRow } from "./DependentDash";
 import {
   Grid,
   Icon,
   Container,
   Divider
 } from 'semantic-ui-react';
-
+const colStyle = { textAlign: "center" }
 class UserDash extends Component {
   constructor(props) {
     super(props)
@@ -20,8 +20,6 @@ class UserDash extends Component {
   }
 
   rsvpStatus = (rsvp) => {
-    console.log('rsvp',rsvp);
-    
     if (rsvp === true) {
       return 'Yes!'
     } else if (rsvp === false) {
@@ -58,89 +56,60 @@ class UserDash extends Component {
     return Math.floor(totalCols / cols)
   }
   assignColWidthDependentGuest = (guests) => {
-
     let numbGuests = guests.length
     const totalCols = 16;
-    if (numbGuests > 3) {
+    if (numbGuests > 4) {
       numbGuests /= 2
     }
-
-    return Math.floor(totalCols / numbGuests)
-
+    return Math.floor(totalCols / numbGuests);
   }
   render() {
-    const { user, firstRSVP, finalRSVP, hasOnsiteInvite, dependentGuests, rehersalRSVP } = this.props;
-    const { laptopColWidth, mobileColWidth } = this.state;
-    const dependentGuestsColWidth = this.assignColWidthDependentGuest(dependentGuests)
-
+    const { user, firstRSVP, finalRSVP, hasOnsiteInvite, hasRehersalInvite, dependentGuests, rehersalRSVP, mealPreference } = this.props;
+    // const { laptopColWidth, mobileColWidth } = this.state;
 
     return (<Container>
-      <Grid >
-        <Grid.Row>
-
-          <Grid.Column mobile={mobileColWidth} largeScreen={laptopColWidth}>
+      <Grid centered stackable columns={4}>
+        <Grid.Row >
+          <Grid.Column style={colStyle} >
             <h5>Initial RSVP</h5>
             <Icon name='heart' size='small' /> {firstRSVP}
           </Grid.Column>
-          <Grid.Column mobile={mobileColWidth} largeScreen={laptopColWidth}>
+          <Grid.Column style={colStyle} >
             <h5>Final RSVP</h5>
-            <Icon name='envelope square' size='small' />{this.rsvpStatus(finalRSVP)} 
+            <Icon name='envelope square' size='small' />{this.rsvpStatus(finalRSVP)}
+          </Grid.Column>
 
-          </Grid.Column>
-          <Grid.Column mobile={mobileColWidth} largeScreen={laptopColWidth}>
+          {hasOnsiteInvite ? <Grid.Column style={colStyle} >
             <h5>Lodging Status: </h5>
-            <Icon name='suitcase' size='small' > </Icon>
-            <p> {this.lodging(user)}</p>
-          </Grid.Column>
-          <Grid.Column mobile={mobileColWidth} largeScreen={laptopColWidth}>
-            <h5>Carpooling</h5>
-            <Icon name='car' size='small' />
-          </Grid.Column>
-          {hasOnsiteInvite ? <Grid.Column mobile={mobileColWidth} largeScreen={laptopColWidth}>
+            <Icon name='suitcase' size='small' />
+            {this.lodging(user)}
+          </Grid.Column> : null}
+          {hasRehersalInvite ? <Grid.Column style={colStyle} >
             <h5>Family Dinner</h5>
             <Icon name='handshake outline' size='small' /> {this.rsvpStatus(rehersalRSVP)}
           </Grid.Column> : null}
-          {user.additional_guest_count > 0 ? <Grid.Column mobile={mobileColWidth} largeScreen={laptopColWidth}>
+          {/* </Grid.Row>
+          <Grid.Row> */}
+          <Grid.Column style={colStyle} >
+            <h5>Carpooling</h5>
+            <Icon name='car' size='small' /> TBD..
+          </Grid.Column>
+          <Grid.Column style={colStyle} >
+            <h5>Meal Preference</h5>
+            <Icon name='food' size='small' /> {mealPreference}
+          </Grid.Column>
+
+          {user.additional_guest_count > 0 ? <Grid.Column style={colStyle} >
             <h5>Additional Guests</h5>
             <Icon name='plus square' size='small' /> {user.additional_guest_count}
           </Grid.Column> : null}
 
         </Grid.Row>
-        <Divider></Divider>
-        <Grid.Row>
-          {user.dependentGuests.map((guest, idx) => {
-            return (<Grid.Column key={idx} mobile={8} largeScreen={dependentGuestsColWidth}>
-              <h5>{guest.full_name} </h5>
+      </Grid>
+      <Divider></Divider>
+      <Grid centered columns='equal'>
+        <DependentGuestRow guests={dependentGuests} dependentGuestsColWidth={this.assignColWidthDependentGuest(dependentGuests)} rsvpStatus={this.rsvpStatus}></DependentGuestRow>
 
-              <Grid.Row>
-                <h5> 
-                <span>
-                    <Icon name='food' size='small' ></Icon>
-                    Meal Preference: {guest.meal_pref}
-                  </span>
-                </h5>
-              </Grid.Row>
-              {guest.rehersal_invite ? <Grid.Row>
-                <h5><span>
-                  <Icon name='envelope square' size='small' > </Icon>
-                </span>
-                  Rehersal RSVP: {this.rsvpStatus(guest.rehersal_rsvp)}
-                </h5>
-
-              </Grid.Row> : null}
-              {guest.food_allergies.length ? <Grid.Row>
-                <h5> <span>
-                  <Icon name='bullhorn' size='small' > </Icon>
-                </span>
-                Allergies: {guest.food_allergies}
-                </h5>
-
-              </Grid.Row> : null}
-
-            </Grid.Column>)
-          })}
-
-        </Grid.Row>
       </Grid>
     </Container>)
   }
@@ -154,7 +123,8 @@ const mapStateToProps = state => ({
   hasOnsiteInvite: state.user.onsite_invite,
   firstRSVP: state.user.first_rsvp,
   finalRSVP: state.user.final_rsvp,
-  rehersalRSVP: state.user.rehersal_rsvp
+  rehersalRSVP: state.user.rehersal_rsvp,
+  mealPreference: state.user.meal_pref
 });
 
 export const mapDispatchToProps = dispatch =>

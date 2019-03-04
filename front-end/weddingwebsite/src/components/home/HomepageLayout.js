@@ -19,6 +19,7 @@ import Abridged from '../modals/Abridged.js';
 import UserDash from '../userDash/UserDash';
 const largeParagraphFont = { fontSize: '1.33em' }
 const HomepageLayout = ({ signInMessage, user }) => {
+
   return (
     <ResponsiveContainer signInMessage={signInMessage} >
       {user.loginStatus ? <UserDash /> : <div></div>}

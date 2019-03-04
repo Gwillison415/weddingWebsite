@@ -1,8 +1,8 @@
 import React from 'react'
 import {Tab} from 'semantic-ui-react';
-import PreliminaryRSVP from "../formTabs/PrelimRsvp"
-import FinalRSVP from "../formTabs/FinalRsvp"
-import MealPref from "../formTabs/MealPref"
+import PreliminaryRSVP from "../formTabs/prelimRsvp"
+import FinalRSVP from "../formTabs/finalRsvp"
+import MealPref from "../formTabs/mealPref"
 import AccomodationCard from '../forms/AccomodationCard';
 
 

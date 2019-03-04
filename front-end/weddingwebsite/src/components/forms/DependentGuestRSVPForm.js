@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { Form, RadioGroup, Radio } from 'informed';
 import { Card, Icon, Image } from 'semantic-ui-react'
-// import saveTheDate from '../../assets/images/saveTheDate.jpeg';
 import logowedcel from '../../assets/images/logowedcel.png';
 import logofamdin from '../../assets/images/logofamdin.png';
 import { saveTheDateDependentFormSubmit } from '../../redux/actions/forms.js';
@@ -12,7 +11,8 @@ class DependentGuestRSVPForm extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      responseMessage: ''
+      responseMessage: '',
+      radioStyle: { height: 20, width: 20, margin: 5 }
     }
   }
   triggerRSVPSubmit = () => {
@@ -42,7 +42,7 @@ class DependentGuestRSVPForm extends Component {
           dependentGuest: this.props.guest.full_name
         }, {
           mainGuest: this.props.mainGuest
-        }, { type: type })
+        }, { type})
       console.log('formAnswers', formAnswers);
 
       this.props.saveTheDateDependentFormSubmit(formAnswers)
@@ -58,8 +58,7 @@ class DependentGuestRSVPForm extends Component {
 
   render() {
     const { guest, rehersalInvite, isRehersalInvite, isFinalRsvp } = this.props;
-    const { responseMessage } = this.state;
-
+    const { responseMessage, radioStyle } = this.state;
     return (<Card>
       <Image src={isRehersalInvite
         ? logofamdin
@@ -82,17 +81,17 @@ class DependentGuestRSVPForm extends Component {
                   <div style={{ display: 'block', margin: "10px 15px" }}>
 
                     <label htmlFor="radio-yes">Most Definitely</label>
-                    <Radio value={true} id="radio-yes" />
+                    <Radio value={true} id="radio-yes" style={radioStyle}/>
                   </div>
                   {!isFinalRsvp ? <div style={{ display: 'block', margin: "10px 15px" }}>
 
                     <label htmlFor="radio-maybe">Maaaaaaaaybe?</label>
-                    <Radio value={'maybe'} id="radio-maybe" />
+                    <Radio value={'maybe'} id="radio-maybe" style={radioStyle}/>
                   </div> : null}
                   <div style={{ display: 'block', margin: "10px 15px" }}>
 
                     <label htmlFor="radio-no">Me Thinks Not</label>
-                    <Radio value={false} id="radio-no" />
+                    <Radio value={false} id="radio-no" style={radioStyle}/>
                   </div>
 
                 </RadioGroup>
