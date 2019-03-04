@@ -84,7 +84,7 @@ class DesktopContainer extends Component {
                   <Dropdown.Menu>
                     <Dropdown.Item style={{ color: 'black' }}>
                       <Link to="/info/timeline" style={{ color: 'black' }}
-                      >  </Link>
+                      > Timeline </Link>
                     </Dropdown.Item>
                     <Dropdown.Item >
                       <Link to="/info/accomodations" style={{color: 'black'}}
