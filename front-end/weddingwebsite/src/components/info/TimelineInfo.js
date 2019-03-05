@@ -101,7 +101,7 @@ return (
             time="Saturday, July 13th "
             title="Bad Speeches and Great Roasts"
             description='Time to pontificate and try to make sense of whats going on: classic. OR
-             What better way to say "I love you" than making comedy out of our lives: que Tradiçional.'
+             What better way to say "I love you" than making comedy out of our lives: que Tradiçional. Email For inquires'
             color="green"
             tags={['8:45pm - 9:30pm']}
             lineHeight={11}
