@@ -152,7 +152,7 @@ const HomepageLayout = ({ signInMessage, user }) => {
                   <List.Item >
                     <List.Icon name='world' />
                     <List.Content style={{ textAlign: 'center' }}>
-                      <a href=''>World Domination Plans</a>
+                      <a href='#'>World Domination Plans</a>
                     </List.Content>
                   </List.Item>
                   {/* <List.Item as='a'>DNA FAQ</List.Item> */}

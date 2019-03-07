@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { Form, RadioGroup, Radio } from 'informed';
 import { Card, Icon, Image } from 'semantic-ui-react'
-import logostd from '../../assets/images/logostd.png';
+
 import logowedcel from '../../assets/images/logowedcel.png';
 import logofamdin from '../../assets/images/logofamdin.png';
 

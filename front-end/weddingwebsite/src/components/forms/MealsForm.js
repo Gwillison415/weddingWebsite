@@ -105,10 +105,7 @@ class MealsForm extends Component {
                     <h4>{responseMessage} </h4>
                 </Card.Content>
                 <Card.Content extra={true}>
-                    <a>
                         <Icon name='user' />
-
-                    </a>
                 </Card.Content>
             </Card>)
     }

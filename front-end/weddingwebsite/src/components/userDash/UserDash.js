@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { handleTabChange } from '../../redux/actions/forms';
+import { discoverTabIndices } from '../../utilities/tabLogic'
+
 import { DependentGuestRow } from "./DependentDash";
 import {
   Grid,
@@ -15,7 +17,7 @@ class UserDash extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      tabDictionary: this.discoverTabIndices(this.props.user)
+      tabIndices: discoverTabIndices(this.props.user)
     }
   }
 
@@ -63,25 +65,9 @@ class UserDash extends Component {
     }
     return Math.floor(totalCols / numbGuests);
   }
-
-  discoverTabIndices = (user) => {
-    if (user.onsite_invite) {
-      return {
-        accomodations: 0,
-        rsvp: 1,
-        meals: 2
-      }
-    } else {
-      return {
-        rsvp: 0,
-        meals: 1
-      }
-    }
-
-  }
   render() {
     const { user, firstRSVP, finalRSVP, hasOnsiteInvite, hasRehersalInvite, dependentGuests, rehersalRSVP, mealPreference, handleTabChange } = this.props;
-    const { tabDictionary } = this.state;
+    const { tabIndices } = this.state;
 
     return (<Container>
       <Grid centered stackable columns={4}>
@@ -91,34 +77,34 @@ class UserDash extends Component {
             <Icon name='heart' size='small' /> {firstRSVP}
           </Grid.Column> */}
           <Grid.Column style={colStyle} >
-            <div onClick={() => { handleTabChange(tabDictionary.rsvp) }}>
+            <div onClick={() => { handleTabChange(tabIndices.rsvp) }}>
               <h5>RSVP</h5>
               <Icon name='envelope square' size='small' />{this.rsvpStatus(finalRSVP)}
             </div>
           </Grid.Column>
 
           {hasOnsiteInvite ? <Grid.Column style={colStyle}  >
-            <div onClick={() => { handleTabChange(tabDictionary.accomodations) }}>
+            <div onClick={() => { handleTabChange(tabIndices.accomodations) }}>
               <h5 >Lodging Status: </h5>
               <Icon name='suitcase' size='small' />
               {this.lodging(user)}
             </div>
           </Grid.Column> : null}
           {hasRehersalInvite ? <Grid.Column style={colStyle} >
-            <div onClick={() => { handleTabChange(tabDictionary.meals) }}>
+            <div onClick={() => { handleTabChange(tabIndices.meals) }}>
               <h5>Family Dinner</h5>
               <Icon name='handshake outline' size='small' /> {this.rsvpStatus(rehersalRSVP)}
             </div>
           </Grid.Column> : null}
           <Grid.Column style={colStyle} >
-            <Popup trigger={<div onClick={() => { handleTabChange(tabDictionary.meals) }}>
+            <Popup trigger={<div onClick={() => { handleTabChange(tabIndices.meals) }}>
               <h5>Meal Preference</h5>
               <Icon name='food' size='small' /> {mealPreference}
             </div>} content={`Allergies: ${user.food_allergies}`} />
 
           </Grid.Column>
           {user.additional_guest_count > 0 ? <Grid.Column style={colStyle} >
-            <Popup trigger={<div onClick={() => { handleTabChange(tabDictionary.rsvp) }}>
+            <Popup trigger={<div onClick={() => { handleTabChange(tabIndices.rsvp) }}>
               <h5>Additional Guests</h5>
               <Icon name='plus square' size='small' /> {user.additional_guest_count}
             </div>} content={`${dependentGuests.map(guest => guest.full_name)}`} />
