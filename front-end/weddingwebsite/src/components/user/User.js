@@ -14,12 +14,12 @@ class User extends Component {
     this.props.getDependents(this.props.userName)
   }
   render() {
-    const { loginStatus, dependentGuests, user} = this.props;
+    const { loginStatus, dependentGuests, user, hasOnsiteInvite} = this.props;
 
     return (<div>
       <ResponsiveContainer>
         {loginStatus? <UserDash/> : <div></div>}
-        <RSVPTabs dependentGuests={dependentGuests} user={user} />
+        <RSVPTabs dependentGuests={dependentGuests} user={user} hasOnsiteInvite={hasOnsiteInvite}/>
       </ResponsiveContainer>
     </div>)
   }
@@ -28,11 +28,9 @@ const mapStateToProps = state => ({
   user: state.user,
   loginStatus: state.user.loginStatus,
   userName: state.user.full_name,
-  redirect: state.user.redirectURL,
-  error: state.user.error,
   dependentGuests: state.user.dependentGuests, 
   rehersal_invite: state.saveTheDateForm.rehersal_invite,
-  
+  hasOnsiteInvite: state.user.onsite_invite
 });
 
 export const mapDispatchToProps = dispatch => bindActionCreators({

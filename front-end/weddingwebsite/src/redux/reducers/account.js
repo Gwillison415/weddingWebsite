@@ -6,7 +6,8 @@ const updateGuest = (allGuestsInState, updatedGuest) => {
 export const user = (state = {
   loginStatus: false,
   dependentGuests: [],
-  homeIsActive: true
+  homeIsActive: true,
+  activeTab: 0
 }, action) => {
   switch (action.type) {
     case CONST.LOGIN_FULFILLED:
@@ -135,6 +136,8 @@ export const user = (state = {
         dependentGuests: dependentGuests,
       }
     case CONST.TAB_CHANGE:
+      console.log('action.payload', action.payload);
+    
       return {
         ...state,
         activeTab: action.payload,

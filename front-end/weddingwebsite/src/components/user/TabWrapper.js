@@ -10,16 +10,16 @@ import { handleTabChange } from '../../redux/actions/forms.js';
 
 
 const RSVPTabs = (props) => {
-  let { user, dependentGuests, hasOnsiteInvite } = props;
+  let { user, dependentGuests, hasOnsiteInvite, activeTab } = props;
   const panes = [
-    {
-      menuItem: 'Preliminary RSVP', render: () => <Tab.Pane attached={false}>
-        <PreliminaryRSVP dependentGuests={dependentGuests} user={user} />
-      </Tab.Pane>
-    },
+    // {
+    //   menuItem: 'Preliminary RSVP', render: () => <Tab.Pane attached={false}>
+    //     <PreliminaryRSVP dependentGuests={dependentGuests} user={user} />
+    //   </Tab.Pane>
+    // },
 
     {
-      menuItem: 'Final RSVP', render: () => <Tab.Pane attached={false}>
+      menuItem: 'RSVP', render: () => <Tab.Pane attached={false}>
         <FinalRSVP dependentGuests={dependentGuests} user={user} />
       </Tab.Pane>
     },
@@ -35,21 +35,17 @@ const RSVPTabs = (props) => {
 
 
   return (
-    <Tab menu={{ secondary: true, pointing: true }} panes={panes} user={user} onTabChange={handleTabChange} />
+    <Tab menu={{ secondary: true, pointing: true }} panes={panes} user={user} onTabChange={handleTabChange} activeIndex={activeTab}/>
   )
 
 }
 
 const mapStateToProps = state => ({
   activeTab: state.user.activeTab,
-  
-  hasOnsiteInvite: state.user.onsite_invite
 });
 export const mapDispatchToProps = dispatch =>
   bindActionCreators({
     handleTabChange,
   }, dispatch);
-export default connect(null, mapDispatchToProps)(RSVPTabs);
+export default connect(mapStateToProps, mapDispatchToProps)(RSVPTabs);
 
-
-// export default RSVPTabs
