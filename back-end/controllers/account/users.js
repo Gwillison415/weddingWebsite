@@ -73,6 +73,7 @@ router.route('/meals').post((req, res) => {
       food_allergies: allergies
     }, '*')
     .then(updatedGuest => {
+      delete updatedGuest[0].hashed_password
       res.status(200).send(updatedGuest[0])
     })
 

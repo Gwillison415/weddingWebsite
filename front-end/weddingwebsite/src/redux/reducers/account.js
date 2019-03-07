@@ -134,6 +134,11 @@ export const user = (state = {
         ...state,
         dependentGuests: dependentGuests,
       }
+    case CONST.TAB_CHANGE:
+      return {
+        ...state,
+        activeTab: action.payload,
+      }
     default:
       return state;
   }
