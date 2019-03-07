@@ -91,32 +91,38 @@ class UserDash extends Component {
             <Icon name='heart' size='small' /> {firstRSVP}
           </Grid.Column> */}
           <Grid.Column style={colStyle} >
-            <div onClick={() => { handleTabChange(tabDictionary.rsvp)}}>
-            <h5>RSVP</h5>
-            <Icon name='envelope square' size='small' />{this.rsvpStatus(finalRSVP)}
+            <div onClick={() => { handleTabChange(tabDictionary.rsvp) }}>
+              <h5>RSVP</h5>
+              <Icon name='envelope square' size='small' />{this.rsvpStatus(finalRSVP)}
             </div>
           </Grid.Column>
 
           {hasOnsiteInvite ? <Grid.Column style={colStyle}  >
-            <div onClick={() => { handleTabChange(tabDictionary.accomodations)}}>
+            <div onClick={() => { handleTabChange(tabDictionary.accomodations) }}>
               <h5 >Lodging Status: </h5>
               <Icon name='suitcase' size='small' />
               {this.lodging(user)}
-           </div>
+            </div>
           </Grid.Column> : null}
           {hasRehersalInvite ? <Grid.Column style={colStyle} >
-            <h5>Family Dinner</h5>
-            <Icon name='handshake outline' size='small' /> {this.rsvpStatus(rehersalRSVP)}
+            <div onClick={() => { handleTabChange(tabDictionary.meals) }}>
+              <h5>Family Dinner</h5>
+              <Icon name='handshake outline' size='small' /> {this.rsvpStatus(rehersalRSVP)}
+            </div>
           </Grid.Column> : null}
           <Grid.Column style={colStyle} >
-            <div onClick={() => { handleTabChange(tabDictionary.meals) }}>
-            <Popup trigger={<h5>Meal Preference</h5>} content={`Allergies: ${user.food_allergies}`} />
-            <Icon name='food' size='small' /> {mealPreference}
-            </div>
+            <Popup trigger={<div onClick={() => { handleTabChange(tabDictionary.meals) }}>
+              <h5>Meal Preference</h5>
+              <Icon name='food' size='small' /> {mealPreference}
+            </div>} content={`Allergies: ${user.food_allergies}`} />
+
           </Grid.Column>
           {user.additional_guest_count > 0 ? <Grid.Column style={colStyle} >
-            <Popup trigger={<h5>Additional Guests</h5>} content={`${dependentGuests.map(guest => guest.full_name)}`} />
-            <Icon name='plus square' size='small' /> {user.additional_guest_count}
+            <Popup trigger={<div onClick={() => { handleTabChange(tabDictionary.rsvp) }}>
+              <h5>Additional Guests</h5>
+              <Icon name='plus square' size='small' /> {user.additional_guest_count}
+            </div>} content={`${dependentGuests.map(guest => guest.full_name)}`} />
+
           </Grid.Column> : null}
           <Grid.Column style={colStyle} >
             <h5>Carpooling</h5>
