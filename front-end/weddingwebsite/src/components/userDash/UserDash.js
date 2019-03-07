@@ -1,21 +1,23 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-import { updateUserPropsFromForms } from '../../redux/actions/forms';
+import { handleTabChange } from '../../redux/actions/forms';
+import { discoverTabIndices } from '../../utilities/tabLogic'
+
 import { DependentGuestRow } from "./DependentDash";
 import {
   Grid,
   Icon,
   Container,
-  Divider
+  Divider,
+  Popup
 } from 'semantic-ui-react';
 const colStyle = { textAlign: "center" }
 class UserDash extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      mobileColWidth: 5,
-      laptopColWidth: this.assignColWidthMain(this.props.user)
+      tabIndices: discoverTabIndices(this.props.user)
     }
   }
 
@@ -64,45 +66,54 @@ class UserDash extends Component {
     return Math.floor(totalCols / numbGuests);
   }
   render() {
-    const { user, firstRSVP, finalRSVP, hasOnsiteInvite, hasRehersalInvite, dependentGuests, rehersalRSVP, mealPreference } = this.props;
-    // const { laptopColWidth, mobileColWidth } = this.state;
+    const { user, firstRSVP, finalRSVP, hasOnsiteInvite, hasRehersalInvite, dependentGuests, rehersalRSVP, mealPreference, handleTabChange } = this.props;
+    const { tabIndices } = this.state;
 
     return (<Container>
       <Grid centered stackable columns={4}>
         <Grid.Row >
-          <Grid.Column style={colStyle} >
+          {/* <Grid.Column style={colStyle} >
             <h5>Initial RSVP</h5>
             <Icon name='heart' size='small' /> {firstRSVP}
-          </Grid.Column>
+          </Grid.Column> */}
           <Grid.Column style={colStyle} >
-            <h5>Final RSVP</h5>
-            <Icon name='envelope square' size='small' />{this.rsvpStatus(finalRSVP)}
+            <div onClick={() => { handleTabChange(tabIndices.rsvp) }}>
+              <h5>RSVP</h5>
+              <Icon name='envelope square' size='small' />{this.rsvpStatus(finalRSVP)}
+            </div>
           </Grid.Column>
 
-          {hasOnsiteInvite ? <Grid.Column style={colStyle} >
-            <h5>Lodging Status: </h5>
-            <Icon name='suitcase' size='small' />
-            {this.lodging(user)}
+          {hasOnsiteInvite ? <Grid.Column style={colStyle}  >
+            <div onClick={() => { handleTabChange(tabIndices.accomodations) }}>
+              <h5 >Lodging Status: </h5>
+              <Icon name='suitcase' size='small' />
+              {this.lodging(user)}
+            </div>
           </Grid.Column> : null}
           {hasRehersalInvite ? <Grid.Column style={colStyle} >
-            <h5>Family Dinner</h5>
-            <Icon name='handshake outline' size='small' /> {this.rsvpStatus(rehersalRSVP)}
+            <div onClick={() => { handleTabChange(tabIndices.meals) }}>
+              <h5>Family Dinner</h5>
+              <Icon name='handshake outline' size='small' /> {this.rsvpStatus(rehersalRSVP)}
+            </div>
           </Grid.Column> : null}
-          {/* </Grid.Row>
-          <Grid.Row> */}
+          <Grid.Column style={colStyle} >
+            <Popup trigger={<div onClick={() => { handleTabChange(tabIndices.meals) }}>
+              <h5>Meal Preference</h5>
+              <Icon name='food' size='small' /> {mealPreference}
+            </div>} content={`Allergies: ${user.food_allergies}`} />
+
+          </Grid.Column>
+          {user.additional_guest_count > 0 ? <Grid.Column style={colStyle} >
+            <Popup trigger={<div onClick={() => { handleTabChange(tabIndices.rsvp) }}>
+              <h5>Additional Guests</h5>
+              <Icon name='plus square' size='small' /> {user.additional_guest_count}
+            </div>} content={`${dependentGuests.map(guest => guest.full_name)}`} />
+
+          </Grid.Column> : null}
           <Grid.Column style={colStyle} >
             <h5>Carpooling</h5>
             <Icon name='car' size='small' /> TBD..
           </Grid.Column>
-          <Grid.Column style={colStyle} >
-            <h5>Meal Preference</h5>
-            <Icon name='food' size='small' /> {mealPreference}
-          </Grid.Column>
-
-          {user.additional_guest_count > 0 ? <Grid.Column style={colStyle} >
-            <h5>Additional Guests</h5>
-            <Icon name='plus square' size='small' /> {user.additional_guest_count}
-          </Grid.Column> : null}
 
         </Grid.Row>
       </Grid>
@@ -129,8 +140,7 @@ const mapStateToProps = state => ({
 
 export const mapDispatchToProps = dispatch =>
   bindActionCreators({
-    updateUserPropsFromForms,
-
+    handleTabChange,
   }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(UserDash);
-// export default connect(mapStateToProps, null)(UserDash);
+

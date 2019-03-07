@@ -51,13 +51,13 @@ import './Login.css';
       <Form id="form-state-form" getApi={this.setFormApi} onSubmit={() => {this.triggerSubmit()}}>
     {({formState}) => (<div >
         <label htmlFor="email-text">Email</label>
-        <Text field="email" id="email-text" validate={this.validateEmail}></Text>
+          <Text field="email" id="email-text" validate={this.validateEmail} autoComplete="username"></Text>
         <div style={{
             margin: '20px'
           }}></div>
-        <label htmlFor="password">password
+        <label htmlFor="current-password">password
         </label>
-        <Text field="password" id="password" type="password" validate={this.validatePassword}/>
+          <Text field="password" id="password" type="password" autoComplete="current-password" validate={this.validatePassword}/>
         <div style={{
             margin: '20px'
           }}></div>

@@ -115,7 +115,7 @@ const rootPanels = [
 export const TravelInfo = () => {
   return (<div>
     <ResponsiveContainer>
-      <Accordion defaultActiveIndex={[0]} panels={rootPanels} className={'ParentContent'} exclusive={false} fluid="fluid"/>
+      <Accordion defaultActiveIndex={[0]} panels={rootPanels} className={'ParentContent'} exclusive={false} />
     </ResponsiveContainer>
   </div>)
 

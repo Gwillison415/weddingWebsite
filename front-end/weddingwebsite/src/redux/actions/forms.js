@@ -63,3 +63,5 @@ export const getDependents = props => (
   }
 );
 export const rsvpFormSubmit = props => ({ type: CONST.RSVP_FORM, payload: props });
+
+export const handleTabChange = index => ({type: CONST.TAB_CHANGE, payload: index})

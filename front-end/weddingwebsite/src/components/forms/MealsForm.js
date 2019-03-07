@@ -12,7 +12,8 @@ class MealsForm extends Component {
         super(props)
         this.state = {
             responseMessage: '',
-            guest: this.props.guest ? this.props.guest : this.props.mainGuest,
+            guestName: this.props.guest ? this.props.guest.full_name : this.props.mainGuest.full_name,
+            guestAllergies: this.props.guest ? this.props.guest.food_allergies : this.props.mainGuest.food_allergies,
             radioStyle: { height: 20, width: 20, margin: 5 }
         }
     }
@@ -25,17 +26,26 @@ class MealsForm extends Component {
 
         if ((mealType || allergies) && !invalid) {
             if (this.props.guest) {
-                formAnswers = Object.assign({}, { mealType }, { allergies }, { fullName: this.state.guest })
-                this.setState({ responseMessage: `Cheers, we have ${this.state.guest} as ${mealType}` })
-            } else {
-                formAnswers = Object.assign({}, { mealType }, { mainGuest: this.props.userName }, { allergies })
-                this.setState({ responseMessage: `Cheers, we have ${this.state.guest} as ${mealType}` })
-            }
-            if (this.props.isMainGuest) {
-                this.props.saveMealPrefsSubmit(formAnswers)
-            } else {
+                formAnswers = Object.assign({}, { mealType }, { allergies }, { fullName: this.state.guestName })
+                if (mealType) {
+                    this.setState({ responseMessage: `Cheers, we have ${this.state.guestName} as ${mealType}` })
+                } else{
+                    this.setState({ responseMessage: `Thanks for letting us know about ${this.state.guestName}'s needs!  We'll have the foods listed above marked in any dish we serve. If you need to add more, make sure to enter them each again every time you save.` })
+                }
                 this.props.saveDependentMealPrefsSubmit(formAnswers)
+            } else {
+                formAnswers = Object.assign({}, { mealType }, { mainGuest: this.state.guestName }, { allergies })
+                if (mealType) {
+                    this.setState({ responseMessage: `Cheers, we have ${this.state.guestName} as ${mealType}` })
+                } else{
+                    this.setState({ responseMessage: `Thanks for letting us know about ${this.state.guestName}'s needs!  We'll have the foods listed above marked in any dish. If you need to add more, make sure to enter them all again.` })
+                }
+                this.props.saveMealPrefsSubmit(formAnswers)
             }
+            if (allergies) {
+                this.setState({ guestAllergies: allergies})
+            }
+        
         } else {
             console.log('failed handleClick unexpectedly');
         }
@@ -46,7 +56,7 @@ class MealsForm extends Component {
     }
 
     render() {
-        const { guest, responseMessage, radioStyle } = this.state;
+        const { guestName, guestAllergies, responseMessage, radioStyle } = this.state;
         return (
 
             <Card>
@@ -54,7 +64,7 @@ class MealsForm extends Component {
                 <Card.Content>
                     <Card.Header>Supper Time!</Card.Header>
                     <Card.Meta>
-                        Tell me dearest, what would <b>{guest}</b> like to eat? - on a saturday night - no less! 
+                        Tell me dearest, what would <b>{guestName}</b> like to eat? - on a saturday night - no less!
                     </Card.Meta>
                     <Card.Description>
                         <Form id="radio-form" getApi={this.setFormApi} onSubmit={() => {
@@ -67,7 +77,7 @@ class MealsForm extends Component {
                                         <RadioGroup field="mealType">
                                             <Segment >
                                                 <label htmlFor="radio-omnivore">Omnivore</label>
-                                                <Radio value="omni" id="radio-omnivore" style={radioStyle}/>
+                                                <Radio value="omni" id="radio-omnivore" style={radioStyle} />
                                             </Segment>
                                             <Segment >
                                                 <label htmlFor="radio-veg">Vegetarian</label>
@@ -82,13 +92,11 @@ class MealsForm extends Component {
                                     </div>
                                     <label>Please let us know about any allergies <Text field="allergies" placeholder={'Children Whining, DJT'} /></label>
                                     <button style={{ margin: 20 }} type="submit">Submit</button>
-
-
-                                    <p>ALL of the Allergies we know about for {guest}:{
+                                    <p>ALL of the Allergies we know about:{
                                         formState.values.allergies
                                             ? JSON.stringify(formState.values.allergies, null, 2)
-                                            : this.props.allergies
-                                    }</p>
+                                            : guestAllergies}
+                                    </p>
 
                                 </div>)
                             }
@@ -97,24 +105,16 @@ class MealsForm extends Component {
                     <h4>{responseMessage} </h4>
                 </Card.Content>
                 <Card.Content extra={true}>
-                    <a>
                         <Icon name='user' />
-
-                    </a>
                 </Card.Content>
             </Card>)
     }
 }
-const mapStateToProps = state => ({
-    user: state.user,
-    userName: state.user.full_name,
-    error: state.user.error,
-    allergies: state.user.food_allergies,
-});
+
 
 export const mapDispatchToProps = dispatch =>
     bindActionCreators({
         saveMealPrefsSubmit,
         saveDependentMealPrefsSubmit
     }, dispatch);
-export default connect(mapStateToProps, mapDispatchToProps)(MealsForm);
+export default connect(null, mapDispatchToProps)(MealsForm);

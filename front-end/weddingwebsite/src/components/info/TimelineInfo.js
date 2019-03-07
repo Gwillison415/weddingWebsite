@@ -1,5 +1,5 @@
 import React from 'react';
-import Timeline from 'react-timeline-semantic-ui';
+import Timeline from './gTimeline';
 import "./timeline.css";
 import { Particles } from 'react-particles-js';
 import { particlesConfig } from '../particles/particlesjs-config';
@@ -32,6 +32,8 @@ return (
             color="teal"
             tags={['6:00pm – 9:00pm']}
             lineHeight={11}
+            onClick={()=> {console.log('timeline fired');
+            }}
         />
         <Timeline
             direction="right"
@@ -98,8 +100,8 @@ return (
             icon="talk"
             time="Saturday, July 13th "
             title="Bad Speeches and Great Roasts"
-            description="Time to pontificate and try to make sense of whats going on: classic. OR
-             What better way to say 'I love you' than making comedy out of our lives: soooo non-traditional"
+            description='Time to pontificate and try to make sense of whats going on: classic. OR
+             What better way to say "I love you" than making comedy out of our lives: que Tradiçional. Email For inquires'
             color="green"
             tags={['8:45pm - 9:30pm']}
             lineHeight={11}

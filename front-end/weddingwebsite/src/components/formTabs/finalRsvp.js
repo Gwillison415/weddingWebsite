@@ -42,7 +42,7 @@ const FinalRSVP = (props) => {
       <Grid container stackable verticalAlign='middle'>
         <Grid.Row>
           {dependentGuests.map((guest, idx) => {
-            if (guest.rsvp !== "no" && guest.rehersal_invite) {
+            if (guest.rehersal_invite) {
               return (<div key={idx} style={{ display: 'inline-flex' }}>
                 <Grid.Column style={{ padding: '.5em 2em' }} width={6}>
                   <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={false} isFinalRsvp={true} rehersalInvite={'  the celebration July 13th?'}>
@@ -56,7 +56,7 @@ const FinalRSVP = (props) => {
             } else {
               return (<div key={idx} style={{ display: 'inline-flex' }}>
                 <Grid.Column style={{ padding: '.5em 2em' }} width={6}>
-                  <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={true} isFinalRsvp={true} rehersalInvite={'the celebration July 13th?'}>
+                  <DependentGuestRSVPForm guest={guest} mainGuest={user.full_name} isRehersalInvite={guest.rehersal_invite} isFinalRsvp={true} rehersalInvite={'the celebration July 13th?'}>
                   </DependentGuestRSVPForm>
                 </Grid.Column>
               </div>)

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router-dom';
-import {changePageLocation} from '../../redux/actions/login';
+import { changePageLocation } from '../../redux/actions/login';
 import { bindActionCreators } from 'redux';
 
 import {
@@ -25,6 +25,13 @@ class DesktopContainer extends Component {
 
   hideFixedMenu = () => this.setState({ fixed: false })
   showFixedMenu = () => this.setState({ fixed: true })
+  scroll = () => {
+    window.scrollTo({
+      top: 200,
+      left: 0,
+      behavior: 'smooth'
+    })
+  }
 
 
   render() {
@@ -35,7 +42,9 @@ class DesktopContainer extends Component {
         <Visibility
           once={false}
           onBottomPassed={this.showFixedMenu}
+          onTopPassed={this.showFixedMenu}
           onBottomPassedReverse={this.hideFixedMenu}
+          onTopVisible={this.hideFixedMenu}
         >
 
           <Segment
@@ -52,12 +61,11 @@ class DesktopContainer extends Component {
               size='large'
             >
               <Container>
-                <Menu.Item header>Welcome {userName? userName : signInMessage? signInMessage : 'Friend'}</Menu.Item>
+                <Menu.Item header>Welcome {userName ? userName : signInMessage ? signInMessage : 'Friend'}</Menu.Item>
                 <Menu.Item active={homeIsActive} onClick={() => {
                   changePageLocation('home')
                   this.props.history.push('/')
                 }}> Home
-                  {/* <Link to="/">Home </Link> */}
                 </Menu.Item>
                 <Menu.Item active={profileIsActive} onClick={() => {
                   if (!user.loginStatus) {
@@ -68,16 +76,11 @@ class DesktopContainer extends Component {
                   }
                 }} > Profile
 
-                  {/* <Link to="/user">Profile  </Link> */}
                 </Menu.Item>
                 <Dropdown text='Places' pointing className='link item'>
                   <Dropdown.Menu>
-
                     <Dropdown.Item link="link" href="http://yokayoranch.com/" target="_blank">The Venue</Dropdown.Item>
-
-
                     <Dropdown.Item link="link" href="http://www.vichysprings.com/" target="_blank">Vichy Hot Springs</Dropdown.Item>
-
                   </Dropdown.Menu>
                 </Dropdown>
                 <Dropdown text='Guest Info' pointing className='link item'>
@@ -87,31 +90,30 @@ class DesktopContainer extends Component {
                       > Timeline </Link>
                     </Dropdown.Item>
                     <Dropdown.Item >
-                      <Link to="/info/accomodations" style={{color: 'black'}}
+                      <Link to="/info/accomodations" style={{ color: 'black' }} onClick={this.scroll}
                       > Accomodations </Link>
                     </Dropdown.Item>
                     <Dropdown.Item >
-                      <Link to="/info/travel" style={{color: 'black'}}
+                      <Link to="/info/travel" style={{ color: 'black' }} onClick={this.scroll}
                       > Travel </Link>
                     </Dropdown.Item>
-                    <Dropdown.Item style={{color: 'black'}}>
-                      <Link to="/info/faq" style={{color: 'black'}}
+                    <Dropdown.Item style={{ color: 'black' }}>
+                      <Link to="/info/faq" style={{ color: 'black' }} onClick={this.scroll}
                       > FAQ Page </Link>
-                      </Dropdown.Item>
-                    <Dropdown.Item link="link" href='mailto:keenewillison2019@gmail.com?subject=Question%20about%20___%20from%20____&body=let%20us%20know%20if%20you%20dont%20want%20us%20to%20put%20your%20question%20on%20our%20FAQ' style={{color: 'black'}}>Email a question</Dropdown.Item>
+                    </Dropdown.Item>
+                    <Dropdown.Item link="link" href='mailto:keenewillison2019@gmail.com?subject=Question%20about%20___%20from%20____&body=let%20us%20know%20if%20you%20dont%20want%20us%20to%20put%20your%20question%20on%20our%20FAQ' style={{ color: 'black' }}>Email a question</Dropdown.Item>
                     <Dropdown.Item ></Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
-
                 <Menu.Item position='right'>
-                  <AccountModal modalStyle={{marginTop: "-250px"}}></AccountModal>
+                  <AccountModal modalStyle={{ marginTop: "-250px" }}></AccountModal>
                 </Menu.Item>
               </Container>
             </Menu>
             <HomepageHeading />
           </Segment>
         </Visibility>
-        { children }
+        {children}
       </Responsive>
     )
   }

@@ -4,7 +4,7 @@ import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 
 import ResponsiveContainer from '../home/ResponsiveContainer';
-import TabExampleSecondaryPointing from './TabWrapper';
+import RSVPTabs from './TabWrapper';
 import {getDependents, accomodationsFormSubmit} from '../../redux/actions/forms.js';
 import UserDash from '../userDash/UserDash';
 
@@ -14,25 +14,21 @@ class User extends Component {
     this.props.getDependents(this.props.userName)
   }
   render() {
-    const {user, dependentGuests, hasOnsiteInvite} = this.props;
+    const { loginStatus, dependentGuests, user, hasOnsiteInvite} = this.props;
 
     return (<div>
       <ResponsiveContainer>
-        {user.loginStatus? <UserDash/> : <div></div>}
-        <TabExampleSecondaryPointing user={user} dependentGuests={dependentGuests} hasOnsiteInvite={hasOnsiteInvite}>
-          {/* <FormCard triggerSubmit={this.triggerRSVPSubmit} getApi={this.setFormApi} user={user} dependentGuests={dependentGuests} ></FormCard> */}
-
-        </TabExampleSecondaryPointing>
+        {loginStatus? <UserDash/> : <div></div>}
+        <RSVPTabs dependentGuests={dependentGuests} user={user} hasOnsiteInvite={hasOnsiteInvite}/>
       </ResponsiveContainer>
     </div>)
   }
 }
 const mapStateToProps = state => ({
   user: state.user,
+  loginStatus: state.user.loginStatus,
   userName: state.user.full_name,
-  redirect: state.user.redirectURL,
-  error: state.user.error,
-  dependentGuests: state.user.dependentGuests,
+  dependentGuests: state.user.dependentGuests, 
   rehersal_invite: state.saveTheDateForm.rehersal_invite,
   hasOnsiteInvite: state.user.onsite_invite
 });
