@@ -24,6 +24,10 @@ const NestedContentGettingThereVenue = (<div className={'NestedContent'}>
     <b> carpool </b>
     when able
   </p>
+  <p>
+    We will be setting up a <b> shuttle to and from sf</b> for those who cannot find a carpool
+    details about that will be shaping up soon, and guests should have a new form soon to indicate if they're interested in shuttles / carpools and what time constraints you have.
+  </p>
   <p>Please indicate on your RSVP if you are interested in carpooling and / or if you have space in an RV - we will assist in connecting people.</p>
   <h4> Renting a car </h4>
   <p>The best prices are 'almost always at the airport', except for the other times. Cora will tell anyone who will listen how much she loves Dollar Car Rental, she uses them 'almost exclusively', in addition 'they are generally very reasonable and easy to pick up and drop off at both SFO and Oakland'. Thank the lord
