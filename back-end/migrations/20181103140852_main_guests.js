@@ -1,7 +1,7 @@
 exports.up = function(knex, Promise) {
   return knex.schema.createTable('main_guests', (table) => {
   table.increments('id')
-  .primary(); //my fb id is 17 char long
+  .primary(); 
   table.string('full_name', 'varchar(30)')
   .notNullable()
   .unique();

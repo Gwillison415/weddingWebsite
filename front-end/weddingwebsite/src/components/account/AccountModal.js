@@ -58,7 +58,7 @@ class AccountModal extends Component {
           {showSignUp && <Signup closeAccountModal={this.closeAccountModal} />}
       </Modal.Description>
     </Modal.Content>
-    <Segment>
+    {/* <Segment> */}
       {error? (<div>
         <h1>{error}</h1>
          <h4>Use a simple password that you don't use anywhere else </h4>
@@ -66,16 +66,14 @@ class AccountModal extends Component {
         <h3>i'm not building a reset password option in, so save it or make it easy</h3>
       </div>)
     :null}
-      </Segment>
+      {/* </Segment> */}
   </Modal>)}
 }
 const mapStateToProps = state => ({
   loginStatus: state.user.loginStatus,
-  // user: state.user,
-  // userName: state.user.full_name,
+
   redirect: state.user.redirectURL,
   error: state.user.error,
 });
 
 export default connect(mapStateToProps, null)(AccountModal)
-// export default AccountModal

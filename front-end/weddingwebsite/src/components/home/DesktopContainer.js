@@ -106,7 +106,7 @@ class DesktopContainer extends Component {
                   </Dropdown.Menu>
                 </Dropdown>
                 <Menu.Item position='right'>
-                  <AccountModal modalStyle={{ marginTop: "-250px" }}></AccountModal>
+                  <AccountModal modalStyle={{ marginTop: "-250px", height: 500 }}></AccountModal>
                 </Menu.Item>
               </Container>
             </Menu>
@@ -119,13 +119,12 @@ class DesktopContainer extends Component {
   }
 }
 const mapStateToProps = state => ({
-  // loginStatus: state.user.loginStatus,
   user: state.user,
   homeIsActive: state.user.homeIsActive,
   profileIsActive: state.user.profileIsActive,
   userName: state.user.full_name,
   redirect: state.user.redirectURL,
-  // error: state.user.error,
+
 });
 const mapDispatchToProps = dispatch => bindActionCreators({
   changePageLocation,

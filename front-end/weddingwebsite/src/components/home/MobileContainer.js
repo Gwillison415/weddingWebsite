@@ -52,8 +52,6 @@ class MobileContainer extends Component {
                 this.props.history.push('/user')
               }
             }} > Profile
-
-                  {/* <Link to="/user">Profile  </Link> */}
             </Menu.Item>
             <Menu.Item as='a' link href='mailto:keenewillison2019@gmail.com?subject=Question%20about%20___%20from%20____&body=let%20us%20know%20if%20you%20dont%20want%20us%20to%20put%20your%20question%20on%20our%20FAQ'>Email a question</Menu.Item>
             <Menu.Item >
@@ -97,7 +95,6 @@ class MobileContainer extends Component {
               </Container>
               <HomepageHeading mobile />
             </Segment>
-
             {children}
           </Sidebar.Pusher>
         </Sidebar.Pushable>

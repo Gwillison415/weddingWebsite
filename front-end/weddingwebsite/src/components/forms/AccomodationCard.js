@@ -34,7 +34,6 @@ class AccomodationCard extends Component {
     this.formApi = formApi;
   }
   render() {
-    const {user} = this.props;
     const { responseMessage, radioStyle} = this.state;
     return (<div>
       <Grid>
@@ -102,13 +101,12 @@ class AccomodationCard extends Component {
               </Card.Content>
               <Card.Content extra={true}>
                 <h4>please still rsvp in the other tabs!</h4>
-                <a>
-                  <Icon name='user'/>
+
                   You will be able to change this for
                   <Countdown minVisible={{
                       visibility: 'hidden'
                     }} endDate={' 01 Apr 2019 00:00:00'}></Countdown>
-                </a>
+
               </Card.Content>
             </Card>
           </Grid.Column>

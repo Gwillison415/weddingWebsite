@@ -93,12 +93,7 @@ class FormCard extends Component {
         </Card.Description>
           <h4>{responseMessage} </h4>
       </Card.Content>
-      <Card.Content extra={true}>
-        <a>
-          <Icon name='user'/>
-
-        </a>
-      </Card.Content>
+  
     </Card>)}
 }
 const mapStateToProps = state => ({
