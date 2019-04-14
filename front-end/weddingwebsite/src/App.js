@@ -10,6 +10,8 @@ import {AccomodationsInfo} from './components/info/AccomodationsInfo';
 import {TravelInfo} from './components/info/TravelInfo';
 import { TimelineInfo } from './components/info/TimelineInfo';
 import {Faq} from './components/info/Faq';
+import {Charity} from './components/info/Charity';
+import {Registry} from './components/info/Registry';
 
 class App extends Component {
 
@@ -25,6 +27,8 @@ class App extends Component {
            <Route exact path="/info/timeline" component={TimelineInfo} />
            <Route exact path="/info/travel" component={TravelInfo} />
            <Route exact path="/info/faq" component={Faq} />
+           <Route exact path="/gifting/charity" component={Charity} />
+           <Route exact path="/gifting/registry" component={Registry} />
           <Route path="/user" component={Auth} />
         </Container>
 

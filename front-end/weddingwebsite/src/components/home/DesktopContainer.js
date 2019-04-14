@@ -105,6 +105,18 @@ class DesktopContainer extends Component {
                     <Dropdown.Item ></Dropdown.Item>
                   </Dropdown.Menu>
                 </Dropdown>
+                <Dropdown text='Gifting' pointing className='link item'>
+                  <Dropdown.Menu>
+                    <Dropdown.Item >
+                      <Link to="/gifting/charity" style={{ color: 'black' }} onClick={this.scroll}
+                      > Charity </Link>
+                    </Dropdown.Item>
+                    <Dropdown.Item >
+                    <Link to="/gifting/registry" style={{ color: 'black' }} onClick={this.scroll}
+                    > Registry </Link>
+                    </Dropdown.Item>
+                  </Dropdown.Menu>
+                </Dropdown>
                 <Menu.Item position='right'>
                   <AccountModal modalStyle={{ marginTop: "-250px", height: 500 }}></AccountModal>
                 </Menu.Item>

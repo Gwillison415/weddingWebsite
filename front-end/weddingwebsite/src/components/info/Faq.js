@@ -39,7 +39,7 @@ const panels = [
 
 export const Faq = () => (<div>
   <ResponsiveContainer>
-    <Accordion className={'ParentContent'} exclusive={false} defaultActiveIndex={[0]} panels={panels}/>
+    <Accordion style={{minHeight: 500}} className={'ParentContent'} exclusive={false} defaultActiveIndex={[0]} panels={panels}/>
   </ResponsiveContainer>
 </div>)
 
