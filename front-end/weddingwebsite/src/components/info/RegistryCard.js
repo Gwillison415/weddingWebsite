@@ -10,7 +10,7 @@ const RegistryCard = ({imageSrc, header, meta, description, link}) => (
       <Card.Description>{description}</Card.Description>
     </Card.Content>
     <Card.Content extra>
-      <Button  href={link} content='Pick Me' />
+      <Button  href={link} target='_blank' content='Pick Me' />
     </Card.Content>
   </Card>
 )

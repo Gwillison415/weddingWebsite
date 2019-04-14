@@ -1,25 +1,4 @@
-// import React from 'react';
-// import ReactDOM from 'react-dom';
-// import Countdown from 'react-countdown-now';
-//
-// let weddingDate = 'Sat, 13 Jul 2019 00:00:00'
-// // Random component
-// const Completionist = () => <span>The Weekend is upon us!!</span>;
-//
-// // Renderer callback with condition
-// const renderer = ({ hours, minutes, seconds, completed }) => {
-//   if (completed) {
-//     // Render a completed state
-//     return <Completionist />;
-//   } else {
-//     // Render a countdown
-//     return <span>{hours}:{minutes}:{seconds}</span>;
-//   }
-// };
-//
-// export default const Countdown = ({renderer, ...props}) => {
-//   renderer
-// }
+
 import React, { Component } from 'react';
 
 class Countdown extends Component {

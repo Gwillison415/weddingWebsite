@@ -96,7 +96,7 @@ console.log('cardWidth', cardWidth);
            description={'Jumpin out of a perfectly working plane sounds crazy, but over Franz Josef Glacier? even more so'} />
         </Grid.Column>
         <Grid.Column width={cardWidth}>
-          <RegistryCard link={'https://paypal.me/pools/c/8dveSDj1Bq'}
+          <RegistryCard link={'https://paypal.me/pools/c/8dvjS3dcsT'}
            header={'Hobbiton Movie Tour'}
            meta={'$116'}
            imageSrc={burn15}
