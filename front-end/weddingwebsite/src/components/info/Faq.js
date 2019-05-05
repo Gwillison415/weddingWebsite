@@ -11,7 +11,21 @@ const panels = [
       </p>
       <p>We'd love to arrange on-site group childcare on the night of the reception so you can fully enjoy the party. Let us know if your little is interested in joining the sleepover party! We are thinking from 8 or 9pm until 1/2am or overnight the morning. Parent’s let us know your thoughts and what you would like to see.</p>
     </div>) }
-  }, {
+  },
+  {
+    key: 'what-to-wear',
+    title: 'What To wear',
+    content: {content : (<div>
+      <p>There will be clothes! wear them, in various forms, most all of the time.
+      </p>
+
+      <p>There exists a <a target='blank' href='https://pin.it/v2kbqmmrlrzsbu'>pinterest board</a>  for those who want to get on message </p>
+      <p>It will be HOT, recommend no stiletto heals as we will be on grass and gravel
+      </p>
+      <p>Don't forget your swimsuit for the pool party on Sunday!
+      </p>
+    </div>) }
+  },{
     key: 'kinds-of-dogs',
     title: 'My Invite didn’t include a +1 or only a +1? ',
     content: 'We’ve got a wonderful and large community that loves and supports us. Finding a venue to accommodate even our closest family and friends was difficult. That said, this is quite a large gathering and we’re not able to accommodate anyone not on the guest list. We really want to include everyone and share this special day with our beloveds - we hope you can find camaraderie with our diverse and friendly guests. If you have a special circumstance or a long term partner we didn’t account for, please let us know but otherwise any requests to bring a guest will likely be politely denied. ',

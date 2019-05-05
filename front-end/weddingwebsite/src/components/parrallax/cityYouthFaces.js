@@ -1,7 +1,6 @@
 import React from 'react';
 import { Parallax } from 'react-parallax';
 import cityYouthBlurb from './../../assets/images/cityYouthBlurb.png';
-// <a href="www.cityyouthnow.org" target="_blank" rel="noopener noreferrer">
 const ParrallaxFaces = () => (
   <div onClick={()=> {
     console.log('click fired');
@@ -9,6 +8,7 @@ const ParrallaxFaces = () => (
     window.location.assign('www.cityyouthnow.org');
 
   }}>
+
   <Parallax
     // bgImageSizes={'mini'}
     blur={{min:0, max:1}}
