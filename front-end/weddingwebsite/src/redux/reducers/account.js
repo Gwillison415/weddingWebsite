@@ -1,17 +1,24 @@
-import * as CONST from '../constants/constants';
+import * as CONST from "../constants/constants";
 
 const updateGuest = (allGuestsInState, updatedGuest) => {
-  return allGuestsInState.map(originalGuest => originalGuest.full_name === updatedGuest.full_name ? updatedGuest : originalGuest)
-}
-export const user = (state = {
-  loginStatus: false,
-  dependentGuests: [],
-  homeIsActive: true,
-  activeTab: 0
-}, action) => {
+  return allGuestsInState.map(originalGuest =>
+    originalGuest.full_name === updatedGuest.full_name
+      ? updatedGuest
+      : originalGuest
+  );
+};
+export const user = (
+  state = {
+    loginStatus: false,
+    dependentGuests: [],
+    homeIsActive: true,
+    activeTab: 0
+  },
+  action
+) => {
   switch (action.type) {
     case CONST.LOGIN_FULFILLED:
-      localStorage.setItem('userId', action.payload.id);
+      localStorage.setItem("userId", action.payload.id);
       return {
         ...state,
         loginStatus: true,
@@ -21,7 +28,7 @@ export const user = (state = {
         ...action.payload
       };
     case CONST.LOGIN:
-      localStorage.setItem('userId', action.payload.id);
+      localStorage.setItem("userId", action.payload.id);
       return {
         ...state,
         loginStatus: true,
@@ -36,23 +43,24 @@ export const user = (state = {
       };
     case CONST.LOGOUT_FULFILLED:
       localStorage.clear();
-      return { loginStatus: false };
+      return {loginStatus: false};
     case CONST.SIGNUP_FULFILLED:
       return {
         ...state,
         loginStatus: false,
-        error: 'You\'ve signed up successfully! now check you email to confirm',
+        error: "You've signed up successfully! now check you email to confirm",
         ...action.payload
       };
     case CONST.SIGNUP_REJECTED:
       return {
         ...state,
         loginStatus: false,
-        error: 'Something Went wrong, make sure to sign up with the email we have for you on file',
+        error:
+          "Something Went wrong, make sure to sign up with the email we have for you on file",
         ...action.payload
       };
     case CONST.RESET_PASSWORD_FULFILLED:
-      localStorage.setItem('userId', action.payload.id);
+      localStorage.setItem("userId", action.payload.id);
       return {
         ...state,
         loginStatus: true,
@@ -71,7 +79,7 @@ export const user = (state = {
     case CONST.SAVE_THE_FINAL_DATE_FORM_FULFILLED:
       return {
         ...state,
-        ...action.payload,
+        ...action.payload
       };
     case CONST.RESET_PASSWORD_REJECTED:
       return {
@@ -86,10 +94,13 @@ export const user = (state = {
         dependentGuests: [...action.payload]
       };
     case CONST.SAVE_THE_DATE_DEPENDENT_FORM_FULFILLED:
-      const dependentGuestsSTD = updateGuest(state.dependentGuests, action.payload)
+      const dependentGuestsSTD = updateGuest(
+        state.dependentGuests,
+        action.payload
+      );
       return {
         ...state,
-        dependentGuests: dependentGuestsSTD,
+        dependentGuests: dependentGuestsSTD
       };
     case CONST.GET_DEPENDENT_GUESTS:
       return {
@@ -99,7 +110,7 @@ export const user = (state = {
     case CONST.REDIRECT:
       return {
         ...state,
-        redirectURL: action.url,
+        redirectURL: action.url
       };
     case CONST.CHANGE_PAGE_LOCATION:
       return {
@@ -113,35 +124,49 @@ export const user = (state = {
         ...state,
         poll_q1: action.payload.poll_q1
       };
+    case CONST.MAIN_BBQ_FORM_FULFILLED:
+      return {
+        ...state,
+        poll_q2: action.payload.poll_q2
+      };
+    case CONST.DEPENDENT_BBQ_FORM_FULFILLED:
+      const dependentGuests = updateGuest(
+        state.dependentGuests,
+        action.payload
+      );
+      return {
+        ...state,
+        dependentGuests: dependentGuests
+      };
     case CONST.ACCOMODATIONS_FORM:
       return {
         ...state,
         poll_q1: action.payload.poll_q1
       };
     case CONST.SAVE_THE_REHEARSAL_DATE_FORM_FULFILLED:
-
       return {
         ...state,
-        ...action.payload,
+        ...action.payload
       };
     case CONST.MEALS_FORM_FULFILLED:
       return {
         ...state,
         ...action.payload
-      }
+      };
     case CONST.DEPENDENT_MEALS_FORM_FULFILLED:
-      const dependentGuests = updateGuest(state.dependentGuests, action.payload)
+      const _dependentGuests = updateGuest(
+        state.dependentGuests,
+        action.payload
+      );
       return {
         ...state,
-        dependentGuests: dependentGuests,
-      }
+        dependentGuests: _dependentGuests
+      };
     case CONST.TAB_CHANGE:
-      console.log('action.payload', action.payload);
-    
       return {
         ...state,
-        activeTab: action.payload,
-      }
+        activeTab: action.payload
+      };
     default:
       return state;
   }

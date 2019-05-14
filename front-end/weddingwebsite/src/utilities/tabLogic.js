@@ -3,12 +3,14 @@ export const discoverTabIndices = (user) => {
         return {
             accomodations: 0,
             rsvp: 1,
-            meals: 2
+            meals: 2,
+            bbq: 3
         }
     } else {
         return {
             rsvp: 0,
-            meals: 1
+            meals: 1,
+            bbq: 2
         }
     }
 }

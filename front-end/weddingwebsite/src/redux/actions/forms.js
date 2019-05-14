@@ -19,7 +19,7 @@ export const saveTheDateDependentFormSubmit = (props) => {
 const saveMainRsvp = (props) => {
   return axios.post(`${process.env.REACT_APP_API_ADDRESS}/user/2ndrsvp`, props, { withCredentials: true }).then(response => response.data)
 }
-export const saveMainRsvpFormSubmit = (props) => {  
+export const saveMainRsvpFormSubmit = (props) => {
   if (props.type === "final_rsvp") {
     return ({ type: CONST.SAVE_THE_FINAL_DATE_FORM, payload: saveMainRsvp(props) })
   } else {
@@ -45,6 +45,28 @@ const postDependentMealPrefFormData = (props) => {
 }
 
 export const saveDependentMealPrefsSubmit = props => ({ type: CONST.DEPENDENT_MEALS_FORM, payload: postDependentMealPrefFormData(props) });
+
+
+// --------------------------------
+const postBBqFormSubmit = (props) => {
+  if (props.isMainGuest) {
+    return axios.post(`${process.env.REACT_APP_API_ADDRESS}/user/bbq/`, props, { withCredentials: true })
+      .then(response => response.data)
+  }  else{
+    return axios.post(`${process.env.REACT_APP_API_ADDRESS}/user/dependents/bbq/`, props, { withCredentials: true })
+    .then(response => response.data)
+  }
+}
+
+export const bbqFormSubmit = props => {
+  console.log('props.isMainGuest', props.isMainGuest);
+if (props.isMainGuest) {
+  return ({ type: CONST.MAIN_BBQ_FORM, payload: postBBqFormSubmit(props) })
+} else {
+  return ({ type: CONST.DEPENDENT_BBQ_FORM, payload: postBBqFormSubmit(props) })
+}
+}
+// --------------------------------
 
 export const updateUserPropsFromForms = (props) => ({ type: CONST.UPDATE_USER_INFO, payload: props });
 

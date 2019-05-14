@@ -66,7 +66,7 @@ class UserDash extends Component {
     return Math.floor(totalCols / numbGuests);
   }
   render() {
-    const { user, firstRSVP, finalRSVP, hasOnsiteInvite, hasRehersalInvite, dependentGuests, rehersalRSVP, mealPreference, handleTabChange } = this.props;
+    const { user, firstRSVP, finalRSVP, hasOnsiteInvite, hasRehersalInvite, dependentGuests, rehersalRSVP, mealPreference, handleTabChange, bbqRSVP } = this.props;
     const { tabIndices } = this.state;
 
     return (<Container>
@@ -77,34 +77,40 @@ class UserDash extends Component {
             <Icon name='heart' size='small' /> {firstRSVP}
           </Grid.Column> */}
           <Grid.Column style={colStyle} >
-            <div onClick={() => { handleTabChange(tabIndices.rsvp) }}>
+            <div style={{cursor: 'pointer'}} onClick={() => { handleTabChange(tabIndices.rsvp) }}>
               <h5>RSVP</h5>
               <Icon name='envelope square' size='small' />{this.rsvpStatus(finalRSVP)}
             </div>
           </Grid.Column>
+          <Grid.Column style={colStyle} >
+            <div style={{cursor: 'pointer'}} onClick={() => { handleTabChange(tabIndices.bbq) }}>
+              <h5>BBQ Fri</h5>
+              <Icon name='free code camp' size='small' />{bbqRSVP}
+            </div>
+          </Grid.Column>
 
           {hasOnsiteInvite ? <Grid.Column style={colStyle}  >
-            <div onClick={() => { handleTabChange(tabIndices.accomodations) }}>
+            <div style={{cursor: 'pointer'}} onClick={() => { handleTabChange(tabIndices.accomodations) }}>
               <h5 >Lodging Status: </h5>
               <Icon name='suitcase' size='small' />
               {this.lodging(user)}
             </div>
           </Grid.Column> : null}
           {hasRehersalInvite ? <Grid.Column style={colStyle} >
-            <div onClick={() => { handleTabChange(tabIndices.meals) }}>
+            <div  style={{cursor: 'pointer'}} onClick={() => { handleTabChange(tabIndices.meals) }}>
               <h5>Family Dinner</h5>
               <Icon name='handshake outline' size='small' /> {this.rsvpStatus(rehersalRSVP)}
             </div>
           </Grid.Column> : null}
           <Grid.Column style={colStyle} >
-            <Popup trigger={<div onClick={() => { handleTabChange(tabIndices.meals) }}>
+            <Popup trigger={<div style={{cursor: 'pointer'}} onClick={() => { handleTabChange(tabIndices.meals) }}>
               <h5>Meal Preference</h5>
               <Icon name='food' size='small' /> {mealPreference}
             </div>} content={`Allergies: ${user.food_allergies}`} />
 
           </Grid.Column>
           {user.additional_guest_count > 0 ? <Grid.Column style={colStyle} >
-            <Popup trigger={<div onClick={() => { handleTabChange(tabIndices.rsvp) }}>
+            <Popup trigger={<div style={{cursor: 'pointer'}} onClick={() => { handleTabChange(tabIndices.rsvp) }}>
               <h5>Additional Guests</h5>
               <Icon name='plus square' size='small' /> {user.additional_guest_count}
             </div>} content={`${dependentGuests.map(guest => guest.full_name)}`} />
@@ -135,7 +141,9 @@ const mapStateToProps = state => ({
   firstRSVP: state.user.first_rsvp,
   finalRSVP: state.user.final_rsvp,
   rehersalRSVP: state.user.rehersal_rsvp,
-  mealPreference: state.user.meal_pref
+  mealPreference: state.user.meal_pref,
+  bbqRSVP: state.user.poll_q2,
+
 });
 
 export const mapDispatchToProps = dispatch =>
@@ -143,4 +151,3 @@ export const mapDispatchToProps = dispatch =>
     handleTabChange,
   }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(UserDash);
-

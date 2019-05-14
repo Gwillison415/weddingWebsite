@@ -5,6 +5,7 @@ import { Tab } from 'semantic-ui-react';
 import PreliminaryRSVP from "../formTabs/prelimRsvp"
 import FinalRSVP from "../formTabs/finalRsvp"
 import MealPref from "../formTabs/mealPref"
+import FridayBBQ from "../formTabs/fridayBBQ"
 import AccomodationCard from '../forms/AccomodationCard';
 import { handleTabChange } from '../../redux/actions/forms.js';
 import { discoverTabIndices } from '../../utilities/tabLogic'
@@ -43,6 +44,11 @@ const RSVPTabs = (props) => {
         <MealPref dependentGuests={dependentGuests} user={user} />
       </Tab.Pane>
     },
+    {
+      menuItem: { value: 'bbq', key: 'bbq', content: 'Friday BBQ' }, render: () => <Tab.Pane attached={false}>
+        <FridayBBQ dependentGuests={dependentGuests} user={user} />
+      </Tab.Pane>
+    },
   ]
   if (hasOnsiteInvite) {
     panes.unshift({ menuItem: { value: 'accomodations', key: 'accomodations', content: 'Accomodations' }, render: () => <Tab.Pane attached={false}>  <AccomodationCard></AccomodationCard>  </Tab.Pane> })
@@ -62,4 +68,3 @@ export const mapDispatchToProps = dispatch =>
     handleTabChange,
   }, dispatch);
 export default connect(mapStateToProps, mapDispatchToProps)(RSVPTabs);
-
