@@ -53,7 +53,7 @@ class MobileContainer extends Component {
               }
             }} > Profile
             </Menu.Item>
-            <Menu.Item as='a' link href='mailto:keenewillison2019@gmail.com?subject=Question%20about%20___%20from%20____&body=let%20us%20know%20if%20you%20dont%20want%20us%20to%20put%20your%20question%20on%20our%20FAQ'>Email a question</Menu.Item>
+
             <Menu.Item >
               <Link to="/info/timeline"> Timeline </Link>
             </Menu.Item>
@@ -66,8 +66,16 @@ class MobileContainer extends Component {
             <Menu.Item >
               <Link to="/info/travel" > Travel </Link>
             </Menu.Item>
+            <Menu.Item >
+              <Link to="/gifting/registry" > Registry </Link>
+            </Menu.Item>
+            <Menu.Item >
+              <Link to="/gifting/charity" > Charity </Link>
+            </Menu.Item>
             <Menu.Item as='a' href="http://yokayoranch.com/" target="_blank">The Venue</Menu.Item>
+            <Menu.Item as='a' href="http://www.vichysprings.com/" target="_blank">Vichy Hot Springs</Menu.Item>
             <Menu.Item as='a'><AccountModal modalStyle={{ marginTop: "-290px" }}></AccountModal></Menu.Item>
+            <Menu.Item as='a' link href='mailto:keenewillison2019@gmail.com?subject=Question%20about%20___%20from%20____&body=let%20us%20know%20if%20you%20dont%20want%20us%20to%20put%20your%20question%20on%20our%20FAQ'>Email a question</Menu.Item>
           </Sidebar>
 
           <Sidebar.Pusher
