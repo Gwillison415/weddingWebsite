@@ -66,7 +66,7 @@ class UserDash extends Component {
     return Math.floor(totalCols / numbGuests);
   }
   render() {
-    const { user, firstRSVP, finalRSVP, hasOnsiteInvite, hasRehersalInvite, dependentGuests, rehersalRSVP, mealPreference, handleTabChange, bbqRSVP } = this.props;
+    const { user, firstRSVP, finalRSVP, hasOnsiteInvite, hasRehersalInvite, dependentGuests, rehersalRSVP, mealPreference, handleTabChange, bbqRSVP, brunchRSVP } = this.props;
     const { tabIndices } = this.state;
 
     return (<Container>
@@ -84,8 +84,14 @@ class UserDash extends Component {
           </Grid.Column>
           <Grid.Column style={colStyle} >
             <div style={{cursor: 'pointer'}} onClick={() => { handleTabChange(tabIndices.bbq) }}>
-              <h5>BBQ Fri</h5>
-              <Icon name='free code camp' size='small' />{bbqRSVP}
+              <h5>Welcome BBQ</h5>
+              <Icon name='free code camp' size='medium' />{bbqRSVP}
+            </div>
+          </Grid.Column>
+          <Grid.Column style={colStyle} >
+            <div style={{cursor: 'pointer'}} onClick={() => { handleTabChange(tabIndices.brunch) }}>
+              <h5>GoodBye Brunch</h5>
+              <Icon name='hand victory' size='medium' />{brunchRSVP}
             </div>
           </Grid.Column>
 
@@ -143,6 +149,7 @@ const mapStateToProps = state => ({
   rehersalRSVP: state.user.rehersal_rsvp,
   mealPreference: state.user.meal_pref,
   bbqRSVP: state.user.poll_q2,
+  brunchRSVP: state.user.poll_q3,
 
 });
 

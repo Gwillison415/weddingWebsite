@@ -5,9 +5,10 @@ import {
   Image,
   Segment
 } from 'semantic-ui-react';
-import BBQForm from '../forms/BBQForm';
+import dubaiDesert from '../../assets/images/dubaiDesert.jpg';
+import BrunchForm from '../forms/BrunchForm';
 
-const FridayBBQ = (props) => {
+const SundayBrunch = (props) => {
   let { user, dependentGuests } = props;
 
   return (<div>
@@ -15,10 +16,10 @@ const FridayBBQ = (props) => {
       <Grid container stackable verticalAlign='middle'>
         <Grid.Row>
           <Header as='h3' style={{ fontSize: '2em' }}>
-            Welcome BBQ  July 12th  6-9pm
+            GoodBye Brunch July 14th  10am - 1pm
           </Header>
           <p style={{ fontSize: '1.33em' }}>
-            We'll be welcoming guests with a barbeque hosted by the bride\'s family 6-9pm July 12th. If you think you'll make it with an apetite, mark yourself yes! Otherwise, just show up for a beverage when you can or we'll see you Saturday!
+            Good Morning Campers! We've officialy been wed, and whatever state you're in - we'd love to know if you'd like to come by and partake in a little poolside brunch featuring burritos, breakfast burritos and tacos, provided by El Coyote in their Taco Truck, and the father of the groom.
           </p>
         </Grid.Row>
       </Grid>
@@ -27,14 +28,13 @@ const FridayBBQ = (props) => {
       <Grid container stackable verticalAlign='middle'>
         <Grid.Row>
         <Grid.Column style={{ padding: '.5em 1em' }} width={6}>
-          <BBQForm guest={user} inviteMessage={'the welcome BBQ July 12th?'}/>
+          <BrunchForm guest={user} inviteMessage={'the Goodbye Brunch July 14th?'}/>
         </Grid.Column>
           {dependentGuests.map((guest, idx) => {
-
               return (<div key={idx} style={{ display: 'inline-flex' }}>
                 <Grid.Column style={{ padding: '.5em 1em' }} width={6}>
-                  <BBQForm guest={guest} mainGuest={user.full_name}  isFinalRsvp={true} inviteMessage={'the welcome BBQ July 12th?'}>
-                  </BBQForm>
+                  <BrunchForm guest={guest} mainGuest={user.full_name}  isFinalRsvp={true} inviteMessage={'the Goodbye Brunch July 14th?'}>
+                  </BrunchForm>
                 </Grid.Column>
               </div>)
           })
@@ -44,4 +44,4 @@ const FridayBBQ = (props) => {
     </Segment>
   </div>)
 }
-export default FridayBBQ;
+export default SundayBrunch;

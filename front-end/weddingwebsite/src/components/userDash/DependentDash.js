@@ -26,6 +26,14 @@ export const DependentGuestRow = ({ guests, dependentGuestsColWidth, rsvpStatus 
                         </span>
                     </h5>
                 </Grid.Row>
+                <Grid.Row>
+                    <h5>
+                        <span>
+                            <Icon name='free code camp' size='small' ></Icon>
+                            Welcome BBQ: {guest.poll_q2}
+                        </span>
+                    </h5>
+                </Grid.Row>
                 {guest.rehersal_invite ? <Grid.Row>
                     <h5><span>
                         <Icon name='envelope square' size='small' > </Icon>
@@ -34,6 +42,15 @@ export const DependentGuestRow = ({ guests, dependentGuestsColWidth, rsvpStatus 
                     </h5>
 
                 </Grid.Row> : null}
+                <Grid.Row>
+                    <h5>
+                        <span>
+                            <Icon name='hand victory' size='small' ></Icon>
+                            GoodBye Brunch: {guest.poll_q3}
+                        </span>
+                    </h5>
+                </Grid.Row>
+
                 {guest.food_allergies.length ? <Grid.Row>
                     <h5> <span>
                         <Icon name='bullhorn' size='small' > </Icon>

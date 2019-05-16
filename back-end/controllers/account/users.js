@@ -108,8 +108,66 @@ router.route('/arsvp').post((req, res) => {
     })
 
 })
-router.route('/drsvp/dependents').post((req, res) => {
+router.route('/bbq').post((req, res) => {
+  const knex = require('../../knex.js')
 
+  const { RSVP, full_name } = req.body;
+  knex('main_guests')
+    .where({ full_name })
+    .update({
+      poll_q2: RSVP
+    })
+    .returning(['poll_q2'])
+    .then(updatedField => {
+      res.status(200).send(updatedField[0])
+    })
+
+})
+router.route('/dependents/bbq').post((req, res) => {
+  const knex = require('../../knex.js')
+
+  const { RSVP, full_name } = req.body;
+  knex('dependent_guests')
+    .where({ full_name })
+    .update({
+      poll_q2: RSVP
+    }, '*')
+    .then(updatedGuest => {
+      console.log('updatedGuest', updatedGuest[0]);
+      res.status(200).send(updatedGuest[0])
+    })
+
+})
+router.route('/brunch').post((req, res) => {
+  const knex = require('../../knex.js')
+
+  const { RSVP, full_name } = req.body;
+  knex('main_guests')
+    .where({ full_name })
+    .update({
+      poll_q3: RSVP
+    })
+    .returning(['poll_q3'])
+    .then(updatedField => {
+      res.status(200).send(updatedField[0])
+    })
+
+})
+router.route('/dependents/brunch').post((req, res) => {
+  const knex = require('../../knex.js')
+
+  const { RSVP, full_name } = req.body;
+  knex('dependent_guests')
+    .where({ full_name })
+    .update({
+      poll_q3: RSVP
+    }, '*')
+    .then(updatedGuest => {
+      res.status(200).send(updatedGuest[0])
+    })
+
+})
+router.route('/drsvp/dependents').post((req, res) => {
   const knex = require('../../knex.js')
   const rsvpType = req.body.type;
   const mainGuest = req.body.mainGuest

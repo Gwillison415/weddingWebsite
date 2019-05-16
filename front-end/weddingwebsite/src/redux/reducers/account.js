@@ -130,13 +130,27 @@ export const user = (
         poll_q2: action.payload.poll_q2
       };
     case CONST.DEPENDENT_BBQ_FORM_FULFILLED:
-      const dependentGuests = updateGuest(
+      const bbqDependentGuests = updateGuest(
         state.dependentGuests,
         action.payload
       );
       return {
         ...state,
-        dependentGuests: dependentGuests
+        dependentGuests: bbqDependentGuests
+      };
+    case CONST.MAIN_BRUNCH_FORM_FULFILLED:
+      return {
+        ...state,
+        poll_q3: action.payload.poll_q3
+      };
+    case CONST.DEPENDENT_BRUNCH_FORM_FULFILLED:
+      const newDependentGuests = updateGuest(
+        state.dependentGuests,
+        action.payload
+      );
+      return {
+        ...state,
+        dependentGuests: newDependentGuests
       };
     case CONST.ACCOMODATIONS_FORM:
       return {
@@ -175,7 +189,6 @@ export const user = (
 export const saveTheDateForm = (state = {}, action) => {
   switch (action.type) {
     case CONST.SAVE_THE_DATE_FORM:
-      console.log(action.payload);
       return {
         ...state,
         first_rsvp: action.payload.first_rsvp,

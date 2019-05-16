@@ -6,6 +6,7 @@ import PreliminaryRSVP from "../formTabs/prelimRsvp"
 import FinalRSVP from "../formTabs/finalRsvp"
 import MealPref from "../formTabs/mealPref"
 import FridayBBQ from "../formTabs/fridayBBQ"
+import SundayBrunch from "../formTabs/SundayBrunch"
 import AccomodationCard from '../forms/AccomodationCard';
 import { handleTabChange } from '../../redux/actions/forms.js';
 import { discoverTabIndices } from '../../utilities/tabLogic'
@@ -47,6 +48,11 @@ const RSVPTabs = (props) => {
     {
       menuItem: { value: 'bbq', key: 'bbq', content: 'Friday BBQ' }, render: () => <Tab.Pane attached={false}>
         <FridayBBQ dependentGuests={dependentGuests} user={user} />
+      </Tab.Pane>
+    },
+    {
+      menuItem: { value: 'brunch', key: 'brunch', content: 'Goodbye Brunch' }, render: () => <Tab.Pane attached={false}>
+        <SundayBrunch dependentGuests={dependentGuests} user={user} />
       </Tab.Pane>
     },
   ]
