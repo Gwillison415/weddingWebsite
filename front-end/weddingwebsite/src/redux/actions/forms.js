@@ -1,94 +1,93 @@
 import * as CONST from "../constants/constants";
 import axios from "axios";
 
-const saveDateInfo = props => {
+const saveDateInfo = data => {
   return axios
-    .post(`${process.env.REACT_APP_API_ADDRESS}/user/1strsvp`, props, {
+    .post(`${process.env.REACT_APP_API_ADDRESS}/user/1strsvp`, data, {
       withCredentials: true
     })
     .then(response => {
       return response.data;
     });
 };
-export const saveTheDateFormSubmit = props => {
-  return {type: CONST.SAVE_THE_DATE_FORM, payload: saveDateInfo(props)};
+export const saveTheDateFormSubmit = data => {
+  return {type: CONST.SAVE_THE_DATE_FORM, payload: saveDateInfo(data)};
 };
-const saveDependentDateInfo = props => {
+const saveDependentDateInfo = data => {
   return axios
-    .post(`${process.env.REACT_APP_API_ADDRESS}/user/drsvp/dependents`, props, {
+    .post(`${process.env.REACT_APP_API_ADDRESS}/user/drsvp/dependents`, data, {
       withCredentials: true
     })
     .then(response => response.data);
 };
-export const saveTheDateDependentFormSubmit = props => {
+export const saveTheDateDependentFormSubmit = data => {
   return {
     type: CONST.SAVE_THE_DATE_DEPENDENT_FORM,
-    payload: saveDependentDateInfo(props)
+    payload: saveDependentDateInfo(data)
   };
 };
 
-const saveMainRsvp = props => {
+const saveMainRsvp = data => {
   return axios
-    .post(`${process.env.REACT_APP_API_ADDRESS}/user/2ndrsvp`, props, {
+    .post(`${process.env.REACT_APP_API_ADDRESS}/user/2ndrsvp`, data, {
       withCredentials: true
     })
     .then(response => response.data);
 };
-export const saveMainRsvpFormSubmit = props => {
-  if (props.type === "final_rsvp") {
-    return {type: CONST.SAVE_THE_FINAL_DATE_FORM, payload: saveMainRsvp(props)};
+export const saveMainRsvpFormSubmit = data => {
+  if (data.type === "final_rsvp") {
+    return {type: CONST.SAVE_THE_FINAL_DATE_FORM, payload: saveMainRsvp(data)};
   } else {
     return {
       type: CONST.SAVE_THE_REHEARSAL_DATE_FORM,
-      payload: saveMainRsvp(props)
+      payload: saveMainRsvp(data)
     };
   }
 };
 
-const postAccomodationsFormData = props => {
+const postAccomodationsFormData = data => {
   return axios
-    .post(`${process.env.REACT_APP_API_ADDRESS}/user/arsvp/`, props, {
+    .post(`${process.env.REACT_APP_API_ADDRESS}/user/arsvp/`, data, {
       withCredentials: true
     })
     .then(response => response.data);
 };
-export const accomodationsFormSubmit = props => ({
+export const accomodationsFormSubmit = data => ({
   type: CONST.ACCOMODATIONS_FORM,
-  payload: postAccomodationsFormData(props)
+  payload: postAccomodationsFormData(data)
 });
 
-const postMealPrefFormData = props => {
+const postMealPrefFormData = data => {
   return axios
-    .post(`${process.env.REACT_APP_API_ADDRESS}/user/meals/`, props, {
+    .post(`${process.env.REACT_APP_API_ADDRESS}/user/meals/`, data, {
       withCredentials: true
     })
     .then(response => response.data);
 };
-export const saveMealPrefsSubmit = props => ({
+export const saveMealPrefsSubmit = data => ({
   type: CONST.MEALS_FORM,
-  payload: postMealPrefFormData(props)
+  payload: postMealPrefFormData(data)
 });
 
-const postDependentMealPrefFormData = props => {
+const postDependentMealPrefFormData = data => {
   return axios
     .post(
       `${process.env.REACT_APP_API_ADDRESS}/user/dependents/meals/`,
-      props,
+      data,
       {withCredentials: true}
     )
     .then(response => response.data);
 };
 
-export const saveDependentMealPrefsSubmit = props => ({
+export const saveDependentMealPrefsSubmit = data => ({
   type: CONST.DEPENDENT_MEALS_FORM,
-  payload: postDependentMealPrefFormData(props)
+  payload: postDependentMealPrefFormData(data)
 });
 
-// --------------------------------
-const postBBqFormSubmit = props => {
-  if (props.isMainGuest) {
+const postBBqFormSubmit = data => {
+  if (data.isMainGuest) {
     return axios
-      .post(`${process.env.REACT_APP_API_ADDRESS}/user/bbq/`, props, {
+      .post(`${process.env.REACT_APP_API_ADDRESS}/user/bbq/`, data, {
         withCredentials: true
       })
       .then(response => response.data);
@@ -96,24 +95,24 @@ const postBBqFormSubmit = props => {
     return axios
       .post(
         `${process.env.REACT_APP_API_ADDRESS}/user/dependents/bbq/`,
-        props,
+        data,
         {withCredentials: true}
       )
       .then(response => response.data);
   }
 };
 
-export const bbqFormSubmit = props => {
-  if (props.isMainGuest) {
-    return {type: CONST.MAIN_BBQ_FORM, payload: postBBqFormSubmit(props)};
+export const bbqFormSubmit = data => {
+  if (data.isMainGuest) {
+    return {type: CONST.MAIN_BBQ_FORM, payload: postBBqFormSubmit(data)};
   } else {
-    return {type: CONST.DEPENDENT_BBQ_FORM, payload: postBBqFormSubmit(props)};
+    return {type: CONST.DEPENDENT_BBQ_FORM, payload: postBBqFormSubmit(data)};
   }
 };
-const postBrunchFormSubmit = props => {
-  if (props.isMainGuest) {
+const postBrunchFormSubmit = data => {
+  if (data.isMainGuest) {
     return axios
-      .post(`${process.env.REACT_APP_API_ADDRESS}/user/brunch/`, props, {
+      .post(`${process.env.REACT_APP_API_ADDRESS}/user/brunch/`, data, {
         withCredentials: true
       })
       .then(response => response.data);
@@ -121,29 +120,27 @@ const postBrunchFormSubmit = props => {
     return axios
       .post(
         `${process.env.REACT_APP_API_ADDRESS}/user/dependents/brunch/`,
-        props,
+        data,
         {withCredentials: true}
       )
       .then(response => response.data);
   }
 };
 
-export const brunchFormSubmit = props => {
-  console.log("props.isMainGuest", props.isMainGuest);
-  if (props.isMainGuest) {
-    return {type: CONST.MAIN_BRUNCH_FORM, payload: postBrunchFormSubmit(props)};
+export const brunchFormSubmit = data => {
+  if (data.isMainGuest) {
+    return {type: CONST.MAIN_BRUNCH_FORM, payload: postBrunchFormSubmit(data)};
   } else {
     return {
       type: CONST.DEPENDENT_BRUNCH_FORM,
-      payload: postBrunchFormSubmit(props)
+      payload: postBrunchFormSubmit(data)
     };
   }
 };
-// --------------------------------
 
-export const updateUserPropsFromForms = props => ({
+export const updateUserPropsFromForms = data => ({
   type: CONST.UPDATE_USER_INFO,
-  payload: props
+  payload: data
 });
 
 const getDependentGuestData = name => {
@@ -158,13 +155,13 @@ const getDependentGuestData = name => {
     })
     .catch(err => err);
 };
-export const getDependents = props => ({
+export const getDependents = data => ({
   type: CONST.GET_DEPENDENT_GUESTS,
-  payload: getDependentGuestData(props)
+  payload: getDependentGuestData(data)
 });
-export const rsvpFormSubmit = props => ({
+export const rsvpFormSubmit = data => ({
   type: CONST.RSVP_FORM,
-  payload: props
+  payload: data
 });
 
 export const handleTabChange = index => ({
