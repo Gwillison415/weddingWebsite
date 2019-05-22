@@ -51,7 +51,7 @@ export const DependentGuestRow = ({ guests, dependentGuestsColWidth, rsvpStatus 
                     </h5>
                 </Grid.Row>
 
-                {guest.food_allergies.length ? <Grid.Row>
+                {guest.food_allergies ? <Grid.Row>
                     <h5> <span>
                         <Icon name='bullhorn' size='small' > </Icon>
                     </span>
