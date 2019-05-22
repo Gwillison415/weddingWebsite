@@ -7,6 +7,7 @@ export const DependentGuestRow = ({ guests, dependentGuestsColWidth, rsvpStatus 
     }
     return (<Grid.Row>
         {guests.map((guest, idx) => {
+
             return (<Grid.Column style={{textAlign: "center"}} key={idx} mobile={8} computer={dependentGuestsColWidth}>
                 <h5>{guest.full_name} </h5>
 
