@@ -135,7 +135,7 @@ return (
             title="Farewell Brunch and Pool Party"
             description="We're never leaving! Do your walk of fame, grab a hair of the dog and recover by the pool while lavishing us praise and well-wishes before you depart back to real life"
             color="teal"
-            tags={['11:00am - 4:00pm']}
+            tags={['10:00am - 2:00pm']}
             lineHeight={13}
         />
 </div >
