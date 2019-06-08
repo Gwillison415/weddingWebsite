@@ -43,7 +43,7 @@ class DependentGuestRSVPForm extends Component {
         }, {
           mainGuest: this.props.mainGuest
         }, { type})
-      console.log('formAnswers', formAnswers);
+
 
       this.props.saveTheDateDependentFormSubmit(formAnswers)
       this.setState({ responseMessage: `Cheers, we have ${this.props.guest.full_name} as ${displayRSVP}` })

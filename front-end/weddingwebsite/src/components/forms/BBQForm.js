@@ -30,7 +30,7 @@ if (RSVP === 'food') {
 }
     if (!invalid) {
       let formAnswers = Object.assign({}, {RSVP}, {full_name: this.props.guest.full_name}, {isMainGuest})
-      console.log('formAnswers', formAnswers);
+
 
       this.props.bbqFormSubmit(formAnswers)
       this.setState({ responseMessage: `Cheers, we have ${this.props.guest.full_name} as ${rsvpLabel}` })

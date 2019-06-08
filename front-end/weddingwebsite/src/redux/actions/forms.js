@@ -6,9 +6,7 @@ const saveDateInfo = data => {
     .post(`${process.env.REACT_APP_API_ADDRESS}/user/1strsvp`, data, {
       withCredentials: true
     })
-    .then(response => {
-      return response.data;
-    });
+    .then(response => response.data);
 };
 export const saveTheDateFormSubmit = data => {
   return {type: CONST.SAVE_THE_DATE_FORM, payload: saveDateInfo(data)};
@@ -50,7 +48,8 @@ const postAccomodationsFormData = data => {
     .post(`${process.env.REACT_APP_API_ADDRESS}/user/arsvp/`, data, {
       withCredentials: true
     })
-    .then(response => response.data);
+    .then(response => response.data)
+
 };
 export const accomodationsFormSubmit = data => ({
   type: CONST.ACCOMODATIONS_FORM,
@@ -167,4 +166,7 @@ export const rsvpFormSubmit = data => ({
 export const handleTabChange = index => ({
   type: CONST.TAB_CHANGE,
   payload: index
+});
+export const closeModal = () => ({
+  type: CONST.CLOSE_MODAL
 });

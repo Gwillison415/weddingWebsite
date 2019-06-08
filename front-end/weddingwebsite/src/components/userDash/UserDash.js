@@ -1,140 +1,242 @@
-import React, { Component } from 'react';
-import { bindActionCreators } from 'redux';
-import { connect } from 'react-redux';
-import { handleTabChange } from '../../redux/actions/forms';
-import { discoverTabIndices } from '../../utilities/tabLogic'
+import React, {Component} from "react";
+import {bindActionCreators} from "redux";
+import {connect} from "react-redux";
+import {handleTabChange, closeModal} from "../../redux/actions/forms";
+import {discoverTabIndices} from "../../utilities/tabLogic";
 
-import { DependentGuestRow } from "./DependentDash";
-import {
-  Grid,
-  Icon,
-  Container,
-  Divider,
-  Popup
-} from 'semantic-ui-react';
-const colStyle = { textAlign: "center" }
+import {DependentGuestRow} from "./DependentDash";
+import {Grid, Icon, Container, Divider, Popup, Modal, Button} from "semantic-ui-react";
+const colStyle = {textAlign: "center"};
 class UserDash extends Component {
   constructor(props) {
-    super(props)
+    super(props);
     this.state = {
-      tabIndices: discoverTabIndices(this.props.user)
-    }
+      tabIndices: discoverTabIndices(this.props.user),
+      isModalOpen: this.props.user.error.length? true: false
+    };
   }
 
-  rsvpStatus = (rsvp) => {
-    if (rsvp === true) {
-      return 'Yes!'
-    } else if (rsvp === false) {
-      return 'No'
-    }
-    else {
-      return '???'
+componentDidUpdate(prevProps) {
+  if (prevProps.error !== this.props.user.error) {
+    if (this.props.user.error.length) {
+      this.handleOpen();
     }
   }
-  lodging = (user) => {
-    // q1 = vip arrival
+}
+  rsvpStatus = rsvp => {
+    if (rsvp === true) {
+      return "Yes!";
+    } else if (rsvp === false) {
+      return "No";
+    } else {
+      return "???";
+    }
+  };
+  lodging = user => {
     switch (user.poll_q1) {
-      case 'yes':
-        return 'I\'m Sorted!';
-      case 'yesEasy':
-        return 'Yes + Flexible';
-      case 'no':
-        return 'Working on it';
-      case 'yesBut':
-        return 'It\'s complicated'
+      case "yes":
+        return "I'm Sorted!";
+      case "yesEasy":
+        return "Yes + Flexible";
+      case "no":
+        return "Working on it";
+      case "yesBut":
+        return "It's complicated";
       default:
         break;
     }
-  }
-  assignColWidthMain = (user) => {
+  };
+  assignColWidthMain = user => {
     const totalCols = 16;
     let cols = 4;
     if (user.additional_guest_count > 0) {
-      cols++
+      cols++;
     }
     if (user.onsite_invite) {
-      cols++
+      cols++;
     }
-    return Math.floor(totalCols / cols)
-  }
-  assignColWidthDependentGuest = (guests) => {
-    let numbGuests = guests.length
+    return Math.floor(totalCols / cols);
+  };
+  assignColWidthDependentGuest = guests => {
+    let numbGuests = guests.length;
     const totalCols = 16;
     if (numbGuests > 4) {
-      numbGuests /= 2
+      numbGuests /= 2;
     }
     return Math.floor(totalCols / numbGuests);
-  }
-  render() {
-    const { user, firstRSVP, finalRSVP, hasOnsiteInvite, hasRehersalInvite, dependentGuests, rehersalRSVP, mealPreference, handleTabChange, bbqRSVP, brunchRSVP } = this.props;
-    const { tabIndices } = this.state;
+  };
 
-    return (<Container>
-      <Grid centered stackable columns={4}>
-        <Grid.Row >
-          {/* <Grid.Column style={colStyle} >
+  handleOpen = () => this.setState({isModalOpen: true});
+
+  handleClose = () => {
+    console.log('closed');
+    this.setState({isModalOpen: false});
+    this.props.closeModal();
+  };
+  render() {
+    const {
+      user,
+      error,
+      firstRSVP,
+      finalRSVP,
+      hasOnsiteInvite,
+      hasRehersalInvite,
+      dependentGuests,
+      rehersalRSVP,
+      mealPreference,
+      handleTabChange,
+      bbqRSVP,
+      brunchRSVP
+    } = this.props;
+    const {tabIndices} = this.state;
+
+    return (
+      <Container>
+        <Grid centered stackable columns={4}>
+          <Grid.Row>
+            {/* <Grid.Column style={colStyle} >
             <h5>Initial RSVP</h5>
             <Icon name='heart' size='small' /> {firstRSVP}
           </Grid.Column> */}
-          <Grid.Column style={colStyle} >
-            <div style={{cursor: 'pointer'}} onClick={() => { handleTabChange(tabIndices.rsvp) }}>
-              <h5>RSVP</h5>
-              <Icon name='envelope square' size='small' />{this.rsvpStatus(finalRSVP)}
-            </div>
-          </Grid.Column>
-          <Grid.Column style={colStyle} >
-            <div style={{cursor: 'pointer'}} onClick={() => { handleTabChange(tabIndices.bbq) }}>
-              <h5>Welcome BBQ</h5>
-              <Icon name='free code camp' size='medium' />{bbqRSVP}
-            </div>
-          </Grid.Column>
-          <Grid.Column style={colStyle} >
-            <div style={{cursor: 'pointer'}} onClick={() => { handleTabChange(tabIndices.brunch) }}>
-              <h5>GoodBye Brunch</h5>
-              <Icon name='hand victory' size='medium' />{brunchRSVP}
-            </div>
-          </Grid.Column>
+            <Grid.Column style={colStyle}>
+              <div
+                style={{cursor: "pointer"}}
+                onClick={() => {
+                  handleTabChange(tabIndices.rsvp);
+                }}
+              >
+                <h5>RSVP</h5>
+                <Icon name="envelope square" size="small" />
+                {this.rsvpStatus(finalRSVP)}
+              </div>
+            </Grid.Column>
+            <Grid.Column style={colStyle}>
+              <div
+                style={{cursor: "pointer"}}
+                onClick={() => {
+                  handleTabChange(tabIndices.bbq);
+                }}
+              >
+                <h5>Welcome BBQ</h5>
+                <Icon name="free code camp" size="small" />
+                {bbqRSVP}
+              </div>
+            </Grid.Column>
+            <Grid.Column style={colStyle}>
+              <div
+                style={{cursor: "pointer"}}
+                onClick={() => {
+                  handleTabChange(tabIndices.brunch);
+                }}
+              >
+                <h5>GoodBye Brunch</h5>
+                <Icon name="hand victory" size="small" />
+                {brunchRSVP}
+              </div>
+            </Grid.Column>
 
-          {hasOnsiteInvite ? <Grid.Column style={colStyle}  >
-            <div style={{cursor: 'pointer'}} onClick={() => { handleTabChange(tabIndices.accomodations) }}>
-              <h5 >Lodging Status: </h5>
-              <Icon name='suitcase' size='small' />
-              {this.lodging(user)}
-            </div>
-          </Grid.Column> : null}
-          {hasRehersalInvite ? <Grid.Column style={colStyle} >
-            <div  style={{cursor: 'pointer'}} onClick={() => { handleTabChange(tabIndices.meals) }}>
-              <h5>Family Dinner</h5>
-              <Icon name='handshake outline' size='small' /> {this.rsvpStatus(rehersalRSVP)}
-            </div>
-          </Grid.Column> : null}
-          <Grid.Column style={colStyle} >
-            <Popup trigger={<div style={{cursor: 'pointer'}} onClick={() => { handleTabChange(tabIndices.meals) }}>
-              <h5>Meal Preference</h5>
-              <Icon name='food' size='small' /> {mealPreference}
-            </div>} content={`Allergies: ${user.food_allergies}`} />
-
-          </Grid.Column>
-          {user.additional_guest_count > 0 ? <Grid.Column style={colStyle} >
-            <Popup trigger={<div style={{cursor: 'pointer'}} onClick={() => { handleTabChange(tabIndices.rsvp) }}>
-              <h5>Additional Guests</h5>
-              <Icon name='plus square' size='small' /> {user.additional_guest_count}
-            </div>} content={`${dependentGuests.map(guest => guest.full_name)}`} />
-
-          </Grid.Column> : null}
-          <Grid.Column style={colStyle} >
-            <h5>Carpooling</h5>
-            <Icon name='car' size='small' /> TBD..
-          </Grid.Column>
-
-        </Grid.Row>
-      </Grid>
-      <Divider></Divider>
-      <Grid centered columns='equal'>
-        <DependentGuestRow guests={dependentGuests} dependentGuestsColWidth={this.assignColWidthDependentGuest(dependentGuests)} rsvpStatus={this.rsvpStatus}></DependentGuestRow>
-
-      </Grid>
-    </Container>)
+            {hasOnsiteInvite ? (
+              <Grid.Column style={colStyle}>
+                <div
+                  style={{cursor: "pointer"}}
+                  onClick={() => {
+                    handleTabChange(tabIndices.accomodations);
+                  }}
+                >
+                  <h5>Lodging Status: </h5>
+                  <Icon name="suitcase" size="small" />
+                  {this.lodging(user)}
+                </div>
+              </Grid.Column>
+            ) : null}
+            {hasRehersalInvite ? (
+              <Grid.Column style={colStyle}>
+                <div
+                  style={{cursor: "pointer"}}
+                  onClick={() => {
+                    handleTabChange(tabIndices.meals);
+                  }}
+                >
+                  <h5>Family Dinner</h5>
+                  <Icon name="handshake outline" size="small" />{" "}
+                  {this.rsvpStatus(rehersalRSVP)}
+                </div>
+              </Grid.Column>
+            ) : null}
+            <Grid.Column style={colStyle}>
+              <Popup
+                trigger={
+                  <div
+                    style={{cursor: "pointer"}}
+                    onClick={() => {
+                      handleTabChange(tabIndices.meals);
+                    }}
+                  >
+                    <h5>Meal Preference</h5>
+                    <Icon name="food" size="small" /> {mealPreference}
+                  </div>
+                }
+                content={`Allergies: ${user.food_allergies}`}
+              />
+            </Grid.Column>
+            {user.additional_guest_count > 0 ? (
+              <Grid.Column style={colStyle}>
+                <Popup
+                  trigger={
+                    <div
+                      style={{cursor: "pointer"}}
+                      onClick={() => {
+                        handleTabChange(tabIndices.rsvp);
+                      }}
+                    >
+                      <h5>Additional Guests</h5>
+                      <Icon name="plus square" size="small" />{" "}
+                      {user.additional_guest_count}
+                    </div>
+                  }
+                  content={`${dependentGuests.map(guest => guest.full_name)}`}
+                />
+              </Grid.Column>
+            ) : null}
+            <Grid.Column style={colStyle}>
+              <h5>Carpooling</h5>
+              <Icon name="car" size="small" /> TBD..
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+        <Divider />
+        <Grid centered columns="equal">
+          <DependentGuestRow
+            guests={dependentGuests}
+            dependentGuestsColWidth={this.assignColWidthDependentGuest(
+              dependentGuests
+            )}
+            rsvpStatus={this.rsvpStatus}
+          />
+        </Grid>
+        <Modal
+          // this modal is mainly for alerting that rsvp's are closed
+          // trigger={<Button onClick={this.handleOpen}>Show Modal</Button>}
+          closeOnEscape
+          open={this.state.isModalOpen}
+          onClose={this.handleClose}
+          basic
+          size="small"
+        >
+          {" "}
+          <Modal.Content>
+            <h3>
+            {error}
+            </h3>
+          </Modal.Content>
+          <Modal.Actions>
+            <Button color="green" onClick={this.handleClose} inverted>
+              <Icon name="checkmark" /> Got it
+            </Button>
+          </Modal.Actions>
+        </Modal>
+      </Container>
+    );
   }
 }
 
@@ -149,12 +251,18 @@ const mapStateToProps = state => ({
   rehersalRSVP: state.user.rehersal_rsvp,
   mealPreference: state.user.meal_pref,
   bbqRSVP: state.user.poll_q2,
-  brunchRSVP: state.user.poll_q3,
-
+  brunchRSVP: state.user.poll_q3
 });
 
 export const mapDispatchToProps = dispatch =>
-  bindActionCreators({
-    handleTabChange,
-  }, dispatch);
-export default connect(mapStateToProps, mapDispatchToProps)(UserDash);
+  bindActionCreators(
+    {
+      handleTabChange,
+      closeModal
+    },
+    dispatch
+  );
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(UserDash);

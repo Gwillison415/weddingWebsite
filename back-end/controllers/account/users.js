@@ -5,6 +5,30 @@ if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
 }
 
+router.route('/dependents/:id').get((req, res) => {
+  const knex = require('../../knex.js')
+  const userId = req.params.id;
+  const name = req.query.name;
+  knex.select('*').from('dependent_guests')
+    .where({ main_guest: name })
+    .then(dependent_guests => {
+      return res.status(200).json(dependent_guests)
+    })
+});
+
+// this route blocks usage of all other routes - gotta cut off rsvp's sometime
+router.use('/', (req, res) => {
+  console.log('get SHOULD BLOCK');
+  res.status(200).send({ error: 'Responses can no longer be submitted'})
+})
+router.use('/', (req, res) => {
+  console.log('POST SHOULD BLOCK');
+
+  res.status(200).send({ error: 'Responses can no longer be submitted'})
+})
+// this route blocks usage of all other routes - gotta cut off rsvp's sometime
+
+
 router.route('/1strsvp').post((req, res) => {
   const knex = require('../../knex.js')
   const name = req.body.name;
@@ -205,15 +229,6 @@ router.route('/drsvp/dependents').post((req, res) => {
   }
 });
 
-router.route('/dependents/:id').get((req, res) => {
-  const knex = require('../../knex.js')
-  const userId = req.params.id;
-  const name = req.query.name;
-  knex.select('*').from('dependent_guests')
-    .where({ main_guest: name })
-    .then(dependent_guests => {
-      return res.status(200).json(dependent_guests)
-    })
-});
+
 
 module.exports = router;

@@ -1,21 +1,27 @@
 import * as CONST from "../constants/constants";
 
 const updateGuest = (allGuestsInState, updatedGuest) => {
-  return allGuestsInState.map(originalGuest =>
-    originalGuest.full_name === updatedGuest.full_name
-      ? updatedGuest
-      : originalGuest
-  );
+  if (!updatedGuest.error) {
+    return allGuestsInState.map(originalGuest =>
+      originalGuest.full_name === updatedGuest.full_name
+        ? updatedGuest
+        : originalGuest
+    );
+  } else {
+    return allGuestsInState;
+  }
 };
 export const user = (
   state = {
     loginStatus: false,
     dependentGuests: [],
     homeIsActive: true,
-    activeTab: 0
+    activeTab: 0,
+    error: ""
   },
   action
 ) => {
+  let error;
   switch (action.type) {
     case CONST.LOGIN_FULFILLED:
       localStorage.setItem("userId", action.payload.id);
@@ -67,46 +73,70 @@ export const user = (
         ...action.payload
       };
     case CONST.UPDATE_USER_INFO:
+      error = action.payload.error ? action.payload.error : "";
       return {
         ...state,
-        ...action.payload
+        ...action.payload,
+        error
       };
     case CONST.SAVE_THE_DATE_FORM_FULFILLED:
-      return {
-        ...state,
-        ...action.payload
-      };
+      if (action.payload.error) {
+        return {
+          ...state,
+          error: action.payload.error
+        };
+      } else {
+        return {
+          ...state,
+          ...action.payload
+        };
+      }
     case CONST.SAVE_THE_FINAL_DATE_FORM_FULFILLED:
-      return {
-        ...state,
-        ...action.payload
-      };
+      if (action.payload.error) {
+        return {
+          ...state,
+          error: action.payload.error
+        };
+      } else {
+        return {
+          ...state,
+          ...action.payload
+        };
+      }
+
     case CONST.RESET_PASSWORD_REJECTED:
       return {
         ...state,
         loginStatus: false,
-        resetError: `Login Failed. ${action.payload.response.data.error}`,
+        error: `Login Failed. ${action.payload.response.data.error}`,
         ...action.payload
       };
     case CONST.GET_DEPENDENT_GUESTS_FULFILLED:
+      error = action.payload.error ? action.payload.error : "";
       return {
         ...state,
+
         dependentGuests: [...action.payload]
       };
     case CONST.SAVE_THE_DATE_DEPENDENT_FORM_FULFILLED:
-      const dependentGuestsSTD = updateGuest(
-        state.dependentGuests,
-        action.payload
-      );
-      return {
-        ...state,
-        dependentGuests: dependentGuestsSTD
-      };
-    case CONST.GET_DEPENDENT_GUESTS:
-      return {
-        ...state,
-        dependentGuests: action.data
-      };
+      if (action.payload.error) {
+        return {
+          ...state,
+          error: action.payload.error
+        };
+      } else {
+        const dependentGuestsSTD = updateGuest(
+          state.dependentGuests,
+          action.payload
+        );
+
+        return {
+          ...state,
+          dependentGuests: dependentGuestsSTD,
+          error
+        };
+      }
+
     case CONST.REDIRECT:
       return {
         ...state,
@@ -120,43 +150,80 @@ export const user = (
         profileIsActive: action.profileIsActive
       };
     case CONST.ACCOMODATIONS_FORM_FULFILLED:
-      return {
-        ...state,
-        poll_q1: action.payload.poll_q1
-      };
+      if (action.payload.error) {
+        return {
+          ...state,
+          error: action.payload.error
+        };
+      } else {
+        return {
+          ...state,
+          poll_q1: action.payload.poll_q1
+        };
+      }
+    // case CONST.ACCOMODATIONS_FORM_REJECTED:
+    //
+    //     return {
+    //       ...state,
+    //       error: action.payload.error
+    //     };
+
     case CONST.MAIN_BBQ_FORM_FULFILLED:
+      error = action.payload.error ? action.payload.error : "";
+
       return {
         ...state,
+        error,
         poll_q2: action.payload.poll_q2
       };
     case CONST.DEPENDENT_BBQ_FORM_FULFILLED:
-      const bbqDependentGuests = updateGuest(
-        state.dependentGuests,
-        action.payload
-      );
-      return {
-        ...state,
-        dependentGuests: bbqDependentGuests
-      };
+      if (action.payload.error) {
+        return {
+          ...state,
+          error: action.payload.error
+        };
+      } else {
+        const bbqDependentGuests = updateGuest(
+          state.dependentGuests,
+          action.payload
+        );
+        return {
+          ...state,
+          error,
+          dependentGuests: bbqDependentGuests
+        };
+      }
     case CONST.MAIN_BRUNCH_FORM_FULFILLED:
-      return {
-        ...state,
-        poll_q3: action.payload.poll_q3
-      };
+      if (action.payload.error) {
+        return {
+          ...state,
+          error: action.payload.error
+        };
+      } else {
+        return {
+          ...state,
+          error,
+          poll_q3: action.payload.poll_q3
+        };
+      }
     case CONST.DEPENDENT_BRUNCH_FORM_FULFILLED:
-      const newDependentGuests = updateGuest(
-        state.dependentGuests,
-        action.payload
-      );
-      return {
-        ...state,
-        dependentGuests: newDependentGuests
-      };
-    case CONST.ACCOMODATIONS_FORM:
-      return {
-        ...state,
-        poll_q1: action.payload.poll_q1
-      };
+      if (action.payload.error) {
+        return {
+          ...state,
+          error: action.payload.error
+        };
+      } else {
+        const newDependentGuests = updateGuest(
+          state.dependentGuests,
+          action.payload
+        );
+        return {
+          ...state,
+          error,
+          dependentGuests: newDependentGuests
+        };
+      }
+
     case CONST.SAVE_THE_REHEARSAL_DATE_FORM_FULFILLED:
       return {
         ...state,
@@ -172,14 +239,22 @@ export const user = (
         state.dependentGuests,
         action.payload
       );
+      error = action.payload.error ? action.payload.error : "";
+
       return {
         ...state,
+        error,
         dependentGuests: _dependentGuests
       };
     case CONST.TAB_CHANGE:
       return {
         ...state,
         activeTab: action.payload
+      };
+    case CONST.CLOSE_MODAL:
+      return {
+        ...state,
+        error: ""
       };
     default:
       return state;
