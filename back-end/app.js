@@ -6,7 +6,7 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-const PORT = process.env.PORT || 3005;
+const PORT = process.env.PORT || 80;
 const cors = require('cors');
 
 const jwt = require('jsonwebtoken');
