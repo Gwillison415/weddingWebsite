@@ -17,7 +17,6 @@ class FormCard extends Component {
   triggerRSVPSubmit = () => {
 
     const formState = this.formApi.getState();
-    console.log('formState====', formState);
     const {RSVP} = formState.values;
     const {invalid} = formState;
 
@@ -64,7 +63,7 @@ class FormCard extends Component {
 
                     <label htmlFor="radio-maybe">Maaaaaaaaybe?</label>
                     <Radio value={'maybe'} id="radio-maybe" style={radioStyle}/>
-                  </div> 
+                  </div>
                   <div style={{ display: 'block', margin: "10px 15px" }}>
 
                     <label htmlFor="radio-no">Me Thinks Not</label>
@@ -75,7 +74,7 @@ class FormCard extends Component {
                   <button type="submit">Submit</button>
 
 
-                
+
 
                 <p>{
                     formState.errors.email
@@ -93,7 +92,7 @@ class FormCard extends Component {
         </Card.Description>
           <h4>{responseMessage} </h4>
       </Card.Content>
-  
+
     </Card>)}
 }
 const mapStateToProps = state => ({

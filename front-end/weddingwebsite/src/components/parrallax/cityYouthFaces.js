@@ -3,7 +3,6 @@ import { Parallax } from 'react-parallax';
 import cityYouthBlurb from './../../assets/images/cityYouthBlurb.png';
 const ParrallaxFaces = () => (
   <div onClick={()=> {
-    console.log('click fired');
     // window.location = 'www.cityyouthnow.org'
     window.location.assign('www.cityyouthnow.org');
 

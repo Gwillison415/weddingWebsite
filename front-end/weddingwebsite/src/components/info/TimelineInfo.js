@@ -35,7 +35,6 @@ return (
             color="teal"
             tags={['6:00pm – 9:00pm']}
             lineHeight={13}
-            onClick={()=> {console.log('timeline fired');
             }}
         />
         <Timeline

@@ -69,7 +69,6 @@ componentDidUpdate(prevProps) {
   handleOpen = () => this.setState({isModalOpen: true});
 
   handleClose = () => {
-    console.log('closed');
     this.setState({isModalOpen: false});
     this.props.closeModal();
   };

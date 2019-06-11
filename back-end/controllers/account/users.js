@@ -18,12 +18,9 @@ router.route('/dependents/:id').get((req, res) => {
 
 // this route blocks usage of all other routes - gotta cut off rsvp's sometime
 router.use('/', (req, res) => {
-  console.log('get SHOULD BLOCK');
   res.status(200).send({ error: 'Responses can no longer be submitted'})
 })
 router.use('/', (req, res) => {
-  console.log('POST SHOULD BLOCK');
-
   res.status(200).send({ error: 'Responses can no longer be submitted'})
 })
 // this route blocks usage of all other routes - gotta cut off rsvp's sometime
@@ -157,7 +154,6 @@ router.route('/dependents/bbq').post((req, res) => {
       poll_q2: RSVP
     }, '*')
     .then(updatedGuest => {
-      console.log('updatedGuest', updatedGuest[0]);
       res.status(200).send(updatedGuest[0])
     })
 
