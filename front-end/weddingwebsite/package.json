@@ -7,7 +7,7 @@
     "axios": "^0.18.0",
     "event-stream": "3.3.4",
     "informed": "^1.10.5",
-    "merge": ">=1.2.1",
+    "merge": ">=2.1.1",
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "react-parallax": "^2.0.0",
